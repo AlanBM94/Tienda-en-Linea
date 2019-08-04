@@ -5,14 +5,25 @@ const Usuario = require('./../models/usuarioModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
-exports.registrarse = async (req, res, next) => {
-  const nuevoUsuario = await Usuario.create(req.body);
-  console.log(nuevoUsuario);
+const firmarToken = id => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN
+  });
+};
 
-  res.status(201).json({
-    status: 'exito',
+const enviarToken = (usuario, statusCodigo, res) => {
+  const token = firmarToken(usuario.id);
+  usuario.contraseña = undefined;
+  res.status(statusCodigo).json({
+    status: 'Exito',
+    token,
     data: {
-      nuevoUsuario
+      usuario
     }
   });
 };
+
+exports.registrarse = catchAsync(async (req, res, next) => {
+  const usuario = await Usuario.create(req.body);
+  enviarToken(usuario, 201, res);
+});
