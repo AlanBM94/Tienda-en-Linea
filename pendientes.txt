@@ -1,0 +1,7 @@
+1) Crear el modelo de los usuarios XXXXXXXXXXX
+
+2) Crear nuevos usuarios
+
+3) Administrar contraseñas
+
+4) JWT
