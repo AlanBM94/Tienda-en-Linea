@@ -1,1 +1,1 @@
-Ocultar las contraseñas de la respuesta del servidor y encriptarlas
+Seguir implementando las rutas de Postman

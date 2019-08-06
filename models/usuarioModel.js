@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const usuarioSchema = new mongoose.Schema({
   nombre: {
@@ -49,6 +50,24 @@ const usuarioSchema = new mongoose.Schema({
     select: false
   }
 });
+
+// Middleware que encripta la contraseña
+usuarioSchema.pre('save', async function(next) {
+  // Si la contraseña no ha sido modificada se ejecuta el siguiente middleware
+  if (!this.isModified('contraseña')) return next();
+  // Hashea la contraseña con un costo de 12
+  this.contraseña = await bcrypt.hash(this.contraseña, 12);
+  // Elimina el campo de confirmarContraseña
+  this.confirmarContraseña = undefined;
+  next();
+});
+
+usuarioSchema.methods.contraseñaCorrecta = async (
+  contraseñaCorrecta,
+  usuarioContraseña
+) => {
+  return await bcrypt.compare(contraseñaCorrecta, usuarioContraseña);
+};
 
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 
