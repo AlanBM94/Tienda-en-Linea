@@ -1,1 +1,8 @@
-Seguir implementando las rutas de Postman
+Cuando se comienzen a hacer las vistas se va a implementar las funciones de
+    olvideMiContraseña
+    actualizarContraseña
+
+Proteger las rutas para los usuarios
+    Obtener la información del usuario actual
+    Actualizar la información del usuario actual
+    Eliminar el usuario actual
