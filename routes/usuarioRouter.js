@@ -15,6 +15,9 @@ router.get(
   usuarioController.obtenerUsuario
 );
 
-router.route('/').get(usuarioController.obtenerUsuarios);
+router.patch('/actualizarMiPerfil', usuarioController.actualizarMiPerfil);
+router.delete('/eliminarMiPerfil', usuarioController.eliminarMiPerfil);
+
+// router.route('/').get(usuarioController.obtenerUsuarios);
 
 module.exports = router;

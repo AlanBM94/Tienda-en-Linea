@@ -83,3 +83,18 @@ exports.proteger = catchAsync(async (req, res, next) => {
   res.locals.usuario = usuarioActual;
   next();
 });
+
+exports.permitirPara = rol => {
+  return (req, res, next) => {
+    console.log(req.usuario);
+    if (req.usuario.rol !== rol) {
+      return next(
+        new AppError(
+          'No tienes los permisos necesatios para realizar está acción',
+          403
+        )
+      );
+    }
+    next();
+  };
+};
