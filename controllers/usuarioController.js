@@ -20,7 +20,7 @@ exports.obtenerUsuario = catchAsync(async (req, res, next) => {
     return next(new AppError('Ningún usuario fue encontrado con ese Id', 404));
   }
   res.status(200).json({
-    status: 'success',
+    status: 'Exito',
     data: {
       usuario
     }
@@ -49,7 +49,7 @@ exports.actualizarMiPerfil = catchAsync(async (req, res, next) => {
   );
 
   res.status(200).json({
-    status: 'exito',
+    status: 'Exito',
     data: {
       usuarioActualizado
     }
@@ -61,7 +61,62 @@ exports.eliminarMiPerfil = catchAsync(async (req, res, next) => {
     activo: false
   });
   res.status(204).json({
-    status: 'exito',
+    status: 'Exito',
+    data: null
+  });
+});
+
+exports.obtenerUsuarios = catchAsync(async (req, res, next) => {
+  const usuarios = await Usuario.find({ rol: 'usuario' });
+  res.status(200).json({
+    status: 'Exito',
+    data: {
+      usuarios
+    }
+  });
+});
+
+exports.obtenerUsuarioDesdeAdmin = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const usuario = await Usuario.findById(id);
+  if (!usuario) {
+    return next(new AppError('Ningún usuario fue encontrado con ese id', 404));
+  }
+  res.status(200).json({
+    status: 'Exito',
+    data: {
+      usuario
+    }
+  });
+});
+
+exports.actualizarUsuario = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const actualizaciones = req.body;
+  const usuarioActualizado = await Usuario.findByIdAndUpdate(
+    id,
+    actualizaciones,
+    { new: true, runValidators: true }
+  );
+  if (!usuarioActualizado) {
+    return next(new AppError('No se pudo actualizar ese usuario', 404));
+  }
+  res.status(200).json({
+    satus: 'Exito',
+    data: {
+      usuarioActualizado
+    }
+  });
+});
+
+exports.eliminarUsuario = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const usuarioEliminado = await Usuario.findOneAndDelete(id);
+  if (!usuarioEliminado) {
+    return next(new AppError('Ningún usuario fue encontrado con ese id', 404));
+  }
+  res.status(204).json({
+    status: 'Exito',
     data: null
   });
 });

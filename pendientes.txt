@@ -2,5 +2,3 @@ Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     olvideMiContraseña
     actualizarContraseña
 
-Proteger las rutas de eliminarUsuario, actualizarUsuario, obtenerUsuario, obtenerUsuarios (crear las rutas y controladores) para solo el administrador
-    

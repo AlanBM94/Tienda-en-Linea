@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const productoController = require('../controllers/productoController');
+const reseñaController = require('../controllers/reseñaController');
 
 const router = express.Router();
 
@@ -26,5 +27,17 @@ router
     authController.permitirPara('administrador'),
     productoController.eliminarProducto
   );
+
+router.use(authController.proteger, authController.permitirPara('usuario'));
+
+router
+  .route('/:id/resenias')
+  .get(reseñaController.obtenerReseñas)
+  .post(reseñaController.establecerIdUsuario, reseñaController.crearReseña);
+
+router
+  .route('/:id/resenias/:id')
+  .patch(reseñaController.actualizarReseña)
+  .delete(reseñaController.eliminarReseña);
 
 module.exports = router;

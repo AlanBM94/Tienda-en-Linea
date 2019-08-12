@@ -86,7 +86,6 @@ exports.proteger = catchAsync(async (req, res, next) => {
 
 exports.permitirPara = rol => {
   return (req, res, next) => {
-    console.log(req.usuario);
     if (req.usuario.rol !== rol) {
       return next(
         new AppError(

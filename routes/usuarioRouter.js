@@ -18,6 +18,14 @@ router.get(
 router.patch('/actualizarMiPerfil', usuarioController.actualizarMiPerfil);
 router.delete('/eliminarMiPerfil', usuarioController.eliminarMiPerfil);
 
-// router.route('/').get(usuarioController.obtenerUsuarios);
+router.use(authController.permitirPara('administrador'));
+
+router.route('/').get(usuarioController.obtenerUsuarios);
+
+router
+  .route('/:id')
+  .get(usuarioController.obtenerUsuarioDesdeAdmin)
+  .patch(usuarioController.actualizarUsuario)
+  .delete(usuarioController.eliminarUsuario);
 
 module.exports = router;
