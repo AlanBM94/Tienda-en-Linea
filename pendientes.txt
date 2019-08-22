@@ -1,4 +1,3 @@
 Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     olvideMiContraseña
     actualizarContraseña
-
