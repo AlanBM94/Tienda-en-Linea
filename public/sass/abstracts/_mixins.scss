@@ -1,0 +1,24 @@
+@mixin opacityAndVisibility {
+  visibility: visible;
+  opacity: 1;
+}
+
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+}
+
+@mixin linkEstilos {
+  text-decoration: none;
+  font-size: $tamanio-default-letra;
+}
+
+@mixin promocionEstilo {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 40%;
+  width: 2.2rem;
+  height: 0.3rem;
+  background: $color-primario;
+}
