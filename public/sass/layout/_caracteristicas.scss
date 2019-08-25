@@ -1,0 +1,36 @@
+.caracteristicas {
+  padding: 10rem 8rem;
+  height: 60rem;
+  &__titulo {
+    text-align: center;
+    font-size: 3.2rem;
+    color: $negro;
+    font-weight: 700;
+  }
+  &__contenido {
+    margin-top: 2rem;
+    height: 90%;
+    @include flexCenter;
+    justify-content: space-around;
+  }
+  &__item {
+    background: $color-rosa-claro;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 6.5rem;
+    position: relative;
+    @include flexColumn;
+  }
+  &__icono {
+    color: $color-primario;
+    font-size: 4rem;
+  }
+  &__texto {
+    position: absolute;
+    top: 110%;
+    width: 20rem;
+    color: $color-primario;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
