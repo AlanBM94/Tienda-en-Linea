@@ -151,6 +151,102 @@ header .hero__btn:hover {
   background: #f04746;
 }
 
+.menu {
+  padding: 10rem 8rem;
+  height: auto;
+  background: #f7f7f7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu__contenedor {
+  width: 50rem;
+  height: 60rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  -ms-grid-rows: (1fr)[4];
+      grid-template-rows: repeat(4, 1fr);
+}
+
+.menu__item {
+  text-align: center;
+}
+
+.menu__enlace {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #ffff;
+}
+
+.menu__electronica {
+  grid-column: 1 / -1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 / 3;
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/electronica.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/electronica.jpg);
+  background-size: cover;
+}
+
+.menu__hogar {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3 / 4;
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/hogar.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/hogar.jpg);
+  background-size: cover;
+}
+
+.menu__deportes {
+  grid-column: 2 / -1;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3 / 4;
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/deportes.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/deportes.jpg);
+  background-size: cover;
+}
+
+.menu__ropa {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  grid-row: 4 / -1;
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/ropa.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/ropa.jpg);
+  background-size: cover;
+}
+
+.menu__herramientas {
+  grid-column: 2 / -1;
+  grid-row: 4 / -1;
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/herramientas.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/herramientas.jpg);
+  background-size: cover;
+}
+
 .nav {
   background: transparent;
   height: 8rem;
@@ -256,6 +352,8 @@ header .hero__btn:hover {
   padding: 0;
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 html {

@@ -2,8 +2,16 @@
 $color-primario: #ed2827;
 $color-primario-hover: #f04746;
 $color-rosa-claro: #fef3f3;
+$gris-claro: #f7f7f7;
 $blanco: #ffff;
 $negro: #232121;
+
+// Gradiente oscuro
+$gradiente-oscuro: linear-gradient(
+  to right bottom,
+  rgba(0, 0, 0, 0.562),
+  rgba(0, 0, 0, 0.562)
+);
 
 // Tipografía
 $tamanio-default-letra: 1.6rem;
