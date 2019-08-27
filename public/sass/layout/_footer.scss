@@ -1,0 +1,20 @@
+.footer {
+  height: 8rem;
+  width: 100%;
+  @include flexCenter;
+  justify-content: space-around;
+  background: $color-primario;
+  &__autor {
+    font-size: 1.4rem;
+    color: $blanco;
+  }
+  &__social {
+    background: 5rem;
+    & ul {
+      display: flex;
+      width: 7rem;
+      justify-content: space-between;
+      list-style: none;
+    }
+  }
+}

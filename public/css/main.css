@@ -2,6 +2,15 @@
   color: #ed2827;
 }
 
+.logo-icono--blanco {
+  color: #ffff;
+}
+
+.icono-footer {
+  color: #ffff;
+  font-size: 1.4rem;
+}
+
 .caracteristicas {
   padding: 10rem 8rem;
   height: 60rem;
@@ -15,8 +24,7 @@
 }
 
 .caracteristicas__contenido {
-  margin-top: 2rem;
-  height: 90%;
+  height: 40rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,6 +39,7 @@
   background: #fef3f3;
   width: 13rem;
   height: 13rem;
+  top: -13%;
   border-radius: 6.5rem;
   position: relative;
   display: -webkit-box;
@@ -52,13 +61,59 @@
   font-size: 4rem;
 }
 
-.caracteristicas__texto {
+.caracteristicas__subtitulo {
   position: absolute;
   top: 110%;
   width: 20rem;
   color: #ed2827;
+  font-weight: 700;
   font-size: 2rem;
   text-align: center;
+}
+
+.caracteristicas__texto {
+  font-size: 1.6rem;
+  color: #232121;
+  opacity: 0.6;
+  position: absolute;
+  font-weight: 600;
+  width: 30rem;
+  text-align: center;
+  top: 190px;
+}
+
+.footer {
+  height: 8rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background: #ed2827;
+}
+
+.footer__autor {
+  font-size: 1.4rem;
+  color: #ffff;
+}
+
+.footer__social {
+  background: 5rem;
+}
+
+.footer__social ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 7rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  list-style: none;
 }
 
 header {
@@ -145,6 +200,7 @@ header .hero__btn {
   color: #ffff;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+  font-weight: 600;
 }
 
 header .hero__btn:hover {
@@ -154,7 +210,7 @@ header .hero__btn:hover {
 .menu {
   padding: 10rem 8rem;
   height: auto;
-  background: #f7f7f7;
+  background: #f3f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -332,6 +388,7 @@ header .hero__btn:hover {
   text-decoration: none;
   font-size: 1.6rem;
   color: #ffff;
+  font-weight: 600;
 }
 
 .nav__seccion-usuario-btn--rojo {
@@ -343,6 +400,106 @@ header .hero__btn:hover {
 
 .nav__seccion-usuario-btn--rojo:hover {
   background: #f04746;
+}
+
+.testimonial {
+  padding: 10rem 8rem;
+  width: 100%;
+  height: 60rem;
+}
+
+.testimonial__titulo {
+  text-align: center;
+  font-size: 3.2rem;
+  color: #232121;
+  font-weight: 700;
+}
+
+.testimonial__contenedorGrande {
+  width: 100%;
+  height: 40rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.testimonial__contenedor {
+  width: 30rem;
+  height: 25rem;
+  -webkit-filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.46));
+          filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.46));
+}
+
+.testimonial__contenido {
+  height: 100%;
+  width: 100%;
+  background: #f3f2f2;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 46% 75%, 25% 99%, 25% 75%, 0% 75%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 46% 75%, 25% 99%, 25% 75%, 0% 75%);
+  position: relative;
+  padding: 2rem;
+}
+
+.testimonial__contenido p {
+  position: absolute;
+  text-align: center;
+  top: 7.1rem;
+  font-weight: 600;
+  font-style: italic;
+  width: 26rem;
+  font-size: 1.6rem;
+}
+
+.testimonial__contenido p::before {
+  display: block;
+  position: absolute;
+  top: -55%;
+  color: #ed2827;
+  content: '"';
+  font-weight: 600;
+  font-style: italic;
+  font-size: 4rem;
+}
+
+.testimonial__autor {
+  background: red;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 2.5rem;
+  position: absolute;
+  left: 13%;
+}
+
+.testimonial__autor--1 {
+  background: url(/public/images/Alan.jpg);
+  background-size: cover;
+}
+
+.testimonial__autor--2 {
+  background: url(/public/images/Sus.jpg);
+  background-size: cover;
+}
+
+.testimonial__autor--3 {
+  background: url(/public/images/Pablin.jpg);
+  background-size: cover;
+}
+
+.testimonial__autor span {
+  position: absolute;
+  font-size: 1.6rem;
+  color: #ed2827;
+  width: 4rem;
+  top: 31%;
+  width: 24rem;
+  left: 110%;
+  text-align: start;
 }
 
 *,

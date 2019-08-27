@@ -54,6 +54,7 @@
   &__seccion-usuario-btn {
     @include linkEstilos;
     color: $blanco;
+    font-weight: 600;
 
     &--rojo {
       background: $color-primario;

@@ -2,14 +2,10 @@
   padding: 10rem 8rem;
   height: 60rem;
   &__titulo {
-    text-align: center;
-    font-size: 3.2rem;
-    color: $negro;
-    font-weight: 700;
+    @include titulo;
   }
   &__contenido {
-    margin-top: 2rem;
-    height: 90%;
+    height: 40rem;
     @include flexCenter;
     justify-content: space-around;
   }
@@ -17,6 +13,7 @@
     background: $color-rosa-claro;
     width: 13rem;
     height: 13rem;
+    top: -13%;
     border-radius: 6.5rem;
     position: relative;
     @include flexColumn;
@@ -25,12 +22,23 @@
     color: $color-primario;
     font-size: 4rem;
   }
-  &__texto {
+  &__subtitulo {
     position: absolute;
     top: 110%;
     width: 20rem;
     color: $color-primario;
+    font-weight: 700;
     font-size: 2rem;
     text-align: center;
+  }
+  &__texto {
+    font-size: $tamanio-default-letra;
+    color: $negro;
+    opacity: 0.6;
+    position: absolute;
+    font-weight: 600;
+    width: 30rem;
+    text-align: center;
+    top: 190px;
   }
 }

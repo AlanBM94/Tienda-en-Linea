@@ -47,6 +47,7 @@ header {
       background: $color-primario;
       color: $blanco;
       transition: all 0.2s;
+      font-weight: 600;
       &:hover {
         background: $color-primario-hover;
       }

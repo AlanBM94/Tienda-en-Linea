@@ -3,6 +3,13 @@
   opacity: 1;
 }
 
+@mixin titulo {
+  text-align: center;
+  font-size: 3.2rem;
+  color: $negro;
+  font-weight: 700;
+}
+
 @mixin flexCenter {
   display: flex;
   align-items: center;

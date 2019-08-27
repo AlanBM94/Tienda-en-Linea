@@ -1,0 +1,85 @@
+.testimonial {
+  padding: 10rem 8rem;
+  width: 100%;
+  height: 60rem;
+  &__titulo {
+    @include titulo;
+  }
+  &__contenedorGrande {
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__contenedor {
+    width: 30rem;
+    height: 25rem;
+    filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.46));
+  }
+  &__contenido {
+    height: 100%;
+    width: 100%;
+    background: $gris-claro;
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 75%,
+      46% 75%,
+      25% 99%,
+      25% 75%,
+      0% 75%
+    );
+    position: relative;
+    padding: 2rem;
+    p {
+      position: absolute;
+      text-align: center;
+      top: 7.1rem;
+      font-weight: 600;
+      font-style: italic;
+      width: 26rem;
+      font-size: $tamanio-default-letra;
+      &::before {
+        display: block;
+        position: absolute;
+        top: -55%;
+        color: $color-primario;
+        content: '"';
+        font-weight: 600;
+        font-style: italic;
+        font-size: 4rem;
+      }
+    }
+  }
+  &__autor {
+    background: red;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+    position: absolute;
+    left: 13%;
+    &--1 {
+      background: url(#{$imgpath}/Alan.jpg);
+      background-size: cover;
+    }
+    &--2 {
+      background: url(#{$imgpath}/Sus.jpg);
+      background-size: cover;
+    }
+    &--3 {
+      background: url(#{$imgpath}/Pablin.jpg);
+      background-size: cover;
+    }
+    & span {
+      position: absolute;
+      font-size: $tamanio-default-letra;
+      color: $color-primario;
+      width: 4rem;
+      top: 31%;
+      width: 24rem;
+      left: 110%;
+      text-align: start;
+    }
+  }
+}

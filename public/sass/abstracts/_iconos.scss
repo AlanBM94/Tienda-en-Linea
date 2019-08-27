@@ -1,3 +1,11 @@
 .logo-icono {
   color: $color-primario;
+  &--blanco {
+    color: $blanco;
+  }
+}
+
+.icono-footer {
+  color: $blanco;
+  font-size: 1.4rem;
 }
