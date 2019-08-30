@@ -8,6 +8,8 @@
     height: 40rem;
     @include flexCenter;
     justify-content: space-around;
+    opacity: 0;
+    transition: all 0.2s;
   }
   &__item {
     background: $color-rosa-claro;
@@ -24,7 +26,7 @@
   }
   &__subtitulo {
     position: absolute;
-    top: 110%;
+    top: 122%;
     width: 20rem;
     color: $color-primario;
     font-weight: 700;

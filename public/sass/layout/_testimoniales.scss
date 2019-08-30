@@ -11,6 +11,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    opacity: 0;
+    transition: all 0.2s;
   }
   &__contenedor {
     width: 30rem;

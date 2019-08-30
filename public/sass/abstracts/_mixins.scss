@@ -5,9 +5,19 @@
 
 @mixin titulo {
   text-align: center;
-  font-size: 3.2rem;
+  font-size: 4.2rem;
   color: $negro;
-  font-weight: 700;
+  font-weight: 300;
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    top: 130%;
+    left: 44%;
+    width: 15rem;
+    height: 2px;
+    background: $color-primario;
+  }
 }
 
 @mixin flexCenter {
