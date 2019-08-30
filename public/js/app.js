@@ -7,6 +7,7 @@ $(document).ready(function() {
         $('.nav__lista').css({ background: '#232121' });
       } else {
         $('.nav').removeClass('sticky');
+        $('.nav').css({ opacity: '0.9' });
         $('.nav__lista').css({ background: 'transparent' });
       }
     },

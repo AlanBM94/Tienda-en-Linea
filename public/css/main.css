@@ -453,6 +453,7 @@ header .hero__btn:hover {
   width: 100%;
   background-color: #232121;
   z-index: 9999;
+  opacity: 0.9;
 }
 
 .testimonial {
