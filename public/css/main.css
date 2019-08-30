@@ -567,6 +567,7 @@ header .hero__btn:hover {
   top: 31%;
   width: 24rem;
   left: 110%;
+  font-weight: 600;
   text-align: start;
 }
 
