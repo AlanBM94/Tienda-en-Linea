@@ -248,7 +248,7 @@ header .hero__btn {
 }
 
 header .hero__btn:hover {
-  background: #f04746;
+  background: #df1413;
 }
 
 .menu {
@@ -443,7 +443,7 @@ header .hero__btn:hover {
 }
 
 .nav__seccion-usuario-btn--rojo:hover {
-  background: #f04746;
+  background: #df1413;
 }
 
 .sticky {
@@ -593,6 +593,11 @@ body {
   color: #232121;
 }
 
+.titulo-logo {
+  font-size: 3rem;
+  text-align: center;
+}
+
 .btn {
   border: none;
   padding: 1rem 1.2rem;
@@ -601,5 +606,98 @@ body {
 .btn:hover {
   border: none;
   cursor: pointer;
+}
+
+.formulario {
+  padding: 8rem 8rem;
+  background: #f3f2f2;
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.formulario__contenido {
+  margin-top: 2rem;
+  width: 35rem;
+  background: #ffff;
+  height: 60rem;
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.46);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.46);
+  padding: 1rem;
+}
+
+.formulario__titulo {
+  margin-top: 2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.formulario__form {
+  width: 80%;
+  height: 90%;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.formulario__input {
+  text-align: center;
+  width: 100%;
+  height: 2rem;
+  padding: 1.3rem 1rem;
+  border-radius: 2px;
+  border: 2px solid #f3f2f2;
+  font-size: 1.6rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.formulario__input:focus {
+  outline: none;
+  border-bottom: 2px solid #ed2827;
+}
+
+.formulario__btnEnviar {
+  width: 100%;
+  height: 4rem;
+  background: #ed2827;
+  color: #ffff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.formulario__btnEnviar:hover {
+  background: #df1413;
+}
+
+.formulario__enlaceSecundario {
+  font-size: 1.4rem;
+  color: #df1413;
+  text-decoration: none;
 }
 /*# sourceMappingURL=main.css.map */

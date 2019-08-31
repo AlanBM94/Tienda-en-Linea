@@ -1,0 +1,62 @@
+.formulario {
+  padding: 8rem 8rem;
+  background: $gris-claro;
+  height: 100vh;
+  width: 100%;
+  @include flexColumn;
+  &__contenido {
+    margin-top: 2rem;
+    width: 35rem;
+    background: $blanco;
+    height: 60rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.46);
+    padding: 1rem;
+  }
+  &__titulo {
+    margin-top: 2rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+  &__form {
+    width: 80%;
+    height: 90%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__input {
+    text-align: center;
+    width: 100%;
+    height: 2rem;
+    padding: 1.3rem 1rem;
+    border-radius: 2px;
+    border: 2px solid $gris-claro;
+    font-size: $tamanio-default-letra;
+    transition: all 0.2s;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $color-primario;
+    }
+  }
+  &__btnEnviar {
+    width: 100%;
+    height: 4rem;
+    background: $color-primario;
+    color: $blanco;
+    font-size: $tamanio-default-letra;
+    font-weight: 600;
+    transition: all 0.2s;
+    &:hover {
+      background: $color-primario-hover;
+    }
+  }
+  &__enlaceSecundario {
+    font-size: 1.4rem;
+    color: $color-primario-hover;
+    text-decoration: none;
+  }
+}
