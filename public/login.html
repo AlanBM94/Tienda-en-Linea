@@ -15,16 +15,18 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/main.css" />
-    <title>Registrate</title>
+    <title>Iniciar sesión</title>
     <section class="formulario">
       <h1 class="titulo-logo">
         <i class="fas fa-shopping-cart logo-icono"></i>
         Mi tienda
       </h1>
       <div class="formulario__contenido">
-        <h2 class="formulario__titulo">Registrate</h2>
-        <form action="#" class="formulario__form">
-          <input class="formulario__input" type="text" placeholder="Usuario" />
+        <h2 class="formulario__titulo">Iniciar sesión</h2>
+        <form
+          action="usuarioLogeado.html"
+          class="formulario__form formulario__form--login"
+        >
           <input
             class="formulario__input"
             type="text"
@@ -35,14 +37,12 @@
             type="password"
             placeholder="Contraseña"
           />
-          <input
-            class="formulario__input"
-            type="password"
-            placeholder="Confirmar contraseña"
-          />
-          <button class="formulario__btnEnviar btn">Registrarse</button>
-          <a href="login.html" class="formulario__enlaceSecundario"
-            >Ya tienes cuenta?</a
+          <button class="formulario__btnEnviar btn">Iniciar sesión</button>
+          <a href="registrarse.html" class="formulario__enlaceSecundario"
+            >Aún no tienes cuenta?</a
+          >
+          <a href="#" class="formulario__enlaceSecundario"
+            >Olvidaste tu contraseña?</a
           >
         </form>
       </div>

@@ -5,10 +5,22 @@ $(document).ready(function() {
       if (direction == 'down') {
         $('.nav').addClass('sticky');
         $('.nav__lista').css({ background: '#232121' });
+        $('.nav__usuarioDropdown').css({ background: '#232121' });
+        $('.nav__usuarioDropdown').css({
+          height: '7rem',
+          width: '12rem',
+          padding: '1rem'
+        });
       } else {
         $('.nav').removeClass('sticky');
         $('.nav').css({ opacity: '0.9' });
         $('.nav__lista').css({ background: 'transparent' });
+        $('.nav__usuarioDropdown').css({ background: '' });
+        $('.nav__usuarioDropdown').css({
+          height: 'auto',
+          width: 'auto',
+          padding: '0'
+        });
       }
     },
     {

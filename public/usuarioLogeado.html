@@ -63,23 +63,26 @@
             <a href="#" class="nav__link">Otros</a>
           </li>
         </ul>
-
-        <!-- Sección de iniciar sesión y registrarse -->
-        <div class="nav__seccion-usuario">
-          <ul class="nav__seccion-usuario-lista">
-            <li class="nav__seccion-usuario-item">
-              <a
-                href="registrarse.html"
-                class="nav__seccion-usuario-btn nav__seccion-usuario-btn--rojo"
-                >Registrarse</a
-              >
-            </li>
-            <li class="nav__seccion-usuario-item">
-              <a href="login.html" class="nav__seccion-usuario-btn">
-                Iniciar sesión
-              </a>
-            </li>
-          </ul>
+        <!-- Sección dinamica del usuario -->
+        <div class="nav__seccionDinamicaPerfil">
+          <button class="nav__btnCarrito btn btn--carrito">
+            Carrito
+            <span>1</span>
+          </button>
+          <div class="nav__usuario">
+            <img src="./images/Alan.jpg" alt="Alan" />
+            <p>
+              Alan <span><i class="fas fa-caret-down"></i></span>
+            </p>
+            <ul class="nav__usuarioDropdown">
+              <li class="nav__usuarioDropdownItem">
+                <a href="#">Mi perfil</a>
+              </li>
+              <li class="nav__usuarioDropdownItem">
+                <a href="#">Cerrar sesión</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- Promoción -->
