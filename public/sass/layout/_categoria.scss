@@ -1,0 +1,56 @@
+.categoria {
+  &__titulo {
+    @include titulo;
+    margin-top: 5rem;
+  }
+
+  &__contenido {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+    grid-gap: 5rem;
+    padding: 13rem 10rem;
+    // background: greenyellow;
+  }
+
+  &__item {
+    justify-self: center;
+    & a {
+      width: 25rem;
+      height: 25rem;
+      & img {
+        width: 22rem;
+        height: 22rem;
+        border: 3rem solid $gris-claro;
+      }
+    }
+  }
+  &__itemFooter {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: repeat(2, 1fr);
+    & h4 {
+      font-size: 1.4rem;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    & p {
+      font-size: 1.3rem;
+      opacity: 0.7;
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+    & i {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      font-size: $tamanio-default-letra;
+      color: $color-primario;
+      justify-self: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

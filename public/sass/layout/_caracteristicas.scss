@@ -1,6 +1,9 @@
 .caracteristicas {
   padding: 10rem 8rem;
   height: 60rem;
+  &--categoria {
+    height: auto;
+  }
   &__titulo {
     @include titulo;
   }

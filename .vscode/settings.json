@@ -7,5 +7,6 @@
       "extensionName": ".css",
       "savePath": "/public/css/"
     }
-  ]
+  ],
+  "liveServer.settings.port": 5501
 }

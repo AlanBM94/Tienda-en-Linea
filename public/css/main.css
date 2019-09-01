@@ -46,6 +46,10 @@
   height: 60rem;
 }
 
+.caracteristicas--categoria {
+  height: auto;
+}
+
 .caracteristicas__titulo {
   text-align: center;
   font-size: 4.2rem;
@@ -124,6 +128,99 @@
   width: 30rem;
   text-align: center;
   top: 190px;
+}
+
+.categoria__titulo {
+  text-align: center;
+  font-size: 4.2rem;
+  color: #232121;
+  font-weight: 300;
+  position: relative;
+  margin-top: 5rem;
+}
+
+.categoria__titulo:before {
+  position: absolute;
+  content: '';
+  top: 130%;
+  left: 44%;
+  width: 15rem;
+  height: 2px;
+  background: #ed2827;
+}
+
+.categoria__contenido {
+  width: 100%;
+  height: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(27rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  grid-gap: 5rem;
+  padding: 13rem 10rem;
+}
+
+.categoria__item {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.categoria__item a {
+  width: 25rem;
+  height: 25rem;
+}
+
+.categoria__item a img {
+  width: 22rem;
+  height: 22rem;
+  border: 3rem solid #f3f2f2;
+}
+
+.categoria__itemFooter {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 80% 20%;
+      grid-template-columns: 80% 20%;
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
+}
+
+.categoria__itemFooter h4 {
+  font-size: 1.4rem;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+}
+
+.categoria__itemFooter p {
+  font-size: 1.3rem;
+  opacity: 0.7;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 / 3;
+}
+
+.categoria__itemFooter i {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2 / 3;
+  font-size: 1.6rem;
+  color: #ed2827;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.categoria__itemFooter i:hover {
+  cursor: pointer;
 }
 
 .footer {
@@ -359,6 +456,10 @@ header .hero__btn:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.nav--sticky {
+  background: #232121;
 }
 
 .nav__lista {

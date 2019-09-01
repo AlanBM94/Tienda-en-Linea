@@ -4,6 +4,9 @@
   padding: 1rem 4rem;
   width: 100%;
   position: absolute;
+  &--sticky {
+    background: #232121;
+  }
   @include flexCenter;
   &__lista {
     list-style: none;
