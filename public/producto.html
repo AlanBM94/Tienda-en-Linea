@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/main.css" />
-    <title>Electrónica</title>
+    <title>Producto</title>
   </head>
   <body>
     <!-- Navegación -->
@@ -86,52 +86,72 @@
       </div>
     </div>
     <!-- Categoría -->
-    <section class="categoria caracteristicas caracteristicas--categoria">
-      <h3 class="categoria__titulo">Electrónica</h3>
-      <div class="categoria__contenido">
-        <div class="categoria__item">
-          <a href="producto.html">
+    <section class="producto caracteristicas">
+      <div class="producto__contenido">
+        <div class="producto__fotografias">
+          <div class="producto__fotografiaPrincipal">
             <img src="images/television.jpg" alt="" />
-          </a>
-          <div class="categoria__itemFooter">
-            <h4>Television Samsung 4k</h4>
-            <p>$10,000</p>
-            <i class="far fa-heart"></i>
+          </div>
+
+          <div
+            class="producto__fotografiaSecundaria producto__fotografiaSecundaria--1"
+          >
+            <img src="images/television.jpg" alt="" />
+          </div>
+          <div
+            class="producto__fotografiaSecundaria producto__fotografiaSecundaria--2"
+          >
+            <img src="images/television.jpg" alt="" />
+          </div>
+          <div
+            class="producto__fotografiaSecundaria producto__fotografiaSecundaria--3"
+          >
+            <img src="images/television.jpg" alt="" />
           </div>
         </div>
-        <div class="categoria__item">
-          <a href="#">
-            <img src="images/television.jpg" alt="" />
-          </a>
-          <div class="categoria__itemFooter">
-            <h4>Television Samsung 4k</h4>
-            <p>$10,000</p>
-            <i class="far fa-heart"></i>
-          </div>
+        <div class="producto__contenidoPrincipal">
+          <h4 class="producto__titulo">
+            Televisión 4k Samsung <span> $10,000</span>
+          </h4>
+          <p class="producto__texto">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque aut
+            eveniet quod magni tempore quam atque, ullam neque nisi facere saepe
+            ea est. A itaque quos voluptates adipisci optio facilis!
+          </p>
+          <form action="#" class="producto__formulario">
+            <input type="number" name="cantidad" id="" placeholder="Cantidad" />
+            <button class="btn producto__btnAgregarCarrito">
+              Agregar al carrito
+            </button>
+          </form>
         </div>
-        <div class="categoria__item">
-          <a href="#">
-            <img src="images/television.jpg" alt="" />
-          </a>
-          <div class="categoria__itemFooter">
-            <h4>Television Samsung 4k</h4>
-            <p>$10,000</p>
-            <i class="far fa-heart"></i>
+        <div class="producto__contenidoSecundario">
+          <div class="producto__puntaje">
+            <h4>4.9</h4>
+            <ul>
+              <li><i class="fas fa-star"></i></li>
+              <li><i class="fas fa-star"></i></li>
+              <li><i class="fas fa-star"></i></li>
+              <li><i class="fas fa-star"></i></li>
+              <li><i class="fas fa-star"></i></li>
+            </ul>
+            <a href="">Ver reseñas</a>
           </div>
-        </div>
-        <div class="categoria__item">
-          <a href="#">
-            <img src="images/television.jpg" alt="" />
-          </a>
-          <div class="categoria__itemFooter">
-            <h4>Television Samsung 4k</h4>
-            <p>$10,000</p>
-            <i class="far fa-heart"></i>
+          <div class="producto__descripcion">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
+              repellendus, dolores nihil asperiores laudantium eos ducimus
+              adipisci minus consectetur unde repellat suscipit maxime aperiam
+              rem libero sit. Excepturi, perferendis? Enim.
+            </p>
+          </div>
+          <div class="producto__categoria">
+            <h4>Electrónica</h4>
           </div>
         </div>
       </div>
     </section>
-
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer__logo">
         <a href="#" class="nav__link nav__link--logo">

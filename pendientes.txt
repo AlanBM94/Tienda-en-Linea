@@ -1,3 +1,7 @@
 Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     olvideMiContraseña
     actualizarContraseña
+
+Interfaz
+    Hacer mixins de los estilos que se repiten del producto
+    Agregar la cantidad que se quiere agregar al carrito
