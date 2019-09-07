@@ -1,6 +1,6 @@
 .producto {
   width: 100%;
-  height: 90rem;
+  height: auto;
   padding: 10rem 5rem;
   &__contenido {
     width: 100%;
@@ -66,7 +66,7 @@
     height: 100%;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    padding: 15rem 5rem;
+    padding: 13rem 5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -85,14 +85,6 @@
   }
   &__btnAgregarCarrito {
     width: 50%;
-    font-weight: 600;
-    color: $blanco;
-    background: $color-primario;
-    transition: all 0.2s;
-    &:hover {
-      background: $color-primario-hover;
-    }
-    font-size: $tamanio-default-letra;
   }
   &__formulario {
     display: flex;
@@ -114,7 +106,7 @@
     height: 100%;
     width: 20%;
     @include flexColumn;
-    justify-content: space-around;
+    justify-content: center;
     & h4 {
       font-size: 4.5rem;
       color: $negro;
@@ -152,5 +144,85 @@
       font-size: 2rem;
       font-weight: 600;
     }
+  }
+  &__resenia {
+    padding: 4rem;
+    width: 100%;
+    & h4 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 400;
+      color: $color-primario;
+    }
+  }
+  &__resenias {
+    width: 100%;
+    height: 100%;
+    margin-top: 4rem;
+  }
+  &__reseniasSlider {
+    margin: 0 2rem;
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  &__contenedorResenia {
+    width: 65rem !important;
+    height: 23rem !important;
+    display: flex;
+    padding: 2rem;
+    background: $gris-claro;
+    margin: 2rem;
+  }
+  &__reseniaUsuario {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    & img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 10rem;
+      align-self: center;
+    }
+    & p {
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: $color-primario;
+      text-align: center;
+    }
+  }
+  &__reseniaContenido {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    & ul {
+      list-style: none;
+      display: flex;
+      li {
+        font-size: $tamanio-default-letra;
+        color: $color-primario;
+        &:not(:first-child) {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+    & span {
+      font-size: 1.2rem;
+      color: $negro;
+      opacity: 0.6;
+    }
+    & p {
+      font-size: 1.4rem;
+      color: $negro;
+      font-weight: 400;
+    }
+  }
+  &__HacerResenia {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }

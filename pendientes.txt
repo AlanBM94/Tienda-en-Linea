@@ -4,4 +4,7 @@ Cuando se comienzen a hacer las vistas se va a implementar las funciones de
 
 Interfaz
     Hacer mixins de los estilos que se repiten del producto
-    Agregar la cantidad que se quiere agregar al carrito
+    Diseñar la interfaz del admin y del usuario
+    Diseñar la interfaz del carrito
+    Diseñar la interfaz de el slider de los mejores productos
+    Diseñar la interfaz de las reseñas de los productos

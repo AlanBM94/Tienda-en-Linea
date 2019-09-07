@@ -6,4 +6,51 @@
     border: none;
     cursor: pointer;
   }
+  &--rojo {
+    padding: 1rem;
+    background: $color-primario;
+    transition: all 0.2s;
+    font-size: $tamanio-default-letra;
+    font-weight: 700;
+    color: $blanco;
+    &:hover {
+      background: $color-primario-hover;
+    }
+  }
+  &--carrito {
+    text-decoration: none;
+    text-align: center;
+  }
+  &--secundario {
+    width: 15rem;
+    height: 5rem;
+    font-size: $tamanio-default-letra;
+    color: $color-primario;
+    font-weight: 600;
+    background: transparent;
+    border: 2px solid $color-primario;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: $blanco;
+      border: 2px solid $color-primario;
+    }
+    &:before {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      width: 100%;
+      transform: translateX(-100%);
+      height: 100%;
+      background: $color-primario;
+      transition: all 0.2s ease-in-out;
+      z-index: -1;
+    }
+    &:hover:before {
+      transform: translateX(0);
+    }
+  }
 }

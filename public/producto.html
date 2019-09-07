@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,600i,700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/glider.min.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
@@ -65,10 +66,10 @@
 
       <!-- Sección dinamica del usuario -->
       <div class="nav__seccionDinamicaPerfil">
-        <button class="nav__btnCarrito btn btn--carrito">
+        <a href="carrito.html" class="nav__btnCarrito btn btn--carrito">
           Carrito
           <span>5</span>
-        </button>
+        </a>
         <div class="nav__usuario">
           <img src="./images/Alan.jpg" alt="Alan" />
           <p>
@@ -120,7 +121,7 @@
           </p>
           <form action="#" class="producto__formulario">
             <input type="number" name="cantidad" id="" placeholder="Cantidad" />
-            <button class="btn producto__btnAgregarCarrito">
+            <button class="btn producto__btnAgregarCarrito btn--rojo">
               Agregar al carrito
             </button>
           </form>
@@ -135,7 +136,7 @@
               <li><i class="fas fa-star"></i></li>
               <li><i class="fas fa-star"></i></li>
             </ul>
-            <a href="">Ver reseñas</a>
+            <!-- <a href="">Ver reseñas</a> -->
           </div>
           <div class="producto__descripcion">
             <p>
@@ -149,6 +150,155 @@
             <h4>Electrónica</h4>
           </div>
         </div>
+      </div>
+      <div class="producto__resenia">
+        <h4>Reseñas</h4>
+        <div class="producto__resenias glider-contain multiple">
+          <button class="glider-prev" role="button" aria-label="Previous">
+            <i class="fa fa-chevron-left"></i>
+          </button>
+          <div class="producto__reseniasSlider glider">
+            <div class="producto__contenedorResenia">
+              <div class="producto__reseniaUsuario">
+                <img src="images/Alan.jpg" alt="" />
+                <p>Alan Beltrán</p>
+              </div>
+              <div class="producto__reseniaContenido">
+                <ul>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star-half-alt"></i>
+                  </li>
+                </ul>
+                <span>20 Agosto 2019</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                  perferendis quo, repudiandae cumque earum, temporibus
+                  reiciendis voluptas accusantium provident dicta maxime modi
+                  itaque aspernatur, adipisci doloribus natus recusandae eum
+                  labore.
+                </p>
+              </div>
+            </div>
+            <div class="producto__contenedorResenia">
+              <div class="producto__reseniaUsuario">
+                <img src="images/Sus.jpg" alt="" />
+                <p>Susana Chavira</p>
+              </div>
+              <div class="producto__reseniaContenido">
+                <ul>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star-half-alt"></i>
+                  </li>
+                </ul>
+                <span>20 Agosto 2019</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                  perferendis quo, repudiandae cumque earum, temporibus
+                  reiciendis voluptas accusantium provident dicta maxime modi
+                  itaque aspernatur, adipisci doloribus natus recusandae eum
+                  labore.
+                </p>
+              </div>
+            </div>
+            <div class="producto__contenedorResenia">
+              <div class="producto__reseniaUsuario">
+                <img src="images/Alan.jpg" alt="" />
+                <p>Alan Mendoza</p>
+              </div>
+              <div class="producto__reseniaContenido">
+                <ul>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star-half-alt"></i>
+                  </li>
+                </ul>
+                <span>20 Agosto 2019</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                  perferendis quo, repudiandae cumque earum, temporibus
+                  reiciendis voluptas accusantium provident dicta maxime modi
+                  itaque aspernatur, adipisci doloribus natus recusandae eum
+                  labore.
+                </p>
+              </div>
+            </div>
+            <div class="producto__contenedorResenia">
+              <div class="producto__reseniaUsuario">
+                <img src="images/Pablin.jpg" alt="" />
+                <p>Pablito Mix</p>
+              </div>
+              <div class="producto__reseniaContenido">
+                <ul>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star-half-alt"></i>
+                  </li>
+                </ul>
+                <span>20 Agosto 2019</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                  perferendis quo, repudiandae cumque earum, temporibus
+                  reiciendis voluptas accusantium provident dicta maxime modi
+                  itaque aspernatur, adipisci doloribus natus recusandae eum
+                  labore.
+                </p>
+              </div>
+            </div>
+          </div>
+          <button class="glider-next" role="button" aria-label="Next">
+            <i class="fa fa-chevron-right"></i>
+          </button>
+          <div role="tablist" class="glider-dots" id="dots"></div>
+        </div>
+      </div>
+      <div class="producto__HacerResenia">
+        <button class="btn btn--secundario">Hacer Reseña</button>
       </div>
     </section>
     <!-- Footer -->
@@ -192,7 +342,20 @@
       </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/glider.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
+    <script>
+      //Slider con glidejs
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 2,
+        dots: '#dots',
+        draggable: false,
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+      });
+    </script>
   </body>
 </html>

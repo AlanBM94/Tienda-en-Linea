@@ -1,0 +1,53 @@
+.mejoresProductos {
+  padding: $paddingSecciones;
+  width: 100%;
+  height: auto;
+  background: $gris-claro;
+  &__titulo {
+    @include titulo;
+  }
+  &__slider {
+    margin: 6rem auto;
+    width: 90%;
+    height: 100%;
+  }
+}
+
+.mejorProducto {
+  width: 100% !important;
+  height: 40rem !important;
+  margin: 0 2rem;
+  background: $gradiente-oscuro, url(#{$imgpath}/television.jpg);
+  background-size: contain;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  align-self: center !important;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__titulo {
+    font-size: 4rem;
+    color: $blanco;
+    font-weight: 300;
+  }
+  &__descripcion {
+    font-size: $tamanio-default-letra;
+    color: $blanco;
+    opacity: 0.8;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  &__enlace {
+    text-decoration: none;
+    background: $color-primario;
+    width: 20%;
+    height: 10%;
+    color: $blanco;
+    font-size: $tamanio-default-letra;
+    @include flexCenter;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}

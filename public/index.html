@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,600i,700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/glider.min.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
@@ -70,12 +71,15 @@
             <li class="nav__seccion-usuario-item">
               <a
                 href="registrarse.html"
-                class="nav__seccion-usuario-btn nav__seccion-usuario-btn--rojo"
+                class="nav__seccion-usuario-btn btn--rojo"
                 >Registrarse</a
               >
             </li>
             <li class="nav__seccion-usuario-item">
-              <a href="login.html" class="nav__seccion-usuario-btn">
+              <a
+                href="login.html"
+                class="nav__seccion-usuario-btn nav__seccion-usuario-btn--transparente"
+              >
                 Iniciar sesión
               </a>
             </li>
@@ -87,7 +91,7 @@
         <h2 class="hero__titulo">Usuarios Premium</h2>
         <p class="hero__texto">20% de descuento</p>
         <span>A partir de 5 compras</span>
-        <button class="hero__btn btn">
+        <button class="hero__btn btn btn--rojo">
           Comienza a comprar
         </button>
       </div>
@@ -133,7 +137,7 @@
     <section class="menu">
       <div class="menu__contenedor">
         <div class="menu__item menu__electronica">
-          <a href="#" class="menu__enlace">
+          <a href="categoria.html" class="menu__enlace">
             Electrónica
           </a>
         </div>
@@ -192,6 +196,52 @@
         </div>
       </div>
     </section>
+    <!-- Productos más vendidos -->
+    <section class="mejoresProductos ">
+      <h3 class="mejoresProductos__titulo">Nuestros mejores productos</h3>
+
+      <div class="mejoresProductos__slider glider-contain multiple">
+        <button class="glider-prev" role="button" aria-label="Previous">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="mejoresProductos__contenido glider">
+          <div class="mejorProducto">
+            <h4 class="mejorProducto__titulo">Televisión Samsung 4k</h4>
+            <p class="mejorProducto__descripcion">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+              tenetur necessitatibus at, excepturi similique, autem sit nisi
+              dolorem ipsa!
+            </p>
+            <a href="#" class="mejorProducto__enlace">Ver producto</a>
+          </div>
+          <div class="mejorProducto">
+            <h4 class="mejorProducto__titulo">Xbox 360</h4>
+            <p class="mejorProducto__descripcion">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+              tenetur necessitatibus at, excepturi similique, autem sit nisi
+              dolorem ipsa!
+            </p>
+            <a href="#" class="mejorProducto__enlace">Ver producto</a>
+          </div>
+          <div class="mejorProducto">
+            <h4 class="mejorProducto__titulo">Licuadora</h4>
+            <p class="mejorProducto__descripcion">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+              tenetur necessitatibus at, excepturi similique, autem sit nisi
+              dolorem ipsa!
+            </p>
+            <a href="#" class="mejorProducto__enlace">Ver producto</a>
+          </div>
+        </div>
+        <button class="glider-next" role="button" aria-label="Next">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        <div role="tablist" class="glider-dots" id="dots"></div>
+      </div>
+    </section>
     <footer class="footer">
       <div class="footer__logo">
         <a href="#" class="nav__link nav__link--logo">
@@ -232,7 +282,20 @@
       </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/glider.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
+    <script>
+      //Slider con glidejs
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        dots: '#dots',
+        draggable: false,
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+      });
+    </script>
   </body>
 </html>

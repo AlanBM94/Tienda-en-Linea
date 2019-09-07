@@ -59,13 +59,9 @@
     color: $blanco;
     font-weight: 600;
 
-    &--rojo {
-      background: $color-primario;
-      padding: 1rem;
-      transition: all 0.2s;
-      &:hover {
-        background: $color-primario-hover;
-      }
+    &--transparente {
+      padding: 0.8rem;
+      border: 1px solid $blanco;
     }
   }
   // Sección dinamica del usuario

@@ -1,5 +1,5 @@
 .testimonial {
-  padding: 10rem 8rem;
+  padding: $paddingSecciones;
   width: 100%;
   height: 60rem;
   &__titulo {
@@ -23,6 +23,7 @@
     height: 100%;
     width: 100%;
     background: $gris-claro;
+    position: relative;
     clip-path: polygon(
       0% 0%,
       100% 0%,
@@ -32,6 +33,17 @@
       25% 75%,
       0% 75%
     );
+    &::before {
+      display: block;
+      position: absolute;
+      top: -5%;
+      left: 0%;
+      color: $color-primario;
+      opacity: 0.4;
+      content: '\201C';
+      font-weight: 600;
+      font-size: 15rem;
+    }
     position: relative;
     padding: 2rem;
     p {
@@ -39,19 +51,8 @@
       text-align: center;
       top: 7.1rem;
       font-weight: 600;
-      font-style: italic;
       width: 26rem;
       font-size: $tamanio-default-letra;
-      &::before {
-        display: block;
-        position: absolute;
-        top: -55%;
-        color: $color-primario;
-        content: '"';
-        font-weight: 600;
-        font-style: italic;
-        font-size: 4rem;
-      }
     }
   }
   &__autor {
