@@ -13,8 +13,9 @@
     position: absolute;
     content: '';
     top: 130%;
-    left: 44%;
-    width: 15rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10%;
     height: 2px;
     background: $color-primario;
   }

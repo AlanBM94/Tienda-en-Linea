@@ -19,6 +19,37 @@
     <title>Producto</title>
   </head>
   <body>
+    <!-- Popup formulario reseña -->
+    <div class="popup" id="popup">
+      <a href="#producto">X</a>
+      <div class="popup__contenido">
+        <h4>Escribe tu reseña</h4>
+        <form action="#" class="formulario__form">
+          <input
+            type="text"
+            class="formulario__input"
+            name="correo"
+            placeholder="Correo electrónico"
+          />
+          <input
+            type="number"
+            min="1"
+            max="5"
+            class="formulario__input"
+            name="puntaje"
+            placeholder="Puntaje"
+          />
+          <textarea
+            class="formulario__input"
+            name="reseña"
+            id="reseña"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <button class="btn btn--rojo">Publicar reseña</button>
+        </form>
+      </div>
+    </div>
     <!-- Navegación -->
     <div class="nav">
       <!-- Logo -->
@@ -86,8 +117,9 @@
         </div>
       </div>
     </div>
+
     <!-- Categoría -->
-    <section class="producto caracteristicas">
+    <section class="producto caracteristicas" id="producto">
       <div class="producto__contenido">
         <div class="producto__fotografias">
           <div class="producto__fotografiaPrincipal">
@@ -298,13 +330,13 @@
         </div>
       </div>
       <div class="producto__HacerResenia">
-        <button class="btn btn--secundario">Hacer Reseña</button>
+        <a href="#popup" class="btn btn--secundario">Hacer Reseña</a>
       </div>
     </section>
     <!-- Footer -->
     <footer class="footer">
       <div class="footer__logo">
-        <a href="#" class="nav__link nav__link--logo">
+        <a href="#" class="nav__link nav__link--l ogo">
           <i class="fas fa-shopping-cart logo-icono logo-icono--blanco"></i>
           <span>miTienda</span>
         </a>

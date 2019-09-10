@@ -3,6 +3,9 @@
   background: $gris-claro;
   height: 100vh;
   width: 100%;
+  &--popup {
+    width: 70%;
+  }
   @include flexColumn;
   &__contenido {
     margin-top: 2rem;
@@ -28,6 +31,10 @@
     align-items: center;
     &--login {
       justify-content: space-around;
+    }
+    & textarea {
+      resize: none;
+      height: 213px;
     }
   }
 

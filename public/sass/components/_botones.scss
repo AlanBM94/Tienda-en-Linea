@@ -27,12 +27,14 @@
     font-size: $tamanio-default-letra;
     color: $color-primario;
     font-weight: 600;
+    @include flexCenter;
+    justify-content: center;
     background: transparent;
     border: 2px solid $color-primario;
     position: relative;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
-
+    text-decoration: none;
     &:hover {
       color: $blanco;
       border: 2px solid $color-primario;
