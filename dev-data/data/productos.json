@@ -1,0 +1,124 @@
+[
+  {
+    "id": 0,
+    "nombre": "Samsung Smart TV 55' 4K UHD",
+    "categoria": "Electrónica",
+    "descripcion": "La característica cargada del UHD TV de Samsung le da a los espectadores una experiencia incomparable en color y resolución. Entre los distintos excitadores de la visión se encuentran su PurColor y sus capacidades de HDR",
+    "precio": 9000,
+    "imagenPrincipal": "SamsungSmarTV55.jpg",
+    "imagenes": [
+      "SamsungSmarTV55-2.jpg",
+      "SamsungSmarTV55-3.jpg",
+      "SamsungSmarTV55-4.jpg"
+    ],
+    "stock": 10
+  },
+  {
+    "id": 1,
+    "nombre": "Consola Xbox One S 1TB Tom Clancys The Division 2",
+    "categoria": "Electrónica",
+    "descripcion": "Juego con resolución en 4K, un mes de prueba de Xbox Game Pass, Entrada auxiliar 3.5 mm y puerto HDMI",
+    "precio": 5300,
+    "imagenPrincipal": "xboxOne.jpg",
+    "imagenes": ["xboxOne-2.jpg", "xboxOne-3.jpg", "xboxOne-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "nombre": "Consola PlayStation 4 1 TB Hits 5 más Dishonored",
+    "categoria": "Electrónica",
+    "descripcion": "Suscripción de 3 meses a PlayStation Plus, con tres increíbles títulos (Days Gone, Detroit Become Human y Rainbow Six Siege), incluye un juego extra de Dishonored",
+    "precio": 6700,
+    "imagenPrincipal": "playStation4.jpg",
+    "imagenes": [
+      "playStation4-2.jpg",
+      "playStation4-3.jpg",
+      "playStation4-4.jpg"
+    ],
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "nombre": "Celular Huawei Mate 20 Lite Dual Sim 64GB Negro",
+    "categoria": "Electrónica",
+    "descripcion": "Pantalla de 1080x2340 píxeles, pantalla de 6.3 Pulgadas, cámara principal dual de 20MP+2MP",
+    "precio": 5400,
+    "imagenPrincipal": "huawei.jpg",
+    "imagenes": ["huawei-2.jpg", "huawei-3.jpg", "huawei-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "nombre": "Bocina Tipo Estudio Edifier R1000T4 Negro",
+    "categoria": "Electrónica",
+    "descripcion": "Totalmente rediseñado, la 4ª generación de la legendaria R1000TC (desde 1999), equipado con tecnologías de ultima generación. Amplificador clase D mejorado con controlador DRC (Control de Rango Dinámico de graves) incorporado, tarjeta de control automático de energia 100-240V, tweeter de 3/4” de nueva generación tipo cúpula de seda natural.",
+    "precio": 1900,
+    "imagenPrincipal": "bocinas.jpg",
+    "imagenes": ["bocinas-2.jpg", "bocinas-3.jpg", "bocinas-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "nombre": "Licuadora T-Fal Infiny Force 12 Funciones Azul",
+    "categoria": "Hogar y cocina",
+    "descripcion": "Diseño inteligente con potencia de 550w, logra hasta 20,000 revoluciones por minuto, modelo con panel de 12 funciones, sistema Carbon Drive, que prolonga la durabilidad, capacidad de 1.25 litros",
+    "precio": 500,
+    "imagenPrincipal": "licuadora.jpg",
+    "imagenes": ["bocinas-2.jpg", "licuadora-3.jpg", "licuadora-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "nombre": "Aspiradora Koblenz Gris Mod. KC-1800",
+    "categoria": "Hogar y cocina",
+    "descripcion": "Ahora con la aspiradora Koblenz podrás tener una perfecta limpieza del hogar al instante, ya que cuenta con un magnifico filtro HEPA capaz de retener contaminantes y partículas mucho más pequeñas, sus sistema de cono ciclónico separa el polvo gracias a su extracción de desperdicios mediante movimientos rotativos del aire.",
+    "precio": 2700,
+    "imagenPrincipal": "aspiradora.jpg",
+    "imagenes": ["aspiradora-2.jpg", "aspiradora-3.jpg", "aspiradora-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 7,
+    "nombre": "Batidora de Mano T-Fal 5 Velocidades Quick Mix Negra",
+    "categoria": "Hogar y cocina",
+    "descripcion": "Permite desde batir las claras de huevo más ligeras hasta masa para pizza, con 5 configuraciones de velocidad, cuenta con una función turbo para obtener excelentes resultados.",
+    "precio": 600,
+    "imagenPrincipal": "batidora.jpg",
+    "imagenes": ["batidora-2.jpg", "batidora-3.jpg", "batidora-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 8,
+    "nombre": "Despachador de agua Richwater Hypermark Hypermark Home HM0022W",
+    "categoria": "Hogar y cocina",
+    "descripcion": "El despachador de agua de Hypermark está diseñado para proporcionar agua fría y caliente su capacidad es perfecta para soportar garrafones de hasta 20 litros. El modelo HM0022WN tiene la capacidad de enfriar 750 ml. por hora y calentar hasta 5 litros en una hora, , el espacio que existe entre las llaves y la reja permiten que se pueda introducir jarras de hasta un litro de capacidad.",
+    "precio": 2510,
+    "imagenPrincipal": "despachadorAgua.jpg",
+    "imagenes": [
+      "despachadorAgua-2.jpg",
+      "despachadorAgua-3.jpg",
+      "despacgadorAgua-4.jpg"
+    ],
+    "stock": 10
+  },
+  {
+    "id": 9,
+    "nombre": "Sofá Cama 3 Asientos MLM Gris",
+    "categoria": "Hogar y cocina",
+    "descripcion": "Descubre la suavidad y el confort que te brinda este increíble sofá cama de 3 asientos y descansa brazos de la marca MLM en color gris con patas de madera. Lucirá perfecto en tu habitación o sala ya que su elegante diseño combina con cualquier tipo de decoración. Las medidas son: Medidas en sofá cama 182 x 83 x 81 cm Medidas en cama 182 x 101 x 42 cm.",
+    "precio": 3000,
+    "imagenPrincipal": "sofa.jpg",
+    "imagenes": ["sofa-2.jpg", "sofa-3.jpg", "sofa-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 10,
+    "nombre": "Balón de Básquetbol Spalding No. 7 grip control",
+    "categoria": "Deportes",
+    "descripcion": "Conoce el sofisticado diseño del balón de básquetbol Spalding, un accesorio deportivo de gran calidad y resistencia. Con tamaño no. 7, ideal para el uso de adultos o adolecentes, además de tener grip perfecto para un mejor rebote, cuenta con diseño profesional de la NBA por lo cual es perfecto para complementar tus entrenamientos deportivos y juegos de básquetbol. Entra a tu tienda virtual Walmart y lleva toda clase de uniformes deportivos a precios accesibles.",
+    "precio": 430,
+    "imagenPrincipal": "balonBasket.jpg",
+    "imagenes": ["balonBasket-2.jpg", "balonBasket-3.jpg", "balonBasket-4.jpg"],
+    "stock": 10
+  }
+]

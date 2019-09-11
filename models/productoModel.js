@@ -9,7 +9,7 @@ const productoSchema = new mongoose.Schema(
       unique: true,
       trim: true,
       maxlength: [
-        40,
+        100,
         'El nombre del producto debe tener como máximo 40 caracteres'
       ],
       minlength: [
@@ -38,12 +38,6 @@ const productoSchema = new mongoose.Schema(
     stock: {
       type: Number,
       min: 1
-    },
-    cantidad: {
-      type: Number,
-      min: 1,
-      max: 10,
-      default: 1
     }
   },
   {
