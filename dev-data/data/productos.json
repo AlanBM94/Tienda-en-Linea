@@ -118,7 +118,155 @@
     "descripcion": "Conoce el sofisticado diseño del balón de básquetbol Spalding, un accesorio deportivo de gran calidad y resistencia. Con tamaño no. 7, ideal para el uso de adultos o adolecentes, además de tener grip perfecto para un mejor rebote, cuenta con diseño profesional de la NBA por lo cual es perfecto para complementar tus entrenamientos deportivos y juegos de básquetbol. Entra a tu tienda virtual Walmart y lleva toda clase de uniformes deportivos a precios accesibles.",
     "precio": 430,
     "imagenPrincipal": "balonBasket.jpg",
-    "imagenes": ["balonBasket-2.jpg", "balonBasket-3.jpg", "balonBasket-4.jpg"],
+    "imagenes": ["balonBasket-2.jpg", "balonBasket-3.jpg", "balon-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 11,
+    "nombre": "Goggles Voit para Mayores de 12 Años",
+    "categoria": "Deportes",
+    "descripcion": "Goggles Voit junior para edades a partir de los 12 años, ideales para proteger los ojos de los rayos UV, los químicos del agua y el cloro. Elaborados con tratamiento anti-empañante que te proporciona una mejor visibilidad bajo el agua, además de su capa espejo que refleja los rayos de luz y sol. Este producto cuenta con variedad de modelos o presentaciones.",
+    "precio": 150,
+    "imagenPrincipal": "goggles.jpg",
+    "imagenes": ["goggles-2.jpg", "goggles-3.jpg", "goggles-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 12,
+    "nombre": "TENIS Adidas KANADIA 8.1 TR W RAWSTE OWHITE REAPINK-TALLA 23.5",
+    "categoria": "Deportes",
+    "descripcion": "Tenis cómodos para hacer Deporte, suela de Goma, talla 23.5 MEX, tallas Mexicanas, El estilo auténtico, original , es un top simple, con cordones, parte superior de Tela duradera, suela original",
+    "precio": 1200,
+    "imagenPrincipal": "tenis.jpg",
+    "imagenes": ["tenis-2.jpg", "tenis-3.jpg", "tenis-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 13,
+    "nombre": "Caminadora Eléctrica Athletic Works 1.5 Hp YK-031431",
+    "categoria": "Deportes",
+    "descripcion": "Con esta increíble caminadora eléctrica de la marca Athletic Works, modelo YK-031431, con ella en casa no tendrás más pretextos para hacer ejercicio cardiovascular y cuidar de tu apariencia física. Este artículo deportivo cuenta con 1.5 Hp y con un soporte de 100 kg, ideal para que corras o camines con una velocidad máxima de 12 km/h, para tu seguridad cuenta con un botón de emergencia que la detiene ante cualquier eventualidad. Para que tu rutina de ejercicio sea más completa tienes la oportunidad de inclinarla manualmente a 3 niveles posibles, 1%, 3% o 5%. Con su monitor LCD relativamente más grande podrás contar la calorías quemadas, el pulso, velocidad, tiempo y distancia recorrida en tu actividad. ¡Es plegable y con ruedas! para moverla y guardarla fácilimente.",
+    "precio": 5500,
+    "imagenPrincipal": "caminadora.jpg",
+    "imagenes": ["caminadora-2.jpg", "caminadora-3.jpg", "caminadora-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 14,
+    "nombre": "Estación Pull Ups Athletic Works MTDP-860",
+    "categoria": "Deportes",
+    "descripcion": "¡Aumenta tu fuerza y resistencia cargando tu propio peso con la fabulosa Estación de Pull Ups, disponible para ti en tu tienda en línea Walmart! Este inigualable Aparato deportivo cuenta con un diseño único, en el que podrás realizar rutinas de ejercicio que incluya fondos, abdominales o barras; ejercicios que al realizarlos con constancia tonificarán los músculos de tu cuerpo, tríceps, abdomen, espalda y pecho, haciéndote lucir una figura atlética.",
+    "precio": 2000,
+    "imagenPrincipal": "pullups.jpg",
+    "imagenes": ["pullups-2.jpg", "pullups-3.jpg", "pullups-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 15,
+    "nombre": "ZAPATO PARA HOMBRE 3000-041253 NEGRO Brantano TALLA: 28.00",
+    "categoria": "Ropa y Accesorios",
+    "descripcion": "ZAPATO VESTIR PARA CABALLERO 3000-041253 NEGRO EN ACABADO NAPA SOFTY, ZAPATO VESTIR PARA CABALLERO BRANTANO 3000-041253 COLOR NEGRO EN ACABADO NAPA SOFTY, -MODELO DEL FABRICANTE:3000, -MARCA:BRANTANO, -COLOR:NEGRO, -LÍNEA:HOMBRE, TALLA:28.00",
+    "precio": 870,
+    "imagenPrincipal": "zapatos.jpg",
+    "imagenes": ["zapatos-2.jpg", "zapatos-3.jpg", "zapatos-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 16,
+    "nombre": "Playera André Badi Caballero Vélo",
+    "categoria": "Ropa y Accesorios",
+    "descripcion": "Playera cuello redondo, Manga corta, Estampado bicicleta en técnica base de agua, Playera de cuello redondo, manga corta con estampado en ruedo.",
+    "precio": 180,
+    "imagenPrincipal": "playera.jpg",
+    "imagenes": ["playera-2.jpg", "playera-3.jpg", "playera-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 17,
+    "nombre": "Gorra Spca Sport Runner 2.0 Negro SPCA SPCA Sport",
+    "categoria": "Ropa y Accesorios",
+    "descripcion": "Visera Curva, Ajustable, Unitalla, Sport, Negro, Gorra SPCA Sport Runner 2.0 Negro Visera Curva Ajustable Unitalla Sport NegroVisera Curva, ajustable, unitalla, sport, negro, gorra SPCA Sport Runner 2.0 Negro Visera Curva Ajustable Unitalla Sport Negro.",
+    "precio": 240,
+    "imagenPrincipal": "gorra.jpg",
+    "imagenes": ["gorra-2.jpg", "gorra-3.jpg", "gorra-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 18,
+    "nombre": "Cartera Brandio 0225 Negra de Piel para Caballero",
+    "categoria": "Ropa y Accesorios",
+    "descripcion": "Si estás en busca de una cartera de estilo clásico, excelente calidad y precio accesible, hemos traído para ti a nuestra tienda en línea este modelo de cartera para caballero en color negro marca Brandio. El modelo 0225 fabricado con exterior de piel de bovino genuina y forro de poliéster cuenta con doble compartimiento para billetes, 6 compartimientos para tarjetas, 2 porta credencial, 2 bolsas interiores. Incluye estuche rígido con tapa de imán para conservar tu cartera en óptimas condiciones.",
+    "precio": 400,
+    "imagenPrincipal": "cartera.jpg",
+    "imagenes": ["cartera-2.jpg", "cartera-3.jpg", "cartera-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 19,
+    "nombre": "Gorra Puma Snapback Mustard Gris Puma Mustard",
+    "categoria": "Ropa y Accesorios",
+    "descripcion": "Visera Plana, Ajustable, Snapback, Confort, Gris, Gorra Puma Snapback Mustard Gris Visera Plana Ajustable Snapback Confort Gris.",
+    "precio": 550,
+    "imagenPrincipal": "gorraPuma.jpg",
+    "imagenes": ["gorraPuma-2.jpg", "gorraPuma-3.jpg", "gorraPuma-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 20,
+    "nombre": "Rotomartillo Black and Decker mas Kit de Herramientas con 30 Pzas",
+    "categoria": "Herramientas",
+    "descripcion": "El inigualable kit de herramientas de la marca Black and Decker incluye: Rotomartillo de 1/2 pulgada con potencia de 550 watts y velocidad variable reversible para mejor control. Así como martillo, nivel, cuchilla, regla, 7 brocas, 10 puntas, 2 pinzas, 6 llaves combinadas y estuche de plástico.",
+    "precio": 1000,
+    "imagenPrincipal": "rotomartillo.jpg",
+    "imagenes": [
+      "rotomartillo-2.jpg",
+      "rotomartillo-3.jpg",
+      "rotomartillo-4.jpg"
+    ],
+    "stock": 10
+  },
+  {
+    "id": 21,
+    "nombre": "Estante Pretul plástico 4 Repisas",
+    "categoria": "Herramientas",
+    "descripcion": "4 repisas con capacidad de 27 kg cada una, ensamblado sin herramientas, estante de plástico con 4 repisas y 12 postes. Capacidad máxima de carga por repisa 27 kg y sistema de ensamble que no requiere el uso de herramientas. Con un solo clic en agregar a carrito podrás disfrutar de los beneficios ",
+    "precio": 250,
+    "imagenPrincipal": "estante.jpg",
+    "imagenes": ["estante-2.jpg", "estante-3.jpg", "estante-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 22,
+    "nombre": "Atornillador Inalámbrico más Caja de Herramientas Black & Decker",
+    "categoria": "Herramientas",
+    "descripcion": "Un atornillador inalámbrico de 3.6 volts. Las baterías de Ni-Cd de 3.6 volts pueden almacenar energía durante mucho tiempo. Con luz LED para permitir su uso incluso en la oscuridad. Funcionalidad delante - reversa para aplicaciones de atornillado y destornillado en instalaciones. Contiene un set de accesorios que complementan la herramienta.",
+    "precio": 600,
+    "imagenPrincipal": "atornillador.jpg",
+    "imagenes": [
+      "atornillador-2.jpg",
+      "atornillador-3.jpg",
+      "atornillador-4.jpg"
+    ],
+    "stock": 10
+  },
+  {
+    "id": 23,
+    "nombre": "Taladro Inalámbrico Black Decker 8V Max",
+    "categoria": "Herramientas",
+    "descripcion": "Taladro inalámbrico diseñado para que completes tu kit de herramientas, ya que es un modelo óptimo para tus labores de bricolaje. Trabaja con una batería de Ion de Litio Integrada, asimismo, tiene un mango de recubierta de goma, microcargador USB para recargar otros artículos móviles y del hogar y punta doble Phillips estándar.",
+    "precio": 500,
+    "imagenPrincipal": "taladro.jpg",
+    "imagenes": ["taladro-2.jpg", "taladro-3.jpg", "taladro-4.jpg"],
+    "stock": 10
+  },
+  {
+    "id": 24,
+    "nombre": "Ventilador de Techo Westinghouse Jaded 48 4 Aspas Gris",
+    "categoria": "Herramientas",
+    "descripcion": "¡Conoce las grandes características del modelo Jaded de 48 y dale a tu hogar un ambiente fresco sin dejar a un lado ese toque elegante. Este tipo de ventilador cuenta con 4 aspas hechas de MDF y madera de gran calidad, con vista en color gris y base de níquel cepillad, el cual brinda mayor resistencia. Ofrece una inclinación de 12 grados, con motor de 50 watts y luz de 80 Watts que brinda mayor iluminación. Podrás programar en sus 3 niveles de velocidades mediante su control remoto. Además es ideal para adaptar en espacios de hasta 25 metros cuadrados.",
+    "precio": 2700,
+    "imagenPrincipal": "ventilador.jpg",
+    "imagenes": ["ventilador-2.jpg", "ventilador-3.jpg", "ventilador-4.jpg"],
     "stock": 10
   }
 ]
