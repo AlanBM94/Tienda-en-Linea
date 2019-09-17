@@ -396,8 +396,16 @@
 }
 
 .categoria__item {
-  -ms-grid-column-align: center;
-      justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .categoria__item a {
@@ -496,8 +504,8 @@ header {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/comprador.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/comprador.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/comprador.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/comprador.jpg);
   background-size: cover;
 }
 
@@ -620,8 +628,8 @@ header .hero__btn:hover {
   width: 100% !important;
   height: 40rem !important;
   margin: 0 2rem;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/television.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/television.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/television.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/television.jpg);
   background-size: contain;
   background-position-x: center;
   background-repeat: no-repeat;
@@ -727,8 +735,8 @@ header .hero__btn:hover {
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   grid-row: 1 / 3;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/electronica.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/electronica.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/electronica.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/electronica.jpg);
   background-size: cover;
 }
 
@@ -739,8 +747,8 @@ header .hero__btn:hover {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3 / 4;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/hogar.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/hogar.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/hogar.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/hogar.jpg);
   background-size: cover;
 }
 
@@ -749,8 +757,8 @@ header .hero__btn:hover {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3 / 4;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/deportes.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/deportes.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/deportes.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/deportes.jpg);
   background-size: cover;
 }
 
@@ -759,16 +767,16 @@ header .hero__btn:hover {
   -ms-grid-column-span: 1;
   grid-column: 1 / 2;
   grid-row: 4 / -1;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/ropa.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/ropa.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/ropa.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/ropa.jpg);
   background-size: cover;
 }
 
 .menu__herramientas {
   grid-column: 2 / -1;
   grid-row: 4 / -1;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/public/images/herramientas.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/public/images/herramientas.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/herramientas.jpg);
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/herramientas.jpg);
   background-size: cover;
 }
 
@@ -1620,17 +1628,17 @@ header .hero__btn:hover {
 }
 
 .testimonial__autor--1 {
-  background: url(/public/images/Alan.jpg);
+  background: url(/images/Alan.jpg);
   background-size: cover;
 }
 
 .testimonial__autor--2 {
-  background: url(/public/images/Sus.jpg);
+  background: url(/images/Sus.jpg);
   background-size: cover;
 }
 
 .testimonial__autor--3 {
-  background: url(/public/images/Pablin.jpg);
+  background: url(/images/Pablin.jpg);
   background-size: cover;
 }
 

@@ -1,0 +1,160 @@
+<!-- Caracteristicas -->
+<section class="caracteristicas">
+    <!-- Caracteristicas titulo -->
+    <h3 class="caracteristicas__titulo">Nuestras características</h3>
+    <div class="caracteristicas__contenido">
+        <!-- Caracteristicas item -->
+        <div class="caracteristicas__item">
+            <i class="caracteristicas__icono fas fa-money-bill"></i>
+            <h3 class="caracteristicas__subtitulo">
+                Mejores Precios
+            </h3>
+            <p class="caracteristicas__texto">
+                Encuentra los mejores productos a precios razonables
+            </p>
+        </div>
+        <!-- Caracteristicas item -->
+        <div class="caracteristicas__item">
+            <i class="caracteristicas__icono fas fa-lock"></i>
+            <h3 class="caracteristicas__subtitulo">
+                Compras Seguras
+            </h3>
+            <p class="caracteristicas__texto">
+                Realiza compras seguras con Stripe
+            </p>
+        </div>
+        <!-- Caracteristicas item -->
+        <div class="caracteristicas__item">
+            <i class="caracteristicas__icono fas fa-check"></i>
+            <h3 class="caracteristicas__subtitulo">
+                Mejores Productos
+            </h3>
+            <p class="caracteristicas__texto">
+                Encuentra los productos de las mejores marcas
+            </p>
+        </div>
+    </div>
+</section>
+<!-- Menú -->
+<section class="menu">
+    <div class="menu__contenedor">
+        <div class="menu__item menu__electronica">
+            <a href="/Electronica" class="menu__enlace">
+                Electrónica
+            </a>
+        </div>
+        <div class="menu__item menu__hogar">
+            <a href="/Hogar" class="menu__enlace">
+                Hogar y cocina
+            </a>
+        </div>
+        <div class="menu__item menu__deportes">
+            <a href="/Deportes" class="menu__enlace">
+                Deportes
+            </a>
+        </div>
+        <div class="menu__item menu__ropa">
+            <a href="/Ropa" class="menu__enlace">
+                Ropa y accesorios
+            </a>
+        </div>
+        <div class="menu__item menu__herramientas">
+            <a href="/Herramientas" class="menu__enlace">
+                Herramientas y hogar
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Testimoniales -->
+<section class="testimonial">
+    <h3 class="testimonial__titulo">Mira lo que la gente dice de nosotros</h3>
+    <div class="testimonial__contenedorGrande">
+        <div class="testimonial__contenedor">
+            <div class="testimonial__contenido">
+                <p>Los mejores productos los he encontrado aquí</p>
+            </div>
+            <div class="testimonial__autor testimonial__autor--1">
+                <span>Alan Beltrán</span>
+            </div>
+        </div>
+        <div class="testimonial__contenedor">
+            <div class="testimonial__contenido">
+                <p>Todas las compras que he realizado han sido de calidad</p>
+            </div>
+            <div class="testimonial__autor testimonial__autor--2">
+                <span>Susana Chavira</span>
+            </div>
+        </div>
+        <div class="testimonial__contenedor">
+            <div class="testimonial__contenido">
+                <p>
+                    Todos mis pagos han sido hechos con mi tarjeta de crédito de forma
+                    segura
+                </p>
+            </div>
+            <div class="testimonial__autor testimonial__autor--3">
+                <span>Pablo Hernandez</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Productos más vendidos -->
+<section class="mejoresProductos ">
+    <h3 class="mejoresProductos__titulo">Nuestros mejores productos</h3>
+
+    <div class="mejoresProductos__slider glider-contain multiple">
+        <button class="glider-prev" role="button" aria-label="Previous">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="mejoresProductos__contenido glider">
+            <div class="mejorProducto">
+                <h4 class="mejorProducto__titulo">Televisión Samsung 4k</h4>
+                <p class="mejorProducto__descripcion">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+                    quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+                    tenetur necessitatibus at, excepturi similique, autem sit nisi
+                    dolorem ipsa!
+                </p>
+                <a href="#" class="mejorProducto__enlace">Ver producto</a>
+            </div>
+            <div class="mejorProducto">
+                <h4 class="mejorProducto__titulo">Xbox 360</h4>
+                <p class="mejorProducto__descripcion">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+                    quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+                    tenetur necessitatibus at, excepturi similique, autem sit nisi
+                    dolorem ipsa!
+                </p>
+                <a href="#" class="mejorProducto__enlace">Ver producto</a>
+            </div>
+            <div class="mejorProducto">
+                <h4 class="mejorProducto__titulo">Licuadora</h4>
+                <p class="mejorProducto__descripcion">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
+                    quas aperiam a commodi, itaque earum unde ab! Quod impedit minus,
+                    tenetur necessitatibus at, excepturi similique, autem sit nisi
+                    dolorem ipsa!
+                </p>
+                <a href="#" class="mejorProducto__enlace">Ver producto</a>
+            </div>
+        </div>
+        <button class="glider-next" role="button" aria-label="Next">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+        <div role="tablist" class="glider-dots" id="dots"></div>
+    </div>
+</section>
+{{> footer}}
+<script src="js/glider.min.js"></script>
+<script>
+    //Slider con glidejs
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        dots: '#dots',
+        draggable: false,
+        arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+        }
+    });
+</script>
