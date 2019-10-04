@@ -3,8 +3,4 @@ Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     actualizarContraseña
 
 Interfaz
-    Hacer mixins de los estilos que se repiten del producto
-    Diseñar la interfaz del admin y del usuario
-    Diseñar la interfaz del carrito
-    Diseñar la interfaz de el slider de los mejores productos
-    Diseñar la interfaz de las reseñas de los productos
+    validar cuando el usuario registrado tenga menos de 3 letras y mas de 10 

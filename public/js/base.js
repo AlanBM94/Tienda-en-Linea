@@ -1,6 +1,11 @@
 /* eslint-disable */
 export const domElementos = {
   formularioRegistrarse: $('#formularioRegistrarse'),
+  formularioIniciarSesion: $('#formularioIniciarSesion'),
+  iniciarSesionInfo: {
+    email: $('#formularioIniciarSesion input[type=text]'),
+    password: $('#formularioIniciarSesion input[type=password] ')
+  },
   registrarseUsuarioInfo: {
     nombre: $('#registrarseNombre'),
     email: $('#registrarseEmail'),

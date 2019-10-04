@@ -1,7 +1,6 @@
 /* eslint-disable */
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 
 export default class Registrarse {
   constructor(nuevoUsuario) {

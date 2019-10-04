@@ -11,5 +11,10 @@ router.get(
   authController.estaLogeado,
   viewController.registrarseTemplate
 );
+router.get(
+  '/iniciarSesion',
+  authController.estaLogeado,
+  viewController.iniciarSesionTemplate
+);
 
 module.exports = router;

@@ -1,14 +1,7 @@
 /* eslint-disable */
 import { domElementos } from '../base';
-import Swal from 'sweetalert2';
-
-const configurarSweetAlert = (tipo, titulo, mensaje) => {
-  return Swal.fire({
-    type: tipo,
-    title: titulo,
-    text: mensaje
-  });
-};
+import { configurarSweetAlert } from '../utils/sweetAlertMensajes';
+import { crearCookie } from '../utils/cookie';
 
 export const obtenerValoresUsuarioRegistrado = () => {
   const infoUsuarioRegistrado = {
@@ -34,11 +27,7 @@ export const obtenerValoresUsuarioRegistrado = () => {
 
 export const mostrarSweetAlert = respuesta => {
   if (respuesta.data.status === 'Exito') {
-    console.log(respuesta.data.token);
-    document.cookie = `jwt=${respuesta.data.token}; max-age=${60 *
-      60 *
-      24 *
-      7}`;
+    crearCookie(respuesta);
     configurarSweetAlert(
       'success',
       'Felicidades!',
@@ -63,7 +52,15 @@ export const mostrarSweetAlert = respuesta => {
       configurarSweetAlert(
         'error',
         'Error!',
-        'La contraseña debe de tener al menos 8 caracteres'
+        'El usuario debe de tener al menos 3 caracteres'
+      );
+      return;
+    }
+    if (respuesta.data.message.includes('is longer than the maximum allowed')) {
+      configurarSweetAlert(
+        'error',
+        'Error!',
+        'El usuario debe de tener maximo 10 caracteres'
       );
       return;
     }
