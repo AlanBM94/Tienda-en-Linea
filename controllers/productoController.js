@@ -9,11 +9,12 @@ exports.obtenerProducto = catchAsync(async (req, res, next) => {
   if (!producto) {
     return next(new AppError('No se encontró producto con ese id', 404));
   }
-  res.status(200).json({
-    status: 'Exito',
-    data: {
-      producto
-    }
+
+  const productoImagenesSecundarias = producto.imagenes;
+
+  res.status(201).render('tienda/producto', {
+    producto,
+    productoImagenesSecundarias
   });
 });
 
@@ -26,11 +27,9 @@ exports.obtenerProductos = catchAsync(async (req, res, next) => {
 
   const productos = await caracteristicas.consulta;
 
-  res.status(200).json({
-    status: 'Exito',
-    data: {
-      productos
-    }
+  res.status(200).render('tienda/categoria', {
+    categoria: req.query.categoria,
+    productos
   });
 });
 

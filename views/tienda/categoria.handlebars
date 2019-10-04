@@ -1,10 +1,11 @@
+{{> navigationSticky }}
 <!-- Categoría -->
 <section class="categoria caracteristicas caracteristicas--categoria">
     <h3 class="categoria__titulo">{{categoria}}</h3>
     <div class="categoria__contenido">
         {{# each productos}}
         <div class="categoria__item">
-            <a href="producto.html">
+            <a href="/productos/{{this.id}}">
                 <img src="images/productos/{{this.imagenPrincipal}}" alt="" />
             </a>
             <div class="categoria__itemFooter">

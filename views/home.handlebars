@@ -1,3 +1,4 @@
+{{> header }}
 <!-- Caracteristicas -->
 <section class="caracteristicas">
     <!-- Caracteristicas titulo -->
@@ -39,27 +40,27 @@
 <section class="menu">
     <div class="menu__contenedor">
         <div class="menu__item menu__electronica">
-            <a href="/Electronica" class="menu__enlace">
+            <a href="/productos?categoria=Electrónica" class="menu__enlace">
                 Electrónica
             </a>
         </div>
         <div class="menu__item menu__hogar">
-            <a href="/Hogar" class="menu__enlace">
+            <a href="/productos?categoria=Hogar%20y%20cocina" class="menu__enlace">
                 Hogar y cocina
             </a>
         </div>
         <div class="menu__item menu__deportes">
-            <a href="/Deportes" class="menu__enlace">
+            <a href="/productos?categoria=Deportes" class="menu__enlace">
                 Deportes
             </a>
         </div>
         <div class="menu__item menu__ropa">
-            <a href="/Ropa" class="menu__enlace">
+            <a href="/productos?categoria=Ropa%20y%20Accesorios" class="menu__enlace">
                 Ropa y accesorios
             </a>
         </div>
         <div class="menu__item menu__herramientas">
-            <a href="/Herramientas" class="menu__enlace">
+            <a href="/productos?categoria=Herramientas" class="menu__enlace">
                 Herramientas y hogar
             </a>
         </div>
@@ -145,16 +146,4 @@
     </div>
 </section>
 {{> footer}}
-<script src="js/glider.min.js"></script>
-<script>
-    //Slider con glidejs
-    new Glider(document.querySelector('.glider'), {
-        slidesToShow: 1,
-        dots: '#dots',
-        draggable: false,
-        arrows: {
-            prev: '.glider-prev',
-            next: '.glider-next'
-        }
-    });
-</script>
+{{> glider}}

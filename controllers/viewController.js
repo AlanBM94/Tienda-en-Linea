@@ -3,25 +3,17 @@ const Usuario = require('../models/usuarioModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
+const generarTemplates = (tipo, respuesta) =>
+  respuesta.status(200).render(tipo);
+
 exports.principal = (req, res, next) => {
-  res.status(200).render('home');
+  generarTemplates('home', res);
 };
 
-exports.categoriaSeleccionada = categoria => {
-  if (categoria === 'Hogar') categoria = 'Hogar y cocina';
-  if (categoria === 'Ropa') categoria = 'Ropa y Accesorios';
-  return (req, res, next) => {
-    req.params.categoria = categoria;
-    next();
-  };
+exports.registrarseTemplate = (req, res, next) => {
+  generarTemplates('tienda/registrarse', res);
 };
 
-// Muestra los producos según su categoría
-exports.buscarCategoria = catchAsync(async (req, res) => {
-  const categoria = req.params.categoria;
-  const productos = await Producto.find({ categoria });
-  res.status(200).render('tienda/categoria', {
-    categoria,
-    productos
-  });
-});
+exports.iniciarSesionTemplate = (req, res, next) => {
+  generarTemplates('tienda/iniciarSesion', res);
+};

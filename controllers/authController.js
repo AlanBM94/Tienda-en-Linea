@@ -97,3 +97,24 @@ exports.permitirPara = rol => {
     next();
   };
 };
+
+exports.estaLogeado = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      const decodificado = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+      const usuarioActual = await Usuario.findById(decodificado.id);
+      if (!usuarioActual) {
+        return next();
+      }
+      console.log(usuarioActual);
+      res.locals.usuario = usuarioActual;
+      return next();
+    } catch (error) {
+      return next();
+    }
+  }
+  next();
+};

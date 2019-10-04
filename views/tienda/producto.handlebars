@@ -1,0 +1,204 @@
+{{> navigationSticky}}
+<!-- Categoría -->
+<section class="producto caracteristicas" id="producto">
+    <div class="producto__contenido">
+        <div class="producto__fotografias">
+            <div class="producto__fotografiaPrincipal">
+                <img src="/images/productos/{{producto.imagenPrincipal}}" alt="{{producto.imagenPrincipal}}" />
+            </div>
+
+            {{#each productoImagenesSecundarias}}
+            <div class="producto__fotografiaSecundaria producto__fotografiaSecundaria--{{@index}}">
+                <img src="/images/productos/{{this}}" alt="{{this}}" />
+            </div>
+            {{/ each}}
+        </div>
+        <div class="producto__contenidoPrincipal">
+            <h4 class="producto__titulo">
+                {{producto.nombre}} <span> ${{producto.precio}} </span>
+            </h4>
+            <p class="producto__texto">
+                {{producto.descripcion}}
+            </p>
+            <form action="#" class="producto__formulario">
+                <input type="number" name="cantidad" id="" placeholder="Cantidad" />
+                <button class="btn producto__btnAgregarCarrito btn--rojo">
+                    Agregar al carrito
+                </button>
+            </form>
+        </div>
+        <div class="producto__contenidoSecundario">
+            <div class="producto__puntaje">
+                <h4>4.9</h4>
+                <ul>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                </ul>
+                <!-- <a href="">Ver reseñas</a> -->
+            </div>
+            <div class="producto__descripcion">
+                <p>
+                    {{producto.descripcion}}
+                </p>
+            </div>
+            <div class="producto__categoria">
+                <h4>{{producto.categoria}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="producto__resenia">
+        <h4>Reseñas</h4>
+        <div class="producto__resenias glider-contain multiple">
+            <button class="glider-prev" role="button" aria-label="Previous">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <div class="producto__reseniasSlider glider">
+                <div class="producto__contenedorResenia">
+                    <div class="producto__reseniaUsuario">
+                        <img src="/images/Alan.jpg" alt="" />
+                        <p>Alan Beltrán</p>
+                    </div>
+                    <div class="producto__reseniaContenido">
+                        <ul>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star-half-alt"></i>
+                            </li>
+                        </ul>
+                        <span>20 Agosto 2019</span>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                            perferendis quo, repudiandae cumque earum, temporibus
+                            reiciendis voluptas accusantium provident dicta maxime modi
+                            itaque aspernatur, adipisci doloribus natus recusandae eum
+                            labore.
+                        </p>
+                    </div>
+                </div>
+                <div class="producto__contenedorResenia">
+                    <div class="producto__reseniaUsuario">
+                        <img src="/images/Sus.jpg" alt="" />
+                        <p>Susana Chavira</p>
+                    </div>
+                    <div class="producto__reseniaContenido">
+                        <ul>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star-half-alt"></i>
+                            </li>
+                        </ul>
+                        <span>20 Agosto 2019</span>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                            perferendis quo, repudiandae cumque earum, temporibus
+                            reiciendis voluptas accusantium provident dicta maxime modi
+                            itaque aspernatur, adipisci doloribus natus recusandae eum
+                            labore.
+                        </p>
+                    </div>
+                </div>
+                <div class="producto__contenedorResenia">
+                    <div class="producto__reseniaUsuario">
+                        <img src="/images/Alan.jpg" alt="" />
+                        <p>Alan Mendoza</p>
+                    </div>
+                    <div class="producto__reseniaContenido">
+                        <ul>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star-half-alt"></i>
+                            </li>
+                        </ul>
+                        <span>20 Agosto 2019</span>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                            perferendis quo, repudiandae cumque earum, temporibus
+                            reiciendis voluptas accusantium provident dicta maxime modi
+                            itaque aspernatur, adipisci doloribus natus recusandae eum
+                            labore.
+                        </p>
+                    </div>
+                </div>
+                <div class="producto__contenedorResenia">
+                    <div class="producto__reseniaUsuario">
+                        <img src="/images/Pablin.jpg" alt="" />
+                        <p>Pablito Mix</p>
+                    </div>
+                    <div class="producto__reseniaContenido">
+                        <ul>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star-half-alt"></i>
+                            </li>
+                        </ul>
+                        <span>20 Agosto 2019</span>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+                            perferendis quo, repudiandae cumque earum, temporibus
+                            reiciendis voluptas accusantium provident dicta maxime modi
+                            itaque aspernatur, adipisci doloribus natus recusandae eum
+                            labore.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button class="glider-next" role="button" aria-label="Next">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <div role="tablist" class="glider-dots" id="dots"></div>
+        </div>
+    </div>
+    <div class="producto__HacerResenia">
+        <a href="#popup" class="btn btn--secundario">Hacer Reseña</a>
+    </div>
+</section>
+
+{{> footer}}
+{{> glider}}

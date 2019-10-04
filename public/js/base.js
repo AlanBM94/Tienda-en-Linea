@@ -1,4 +1,17 @@
-$(document).ready(function() {
+/* eslint-disable */
+export const domElementos = {
+  formularioRegistrarse: $('#formularioRegistrarse'),
+  registrarseUsuarioInfo: {
+    nombre: $('#registrarseNombre'),
+    email: $('#registrarseEmail'),
+    contraseña: $('#registrarseContraseña'),
+    confirmarContraseña: $('#registrarseConfirmarContraseña')
+  },
+  btnCerrarSesion: $('#cerrarSesion')
+};
+
+// Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
+export const configWaypoints = () => {
   // Sticky navigation
   $('.caracteristicas').waypoint(
     function(direction) {
@@ -45,4 +58,4 @@ $(document).ready(function() {
       offset: '10%'
     }
   );
-});
+};

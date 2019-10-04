@@ -15,27 +15,27 @@
             <!-- Navegación item -->
             <li class="nav__item">
                 <!-- Navegación link -->
-                <a href="/Electronica" class="nav__link">Electrónica</a>
+                <a href="/productos?categoria=Electrónica" class="nav__link">Electrónica</a>
             </li>
             <!-- Navegación item -->
             <li class="nav__item">
                 <!-- Navegación link -->
-                <a href="/Hogar" class="nav__link">Hogar y cocina</a>
+                <a href="/productos?categoria=Hogar%20y%20cocina" class="nav__link">Hogar y cocina</a>
             </li>
             <!-- Navegación item -->
             <li class="nav__item">
                 <!-- Navegación link -->
-                <a href="/Deportes" class="nav__link">Deportes</a>
+                <a href="/productos?categoria=Deportes" class="nav__link">Deportes</a>
             </li>
             <!-- Navegación item -->
             <li class="nav__item">
                 <!-- Navegación link -->
-                <a href="/Ropa" class="nav__link">Ropa, zapatos y accesorios</a>
+                <a href="/productos?categoria=Ropa%20y%20Accesorios" class="nav__link">Ropa, zapatos y accesorios</a>
             </li>
             <!-- Navegación item -->
             <li class="nav__item">
                 <!-- Navegación link -->
-                <a href="/Herramientas" class="nav__link">Herramientas y mejoras del hogar</a>
+                <a href="/productos?categoria=Herramientas" class="nav__link">Herramientas y mejoras del hogar</a>
             </li>
             <!-- Navegación item -->
             <li class="nav__item">
@@ -43,20 +43,46 @@
                 <a href="#" class="nav__link">Otros</a>
             </li>
         </ul>
+        {{# if usuario}}
+        <!-- Sección dinamica del usuario -->
+        <div class="nav__seccionDinamicaPerfil">
+            <button class="nav__btnCarrito btn btn--carrito">
+                Carrito
+                <span>0</span>
+            </button>
+            <div class="nav__usuario">
+                <img src="./images/{{usuario.foto}}" alt="Alan" />
+                <p>
+                    {{usuario.nombre}} <span><i class="fas fa-caret-down"></i></span>
+                </p>
+                <ul class="nav__usuarioDropdown">
+                    <li class="nav__usuarioDropdownItem">
+                        <a href="#">Mi perfil</a>
+                    </li>
+                    <li class="nav__usuarioDropdownItem">
+                        <a href="#" id="cerrarSesion">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {{ else }}
 
         <!-- Sección de iniciar sesión y registrarse -->
         <div class="nav__seccion-usuario">
             <ul class="nav__seccion-usuario-lista">
                 <li class="nav__seccion-usuario-item">
-                    <a href="registrarse.html" class="nav__seccion-usuario-btn btn--rojo">Registrarse</a>
+                    <a href="/registrarse" class="nav__seccion-usuario-btn btn--rojo">Registrarse</a>
                 </li>
                 <li class="nav__seccion-usuario-item">
-                    <a href="login.html" class="nav__seccion-usuario-btn nav__seccion-usuario-btn--transparente">
+                    <a href="/iniciarSesion" class="nav__seccion-usuario-btn nav__seccion-usuario-btn--transparente">
                         Iniciar sesión
                     </a>
                 </li>
             </ul>
         </div>
+        {{/if }}
+
     </div>
     <!-- Promoción -->
     <div class="hero">
