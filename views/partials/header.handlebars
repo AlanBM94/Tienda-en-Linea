@@ -46,10 +46,16 @@
         {{# if usuario}}
         <!-- Sección dinamica del usuario -->
         <div class="nav__seccionDinamicaPerfil">
-            <button class="nav__btnCarrito btn btn--carrito">
+            <a href="/carrito/ver" class="nav__btnCarrito btn btn--carrito">
                 Carrito
-                <span>0</span>
-            </button>
+                <span>
+                    {{# if carrito}}
+                    {{carrito.productos.length}}
+                    {{ else }}
+                    0
+                    {{/if}}
+                </span>
+            </a>
             <div class="nav__usuario">
                 <img src="./images/{{usuario.foto}}" alt="Alan" />
                 <p>

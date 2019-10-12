@@ -139,7 +139,17 @@ var domElementos = {
     contraseña: $('#registrarseContraseña'),
     confirmarContraseña: $('#registrarseConfirmarContraseña')
   },
-  btnCerrarSesion: $('#cerrarSesion')
+  producto: {
+    articulo: $('.producto__titulo').text().trim(),
+    categoria: $('.producto__categoria').text().trim(),
+    descripcion: $('.producto__texto').text().trim(),
+    precio: $('.producto__titulo span').text().trim(),
+    imagen: $('.producto__fotografiaPrincipal img').attr('src'),
+    slug: $('.producto__slug').val()
+  },
+  btnCerrarSesion: $('#cerrarSesion'),
+  btnAgregarCarrito: $('#agregarCarrito'),
+  btnEliminarCarrito: $('.carrito__eliminar a')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -208,13 +218,14 @@ exports.eliminarCookie = exports.crearCookie = void 0;
 
 /* eslint-disable */
 var crearCookie = function crearCookie(respuesta) {
-  document.cookie = "jwt=".concat(respuesta.data.token, "; max-age=").concat(60 * 60 * 24 * 7);
+  document.cookie = "jwt=".concat(respuesta.data.token, "; max-age=").concat(60 * 60 * 24 * 7, " path=/");
+  document.cookie = 'username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/';
 };
 
 exports.crearCookie = crearCookie;
 
 var eliminarCookie = function eliminarCookie() {
-  document.cookie = 'jwt=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = 'jwt=;expires=Thu, path=/ 01 Jan 1970 00:00:01 GMT; path=/';
 };
 
 exports.eliminarCookie = eliminarCookie;
@@ -2807,21 +2818,20 @@ function () {
 
               case 3:
                 consulta = _context.sent;
-                console.log(consulta);
                 return _context.abrupt("return", consulta);
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
                 alert('Algo salió mal');
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 7]]);
       }));
 
       function enviarPeticion() {
@@ -2836,6 +2846,138 @@ function () {
 }();
 
 exports.default = IniciarSesion;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"models/carrito.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Carrito =
+/*#__PURE__*/
+function () {
+  function Carrito() {
+    _classCallCheck(this, Carrito);
+  }
+
+  _createClass(Carrito, [{
+    key: "agregarProducto",
+    value: function () {
+      var _agregarProducto = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(producto) {
+        var consulta;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return (0, _axios.default)({
+                  method: 'POST',
+                  url: '/carrito/agregar',
+                  data: {
+                    articulo: producto.articulo,
+                    categoria: producto.categoria,
+                    descripcion: producto.descripcion,
+                    precio: producto.precio,
+                    imagen: producto.imagen,
+                    cantidad: producto.cantidad,
+                    slug: producto.slug
+                  }
+                });
+
+              case 3:
+                consulta = _context.sent;
+                _context.next = 10;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+                alert('Algo salió mal');
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 6]]);
+      }));
+
+      function agregarProducto(_x) {
+        return _agregarProducto.apply(this, arguments);
+      }
+
+      return agregarProducto;
+    }()
+  }, {
+    key: "eliminarProducto",
+    value: function () {
+      var _eliminarProducto = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(id) {
+        var consulta;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return (0, _axios.default)({
+                  method: 'DELETE',
+                  url: "/carrito/".concat(id)
+                });
+
+              case 3:
+                consulta = _context2.sent;
+                console.log(consulta.data.status);
+                return _context2.abrupt("return", consulta.data.status === 'Exito' ? true : false);
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+                alert('Algo salió mal');
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }));
+
+      function eliminarProducto(_x2) {
+        return _eliminarProducto.apply(this, arguments);
+      }
+
+      return eliminarProducto;
+    }()
+  }]);
+
+  return Carrito;
+}();
+
+exports.default = Carrito;
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -5961,7 +6103,70 @@ var mostrarSweetAlert = function mostrarSweetAlert(respuesta) {
 };
 
 exports.mostrarSweetAlert = mostrarSweetAlert;
-},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js","../utils/cookie":"utils/cookie.js"}],"index.js":[function(require,module,exports) {
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js","../utils/cookie":"utils/cookie.js"}],"views/carritoVista.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mostrarMensajeNoProducto = exports.mostrarMensaje = exports.eliminarProductoDOM = exports.obtenerInfoProductoAEliminar = exports.obtenerInfoProducto = void 0;
+
+var _base = require("../base");
+
+var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
+
+/* eslint-disable */
+// Obtiene la información del producto que se quiere agregar al carrito de compras
+var obtenerInfoProducto = function obtenerInfoProducto() {
+  _base.domElementos.producto.articulo = _base.domElementos.producto.articulo.split('$')[0].trim();
+  _base.domElementos.producto.cantidad = parseInt($('.producto__cantidad').val());
+  _base.domElementos.producto.precio = parseInt(_base.domElementos.producto.precio.split('$')[1]);
+  _base.domElementos.producto.imagen = _base.domElementos.producto.imagen.split('/')[3];
+
+  if (!_base.domElementos.producto.cantidad) {
+    return false;
+  } else {
+    return _base.domElementos.producto;
+  }
+}; // Obtiene la información del producto que se quiere eliminar del carrito
+
+
+exports.obtenerInfoProducto = obtenerInfoProducto;
+
+var obtenerInfoProductoAEliminar = function obtenerInfoProductoAEliminar(e) {
+  return e.target.getAttribute('data-id');
+}; // Elimina el producto del DOM
+
+
+exports.obtenerInfoProductoAEliminar = obtenerInfoProductoAEliminar;
+
+var eliminarProductoDOM = function eliminarProductoDOM(event) {
+  var producto = event.target.parentElement.parentElement.parentElement;
+  var listaProductos = event.target.parentElement.parentElement.parentElement.parentElement;
+  listaProductos.removeChild(producto);
+  location.reload();
+}; // Envía mensajes de sweet alert
+
+
+exports.eliminarProductoDOM = eliminarProductoDOM;
+
+var mostrarMensaje = function mostrarMensaje(infoProducto) {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', "Has agregado el producto ".concat(infoProducto.articulo, " a tu carrito")).then(function (respuesta) {
+    if (respuesta.value) {
+      location.reload();
+    }
+  });
+}; // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
+
+
+exports.mostrarMensaje = mostrarMensaje;
+
+var mostrarMensajeNoProducto = function mostrarMensajeNoProducto() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'No se encontró ese producto');
+};
+
+exports.mostrarMensajeNoProducto = mostrarMensajeNoProducto;
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _base = require("./base");
@@ -5972,9 +6177,13 @@ var _registrarse = _interopRequireDefault(require("./models/registrarse"));
 
 var _iniciarSesion = _interopRequireDefault(require("./models/iniciarSesion"));
 
+var _carrito = _interopRequireDefault(require("./models/carrito"));
+
 var registrarseVista = _interopRequireWildcard(require("./views/registrarseVista"));
 
 var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionVista"));
+
+var carritoVista = _interopRequireWildcard(require("./views/carritoVista"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6074,6 +6283,89 @@ $(document).ready(function () {
     return function controladorIniciarSesion() {
       return _ref2.apply(this, arguments);
     };
+  }(); //Controlador que agrega un producto al carrito
+
+
+  var controladorCarrito =
+  /*#__PURE__*/
+  function () {
+    var _ref3 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3() {
+      var infoProducto, producto;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              // Obtener los datos del producto que quiero agregar al carrito
+              infoProducto = carritoVista.obtenerInfoProducto();
+              console.log(infoProducto); // Crear un objeto de la clase Carrito
+
+              producto = new _carrito.default();
+              console.log(producto);
+
+              if (infoProducto !== false) {
+                // Enviar la petición al servidor para agregar el producto al carrito
+                producto.agregarProducto(infoProducto);
+                carritoVista.mostrarMensaje(infoProducto);
+              } else {
+                carritoVista.mostrarMensaje(infoProducto);
+              }
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function controladorCarrito() {
+      return _ref3.apply(this, arguments);
+    };
+  }(); // Controlador que elimina un producto del carrito
+  // TODO: mostrar mensaje si en verdad se desea eliminar el producto
+
+
+  var controladorEliminarProductoCarrito =
+  /*#__PURE__*/
+  function () {
+    var _ref4 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee4(e) {
+      var idProducto, producto, permisoBorrarProducto;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              // Se obtiene el id del producto que se quiere eliminar
+              idProducto = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
+
+              producto = new _carrito.default(); // Se elimina el producto creado con el id del producto
+
+              _context4.next = 4;
+              return producto.eliminarProducto(idProducto);
+
+            case 4:
+              permisoBorrarProducto = _context4.sent;
+
+              if (permisoBorrarProducto) {
+                carritoVista.eliminarProductoDOM(e);
+              } else {
+                carritoVista.mostrarMensajeNoProducto();
+              }
+
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function controladorEliminarProductoCarrito(_x) {
+      return _ref4.apply(this, arguments);
+    };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
 
@@ -6086,16 +6378,49 @@ $(document).ready(function () {
   _base.domElementos.formularioIniciarSesion.submit(function (event) {
     event.preventDefault();
     controladorIniciarSesion();
-  }); // Evento que se dispara cuando se cierra sesión
+  }); // Evento que se dispara cuando se presiona el boton de agregar al carrito
 
 
-  _base.domElementos.btnCerrarSesion.on('click', function (e) {
+  _base.domElementos.btnAgregarCarrito.on('click', function (e) {
     e.preventDefault();
+    controladorCarrito();
+  }); // Evento que se dispara cuando se presiona el boton de eliminar carrito
+  // TODO: hacer el div que rodea el boton de eliminar producto del carrito más pequeño
+
+
+  _base.domElementos.btnEliminarCarrito.on('click',
+  /*#__PURE__*/
+  function () {
+    var _ref5 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee5(e) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              e.preventDefault();
+              controladorEliminarProductoCarrito(e);
+
+            case 2:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x2) {
+      return _ref5.apply(this, arguments);
+    };
+  }()); // Evento que se dispara cuando se cierra sesión
+
+
+  _base.domElementos.btnCerrarSesion.on('click', function () {
     (0, _cookie.eliminarCookie)();
     location.assign('/');
   });
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -6123,7 +6448,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59279" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53286" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

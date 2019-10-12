@@ -11,8 +11,16 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+// Helpers de Handlebars
+const hbs = expressHbs.create({
+  helpers: {
+    subtotal: function(cantidad, precio) {
+      return cantidad * precio;
+    }
+  }
+});
 // view engine setup
-app.engine('handlebars', expressHbs());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Accede a los archivos estaticos

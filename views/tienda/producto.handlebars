@@ -21,8 +21,10 @@
                 {{producto.descripcion}}
             </p>
             <form action="#" class="producto__formulario">
-                <input type="number" name="cantidad" id="" placeholder="Cantidad" />
-                <button class="btn producto__btnAgregarCarrito btn--rojo">
+                <input type="hidden" name="slug" value="{{producto.slug}}" class="producto__slug">
+                <input type="number" name="cantidad" value="1" placeholder="Cantidad" min="1" max="10"
+                    class="producto__cantidad" />
+                <button class="btn producto__btnAgregarCarrito btn--rojo" id="agregarCarrito">
                     Agregar al carrito
                 </button>
             </form>

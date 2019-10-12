@@ -18,7 +18,6 @@ export default class IniciarSesion {
           contraseña: this.password
         }
       });
-      console.log(consulta);
       return consulta;
     } catch (error) {
       console.log(error);

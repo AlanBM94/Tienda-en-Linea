@@ -1,0 +1,60 @@
+{{> navigationSticky}}
+<div class="carrito caracteristicas">
+    <h3 class="carrito__titulo">Tu carrito</h3>
+    <div class="carrito__contenido">
+        <div class="carrito__lista">
+            <div class="carrito__listaHeader">
+                <h4 class="carrito__listaTitulo">Producto</h4>
+                <h4 class="carrito__listaTitulo">Precio</h4>
+                <h4 class="carrito__listaTitulo">Cantidad</h4>
+                <h4 class="carrito__listaTitulo">Total</h4>
+            </div>
+            {{# each productosCarrito}}
+            <div class="carrito__listaItem" id="{{this._id}}">
+                <div class="carrito__Producto">
+                    <img src="/images/productos/{{this.imagen}}" alt="{{this.articulo}}" />
+                    <p class="carrito__texto">{{this.articulo}}</p>
+                </div>
+                <div class="carrito__Precio">
+                    <p class="carrito__texto">${{this.precio}}</p>
+                </div>
+                <div class="carrito__Cantidad">
+                    <p class="carrito__texto">{{this.cantidad}}</p>
+                </div>
+                <div class="carrito__Total">
+                    <p class="carrito__texto">$
+                        {{subtotal this.cantidad this.precio}}
+                    </p>
+                </div>
+                <div class="carrito__eliminarProducto">
+                    <div class="carrito__eliminar">
+                        <a href="#" class="carrito__texto" data-id="{{this._id}}">X</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+        <div class="carrito__resumen">
+            <div class="carrito__resumenHeader">
+                <h4>Resumen de la compra</h4>
+            </div>
+            <div class="carrito__resumenCuerpo">
+                <div class="carrito__resumenFila">
+                    <p class="resumenCampo">Subtotal</p>
+                    <span>${{carrito.total}}</span>
+                </div>
+                <div class="carrito__resumenFila">
+                    <p class="resumenCampo">Envío</p>
+                    <span>$0</span>
+                </div>
+                <div class="carrito__resumenFila">
+                    <p class="resumenCampo">Total:</p>
+                    <span>${{carrito.total}}</span>
+                </div>
+            </div>
+            <button class="btn btn--rojo">Comprar</button>
+        </div>
+    </div>
+</div>
+{{> footer}}

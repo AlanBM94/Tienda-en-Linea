@@ -98,6 +98,7 @@ exports.permitirPara = rol => {
   };
 };
 
+// Verifica que el usuario este logeado
 exports.estaLogeado = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
@@ -109,7 +110,6 @@ exports.estaLogeado = async (req, res, next) => {
       if (!usuarioActual) {
         return next();
       }
-      console.log(usuarioActual);
       res.locals.usuario = usuarioActual;
       return next();
     } catch (error) {

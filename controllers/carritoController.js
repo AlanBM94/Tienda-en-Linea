@@ -7,16 +7,27 @@ const catchAsync = require('../utils/catchAsync');
 //   next();
 // };
 
+// Si existe res.locals.usuario crea un carrito en res.locals
+exports.obtenerCarritoLocals = async (req, res, next) => {
+  if (res.locals.usuario) {
+    const carrito = await Carrito.findOne({ usuario: res.locals.usuario._id });
+    res.locals.carrito = carrito;
+    next();
+  } else {
+    next();
+  }
+};
+
 exports.obtenerCarrito = catchAsync(async (req, res, next) => {
   const carrito = await Carrito.findOne({ usuario: req.usuario._id });
   if (!carrito) {
-    return next(new AppError('No se encontró ningún carrito', 404));
+    return res.status(200).render('tienda/carritoVacio');
   }
-  res.status(200).json({
-    status: 'Exito',
-    data: {
-      carrito
-    }
+  res.locals.carrito = carrito;
+  const productosCarrito = carrito.productos;
+  res.status(200).render('tienda/carrito', {
+    carrito,
+    productosCarrito
   });
 });
 
@@ -35,9 +46,7 @@ exports.crearCarrito = catchAsync(async (req, res, next) => {
     req.carrito = carrito;
   } else {
     req.carrito = carritoViejo;
-    // console.log(carrito, 'jkajka');
   }
-
   next();
 });
 

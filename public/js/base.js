@@ -12,7 +12,25 @@ export const domElementos = {
     contraseña: $('#registrarseContraseña'),
     confirmarContraseña: $('#registrarseConfirmarContraseña')
   },
-  btnCerrarSesion: $('#cerrarSesion')
+  producto: {
+    articulo: $('.producto__titulo')
+      .text()
+      .trim(),
+    categoria: $('.producto__categoria')
+      .text()
+      .trim(),
+    descripcion: $('.producto__texto')
+      .text()
+      .trim(),
+    precio: $('.producto__titulo span')
+      .text()
+      .trim(),
+    imagen: $('.producto__fotografiaPrincipal img').attr('src'),
+    slug: $('.producto__slug').val()
+  },
+  btnCerrarSesion: $('#cerrarSesion'),
+  btnAgregarCarrito: $('#agregarCarrito'),
+  btnEliminarCarrito: $('.carrito__eliminar a')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

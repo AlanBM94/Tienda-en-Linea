@@ -46,14 +46,20 @@
     {{# if usuario}}
     <!-- Sección dinamica del usuario -->
     <div class="nav__seccionDinamicaPerfil">
-        <button class="nav__btnCarrito btn btn--carrito">
+        <a href="/carrito/ver" class="nav__btnCarrito btn btn--carrito">
             Carrito
-            <span>5</span>
-        </button>
+            <span>
+                {{# if carrito}}
+                {{carrito.productos.length}}
+                {{ else }}
+                0
+                {{/if}}
+            </span>
+        </a>
         <div class="nav__usuario">
-            <img src="./images/Alan.jpg" alt="Alan" />
+            <img src="/images/{{usuario.foto}}" alt="Alan" />
             <p>
-                Alan <span><i class="fas fa-caret-down"></i></span>
+                {{usuario.nombre}} <span><i class="fas fa-caret-down"></i></span>
             </p>
             <ul class="nav__usuarioDropdown">
                 <li class="nav__usuarioDropdownItem">
@@ -71,11 +77,10 @@
     <div class="nav__seccion-usuario">
         <ul class="nav__seccion-usuario-lista">
             <li class="nav__seccion-usuario-item">
-                <a href="/usuarios/registrarse" class="nav__seccion-usuario-btn btn--rojo">Registrarse</a>
+                <a href="/registrarse" class="nav__seccion-usuario-btn btn--rojo">Registrarse</a>
             </li>
             <li class="nav__seccion-usuario-item">
-                <a href="/usuarios/iniciarSesion"
-                    class="nav__seccion-usuario-btn nav__seccion-usuario-btn--transparente">
+                <a href="/iniciarSesion" class="nav__seccion-usuario-btn nav__seccion-usuario-btn--transparente">
                     Iniciar sesión
                 </a>
             </li>

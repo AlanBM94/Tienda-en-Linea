@@ -1,13 +1,18 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const productoController = require('../controllers/productoController');
+const carritoController = require('../controllers/carritoController');
 const reseñaController = require('../controllers/reseñaController');
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(productoController.obtenerProductos)
+  .get(
+    authController.estaLogeado,
+    carritoController.obtenerCarritoLocals,
+    productoController.obtenerProductos
+  )
   .post(
     authController.proteger,
     authController.permitirPara('administrador'),
@@ -16,7 +21,11 @@ router
 
 router
   .route('/:id')
-  .get(productoController.obtenerProducto)
+  .get(
+    authController.estaLogeado,
+    carritoController.obtenerCarritoLocals,
+    productoController.obtenerProducto
+  )
   .patch(
     authController.proteger,
     authController.permitirPara('administrador'),

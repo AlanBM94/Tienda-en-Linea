@@ -2,5 +2,4 @@ Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     olvideMiContraseña
     actualizarContraseña
 
-Interfaz
-    validar cuando el usuario registrado tenga menos de 3 letras y mas de 10 
+Solucionar que cuando el usuario cierra sesión desde el carrito tiene que cerrar sesión dos veces

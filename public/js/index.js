@@ -3,10 +3,12 @@ import { configWaypoints, domElementos } from './base';
 import { eliminarCookie } from './utils/cookie';
 import Registrarse from './models/registrarse';
 import IniciarSesion from './models/iniciarSesion';
+import Carrito from './models/carrito';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
+import * as carritoVista from './views/carritoVista';
 
-$(document).ready(function() {
+$(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
   configWaypoints();
 
@@ -36,21 +38,66 @@ $(document).ready(function() {
     }
   };
 
+  //Controlador que agrega un producto al carrito
+  const controladorCarrito = async () => {
+    // Obtener los datos del producto que quiero agregar al carrito
+    const infoProducto = carritoVista.obtenerInfoProducto();
+    console.log(infoProducto);
+    // Crear un objeto de la clase Carrito
+    const producto = new Carrito();
+    console.log(producto);
+    if (infoProducto !== false) {
+      // Enviar la petición al servidor para agregar el producto al carrito
+      producto.agregarProducto(infoProducto);
+      carritoVista.mostrarMensaje(infoProducto);
+    } else {
+      carritoVista.mostrarMensaje(infoProducto);
+    }
+  };
+
+  // Controlador que elimina un producto del carrito
+  // TODO: mostrar mensaje si en verdad se desea eliminar el producto
+  const controladorEliminarProductoCarrito = async e => {
+    // Se obtiene el id del producto que se quiere eliminar
+    const idProducto = carritoVista.obtenerInfoProductoAEliminar(e);
+    // Se crea un objeto de la clase Carrito
+    const producto = new Carrito();
+    // Se elimina el producto creado con el id del producto
+    const permisoBorrarProducto = await producto.eliminarProducto(idProducto);
+    if (permisoBorrarProducto) {
+      carritoVista.eliminarProductoDOM(e);
+    } else {
+      carritoVista.mostrarMensajeNoProducto();
+    }
+  };
+
   // Evento que se dispara cuando se envía el formulario de Registro
-  domElementos.formularioRegistrarse.submit(function(event) {
+  domElementos.formularioRegistrarse.submit(event => {
     event.preventDefault();
     controladorRegistrarse();
   });
 
   // Evento que se dispara cuando se envía el formulario de iniciar sesión
-  domElementos.formularioIniciarSesion.submit(function(event) {
+  domElementos.formularioIniciarSesion.submit(event => {
     event.preventDefault();
     controladorIniciarSesion();
   });
 
-  // Evento que se dispara cuando se cierra sesión
-  domElementos.btnCerrarSesion.on('click', function(e) {
+  // Evento que se dispara cuando se presiona el boton de agregar al carrito
+  domElementos.btnAgregarCarrito.on('click', e => {
     e.preventDefault();
+    controladorCarrito();
+  });
+
+  // Evento que se dispara cuando se presiona el boton de eliminar carrito
+  // TODO: hacer el div que rodea el boton de eliminar producto del carrito más pequeño
+  domElementos.btnEliminarCarrito.on('click', async e => {
+    e.preventDefault();
+    controladorEliminarProductoCarrito(e);
+  });
+
+  // Evento que se dispara cuando se cierra sesión
+  domElementos.btnCerrarSesion.on('click', () => {
     eliminarCookie();
     location.assign('/');
   });
