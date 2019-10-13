@@ -149,7 +149,8 @@ var domElementos = {
   },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),
-  btnEliminarCarrito: $('.carrito__eliminar a')
+  btnEliminarCarrito: $('.carrito__eliminar a'),
+  btnComprar: $('#btnComprar')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -2978,6 +2979,92 @@ function () {
 }();
 
 exports.default = Carrito;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"models/compra.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Compra =
+/*#__PURE__*/
+function () {
+  function Compra(id) {
+    _classCallCheck(this, Compra);
+
+    this.id = id;
+  }
+
+  _createClass(Compra, [{
+    key: "hacerPeticionStripe",
+    value: function () {
+      var _hacerPeticionStripe = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var stripe, consulta;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                stripe = Stripe('pk_test_ZDcXOQ8zKStcrxrjeTz1ynAN00aquyrddG');
+                _context.next = 4;
+                return (0, _axios.default)("/compra/checkout-session/".concat(this.id));
+
+              case 4:
+                consulta = _context.sent;
+                _context.next = 7;
+                return stripe.redirectToCheckout({
+                  sessionId: consulta.data.session.id
+                });
+
+              case 7:
+                console.log(consulta);
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 10]]);
+      }));
+
+      function hacerPeticionStripe() {
+        return _hacerPeticionStripe.apply(this, arguments);
+      }
+
+      return hacerPeticionStripe;
+    }()
+  }]);
+
+  return Compra;
+}();
+
+exports.default = Compra;
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -6166,6 +6253,24 @@ var mostrarMensajeNoProducto = function mostrarMensajeNoProducto() {
 };
 
 exports.mostrarMensajeNoProducto = mostrarMensajeNoProducto;
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/compraVista.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.obtenerId = void 0;
+
+var _base = require("../base");
+
+var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
+
+/* eslint-disable */
+var obtenerId = function obtenerId(e) {
+  return e.target.getAttribute('data-id');
+};
+
+exports.obtenerId = obtenerId;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -6179,11 +6284,15 @@ var _iniciarSesion = _interopRequireDefault(require("./models/iniciarSesion"));
 
 var _carrito = _interopRequireDefault(require("./models/carrito"));
 
+var _compra = _interopRequireDefault(require("./models/compra"));
+
 var registrarseVista = _interopRequireWildcard(require("./views/registrarseVista"));
 
 var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionVista"));
 
 var carritoVista = _interopRequireWildcard(require("./views/carritoVista"));
+
+var compraVista = _interopRequireWildcard(require("./views/compraVista"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6324,7 +6433,6 @@ $(document).ready(function () {
       return _ref3.apply(this, arguments);
     };
   }(); // Controlador que elimina un producto del carrito
-  // TODO: mostrar mensaje si en verdad se desea eliminar el producto
 
 
   var controladorEliminarProductoCarrito =
@@ -6385,7 +6493,6 @@ $(document).ready(function () {
     e.preventDefault();
     controladorCarrito();
   }); // Evento que se dispara cuando se presiona el boton de eliminar carrito
-  // TODO: hacer el div que rodea el boton de eliminar producto del carrito más pequeño
 
 
   _base.domElementos.btnEliminarCarrito.on('click',
@@ -6412,7 +6519,18 @@ $(document).ready(function () {
     return function (_x2) {
       return _ref5.apply(this, arguments);
     };
-  }()); // Evento que se dispara cuando se cierra sesión
+  }()); // Evento que se dispara cuando se hace click en el boton de comprar
+
+
+  _base.domElementos.btnComprar.on('click', function (e) {
+    // Se obtiene el id del carrito que se quiere comprar
+    var idCarrito = compraVista.obtenerId(e); // Crear una nueva compra
+
+    var nuevaCompra = new _compra.default(idCarrito); // Hacer la petición al servidor
+
+    nuevaCompra.hacerPeticionStripe();
+    console.log(idCarrito);
+  }); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click', function () {
@@ -6420,7 +6538,7 @@ $(document).ready(function () {
     location.assign('/');
   });
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -6448,7 +6566,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53286" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52215" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

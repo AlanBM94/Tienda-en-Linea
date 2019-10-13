@@ -4,9 +4,11 @@ import { eliminarCookie } from './utils/cookie';
 import Registrarse from './models/registrarse';
 import IniciarSesion from './models/iniciarSesion';
 import Carrito from './models/carrito';
+import Compra from './models/compra';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
 import * as carritoVista from './views/carritoVista';
+import * as compraVista from './views/compraVista';
 
 $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
@@ -56,7 +58,6 @@ $(document).ready(() => {
   };
 
   // Controlador que elimina un producto del carrito
-  // TODO: mostrar mensaje si en verdad se desea eliminar el producto
   const controladorEliminarProductoCarrito = async e => {
     // Se obtiene el id del producto que se quiere eliminar
     const idProducto = carritoVista.obtenerInfoProductoAEliminar(e);
@@ -90,10 +91,20 @@ $(document).ready(() => {
   });
 
   // Evento que se dispara cuando se presiona el boton de eliminar carrito
-  // TODO: hacer el div que rodea el boton de eliminar producto del carrito más pequeño
   domElementos.btnEliminarCarrito.on('click', async e => {
     e.preventDefault();
     controladorEliminarProductoCarrito(e);
+  });
+
+  // Evento que se dispara cuando se hace click en el boton de comprar
+  domElementos.btnComprar.on('click', e => {
+    // Se obtiene el id del carrito que se quiere comprar
+    const idCarrito = compraVista.obtenerId(e);
+    // Crear una nueva compra
+    const nuevaCompra = new Compra(idCarrito);
+    // Hacer la petición al servidor
+    nuevaCompra.hacerPeticionStripe();
+    console.log(idCarrito);
   });
 
   // Evento que se dispara cuando se cierra sesión

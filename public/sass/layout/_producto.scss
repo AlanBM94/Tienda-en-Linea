@@ -6,18 +6,19 @@
     width: 100%;
     height: 100%;
     display: grid;
+    justify-items: center;
     grid-template-columns: 40% 60%;
-    row-gap: 2rem;
+    row-gap: 5rem;
     grid-template-rows: 80% 20%;
   }
   &__fotografias {
-    width: 100%;
+    width: 80%;
     height: 100%;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     display: grid;
     grid-column-gap: 1rem;
-    grid-row-gap: 3rem;
+    grid-row-gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 80% 20%;
     padding: 5rem;
@@ -28,7 +29,7 @@
     @include flexCenter;
     justify-content: center;
     & img {
-      width: 30rem;
+      width: 100%;
       height: 30rem;
       border: 5rem solid $gris-claro;
     }
@@ -40,8 +41,8 @@
       @include flexCenter;
       justify-content: center;
       & img {
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
       }
     }
     &--1 {
@@ -50,8 +51,8 @@
       @include flexCenter;
       justify-content: center;
       & img {
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
       }
     }
     &--2 {
@@ -60,8 +61,8 @@
       @include flexCenter;
       justify-content: center;
       & img {
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
       }
     }
   }
@@ -150,6 +151,7 @@
     }
   }
   &__resenia {
+    margin-top: 5rem;
     padding: 4rem;
     width: 100%;
     & h4 {

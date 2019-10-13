@@ -1,4 +1,5 @@
 {{> navigationSticky}}
+<script src="https://js.stripe.com/v3/"></script>
 <div class="carrito caracteristicas">
     <h3 class="carrito__titulo">Tu carrito</h3>
     <div class="carrito__contenido">
@@ -53,7 +54,7 @@
                     <span>${{carrito.total}}</span>
                 </div>
             </div>
-            <button class="btn btn--rojo">Comprar</button>
+            <button class="btn btn--rojo" data-id="{{carrito._id}}" id="btnComprar">Comprar</button>
         </div>
     </div>
 </div>

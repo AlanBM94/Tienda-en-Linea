@@ -9,7 +9,7 @@
     height: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-    grid-gap: 5rem;
+    grid-gap: 8rem;
     padding: 13rem 10rem;
   }
 
@@ -17,10 +17,10 @@
     @include flexCenter;
     flex-direction: column;
     & a {
-      width: 25rem;
+      width: 100%;
       height: 25rem;
       & img {
-        width: 22rem;
+        width: 100%;
         height: 22rem;
         border: 3rem solid $gris-claro;
       }
@@ -46,7 +46,7 @@
       grid-column: 2 / 3;
       font-size: $tamanio-default-letra;
       color: $color-primario;
-      justify-self: center;
+      justify-self: end;
 
       &:hover {
         cursor: pointer;

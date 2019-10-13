@@ -30,7 +30,8 @@ export const domElementos = {
   },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),
-  btnEliminarCarrito: $('.carrito__eliminar a')
+  btnEliminarCarrito: $('.carrito__eliminar a'),
+  btnComprar: $('#btnComprar')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

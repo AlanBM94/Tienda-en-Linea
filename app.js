@@ -7,6 +7,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const productoRouter = require('./routes/productoRouter');
 const usuarioRouter = require('./routes/usuarioRouter');
 const carritoRouter = require('./routes/carritoRouter');
+const compraRouter = require('./routes/compraRouter');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -39,15 +40,11 @@ app.use((req, res, next) => {
 });
 
 // RUTAS
-
 app.use('/', viewRouter);
-
 app.use('/productos', productoRouter);
-
 app.use('/usuarios', usuarioRouter);
-
 app.use('/carrito', carritoRouter);
-
+app.use('/compra', compraRouter);
 app.use(globalErrorHandler);
 
 module.exports = app;
