@@ -22,6 +22,7 @@
             </p>
             <form action="#" class="producto__formulario">
                 <input type="hidden" name="slug" value="{{producto.slug}}" class="producto__slug">
+                <input type="hidden" name="stock" value="{{producto.stock}}" class="producto__stock">
                 <input type="number" name="cantidad" value="1" placeholder="Cantidad" min="1" max="10"
                     class="producto__cantidad" />
                 <button class="btn producto__btnAgregarCarrito btn--rojo" id="agregarCarrito">

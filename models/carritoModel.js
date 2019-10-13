@@ -21,7 +21,8 @@ const carritoSchema = new mongoose.Schema(
           min: 1,
           max: 10
         },
-        slug: String
+        slug: String,
+        stock: Number
       }
     ],
     total: {

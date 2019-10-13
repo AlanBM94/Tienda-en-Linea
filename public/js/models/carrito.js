@@ -16,7 +16,8 @@ export default class Carrito {
           precio: producto.precio,
           imagen: producto.imagen,
           cantidad: producto.cantidad,
-          slug: producto.slug
+          slug: producto.slug,
+          stock: producto.stock
         }
       });
     } catch (error) {

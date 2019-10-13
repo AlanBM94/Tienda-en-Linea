@@ -26,7 +26,8 @@ export const domElementos = {
       .text()
       .trim(),
     imagen: $('.producto__fotografiaPrincipal img').attr('src'),
-    slug: $('.producto__slug').val()
+    slug: $('.producto__slug').val(),
+    stock: $('.producto__stock').val()
   },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),

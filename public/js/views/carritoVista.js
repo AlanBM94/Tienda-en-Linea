@@ -8,9 +8,12 @@ export const obtenerInfoProducto = () => {
     .split('$')[0]
     .trim();
   domElementos.producto.cantidad = parseInt($('.producto__cantidad').val());
+
   domElementos.producto.precio = parseInt(
     domElementos.producto.precio.split('$')[1]
   );
+
+  domElementos.producto.stock = parseInt(domElementos.producto.stock);
   domElementos.producto.imagen = domElementos.producto.imagen.split('/')[3];
   if (!domElementos.producto.cantidad) {
     return false;
@@ -48,4 +51,13 @@ export const mostrarMensaje = infoProducto => {
 // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
 export const mostrarMensajeNoProducto = () => {
   configurarSweetAlert('error', 'Error!', 'No se encontró ese producto');
+};
+
+// Mostrar mensaje de que no se pudo eliminar el producto seleccionado
+export const mostrarMensajeSinStock = () => {
+  configurarSweetAlert(
+    'warning',
+    'Sin productos suficientes!',
+    'No contamos con tantas unidades de este producto, intenta más tarde'
+  );
 };

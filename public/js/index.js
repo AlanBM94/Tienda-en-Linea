@@ -44,7 +44,14 @@ $(document).ready(() => {
   const controladorCarrito = async () => {
     // Obtener los datos del producto que quiero agregar al carrito
     const infoProducto = carritoVista.obtenerInfoProducto();
-    console.log(infoProducto);
+    // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
+    if (infoProducto.cantidad > infoProducto.stock) {
+      carritoVista.mostrarMensajeSinStock();
+      // Reinicia los atributos del objeto infoProducto para que pueda volver a obtener solo la información necesaria
+      infoProducto.precio = `$${infoProducto.precio}`;
+      infoProducto.imagen = `/images/productos/${infoProducto.imagen}`;
+      return;
+    }
     // Crear un objeto de la clase Carrito
     const producto = new Carrito();
     console.log(producto);

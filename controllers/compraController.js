@@ -81,8 +81,6 @@ exports.obtenerCheckoutSession = catchAsync(async (req, res, next) => {
     ]
   });
 
-  // Actualiza el stock de la tienda
-  // TODO: actualizar el stock de la tinda
   // actualizarStock(carrito);
 
   // Enviarla al cliente en la respuesta

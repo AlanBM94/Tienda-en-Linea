@@ -145,7 +145,8 @@ var domElementos = {
     descripcion: $('.producto__texto').text().trim(),
     precio: $('.producto__titulo span').text().trim(),
     imagen: $('.producto__fotografiaPrincipal img').attr('src'),
-    slug: $('.producto__slug').val()
+    slug: $('.producto__slug').val(),
+    stock: $('.producto__stock').val()
   },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),
@@ -2901,7 +2902,8 @@ function () {
                     precio: producto.precio,
                     imagen: producto.imagen,
                     cantidad: producto.cantidad,
-                    slug: producto.slug
+                    slug: producto.slug,
+                    stock: producto.stock
                   }
                 });
 
@@ -6196,7 +6198,7 @@ exports.mostrarSweetAlert = mostrarSweetAlert;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarMensajeNoProducto = exports.mostrarMensaje = exports.eliminarProductoDOM = exports.obtenerInfoProductoAEliminar = exports.obtenerInfoProducto = void 0;
+exports.mostrarMensajeSinStock = exports.mostrarMensajeNoProducto = exports.mostrarMensaje = exports.eliminarProductoDOM = exports.obtenerInfoProductoAEliminar = exports.obtenerInfoProducto = void 0;
 
 var _base = require("../base");
 
@@ -6208,6 +6210,7 @@ var obtenerInfoProducto = function obtenerInfoProducto() {
   _base.domElementos.producto.articulo = _base.domElementos.producto.articulo.split('$')[0].trim();
   _base.domElementos.producto.cantidad = parseInt($('.producto__cantidad').val());
   _base.domElementos.producto.precio = parseInt(_base.domElementos.producto.precio.split('$')[1]);
+  _base.domElementos.producto.stock = parseInt(_base.domElementos.producto.stock);
   _base.domElementos.producto.imagen = _base.domElementos.producto.imagen.split('/')[3];
 
   if (!_base.domElementos.producto.cantidad) {
@@ -6250,9 +6253,16 @@ exports.mostrarMensaje = mostrarMensaje;
 
 var mostrarMensajeNoProducto = function mostrarMensajeNoProducto() {
   (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'No se encontró ese producto');
-};
+}; // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
+
 
 exports.mostrarMensajeNoProducto = mostrarMensajeNoProducto;
+
+var mostrarMensajeSinStock = function mostrarMensajeSinStock() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'Sin productos suficientes!', 'No contamos con tantas unidades de este producto, intenta más tarde');
+};
+
+exports.mostrarMensajeSinStock = mostrarMensajeSinStock;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/compraVista.js":[function(require,module,exports) {
 "use strict";
 
@@ -6407,9 +6417,21 @@ $(document).ready(function () {
           switch (_context3.prev = _context3.next) {
             case 0:
               // Obtener los datos del producto que quiero agregar al carrito
-              infoProducto = carritoVista.obtenerInfoProducto();
-              console.log(infoProducto); // Crear un objeto de la clase Carrito
+              infoProducto = carritoVista.obtenerInfoProducto(); // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
 
+              if (!(infoProducto.cantidad > infoProducto.stock)) {
+                _context3.next = 6;
+                break;
+              }
+
+              carritoVista.mostrarMensajeSinStock(); // Reinicia los atributos del objeto infoProducto para que pueda volver a obtener solo la información necesaria
+
+              infoProducto.precio = "$".concat(infoProducto.precio);
+              infoProducto.imagen = "/images/productos/".concat(infoProducto.imagen);
+              return _context3.abrupt("return");
+
+            case 6:
+              // Crear un objeto de la clase Carrito
               producto = new _carrito.default();
               console.log(producto);
 
@@ -6421,7 +6443,7 @@ $(document).ready(function () {
                 carritoVista.mostrarMensaje(infoProducto);
               }
 
-            case 5:
+            case 9:
             case "end":
               return _context3.stop();
           }
@@ -6566,7 +6588,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64050" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
