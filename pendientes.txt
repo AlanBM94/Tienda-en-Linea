@@ -1,5 +1,5 @@
+
 Cuando se comienzen a hacer las vistas se va a implementar las funciones de
     olvideMiContraseña
     actualizarContraseña
 
-Solucionar que cuando el usuario cierra sesión desde el carrito tiene que cerrar sesión dos veces

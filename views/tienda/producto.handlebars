@@ -1,5 +1,18 @@
 {{> navigationSticky}}
 <!-- Categoría -->
+<!-- Popup formulario reseña -->
+<div class="popup" id="popup">
+    <a href="#producto">X</a>
+    <div class="popup__contenido">
+        <h4>Escribe tu reseña</h4>
+        <form action="#" class="formulario__form">
+            <input type="text" class="formulario__input" name="correo" placeholder="Correo electrónico" />
+            <input type="number" min="1" max="5" class="formulario__input" name="puntaje" placeholder="Puntaje" />
+            <textarea class="formulario__input" name="reseña" id="reseña" cols="30" rows="10"></textarea>
+            <button class="btn btn--rojo">Publicar reseña</button>
+        </form>
+    </div>
+</div>
 <section class="producto caracteristicas" id="producto">
     <div class="producto__contenido">
         <div class="producto__fotografias">

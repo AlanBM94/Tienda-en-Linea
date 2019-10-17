@@ -1447,7 +1447,8 @@ header .hero__btn:hover {
 }
 
 .producto__reseniasSlider {
-  margin: 0 2rem;
+  margin: 0 auto;
+  width: 60%;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -1457,7 +1458,6 @@ header .hero__btn:hover {
 }
 
 .producto__contenedorResenia {
-  width: 65rem !important;
   height: 23rem !important;
   display: -webkit-box;
   display: -ms-flexbox;

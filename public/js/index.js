@@ -111,8 +111,9 @@ $(document).ready(() => {
     const nuevaCompra = new Compra(idCarrito);
     // Hacer la petición al servidor
     nuevaCompra.hacerPeticionStripe();
-    console.log(idCarrito);
   });
+
+  // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
 
   // Evento que se dispara cuando se cierra sesión
   domElementos.btnCerrarSesion.on('click', () => {

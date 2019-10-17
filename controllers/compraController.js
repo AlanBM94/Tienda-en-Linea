@@ -35,8 +35,8 @@ const cantidadProductos = numero =>
 // Le resta al stock la cantidad de los productos comprados
 const restarStock = async (cantidad, slugProducto) => {
   const producto = await Producto.findOne({ slug: slugProducto });
-  const nuevaStock = producto.stock - cantidad;
-  await Producto.findByIdAndUpdate(producto._id, { stock: nuevaStock });
+  const nuevoStock = producto.stock - cantidad;
+  await Producto.findByIdAndUpdate(producto._id, { stock: nuevoStock });
 };
 
 // Actualiza el stock de la tienda
@@ -80,8 +80,6 @@ exports.obtenerCheckoutSession = catchAsync(async (req, res, next) => {
       }
     ]
   });
-
-  // actualizarStock(carrito);
 
   // Enviarla al cliente en la respuesta
   res.status(200).json({

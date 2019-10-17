@@ -167,12 +167,12 @@
     margin-top: 4rem;
   }
   &__reseniasSlider {
-    margin: 0 2rem;
+    margin: 0 auto;
+    width: 60%;
     display: flex !important;
     justify-content: space-between !important;
   }
   &__contenedorResenia {
-    width: 65rem !important;
     height: 23rem !important;
     display: flex;
     padding: 2rem;
