@@ -41,9 +41,15 @@ $(document).ready(() => {
   };
 
   //Controlador que agrega un producto al carrito
-  const controladorCarrito = async () => {
-    // Obtener los datos del producto que quiero agregar al carrito
-    const infoProducto = carritoVista.obtenerInfoProducto();
+  // FIXME: solucionar que no se puedan agregar más productos al carrito de los que hay en stock
+  const controladorCarrito = async (boton, e) => {
+    let infoProducto;
+    if (boton === 'btn') {
+      // Obtener los datos del producto que quiero agregar al carrito
+      infoProducto = carritoVista.obtenerInfoProducto();
+    } else if (boton === 'icono') {
+      infoProducto = carritoVista.obtenerInfoProductoIcono(e);
+    }
     // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
     if (infoProducto.cantidad > infoProducto.stock) {
       carritoVista.mostrarMensajeSinStock();
@@ -54,7 +60,6 @@ $(document).ready(() => {
     }
     // Crear un objeto de la clase Carrito
     const producto = new Carrito();
-    console.log(producto);
     if (infoProducto !== false) {
       // Enviar la petición al servidor para agregar el producto al carrito
       producto.agregarProducto(infoProducto);
@@ -94,7 +99,32 @@ $(document).ready(() => {
   // Evento que se dispara cuando se presiona el boton de agregar al carrito
   domElementos.btnAgregarCarrito.on('click', e => {
     e.preventDefault();
-    controladorCarrito();
+    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
+    if (document.cookie) {
+      const cookieMiTienda = document.cookie.split('=')[0];
+      if (cookieMiTienda === 'jwt') {
+        controladorCarrito('btn');
+      } else {
+        carritoVista.mostrarMensajeNoSession();
+      }
+    } else {
+      carritoVista.mostrarMensajeNoSession();
+    }
+  });
+
+  // Evento que se dispara cuando se presiona el icono de agregar al carrito
+  domElementos.iconoAgregarCarrito.on('click', function(e) {
+    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
+    if (document.cookie) {
+      const cookieMiTienda = document.cookie.split('=')[0];
+      if (cookieMiTienda === 'jwt') {
+        controladorCarrito('icono', e);
+      } else {
+        carritoVista.mostrarMensajeNoSession();
+      }
+    } else {
+      carritoVista.mostrarMensajeNoSession();
+    }
   });
 
   // Evento que se dispara cuando se presiona el boton de eliminar carrito

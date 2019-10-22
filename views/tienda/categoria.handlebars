@@ -6,16 +6,19 @@
         {{# each productos}}
         <div class="categoria__item">
             <a href="/productos/{{this.id}}">
-                <img src="images/productos/{{this.imagenPrincipal}}" alt="" />
+                <img src="images/productos/{{this.imagenPrincipal}}" alt="{{this.nombre}}" />
             </a>
             <div class="categoria__itemFooter">
                 <h4>{{this.nombre}}</h4>
                 <p>${{this.precio}}</p>
-                <i class="far fa-heart"></i>
+                <i class="fas fa-heart iconoAgregarCarrito" id="{{this.id}}"></i>
+                <input type="hidden" name="{{this.descripcion}}">
+                <input type="hidden" name="{{this.slug}}">
+                <input type="hidden" name="{{this.stock}}">
+                <input type="hidden" name="{{this.categoria}}">
             </div>
         </div>
         {{/ each}}
-
     </div>
 </section>
 {{> footer}}

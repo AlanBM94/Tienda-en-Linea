@@ -5,41 +5,55 @@ header {
   background: $gradiente-oscuro, url(#{$imgpath}/comprador.jpg);
   background-size: cover;
   .hero {
+    width: 60rem;
+    height: 20rem;
     position: absolute;
     background: $blanco;
     left: 50%;
-    top: 20%;
+    top: 40%;
     transform: translateX(-50%);
-    width: 30rem;
-    height: 40rem;
-    @include flexColumn;
+    display: flex;
+    &__primario {
+      background: $color-primario;
+      height: 100%;
+      width: 40%;
+      padding: 3rem 0;
+    }
     &__titulo {
-      font-size: 3.8rem;
+      font-size: 2.8rem;
       margin-top: 2rem;
       font-weight: 400;
       text-align: center;
       text-transform: uppercase;
-      color: $color-primario;
+      color: $blanco;
     }
     &__texto {
       font-size: 2rem;
-      color: $negro;
+      color: #ffff;
       font-weight: 600;
       position: relative;
-      margin-top: -4rem;
-      &::before {
-        @include promocionEstilo;
-        left: -13%;
-      }
-      &::after {
-        @include promocionEstilo;
-        left: 103%;
-      }
+      margin-top: 2rem;
+      text-align: center;
+    }
+    &__secundario {
+      width: 60%;
+      height: 100%;
+      padding: 1rem;
+      @include flexColumn;
     }
     & span {
       font-size: 1.4rem;
-      margin-top: -4rem;
+      margin-top: 2rem;
+      font-weight: 700;
       color: $negro;
+      &::before {
+        @include promocionEstilo;
+        left: 52%;
+      }
+      &::after {
+        @include promocionEstilo;
+        left: 84%;
+      }
       opacity: 0.7;
     }
     &__btn {

@@ -22,6 +22,25 @@ export const obtenerInfoProducto = () => {
   }
 };
 
+// Obtiene la información del producto que se quiere agregar al carrito de compras desde el icono del corazón
+export const obtenerInfoProductoIcono = e => {
+  const productoInfo = {
+    articulo: e.target.parentElement.children[0].innerText,
+    cantidad: '1',
+    categoria: e.target.parentElement.children[6].name,
+    descripcion: e.target.parentElement.children[3].name,
+    imagen: e.target.parentElement.parentElement.children[0].children[0].src.split(
+      '/'
+    )[5],
+    precio: parseInt(
+      e.target.parentElement.children[1].innerText.split('$')[1]
+    ),
+    slug: e.target.parentElement.children[4].name,
+    stock: parseInt(e.target.parentElement.children[5].name)
+  };
+  return productoInfo;
+};
+
 // Obtiene la información del producto que se quiere eliminar del carrito
 export const obtenerInfoProductoAEliminar = e =>
   e.target.getAttribute('data-id');
@@ -59,5 +78,14 @@ export const mostrarMensajeSinStock = () => {
     'warning',
     'Sin productos suficientes!',
     'No contamos con tantas unidades de este producto, intenta más tarde'
+  );
+};
+
+// Mostrar mensaje de que no puedes agregar un producto al carrito de compras sin iniciar sesión
+export const mostrarMensajeNoSession = () => {
+  configurarSweetAlert(
+    'warning',
+    'No has iniciado sesión!',
+    'Debes iniciar sesión para agregar un producto a tu carrito'
   );
 };

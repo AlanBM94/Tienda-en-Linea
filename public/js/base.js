@@ -29,8 +29,27 @@ export const domElementos = {
     slug: $('.producto__slug').val(),
     stock: $('.producto__stock').val()
   },
+  productoIcono: {
+    articulo: $('#articuloProductoIcono')
+      .text()
+      .trim(),
+    categoria: $('#categoriaProductoIcono')
+      .text()
+      .trim(),
+    descripcion: $('#descripcionProductoIcono')
+      .text()
+      .trim(),
+    precio: $('#precioProductoIcono')
+      .text()
+      .trim(),
+    imagen: $('#imagenProductoIcono').attr('src'),
+    slug: $('#slugProductoIcono').val(),
+    stock: $('#stockProductoIcono').val(),
+    cantidad: '1'
+  },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),
+  iconoAgregarCarrito: $('.iconoAgregarCarrito'),
   btnEliminarCarrito: $('.carrito__eliminar a'),
   btnComprar: $('#btnComprar')
 };
@@ -46,8 +65,9 @@ export const configWaypoints = () => {
         $('.nav__usuarioDropdown').css({ background: '#232121' });
         $('.nav__usuarioDropdown').css({
           height: '7rem',
-          width: '12rem',
-          padding: '1rem'
+          width: '100%',
+          padding: '1rem',
+          'margin-right': '0'
         });
       } else {
         $('.nav').removeClass('sticky');
@@ -57,7 +77,8 @@ export const configWaypoints = () => {
         $('.nav__usuarioDropdown').css({
           height: 'auto',
           width: 'auto',
-          padding: '0'
+          padding: '0',
+          'margin-right': '1.5rem'
         });
       }
     },

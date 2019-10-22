@@ -103,9 +103,9 @@
     grid-template-rows: repeat(2, 1fr);
     margin-top: 1rem;
     & img {
-      width: 5rem;
-      height: 5rem;
-      border-radius: 10rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 6rem;
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       align-self: center;
@@ -140,7 +140,6 @@
     background: transparent;
     visibility: hidden;
     justify-self: end;
-    margin-right: 1.2rem;
     opacity: 0;
     transition: all 0.2s;
     & li:not(:last-child) {

@@ -148,8 +148,19 @@ var domElementos = {
     slug: $('.producto__slug').val(),
     stock: $('.producto__stock').val()
   },
+  productoIcono: {
+    articulo: $('#articuloProductoIcono').text().trim(),
+    categoria: $('#categoriaProductoIcono').text().trim(),
+    descripcion: $('#descripcionProductoIcono').text().trim(),
+    precio: $('#precioProductoIcono').text().trim(),
+    imagen: $('#imagenProductoIcono').attr('src'),
+    slug: $('#slugProductoIcono').val(),
+    stock: $('#stockProductoIcono').val(),
+    cantidad: '1'
+  },
   btnCerrarSesion: $('#cerrarSesion'),
   btnAgregarCarrito: $('#agregarCarrito'),
+  iconoAgregarCarrito: $('.iconoAgregarCarrito'),
   btnEliminarCarrito: $('.carrito__eliminar a'),
   btnComprar: $('#btnComprar')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
@@ -169,8 +180,9 @@ var configWaypoints = function configWaypoints() {
       });
       $('.nav__usuarioDropdown').css({
         height: '7rem',
-        width: '12rem',
-        padding: '1rem'
+        width: '100%',
+        padding: '1rem',
+        'margin-right': '0'
       });
     } else {
       $('.nav').removeClass('sticky');
@@ -186,7 +198,8 @@ var configWaypoints = function configWaypoints() {
       $('.nav__usuarioDropdown').css({
         height: 'auto',
         width: 'auto',
-        padding: '0'
+        padding: '0',
+        'margin-right': '1.5rem'
       });
     }
   }, {
@@ -6198,7 +6211,7 @@ exports.mostrarSweetAlert = mostrarSweetAlert;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarMensajeSinStock = exports.mostrarMensajeNoProducto = exports.mostrarMensaje = exports.eliminarProductoDOM = exports.obtenerInfoProductoAEliminar = exports.obtenerInfoProducto = void 0;
+exports.mostrarMensajeNoSession = exports.mostrarMensajeSinStock = exports.mostrarMensajeNoProducto = exports.mostrarMensaje = exports.eliminarProductoDOM = exports.obtenerInfoProductoAEliminar = exports.obtenerInfoProductoIcono = exports.obtenerInfoProducto = void 0;
 
 var _base = require("../base");
 
@@ -6218,10 +6231,27 @@ var obtenerInfoProducto = function obtenerInfoProducto() {
   } else {
     return _base.domElementos.producto;
   }
-}; // Obtiene la información del producto que se quiere eliminar del carrito
+}; // Obtiene la información del producto que se quiere agregar al carrito de compras desde el icono del corazón
 
 
 exports.obtenerInfoProducto = obtenerInfoProducto;
+
+var obtenerInfoProductoIcono = function obtenerInfoProductoIcono(e) {
+  var productoInfo = {
+    articulo: e.target.parentElement.children[0].innerText,
+    cantidad: '1',
+    categoria: e.target.parentElement.children[6].name,
+    descripcion: e.target.parentElement.children[3].name,
+    imagen: e.target.parentElement.parentElement.children[0].children[0].src.split('/')[5],
+    precio: parseInt(e.target.parentElement.children[1].innerText.split('$')[1]),
+    slug: e.target.parentElement.children[4].name,
+    stock: parseInt(e.target.parentElement.children[5].name)
+  };
+  return productoInfo;
+}; // Obtiene la información del producto que se quiere eliminar del carrito
+
+
+exports.obtenerInfoProductoIcono = obtenerInfoProductoIcono;
 
 var obtenerInfoProductoAEliminar = function obtenerInfoProductoAEliminar(e) {
   return e.target.getAttribute('data-id');
@@ -6260,9 +6290,16 @@ exports.mostrarMensajeNoProducto = mostrarMensajeNoProducto;
 
 var mostrarMensajeSinStock = function mostrarMensajeSinStock() {
   (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'Sin productos suficientes!', 'No contamos con tantas unidades de este producto, intenta más tarde');
-};
+}; // Mostrar mensaje de que no puedes agregar un producto al carrito de compras sin iniciar sesión
+
 
 exports.mostrarMensajeSinStock = mostrarMensajeSinStock;
+
+var mostrarMensajeNoSession = function mostrarMensajeNoSession() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'No has iniciado sesión!', 'Debes iniciar sesión para agregar un producto a tu carrito');
+};
+
+exports.mostrarMensajeNoSession = mostrarMensajeNoSession;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/compraVista.js":[function(require,module,exports) {
 "use strict";
 
@@ -6403,6 +6440,7 @@ $(document).ready(function () {
       return _ref2.apply(this, arguments);
     };
   }(); //Controlador que agrega un producto al carrito
+  // FIXME: solucionar que no se puedan agregar más productos al carrito de los que hay en stock
 
 
   var controladorCarrito =
@@ -6410,14 +6448,19 @@ $(document).ready(function () {
   function () {
     var _ref3 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3() {
+    regeneratorRuntime.mark(function _callee3(boton, e) {
       var infoProducto, producto;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              // Obtener los datos del producto que quiero agregar al carrito
-              infoProducto = carritoVista.obtenerInfoProducto(); // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
+              if (boton === 'btn') {
+                // Obtener los datos del producto que quiero agregar al carrito
+                infoProducto = carritoVista.obtenerInfoProducto();
+              } else if (boton === 'icono') {
+                infoProducto = carritoVista.obtenerInfoProductoIcono(e);
+              } // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
+
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
                 _context3.next = 6;
@@ -6433,7 +6476,6 @@ $(document).ready(function () {
             case 6:
               // Crear un objeto de la clase Carrito
               producto = new _carrito.default();
-              console.log(producto);
 
               if (infoProducto !== false) {
                 // Enviar la petición al servidor para agregar el producto al carrito
@@ -6443,7 +6485,7 @@ $(document).ready(function () {
                 carritoVista.mostrarMensaje(infoProducto);
               }
 
-            case 9:
+            case 8:
             case "end":
               return _context3.stop();
           }
@@ -6451,7 +6493,7 @@ $(document).ready(function () {
       }, _callee3);
     }));
 
-    return function controladorCarrito() {
+    return function controladorCarrito(_x, _x2) {
       return _ref3.apply(this, arguments);
     };
   }(); // Controlador que elimina un producto del carrito
@@ -6493,7 +6535,7 @@ $(document).ready(function () {
       }, _callee4);
     }));
 
-    return function controladorEliminarProductoCarrito(_x) {
+    return function controladorEliminarProductoCarrito(_x3) {
       return _ref4.apply(this, arguments);
     };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
@@ -6512,8 +6554,35 @@ $(document).ready(function () {
 
 
   _base.domElementos.btnAgregarCarrito.on('click', function (e) {
-    e.preventDefault();
-    controladorCarrito();
+    e.preventDefault(); // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
+
+    if (document.cookie) {
+      var cookieMiTienda = document.cookie.split('=')[0];
+
+      if (cookieMiTienda === 'jwt') {
+        controladorCarrito('btn');
+      } else {
+        carritoVista.mostrarMensajeNoSession();
+      }
+    } else {
+      carritoVista.mostrarMensajeNoSession();
+    }
+  }); // Evento que se dispara cuando se presiona el icono de agregar al carrito
+
+
+  _base.domElementos.iconoAgregarCarrito.on('click', function (e) {
+    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
+    if (document.cookie) {
+      var cookieMiTienda = document.cookie.split('=')[0];
+
+      if (cookieMiTienda === 'jwt') {
+        controladorCarrito('icono', e);
+      } else {
+        carritoVista.mostrarMensajeNoSession();
+      }
+    } else {
+      carritoVista.mostrarMensajeNoSession();
+    }
   }); // Evento que se dispara cuando se presiona el boton de eliminar carrito
 
 
@@ -6538,7 +6607,7 @@ $(document).ready(function () {
       }, _callee5);
     }));
 
-    return function (_x2) {
+    return function (_x4) {
       return _ref5.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
@@ -6551,8 +6620,8 @@ $(document).ready(function () {
     var nuevaCompra = new _compra.default(idCarrito); // Hacer la petición al servidor
 
     nuevaCompra.hacerPeticionStripe();
-    console.log(idCarrito);
-  }); // Evento que se dispara cuando se cierra sesión
+  }); // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
+  // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click', function () {
@@ -6588,7 +6657,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50254" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62530" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
