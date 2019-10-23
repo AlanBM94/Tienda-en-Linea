@@ -42,8 +42,17 @@ export const obtenerInfoProductoIcono = e => {
 };
 
 // Obtiene la información del producto que se quiere eliminar del carrito
-export const obtenerInfoProductoAEliminar = e =>
-  e.target.getAttribute('data-id');
+export const obtenerInfoProductoAEliminar = e => {
+  const productoEliminar = {
+    id: e.target.getAttribute('data-id'),
+    cantidad: parseInt(
+      e.target.parentElement.parentElement.parentElement.children[2].innerText
+    ),
+    nombre:
+      e.target.parentElement.parentElement.parentElement.children[0].innerText
+  };
+  return productoEliminar;
+};
 
 // Elimina el producto del DOM
 export const eliminarProductoDOM = event => {

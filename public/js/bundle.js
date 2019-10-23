@@ -2944,13 +2944,14 @@ function () {
       }
 
       return agregarProducto;
-    }()
+    }() // Se envia la cantidad del producto que se iba a eliminar para que se vuelva a sumar al stock del producto
+
   }, {
     key: "eliminarProducto",
     value: function () {
       var _eliminarProducto = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(id) {
+      regeneratorRuntime.mark(function _callee2(productoId, cantidad, nombre) {
         var consulta;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2960,29 +2961,32 @@ function () {
                 _context2.next = 3;
                 return (0, _axios.default)({
                   method: 'DELETE',
-                  url: "/carrito/".concat(id)
+                  url: "/carrito/".concat(productoId),
+                  data: {
+                    cantidad: cantidad,
+                    nombre: nombre
+                  }
                 });
 
               case 3:
                 consulta = _context2.sent;
-                console.log(consulta.data.status);
                 return _context2.abrupt("return", consulta.data.status === 'Exito' ? true : false);
 
-              case 8:
-                _context2.prev = 8;
+              case 7:
+                _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
                 alert('Algo salió mal');
 
-              case 12:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 8]]);
+        }, _callee2, null, [[0, 7]]);
       }));
 
-      function eliminarProducto(_x2) {
+      function eliminarProducto(_x2, _x3, _x4) {
         return _eliminarProducto.apply(this, arguments);
       }
 
@@ -6254,7 +6258,12 @@ var obtenerInfoProductoIcono = function obtenerInfoProductoIcono(e) {
 exports.obtenerInfoProductoIcono = obtenerInfoProductoIcono;
 
 var obtenerInfoProductoAEliminar = function obtenerInfoProductoAEliminar(e) {
-  return e.target.getAttribute('data-id');
+  var productoEliminar = {
+    id: e.target.getAttribute('data-id'),
+    cantidad: parseInt(e.target.parentElement.parentElement.parentElement.children[2].innerText),
+    nombre: e.target.parentElement.parentElement.parentElement.children[0].innerText
+  };
+  return productoEliminar;
 }; // Elimina el producto del DOM
 
 
@@ -6505,18 +6514,18 @@ $(document).ready(function () {
     var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee4(e) {
-      var idProducto, producto, permisoBorrarProducto;
+      var productoEliminar, producto, permisoBorrarProducto;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               // Se obtiene el id del producto que se quiere eliminar
-              idProducto = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
+              productoEliminar = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
 
-              producto = new _carrito.default(); // Se elimina el producto creado con el id del producto
+              producto = new _carrito.default(); // Se elimina el producto creado con el id del producto y se envía la cantidad para que se actualice el stock
 
               _context4.next = 4;
-              return producto.eliminarProducto(idProducto);
+              return producto.eliminarProducto(productoEliminar.id, productoEliminar.cantidad, productoEliminar.nombre);
 
             case 4:
               permisoBorrarProducto = _context4.sent;

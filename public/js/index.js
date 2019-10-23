@@ -72,11 +72,15 @@ $(document).ready(() => {
   // Controlador que elimina un producto del carrito
   const controladorEliminarProductoCarrito = async e => {
     // Se obtiene el id del producto que se quiere eliminar
-    const idProducto = carritoVista.obtenerInfoProductoAEliminar(e);
+    const productoEliminar = carritoVista.obtenerInfoProductoAEliminar(e);
     // Se crea un objeto de la clase Carrito
     const producto = new Carrito();
-    // Se elimina el producto creado con el id del producto
-    const permisoBorrarProducto = await producto.eliminarProducto(idProducto);
+    // Se elimina el producto creado con el id del producto y se envía la cantidad para que se actualice el stock
+    const permisoBorrarProducto = await producto.eliminarProducto(
+      productoEliminar.id,
+      productoEliminar.cantidad,
+      productoEliminar.nombre
+    );
     if (permisoBorrarProducto) {
       carritoVista.eliminarProductoDOM(e);
     } else {

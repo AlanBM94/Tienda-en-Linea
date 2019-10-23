@@ -1,6 +1,7 @@
 const Carrito = require('../models/carritoModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const Producto = require('../models/productoModel');
 
 // exports.establecerIdUsuario = (req, res, next) => {
 //   if (!req.body.usuario) req.body.usuario = req.usuario.id;
@@ -50,8 +51,20 @@ exports.crearCarrito = catchAsync(async (req, res, next) => {
   next();
 });
 
+// Le resta al stock la cantidad de los productos comprados
+const restarStock = async (cantidad, slugProducto) => {
+  const producto = await Producto.findOne({ slug: slugProducto });
+  const nuevoStock = producto.stock - cantidad;
+  await Producto.findByIdAndUpdate(producto._id, { stock: nuevoStock });
+};
+
+// Agrega el producto al carrito
 exports.agregarAlCarrito = catchAsync(async (req, res, next) => {
   const producto = req.body;
+  // Actualiza el stock de la tienda
+  await restarStock(producto.cantidad, producto.slug);
+
+  // Se agrega el nuevo producto al carrito de compras
   const carritoActualizado = await Carrito.findByIdAndUpdate(
     req.carrito.id,
     {
@@ -60,6 +73,7 @@ exports.agregarAlCarrito = catchAsync(async (req, res, next) => {
     { new: true, runValidators: true }
   );
 
+  // Si no hay un carrito actualizado lanza un error
   if (!carritoActualizado) {
     return next(new AppError('No se encontró ningún carrito con ese Id', 404));
   }
@@ -74,8 +88,19 @@ exports.agregarAlCarrito = catchAsync(async (req, res, next) => {
   });
 });
 
+const sumarStock = catchAsync(async (nombreProducto, cantidadProducto) => {
+  const producto = await Producto.findOne({ nombre: nombreProducto });
+  const stockNuevo = producto.stock + cantidadProducto;
+  await Producto.findByIdAndUpdate(producto.id, { stock: stockNuevo });
+});
+
 exports.eliminarProductoDelCarrito = catchAsync(async (req, res, next) => {
+  // El id pertenece al producto que se va a eliminar
   const { id } = req.params;
+  const { cantidad, nombre } = req.body;
+  // Se vuelve a sumar la cantidad del del producto al stock del mismo
+  await sumarStock(nombre, cantidad);
+  // Se elimina el producto del carrito de compras
   const carrito = await Carrito.findOneAndUpdate(
     { usuario: req.usuario._id },
     { $pull: { productos: { _id: id } } },

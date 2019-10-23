@@ -25,14 +25,17 @@ export default class Carrito {
       alert('Algo salió mal');
     }
   }
-
-  async eliminarProducto(id) {
+  // Se envia la cantidad del producto que se iba a eliminar para que se vuelva a sumar al stock del producto
+  async eliminarProducto(productoId, cantidad, nombre) {
     try {
       const consulta = await axios({
         method: 'DELETE',
-        url: `/carrito/${id}`
+        url: `/carrito/${productoId}`,
+        data: {
+          cantidad,
+          nombre
+        }
       });
-      console.log(consulta.data.status);
       return consulta.data.status === 'Exito' ? true : false;
     } catch (error) {
       console.log(error);

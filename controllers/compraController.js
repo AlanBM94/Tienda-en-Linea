@@ -1,7 +1,6 @@
 const stripe = require('stripe')('sk_test_aX5uThJUB2R6tw70TbVPbiZD00TNRhCnTk');
 const Carrito = require('../models/carritoModel');
 const Compra = require('../models/compraModel');
-const Producto = require('../models/productoModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -31,23 +30,6 @@ const formatoFecha = fecha => {
 // Mensaje si es un producto o varios
 const cantidadProductos = numero =>
   numero === 1 ? 'producto adquirido' : 'productos adquiridos';
-
-// Le resta al stock la cantidad de los productos comprados
-const restarStock = async (cantidad, slugProducto) => {
-  const producto = await Producto.findOne({ slug: slugProducto });
-  const nuevoStock = producto.stock - cantidad;
-  await Producto.findByIdAndUpdate(producto._id, { stock: nuevoStock });
-};
-
-// Actualiza el stock de la tienda
-const actualizarStock = catchAsync(async idCarrito => {
-  const carrito = await Carrito.findById(idCarrito);
-  await Promise.all(
-    carrito.productos.map(async producto => {
-      await restarStock(producto.cantidad, producto.slug);
-    })
-  );
-});
 
 exports.obtenerCheckoutSession = catchAsync(async (req, res, next) => {
   // Obtener el carrito
@@ -97,8 +79,6 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   }
   const nuevaCompra = await Compra.create({ carrito, usuario, precio });
   if (nuevaCompra) {
-    // Actualiza el stock de la tienda
-    await actualizarStock(carrito);
     // Eliminar los productos del carrito
     await Carrito.findOneAndUpdate(
       { usuario },
