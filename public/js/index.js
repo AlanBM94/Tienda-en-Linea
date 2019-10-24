@@ -41,7 +41,6 @@ $(document).ready(() => {
   };
 
   //Controlador que agrega un producto al carrito
-  // FIXME: solucionar que no se puedan agregar más productos al carrito de los que hay en stock
   const controladorCarrito = async (boton, e) => {
     let infoProducto;
     if (boton === 'btn') {

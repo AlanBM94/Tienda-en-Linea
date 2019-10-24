@@ -37,7 +37,7 @@ const productoSchema = new mongoose.Schema(
     imagenes: [String],
     stock: {
       type: Number,
-      min: 1
+      min: 0
     }
   },
   {

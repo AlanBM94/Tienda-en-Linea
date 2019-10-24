@@ -6264,16 +6264,34 @@ var obtenerInfoProductoAEliminar = function obtenerInfoProductoAEliminar(e) {
     nombre: e.target.parentElement.parentElement.parentElement.children[0].innerText
   };
   return productoEliminar;
-}; // Elimina el producto del DOM
+}; // Actualiza el número de productos del carrito
 
 
 exports.obtenerInfoProductoAEliminar = obtenerInfoProductoAEliminar;
 
+var actualizaNumeroProductos = function actualizaNumeroProductos(valor) {
+  var numeroProductos = parseInt($('.nav__btnCarrito span').text());
+  var operacion = valor === 'resta' ? numeroProductos - 1 : numeroProductos + 1;
+  $('.nav__btnCarrito span').text(operacion);
+}; // Actualiza el total del carrito
+
+
+var actualizarTotalCarrito = function actualizarTotalCarrito(producto) {
+  // Actualiza el número de productos del carrito
+  actualizaNumeroProductos('resta');
+  var precioProducto = parseInt(producto.children[3].children[0].innerText.split('$')[1].trim());
+  var precioCarritoTotal = parseInt($('.carrito__resumenFila span').text().split('$')[1]);
+  var precioActualizadoCarrito = precioCarritoTotal - precioProducto;
+  $('.carrito__resumenFila span').text("$".concat(precioActualizadoCarrito));
+}; // Elimina el producto del DOM
+
+
 var eliminarProductoDOM = function eliminarProductoDOM(event) {
   var producto = event.target.parentElement.parentElement.parentElement;
   var listaProductos = event.target.parentElement.parentElement.parentElement.parentElement;
-  listaProductos.removeChild(producto);
-  location.reload();
+  listaProductos.removeChild(producto); // Actualiza el total del carrito
+
+  actualizarTotalCarrito(producto);
 }; // Envía mensajes de sweet alert
 
 
@@ -6282,7 +6300,8 @@ exports.eliminarProductoDOM = eliminarProductoDOM;
 var mostrarMensaje = function mostrarMensaje(infoProducto) {
   (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', "Has agregado el producto ".concat(infoProducto.articulo, " a tu carrito")).then(function (respuesta) {
     if (respuesta.value) {
-      location.reload();
+      // Actualiza el número de productos del carrito
+      actualizaNumeroProductos('suma');
     }
   });
 }; // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
@@ -6449,7 +6468,6 @@ $(document).ready(function () {
       return _ref2.apply(this, arguments);
     };
   }(); //Controlador que agrega un producto al carrito
-  // FIXME: solucionar que no se puedan agregar más productos al carrito de los que hay en stock
 
 
   var controladorCarrito =

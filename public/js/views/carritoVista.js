@@ -54,13 +54,38 @@ export const obtenerInfoProductoAEliminar = e => {
   return productoEliminar;
 };
 
+// Actualiza el número de productos del carrito
+const actualizaNumeroProductos = valor => {
+  let numeroProductos = parseInt($('.nav__btnCarrito span').text());
+  const operacion =
+    valor === 'resta' ? numeroProductos - 1 : numeroProductos + 1;
+  $('.nav__btnCarrito span').text(operacion);
+};
+
+// Actualiza el total del carrito
+const actualizarTotalCarrito = producto => {
+  // Actualiza el número de productos del carrito
+  actualizaNumeroProductos('resta');
+  const precioProducto = parseInt(
+    producto.children[3].children[0].innerText.split('$')[1].trim()
+  );
+  const precioCarritoTotal = parseInt(
+    $('.carrito__resumenFila span')
+      .text()
+      .split('$')[1]
+  );
+  const precioActualizadoCarrito = precioCarritoTotal - precioProducto;
+  $('.carrito__resumenFila span').text(`$${precioActualizadoCarrito}`);
+};
+
 // Elimina el producto del DOM
 export const eliminarProductoDOM = event => {
   const producto = event.target.parentElement.parentElement.parentElement;
   const listaProductos =
     event.target.parentElement.parentElement.parentElement.parentElement;
   listaProductos.removeChild(producto);
-  location.reload();
+  // Actualiza el total del carrito
+  actualizarTotalCarrito(producto);
 };
 
 // Envía mensajes de sweet alert
@@ -71,7 +96,8 @@ export const mostrarMensaje = infoProducto => {
     `Has agregado el producto ${infoProducto.articulo} a tu carrito`
   ).then(function(respuesta) {
     if (respuesta.value) {
-      location.reload();
+      // Actualiza el número de productos del carrito
+      actualizaNumeroProductos('suma');
     }
   });
 };
