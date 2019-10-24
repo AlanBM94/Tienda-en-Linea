@@ -6302,6 +6302,7 @@ var mostrarMensaje = function mostrarMensaje(infoProducto) {
     if (respuesta.value) {
       // Actualiza el número de productos del carrito
       actualizaNumeroProductos('suma');
+      window.location.href = '/carrito/ver';
     }
   });
 }; // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
