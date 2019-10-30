@@ -2736,7 +2736,7 @@ function () {
                 _context.next = 3;
                 return (0, _axios.default)({
                   method: 'POST',
-                  url: '/usuarios/registrarse',
+                  url: '/api/v1/usuarios/registrarse',
                   data: {
                     nombre: this.nombre,
                     email: this.email,
@@ -2824,7 +2824,7 @@ function () {
                 _context.next = 3;
                 return (0, _axios.default)({
                   method: 'POST',
-                  url: '/usuarios/iniciarSesion',
+                  url: '/api/v1/usuarios/iniciarSesion',
                   data: {
                     email: this.email,
                     contraseña: this.password
@@ -2907,7 +2907,7 @@ function () {
                 _context.next = 3;
                 return (0, _axios.default)({
                   method: 'POST',
-                  url: '/carrito/agregar',
+                  url: '/api/v1/carrito/agregar',
                   data: {
                     articulo: producto.articulo,
                     categoria: producto.categoria,
@@ -2961,7 +2961,7 @@ function () {
                 _context2.next = 3;
                 return (0, _axios.default)({
                   method: 'DELETE',
-                  url: "/carrito/".concat(productoId),
+                  url: "/api/v1/carrito/".concat(productoId),
                   data: {
                     cantidad: cantidad,
                     nombre: nombre
@@ -3045,7 +3045,7 @@ function () {
                 _context.prev = 0;
                 stripe = Stripe('pk_test_ZDcXOQ8zKStcrxrjeTz1ynAN00aquyrddG');
                 _context.next = 4;
-                return (0, _axios.default)("/compra/checkout-session/".concat(this.id));
+                return (0, _axios.default)("/api/v1/compra/checkout-session/".concat(this.id));
 
               case 4:
                 consulta = _context.sent;
@@ -6302,7 +6302,7 @@ var mostrarMensaje = function mostrarMensaje(infoProducto) {
     if (respuesta.value) {
       // Actualiza el número de productos del carrito
       actualizaNumeroProductos('suma');
-      window.location.href = '/carrito/ver';
+      window.location.href = '/carrito';
     }
   });
 }; // Mostrar mensaje de que no se pudo eliminar el producto seleccionado
@@ -6685,7 +6685,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62530" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

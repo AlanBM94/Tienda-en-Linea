@@ -9,7 +9,9 @@ export default class Compra {
   async hacerPeticionStripe() {
     try {
       const stripe = Stripe('pk_test_ZDcXOQ8zKStcrxrjeTz1ynAN00aquyrddG');
-      const consulta = await axios(`/compra/checkout-session/${this.id}`);
+      const consulta = await axios(
+        `/api/v1/compra/checkout-session/${this.id}`
+      );
       //Redirecciona al formulario de stripe
       await stripe.redirectToCheckout({
         sessionId: consulta.data.session.id

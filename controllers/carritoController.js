@@ -34,10 +34,9 @@ exports.obtenerCarrito = catchAsync(async (req, res, next) => {
     return res.status(200).render('tienda/carritoVacio');
   }
   res.locals.carrito = carrito;
-  const productosCarrito = carrito.productos;
-  res.status(200).render('tienda/carrito', {
-    carrito,
-    productosCarrito
+  res.status(200).json({
+    status: 'Exito',
+    carrito
   });
 });
 

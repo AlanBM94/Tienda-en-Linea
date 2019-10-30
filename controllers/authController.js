@@ -111,6 +111,7 @@ exports.estaLogeado = async (req, res, next) => {
         return next();
       }
       res.locals.usuario = usuarioActual;
+      req.usuario = usuarioActual;
       return next();
     } catch (error) {
       return next();

@@ -39,12 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// RUTAS
+// Rutas de el sitio que consume la API
 app.use('/', viewRouter);
-app.use('/productos', productoRouter);
-app.use('/usuarios', usuarioRouter);
-app.use('/carrito', carritoRouter);
-app.use('/compra', compraRouter);
+
+// Rutas de la API
+app.use('/api/v1/productos', productoRouter);
+app.use('/api/v1/usuarios', usuarioRouter);
+app.use('/api/v1/carrito', carritoRouter);
+app.use('/api/v1/compra', compraRouter);
 app.use(globalErrorHandler);
 
 module.exports = app;

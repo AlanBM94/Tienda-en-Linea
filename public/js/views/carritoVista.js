@@ -98,7 +98,7 @@ export const mostrarMensaje = infoProducto => {
     if (respuesta.value) {
       // Actualiza el número de productos del carrito
       actualizaNumeroProductos('suma');
-      window.location.href = '/carrito/ver';
+      window.location.href = '/carrito';
     }
   });
 };

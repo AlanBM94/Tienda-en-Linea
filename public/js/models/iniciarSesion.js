@@ -12,7 +12,7 @@ export default class IniciarSesion {
     try {
       const consulta = await axios({
         method: 'POST',
-        url: '/usuarios/iniciarSesion',
+        url: '/api/v1/usuarios/iniciarSesion',
         data: {
           email: this.email,
           contraseña: this.password

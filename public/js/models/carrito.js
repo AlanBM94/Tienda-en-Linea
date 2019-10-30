@@ -8,7 +8,7 @@ export default class Carrito {
     try {
       const consulta = await axios({
         method: 'POST',
-        url: '/carrito/agregar',
+        url: '/api/v1/carrito/agregar',
         data: {
           articulo: producto.articulo,
           categoria: producto.categoria,
@@ -30,7 +30,7 @@ export default class Carrito {
     try {
       const consulta = await axios({
         method: 'DELETE',
-        url: `/carrito/${productoId}`,
+        url: `/api/v1/carrito/${productoId}`,
         data: {
           cantidad,
           nombre
