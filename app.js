@@ -22,6 +22,7 @@ const hbs = expressHbs.create({
 });
 // view engine setup
 app.engine('handlebars', hbs.engine);
+
 app.set('view engine', 'handlebars');
 
 // Accede a los archivos estaticos

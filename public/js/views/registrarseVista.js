@@ -3,6 +3,20 @@ import { domElementos } from '../base';
 import { configurarSweetAlert } from '../utils/sweetAlertMensajes';
 import { crearCookie } from '../utils/cookie';
 
+const validarCamposLlenos = infoUsuario => {
+  if (
+    infoUsuario.nombre == '' ||
+    infoUsuario.email == '' ||
+    infoUsuario.contraseña == '' ||
+    infoUsuario.confirmarContraseña == ''
+  ) {
+    configurarSweetAlert('error', 'Error!', 'Todos los campos son necesarios');
+    return undefined;
+  } else {
+    return infoUsuario;
+  }
+};
+
 export const obtenerValoresUsuarioRegistrado = () => {
   const infoUsuarioRegistrado = {
     nombre: domElementos.registrarseUsuarioInfo.nombre.val().trim(),
@@ -12,22 +26,77 @@ export const obtenerValoresUsuarioRegistrado = () => {
       .val()
       .trim()
   };
+  return validarCamposLlenos(infoUsuarioRegistrado);
+};
+
+const crearMensajeError = (errores, mensaje) => {
+  if (mensaje.includes(errores[0])) {
+    configurarSweetAlert('error', 'Error', 'Ese correo electrónico ya existe');
+  }
   if (
-    infoUsuarioRegistrado.nombre == '' ||
-    infoUsuarioRegistrado.email == '' ||
-    infoUsuarioRegistrado.contraseña == '' ||
-    infoUsuarioRegistrado.confirmarContraseña == ''
+    mensaje.includes(errores[1].campo) &&
+    mensaje.includes(errores[1].mensaje)
   ) {
-    configurarSweetAlert('error', 'Error!', 'Todos los campos son necesarios');
-    return undefined;
-  } else {
-    return infoUsuarioRegistrado;
+    configurarSweetAlert(
+      'error',
+      'Error',
+      'El usuario debe de tener al menos 3 caracteres'
+    );
+  }
+  if (
+    mensaje.includes(errores[2].campo) &&
+    mensaje.includes(errores[2].mensaje)
+  ) {
+    configurarSweetAlert(
+      'error',
+      'Error',
+      'La contraseña debe de tener al menos 3 caracteres'
+    );
+  }
+  if (
+    mensaje.includes(errores[3].campo) &&
+    mensaje.includes(errores[3].mensaje)
+  ) {
+    configurarSweetAlert(
+      'error',
+      'Error',
+      'El usuario debe tener como máximo 10 caracteres'
+    );
+  }
+  if (
+    mensaje.includes(errores[4].campo) &&
+    mensaje.includes(errores[4].mensaje)
+  ) {
+    configurarSweetAlert(
+      'error',
+      'Error',
+      'La contraseña debe tener como máximo 20 caracteres'
+    );
+  }
+  if (mensaje.includes(errores[5])) {
+    configurarSweetAlert('error', 'Error', `${errores[5]}`);
+  }
+  if (mensaje.includes(errores[6])) {
+    configurarSweetAlert('error', 'Error', `${errores[6]}`);
   }
 };
 
-export const mostrarSweetAlert = respuesta => {
-  if (respuesta.data.status === 'Exito') {
-    crearCookie(respuesta);
+const mostrarMensajeError = mensaje => {
+  const posiblesErrores = [
+    'duplicate key error collection',
+    { campo: 'nombre', mensaje: 'is shorter than the minimum allowed' },
+    { campo: 'contraseña', mensaje: 'is shorter than the minimum allowed' },
+    { campo: 'nombre', mensaje: 'is longer than the maximum allowed' },
+    { campo: 'contraseña', mensaje: 'is longer than the maximum allowed' },
+    'Las contraseñas no son iguales',
+    'Ingresa un correo electrónico valido'
+  ];
+  crearMensajeError(posiblesErrores, mensaje);
+};
+
+export const mostrarMensajeRegistro = respuestaAPI => {
+  if (respuestaAPI.data.status === 'Exito') {
+    crearCookie(respuestaAPI);
     configurarSweetAlert(
       'success',
       'Felicidades!',
@@ -38,45 +107,6 @@ export const mostrarSweetAlert = respuesta => {
       }
     });
   } else {
-    if (respuesta.data.message.includes('duplicate key error collection')) {
-      configurarSweetAlert(
-        'error',
-        'Error!',
-        'Existe un usuario con este email'
-      );
-      return;
-    }
-    if (
-      respuesta.data.message.includes('is shorter than the minimum allowed')
-    ) {
-      configurarSweetAlert(
-        'error',
-        'Error!',
-        'El usuario debe de tener al menos 3 caracteres'
-      );
-      return;
-    }
-    if (respuesta.data.message.includes('is longer than the maximum allowed')) {
-      configurarSweetAlert(
-        'error',
-        'Error!',
-        'El usuario debe de tener maximo 10 caracteres'
-      );
-      return;
-    }
-    if (respuesta.data.message.includes('Las contraseñas no son iguales')) {
-      configurarSweetAlert('error', 'Error!', 'Las contraseñas no son iguales');
-      return;
-    }
-    if (
-      respuesta.data.message.includes('Ingresa un correo electrónico valido')
-    ) {
-      configurarSweetAlert(
-        'error',
-        'Error!',
-        'Ingresa un correo electrónico válido'
-      );
-      return;
-    }
+    mostrarMensajeError(respuestaAPI.data.message);
   }
 };

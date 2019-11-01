@@ -4,21 +4,16 @@ import { configurarSweetAlert } from '../utils/sweetAlertMensajes';
 
 // Obtiene la información del producto que se quiere agregar al carrito de compras
 export const obtenerInfoProducto = () => {
-  domElementos.producto.articulo = domElementos.producto.articulo
-    .split('$')[0]
-    .trim();
-  domElementos.producto.cantidad = parseInt($('.producto__cantidad').val());
-
-  domElementos.producto.precio = parseInt(
-    domElementos.producto.precio.split('$')[1]
-  );
-
-  domElementos.producto.stock = parseInt(domElementos.producto.stock);
-  domElementos.producto.imagen = domElementos.producto.imagen.split('/')[3];
-  if (!domElementos.producto.cantidad) {
+  const { producto } = domElementos;
+  producto.articulo = producto.articulo.split('$')[0].trim();
+  producto.cantidad = parseInt($('.producto__cantidad').val());
+  producto.precio = parseInt(producto.precio.split('$')[1]);
+  producto.stock = parseInt(producto.stock);
+  producto.imagen = producto.imagen.split('/')[3];
+  if (!producto.cantidad) {
     return false;
   } else {
-    return domElementos.producto;
+    return producto;
   }
 };
 

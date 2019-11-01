@@ -6098,7 +6098,7 @@ exports.configurarSweetAlert = configurarSweetAlert;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarSweetAlert = exports.obtenerValoresUsuarioRegistrado = void 0;
+exports.mostrarMensajeRegistro = exports.obtenerValoresUsuarioRegistrado = void 0;
 
 var _base = require("../base");
 
@@ -6107,6 +6107,15 @@ var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
 var _cookie = require("../utils/cookie");
 
 /* eslint-disable */
+var validarCamposLlenos = function validarCamposLlenos(infoUsuario) {
+  if (infoUsuario.nombre == '' || infoUsuario.email == '' || infoUsuario.contraseña == '' || infoUsuario.confirmarContraseña == '') {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Todos los campos son necesarios');
+    return undefined;
+  } else {
+    return infoUsuario;
+  }
+};
+
 var obtenerValoresUsuarioRegistrado = function obtenerValoresUsuarioRegistrado() {
   var infoUsuarioRegistrado = {
     nombre: _base.domElementos.registrarseUsuarioInfo.nombre.val().trim(),
@@ -6114,54 +6123,72 @@ var obtenerValoresUsuarioRegistrado = function obtenerValoresUsuarioRegistrado()
     contraseña: _base.domElementos.registrarseUsuarioInfo.contraseña.val().trim(),
     confirmarContraseña: _base.domElementos.registrarseUsuarioInfo.confirmarContraseña.val().trim()
   };
-
-  if (infoUsuarioRegistrado.nombre == '' || infoUsuarioRegistrado.email == '' || infoUsuarioRegistrado.contraseña == '' || infoUsuarioRegistrado.confirmarContraseña == '') {
-    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Todos los campos son necesarios');
-    return undefined;
-  } else {
-    return infoUsuarioRegistrado;
-  }
+  return validarCamposLlenos(infoUsuarioRegistrado);
 };
 
 exports.obtenerValoresUsuarioRegistrado = obtenerValoresUsuarioRegistrado;
 
-var mostrarSweetAlert = function mostrarSweetAlert(respuesta) {
-  if (respuesta.data.status === 'Exito') {
-    (0, _cookie.crearCookie)(respuesta);
+var crearMensajeError = function crearMensajeError(errores, mensaje) {
+  if (mensaje.includes(errores[0])) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'Ese correo electrónico ya existe');
+  }
+
+  if (mensaje.includes(errores[1].campo) && mensaje.includes(errores[1].mensaje)) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'El usuario debe de tener al menos 3 caracteres');
+  }
+
+  if (mensaje.includes(errores[2].campo) && mensaje.includes(errores[2].mensaje)) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'La contraseña debe de tener al menos 3 caracteres');
+  }
+
+  if (mensaje.includes(errores[3].campo) && mensaje.includes(errores[3].mensaje)) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'El usuario debe tener como máximo 10 caracteres');
+  }
+
+  if (mensaje.includes(errores[4].campo) && mensaje.includes(errores[4].mensaje)) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'La contraseña debe tener como máximo 20 caracteres');
+  }
+
+  if (mensaje.includes(errores[5])) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', "".concat(errores[5]));
+  }
+
+  if (mensaje.includes(errores[6])) {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', "".concat(errores[6]));
+  }
+};
+
+var mostrarMensajeError = function mostrarMensajeError(mensaje) {
+  var posiblesErrores = ['duplicate key error collection', {
+    campo: 'nombre',
+    mensaje: 'is shorter than the minimum allowed'
+  }, {
+    campo: 'contraseña',
+    mensaje: 'is shorter than the minimum allowed'
+  }, {
+    campo: 'nombre',
+    mensaje: 'is longer than the maximum allowed'
+  }, {
+    campo: 'contraseña',
+    mensaje: 'is longer than the maximum allowed'
+  }, 'Las contraseñas no son iguales', 'Ingresa un correo electrónico valido'];
+  crearMensajeError(posiblesErrores, mensaje);
+};
+
+var mostrarMensajeRegistro = function mostrarMensajeRegistro(respuestaAPI) {
+  if (respuestaAPI.data.status === 'Exito') {
+    (0, _cookie.crearCookie)(respuestaAPI);
     (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Felicidades!', 'Te has registrado con exito').then(function (respuesta) {
       if (respuesta.value) {
         location.assign('/');
       }
     });
   } else {
-    if (respuesta.data.message.includes('duplicate key error collection')) {
-      (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Existe un usuario con este email');
-      return;
-    }
-
-    if (respuesta.data.message.includes('is shorter than the minimum allowed')) {
-      (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'El usuario debe de tener al menos 3 caracteres');
-      return;
-    }
-
-    if (respuesta.data.message.includes('is longer than the maximum allowed')) {
-      (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'El usuario debe de tener maximo 10 caracteres');
-      return;
-    }
-
-    if (respuesta.data.message.includes('Las contraseñas no son iguales')) {
-      (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Las contraseñas no son iguales');
-      return;
-    }
-
-    if (respuesta.data.message.includes('Ingresa un correo electrónico valido')) {
-      (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Ingresa un correo electrónico válido');
-      return;
-    }
+    mostrarMensajeError(respuestaAPI.data.message);
   }
 };
 
-exports.mostrarSweetAlert = mostrarSweetAlert;
+exports.mostrarMensajeRegistro = mostrarMensajeRegistro;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js","../utils/cookie":"utils/cookie.js"}],"views/iniciarSesionVista.js":[function(require,module,exports) {
 "use strict";
 
@@ -6224,16 +6251,17 @@ var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
 /* eslint-disable */
 // Obtiene la información del producto que se quiere agregar al carrito de compras
 var obtenerInfoProducto = function obtenerInfoProducto() {
-  _base.domElementos.producto.articulo = _base.domElementos.producto.articulo.split('$')[0].trim();
-  _base.domElementos.producto.cantidad = parseInt($('.producto__cantidad').val());
-  _base.domElementos.producto.precio = parseInt(_base.domElementos.producto.precio.split('$')[1]);
-  _base.domElementos.producto.stock = parseInt(_base.domElementos.producto.stock);
-  _base.domElementos.producto.imagen = _base.domElementos.producto.imagen.split('/')[3];
+  var producto = _base.domElementos.producto;
+  producto.articulo = producto.articulo.split('$')[0].trim();
+  producto.cantidad = parseInt($('.producto__cantidad').val());
+  producto.precio = parseInt(producto.precio.split('$')[1]);
+  producto.stock = parseInt(producto.stock);
+  producto.imagen = producto.imagen.split('/')[3];
 
-  if (!_base.domElementos.producto.cantidad) {
+  if (!producto.cantidad) {
     return false;
   } else {
-    return _base.domElementos.producto;
+    return producto;
   }
 }; // Obtiene la información del producto que se quiere agregar al carrito de compras desde el icono del corazón
 
@@ -6412,7 +6440,7 @@ $(document).ready(function () {
             case 5:
               usuarioRegistrado = _context.sent;
               // Muestra el sweet alert según la respuesta de la petición
-              registrarseVista.mostrarSweetAlert(usuarioRegistrado);
+              registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
 
             case 7:
             case "end":
@@ -6491,17 +6519,14 @@ $(document).ready(function () {
 
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
-                _context3.next = 6;
+                _context3.next = 4;
                 break;
               }
 
-              carritoVista.mostrarMensajeSinStock(); // Reinicia los atributos del objeto infoProducto para que pueda volver a obtener solo la información necesaria
-
-              infoProducto.precio = "$".concat(infoProducto.precio);
-              infoProducto.imagen = "/images/productos/".concat(infoProducto.imagen);
+              carritoVista.mostrarMensajeSinStock();
               return _context3.abrupt("return");
 
-            case 6:
+            case 4:
               // Crear un objeto de la clase Carrito
               producto = new _carrito.default();
 
@@ -6513,7 +6538,7 @@ $(document).ready(function () {
                 carritoVista.mostrarMensaje(infoProducto);
               }
 
-            case 8:
+            case 6:
             case "end":
               return _context3.stop();
           }
@@ -6685,7 +6710,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58485" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

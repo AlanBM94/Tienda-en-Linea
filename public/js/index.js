@@ -23,7 +23,7 @@ $(document).ready(() => {
       // Se envía la petición al servidor para crear el usuario
       const usuarioRegistrado = await objetoUsuario.enviarPeticion();
       // Muestra el sweet alert según la respuesta de la petición
-      registrarseVista.mostrarSweetAlert(usuarioRegistrado);
+      registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
     }
   };
 
@@ -52,9 +52,6 @@ $(document).ready(() => {
     // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
     if (infoProducto.cantidad > infoProducto.stock) {
       carritoVista.mostrarMensajeSinStock();
-      // Reinicia los atributos del objeto infoProducto para que pueda volver a obtener solo la información necesaria
-      infoProducto.precio = `$${infoProducto.precio}`;
-      infoProducto.imagen = `/images/productos/${infoProducto.imagen}`;
       return;
     }
     // Crear un objeto de la clase Carrito
