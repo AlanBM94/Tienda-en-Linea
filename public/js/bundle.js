@@ -6128,7 +6128,7 @@ var obtenerValoresUsuarioRegistrado = function obtenerValoresUsuarioRegistrado()
 
 exports.obtenerValoresUsuarioRegistrado = obtenerValoresUsuarioRegistrado;
 
-var crearMensajeError = function crearMensajeError(errores, mensaje) {
+var mostrarMensajeError = function mostrarMensajeError(errores, mensaje) {
   if (mensaje.includes(errores[0])) {
     (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'Ese correo electrónico ya existe');
   }
@@ -6158,7 +6158,7 @@ var crearMensajeError = function crearMensajeError(errores, mensaje) {
   }
 };
 
-var mostrarMensajeError = function mostrarMensajeError(mensaje) {
+var crearMensajeError = function crearMensajeError(mensaje) {
   var posiblesErrores = ['duplicate key error collection', {
     campo: 'nombre',
     mensaje: 'is shorter than the minimum allowed'
@@ -6172,7 +6172,7 @@ var mostrarMensajeError = function mostrarMensajeError(mensaje) {
     campo: 'contraseña',
     mensaje: 'is longer than the maximum allowed'
   }, 'Las contraseñas no son iguales', 'Ingresa un correo electrónico valido'];
-  crearMensajeError(posiblesErrores, mensaje);
+  mostrarMensajeError(posiblesErrores, mensaje);
 };
 
 var mostrarMensajeRegistro = function mostrarMensajeRegistro(respuestaAPI) {
@@ -6184,7 +6184,7 @@ var mostrarMensajeRegistro = function mostrarMensajeRegistro(respuestaAPI) {
       }
     });
   } else {
-    mostrarMensajeError(respuestaAPI.data.message);
+    crearMensajeError(respuestaAPI.data.message);
   }
 };
 

@@ -29,7 +29,7 @@ export const obtenerValoresUsuarioRegistrado = () => {
   return validarCamposLlenos(infoUsuarioRegistrado);
 };
 
-const crearMensajeError = (errores, mensaje) => {
+const mostrarMensajeError = (errores, mensaje) => {
   if (mensaje.includes(errores[0])) {
     configurarSweetAlert('error', 'Error', 'Ese correo electrónico ya existe');
   }
@@ -81,7 +81,7 @@ const crearMensajeError = (errores, mensaje) => {
   }
 };
 
-const mostrarMensajeError = mensaje => {
+const crearMensajeError = mensaje => {
   const posiblesErrores = [
     'duplicate key error collection',
     { campo: 'nombre', mensaje: 'is shorter than the minimum allowed' },
@@ -91,7 +91,7 @@ const mostrarMensajeError = mensaje => {
     'Las contraseñas no son iguales',
     'Ingresa un correo electrónico valido'
   ];
-  crearMensajeError(posiblesErrores, mensaje);
+  mostrarMensajeError(posiblesErrores, mensaje);
 };
 
 export const mostrarMensajeRegistro = respuestaAPI => {
@@ -107,6 +107,6 @@ export const mostrarMensajeRegistro = respuestaAPI => {
       }
     });
   } else {
-    mostrarMensajeError(respuestaAPI.data.message);
+    crearMensajeError(respuestaAPI.data.message);
   }
 };
