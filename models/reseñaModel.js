@@ -13,7 +13,7 @@ const reseñaSchema = new mongoose.Schema(
     },
     reseñaFecha: {
       type: Date,
-      default: Date.now
+      default: Date.now()
     },
     producto: {
       type: mongoose.Schema.ObjectId,

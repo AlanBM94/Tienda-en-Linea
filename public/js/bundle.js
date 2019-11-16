@@ -140,6 +140,7 @@ var domElementos = {
     confirmarContraseña: $('#registrarseConfirmarContraseña')
   },
   producto: {
+    articuloId: $('.producto__titulo').attr('id'),
     articulo: $('.producto__titulo').text().trim(),
     categoria: $('.producto__categoria').text().trim(),
     descripcion: $('.producto__texto').text().trim(),
@@ -162,7 +163,11 @@ var domElementos = {
   btnAgregarCarrito: $('#agregarCarrito'),
   iconoAgregarCarrito: $('.iconoAgregarCarrito'),
   btnEliminarCarrito: $('.carrito__eliminar a'),
-  btnComprar: $('#btnComprar')
+  btnComprar: $('#btnComprar'),
+  btnPublicarReseña: $('#btnPublicarReseña'),
+  contenedoresInformacionPersonalUsuarios: $('.producto__reseniaUsuario'),
+  inputPuntajeReseña: $('#puntajeReseña'),
+  inputContenidoReseña: $('#contenidoReseña')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -2685,7 +2690,159 @@ module.exports.default = axios;
 
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"models/registrarse.js":[function(require,module,exports) {
+},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"models/peticiones.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Peticion =
+/*#__PURE__*/
+function () {
+  function Peticion() {
+    _classCallCheck(this, Peticion);
+  }
+
+  _createClass(Peticion, [{
+    key: "hacerPeticionPost",
+    value: function () {
+      var _hacerPeticionPost = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(url, data) {
+        var consulta;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return (0, _axios.default)({
+                  method: 'POST',
+                  url: url,
+                  data: data
+                });
+
+              case 3:
+                consulta = _context.sent;
+                return _context.abrupt("return", consulta);
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                alert('Algo salió mal');
+                console.log(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }));
+
+      function hacerPeticionPost(_x, _x2) {
+        return _hacerPeticionPost.apply(this, arguments);
+      }
+
+      return hacerPeticionPost;
+    }()
+  }, {
+    key: "hacerPeticionUsuario",
+    value: function () {
+      var _hacerPeticionUsuario = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(id) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return (0, _axios.default)({
+                  url: "/api/v1/usuarios/".concat(id),
+                  method: 'GET'
+                });
+
+              case 3:
+                respuesta = _context2.sent;
+                return _context2.abrupt("return", respuesta);
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                alert('Algo salió mal');
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }));
+
+      function hacerPeticionUsuario(_x3) {
+        return _hacerPeticionUsuario.apply(this, arguments);
+      }
+
+      return hacerPeticionUsuario;
+    }()
+  }, {
+    key: "obtenerUsuarios",
+    value: function () {
+      var _obtenerUsuarios = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(idsUsuarios) {
+        var _this = this;
+
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                return _context3.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
+                  return _this.hacerPeticionUsuario(id);
+                })));
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function obtenerUsuarios(_x4) {
+        return _obtenerUsuarios.apply(this, arguments);
+      }
+
+      return obtenerUsuarios;
+    }()
+  }]);
+
+  return Peticion;
+}();
+
+exports.default = Peticion;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"models/registrarse.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3055,21 +3212,20 @@ function () {
                 });
 
               case 7:
-                console.log(consulta);
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 13:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 10]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       function hacerPeticionStripe() {
@@ -3084,7 +3240,123 @@ function () {
 }();
 
 exports.default = Compra;
-},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"models/reseña.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _peticiones = _interopRequireDefault(require("../models/peticiones"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Reseña =
+/*#__PURE__*/
+function (_Peticion) {
+  _inherits(Reseña, _Peticion);
+
+  function Reseña(infoReseña) {
+    var _this;
+
+    _classCallCheck(this, Reseña);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Reseña).call(this));
+    _this.idProducto = infoReseña.id;
+    _this.puntuacion = infoReseña.puntuacion;
+    _this.reseña = infoReseña.reseña;
+    return _this;
+  }
+
+  _createClass(Reseña, [{
+    key: "validarCreacionRese\xF1a",
+    value: function validarCreacionReseA(respuesta) {
+      if (respuesta.data.status !== 'Exito') {
+        if (respuesta.data.message.includes('duplicate key error')) {
+          return 'No puedes escribir más de una reseña';
+        }
+
+        if (respuesta.data.message.includes('Debes de comprar el producto antes de hacer la reseña')) {
+          return 'Debes de comprar el producto antes de hacer la reseña';
+        }
+      } else {
+        return true;
+      }
+    }
+  }, {
+    key: "crear",
+    value: function () {
+      var _crear = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var respuesta, mensaje;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _get(_getPrototypeOf(Reseña.prototype), "hacerPeticionPost", this).call(this, "/api/v1/productos/".concat(this.idProducto, "/resenias"), {
+                  reseña: this.reseña,
+                  puntuacion: this.puntuacion
+                });
+
+              case 2:
+                respuesta = _context.sent;
+                mensaje = this.validarCreacionReseña(respuesta);
+                return _context.abrupt("return", mensaje);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function crear() {
+        return _crear.apply(this, arguments);
+      }
+
+      return crear;
+    }()
+  }]);
+
+  return Reseña;
+}(_peticiones.default);
+
+exports.default = Reseña;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js","../models/peticiones":"models/peticiones.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
@@ -6375,12 +6647,130 @@ var obtenerId = function obtenerId(e) {
 };
 
 exports.obtenerId = obtenerId;
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/reseñasVista.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mostrarMensajeReseñaCreada = exports.mostrarErrorReseña = exports.mostrarMensajeCrearReseñaYPuntaje = exports.obtenerValoresReseña = exports.conseguirProductoId = exports.mostrarInfoUsuario = exports.mostrarReseñas = exports.retornarIdsUsuarios = void 0;
+
+var _base = require("../base");
+
+var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
+
+/* eslint-disable */
+var crearElementosHTML = function crearElementosHTML() {
+  var itemLista = document.createElement('li');
+  var icono = document.createElement('i');
+  return [itemLista, icono];
+};
+
+var agregarEstilosIcono = function agregarEstilosIcono(icono) {
+  icono.className = 'fas fa-star';
+  icono.style.color = '#ff0000';
+};
+
+var crearEstrella = function crearEstrella(item, icono, contenedor) {
+  var estrella = item.appendChild(icono);
+  contenedor.appendChild(estrella);
+};
+
+var crearEstrellas = function crearEstrellas(puntuacion, puntuacionContenedor) {
+  for (var j = 0; j < parseInt(puntuacion); j++) {
+    var elementosHTML = crearElementosHTML();
+    agregarEstilosIcono(elementosHTML[1]);
+    crearEstrella(elementosHTML[0], elementosHTML[1], puntuacionContenedor);
+  }
+};
+
+var crearIdsUsuarios = function crearIdsUsuarios() {
+  var contenedores = _base.domElementos.contenedoresInformacionPersonalUsuarios;
+  var idsUsuarios = []; // Llena el arreglo de idsUsuarios partiendo de los contenedores
+
+  contenedores.contents().map(function (indice, nodo) {
+    if (nodo.id !== undefined && nodo.id !== '') {
+      idsUsuarios.push(nodo.id);
+    }
+  });
+  return idsUsuarios;
+};
+
+var retornarIdsUsuarios = function retornarIdsUsuarios() {
+  var ids = crearIdsUsuarios();
+  return ids;
+};
+
+exports.retornarIdsUsuarios = retornarIdsUsuarios;
+
+var mostrarReseñas = function mostrarReseñas() {
+  var puntuacionesContenedores = $('.estrellasPuntuacion'); //Crea las estrellas de cada usuario
+
+  for (var i = 0; i < puntuacionesContenedores.length; i++) {
+    var puntuacion = puntuacionesContenedores[i].getAttribute('data-id');
+    crearEstrellas(puntuacion, puntuacionesContenedores[i]);
+  }
+};
+
+exports.mostrarReseñas = mostrarReseñas;
+
+var mostrarInfoUsuario = function mostrarInfoUsuario(usuarios) {
+  var contenedores = _base.domElementos.contenedoresInformacionPersonalUsuarios; // Por cada usuario agrega a su contenedor la foto y el nombre
+
+  usuarios.map(function (usuario, indice) {
+    contenedores[indice].children[0].src = "/images/".concat(usuario.data.data.usuario.foto);
+    contenedores[indice].children[1].innerText = usuario.data.data.usuario.nombre;
+  });
+};
+
+exports.mostrarInfoUsuario = mostrarInfoUsuario;
+
+var conseguirProductoId = function conseguirProductoId() {
+  var productoId = _base.domElementos.producto.articuloId;
+  return productoId;
+};
+
+exports.conseguirProductoId = conseguirProductoId;
+
+var obtenerValoresReseña = function obtenerValoresReseña() {
+  var reseña = {
+    puntuacion: _base.domElementos.inputPuntajeReseña.val(),
+    contenido: _base.domElementos.inputContenidoReseña.val().trim()
+  };
+  return reseña;
+};
+
+exports.obtenerValoresReseña = obtenerValoresReseña;
+
+var mostrarMensajeCrearReseñaYPuntaje = function mostrarMensajeCrearReseñaYPuntaje() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'Debes de ingresar un puntaje y una reseña');
+};
+
+exports.mostrarMensajeCrearReseñaYPuntaje = mostrarMensajeCrearReseñaYPuntaje;
+
+var mostrarErrorReseña = function mostrarErrorReseña(mensaje) {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', mensaje);
+};
+
+exports.mostrarErrorReseña = mostrarErrorReseña;
+
+var mostrarMensajeReseñaCreada = function mostrarMensajeReseñaCreada(idProducto) {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito', 'Tu reseña ha sido creada').then(function (respuesta) {
+    if (respuesta.value) {
+      location.assign("/productos/".concat(idProducto));
+    }
+  });
+};
+
+exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _base = require("./base");
 
 var _cookie = require("./utils/cookie");
+
+var _peticiones = _interopRequireDefault(require("./models/peticiones"));
 
 var _registrarse = _interopRequireDefault(require("./models/registrarse"));
 
@@ -6390,6 +6780,8 @@ var _carrito = _interopRequireDefault(require("./models/carrito"));
 
 var _compra = _interopRequireDefault(require("./models/compra"));
 
+var _reseA = _interopRequireDefault(require("./models/rese\xF1a"));
+
 var registrarseVista = _interopRequireWildcard(require("./views/registrarseVista"));
 
 var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionVista"));
@@ -6397,6 +6789,8 @@ var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionV
 var carritoVista = _interopRequireWildcard(require("./views/carritoVista"));
 
 var compraVista = _interopRequireWildcard(require("./views/compraVista"));
+
+var reseñaVista = _interopRequireWildcard(require("./views/rese\xF1asVista"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6412,35 +6806,27 @@ $(document).ready(function () {
   // Configura los puntos en los que se tienen que hacer animaciones
   (0, _base.configWaypoints)();
 
-  var controladorRegistrarse =
+  var controladorMostrarReseñas =
   /*#__PURE__*/
   function () {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee() {
-      var infoUsuario, objetoUsuario, usuarioRegistrado;
+      var ids, peticion, usuarios;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // Se crea la infoUsuario con los valores ingresados
-              infoUsuario = registrarseVista.obtenerValoresUsuarioRegistrado();
-
-              if (!(infoUsuario !== undefined)) {
-                _context.next = 7;
-                break;
-              }
-
-              // Se crea un objeto de la clase Registrarse con la información del usuario
-              objetoUsuario = new _registrarse.default(infoUsuario); // Se envía la petición al servidor para crear el usuario
-
+              reseñaVista.mostrarReseñas();
+              ids = reseñaVista.retornarIdsUsuarios();
+              peticion = new _peticiones.default();
               _context.next = 5;
-              return objetoUsuario.enviarPeticion();
+              return peticion.obtenerUsuarios(ids);
 
             case 5:
-              usuarioRegistrado = _context.sent;
-              // Muestra el sweet alert según la respuesta de la petición
-              registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
+              usuarios = _context.sent;
+              // Mostrar la información de los usuarios en las reseñas
+              reseñaVista.mostrarInfoUsuario(usuarios);
 
             case 7:
             case "end":
@@ -6450,42 +6836,42 @@ $(document).ready(function () {
       }, _callee);
     }));
 
-    return function controladorRegistrarse() {
+    return function controladorMostrarReseñas() {
       return _ref.apply(this, arguments);
     };
   }();
 
-  var controladorIniciarSesion =
+  var controladorRegistrarse =
   /*#__PURE__*/
   function () {
     var _ref2 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee2() {
-      var infoUsuario, objetoUsuario, usuarioLogeado;
+      var infoUsuario, objetoUsuario, usuarioRegistrado;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
-              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
+              // Se crea la infoUsuario con los valores ingresados
+              infoUsuario = registrarseVista.obtenerValoresUsuarioRegistrado();
 
               if (!(infoUsuario !== undefined)) {
-                _context2.next = 8;
+                _context2.next = 7;
                 break;
               }
 
-              // Se crea un objeto de la clase IniciarSesion con la información del usuario
-              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
+              // Se crea un objeto de la clase Registrarse con la información del usuario
+              objetoUsuario = new _registrarse.default(infoUsuario); // Se envía la petición al servidor para crear el usuario
 
-              objetoUsuario.enviarPeticion();
-              _context2.next = 6;
+              _context2.next = 5;
               return objetoUsuario.enviarPeticion();
 
-            case 6:
-              usuarioLogeado = _context2.sent;
-              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
+            case 5:
+              usuarioRegistrado = _context2.sent;
+              // Muestra el sweet alert según la respuesta de la petición
+              registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
 
-            case 8:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -6493,8 +6879,51 @@ $(document).ready(function () {
       }, _callee2);
     }));
 
-    return function controladorIniciarSesion() {
+    return function controladorRegistrarse() {
       return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var controladorIniciarSesion =
+  /*#__PURE__*/
+  function () {
+    var _ref3 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3() {
+      var infoUsuario, objetoUsuario, usuarioLogeado;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
+              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
+
+              if (!(infoUsuario !== undefined)) {
+                _context3.next = 8;
+                break;
+              }
+
+              // Se crea un objeto de la clase IniciarSesion con la información del usuario
+              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
+
+              objetoUsuario.enviarPeticion();
+              _context3.next = 6;
+              return objetoUsuario.enviarPeticion();
+
+            case 6:
+              usuarioLogeado = _context3.sent;
+              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
+
+            case 8:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function controladorIniciarSesion() {
+      return _ref3.apply(this, arguments);
     };
   }(); //Controlador que agrega un producto al carrito
 
@@ -6502,13 +6931,13 @@ $(document).ready(function () {
   var controladorCarrito =
   /*#__PURE__*/
   function () {
-    var _ref3 = _asyncToGenerator(
+    var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3(boton, e) {
+    regeneratorRuntime.mark(function _callee4(boton, e) {
       var infoProducto, producto;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               if (boton === 'btn') {
                 // Obtener los datos del producto que quiero agregar al carrito
@@ -6519,12 +6948,12 @@ $(document).ready(function () {
 
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
-                _context3.next = 4;
+                _context4.next = 4;
                 break;
               }
 
               carritoVista.mostrarMensajeSinStock();
-              return _context3.abrupt("return");
+              return _context4.abrupt("return");
 
             case 4:
               // Crear un objeto de la clase Carrito
@@ -6540,14 +6969,14 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
 
     return function controladorCarrito(_x, _x2) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }(); // Controlador que elimina un producto del carrito
 
@@ -6555,24 +6984,24 @@ $(document).ready(function () {
   var controladorEliminarProductoCarrito =
   /*#__PURE__*/
   function () {
-    var _ref4 = _asyncToGenerator(
+    var _ref5 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4(e) {
+    regeneratorRuntime.mark(function _callee5(e) {
       var productoEliminar, producto, permisoBorrarProducto;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               // Se obtiene el id del producto que se quiere eliminar
               productoEliminar = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
 
               producto = new _carrito.default(); // Se elimina el producto creado con el id del producto y se envía la cantidad para que se actualice el stock
 
-              _context4.next = 4;
+              _context5.next = 4;
               return producto.eliminarProducto(productoEliminar.id, productoEliminar.cantidad, productoEliminar.nombre);
 
             case 4:
-              permisoBorrarProducto = _context4.sent;
+              permisoBorrarProducto = _context5.sent;
 
               if (permisoBorrarProducto) {
                 carritoVista.eliminarProductoDOM(e);
@@ -6582,17 +7011,18 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4);
+      }, _callee5);
     }));
 
     return function controladorEliminarProductoCarrito(_x3) {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
-  }(); // Evento que se dispara cuando se envía el formulario de Registro
+  }();
 
+  controladorMostrarReseñas(); // Evento que se dispara cuando se envía el formulario de Registro
 
   _base.domElementos.formularioRegistrarse.submit(function (event) {
     event.preventDefault();
@@ -6642,26 +7072,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref5 = _asyncToGenerator(
+    var _ref6 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee5(e) {
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    regeneratorRuntime.mark(function _callee6(e) {
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee5);
+      }, _callee6);
     }));
 
     return function (_x4) {
-      return _ref5.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -6674,7 +7104,64 @@ $(document).ready(function () {
 
     nuevaCompra.hacerPeticionStripe();
   }); // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
-  // Evento que se dispara cuando se cierra sesión
+
+
+  _base.domElementos.btnPublicarReseña.on('click',
+  /*#__PURE__*/
+  function () {
+    var _ref7 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee7(e) {
+      var productoId, valoresReseña, infoReseña, reseña, mensaje;
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              e.preventDefault();
+              productoId = reseñaVista.conseguirProductoId();
+              valoresReseña = reseñaVista.obtenerValoresReseña();
+
+              if (!(valoresReseña.puntuacion === '' || valoresReseña.contenido === '')) {
+                _context7.next = 7;
+                break;
+              }
+
+              reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
+              _context7.next = 14;
+              break;
+
+            case 7:
+              infoReseña = {
+                id: productoId,
+                puntuacion: valoresReseña.puntuacion,
+                reseña: valoresReseña.contenido
+              };
+              reseña = new _reseA.default(infoReseña);
+              _context7.next = 11;
+              return reseña.crear();
+
+            case 11:
+              mensaje = _context7.sent;
+              console.log(mensaje);
+
+              if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
+                reseñaVista.mostrarErrorReseña(mensaje);
+              } else {
+                reseñaVista.mostrarMensajeReseñaCreada(productoId);
+              }
+
+            case 14:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function (_x5) {
+      return _ref7.apply(this, arguments);
+    };
+  }()); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click', function () {
@@ -6682,7 +7169,7 @@ $(document).ready(function () {
     location.assign('/');
   });
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -6710,7 +7197,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58485" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58515" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

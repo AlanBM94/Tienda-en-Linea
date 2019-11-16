@@ -79,7 +79,12 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   }
   const nuevaCompra = await Compra.create({ carrito, usuario, precio });
   if (nuevaCompra) {
+    const carritoProductos = await Carrito.findById(carrito);
     // Eliminar los productos del carrito
+    await Carrito.findOneAndUpdate(
+      { usuario },
+      { productosHistorial: carritoProductos.productos }
+    );
     await Carrito.findOneAndUpdate(
       { usuario },
       { $pull: { productos: {} } },

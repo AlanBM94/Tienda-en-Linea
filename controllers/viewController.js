@@ -38,9 +38,17 @@ exports.obtenerCategoria = catchAsync(async (req, res, next) => {
 });
 
 exports.obtenerProducto = catchAsync(async (req, res, next) => {
-  const producto = await Producto.findById(req.params.id);
+  const producto = await Producto.findById(req.params.id).populate('reseñas');
+  const { reseñas, imagenes } = producto;
+  let stock = false;
+  if (producto.stock > 0) {
+    stock = producto;
+  }
   res.status(200).render('tienda/producto', {
-    producto
+    producto,
+    imagenes,
+    reseñas,
+    stock
   });
 });
 

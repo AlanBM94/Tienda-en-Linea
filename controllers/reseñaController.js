@@ -1,12 +1,55 @@
+const { ObjectId } = require('mongoose').Types;
 const Reseña = require('../models/reseñaModel');
+const Compra = require('../models/compraModel');
+const Carrito = require('../models/carritoModel');
+const Producto = require('../models/productoModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+
+const crearPermisoReseña = (carritos, articuloReseña) => {
+  let resultado;
+  carritos.map(carrito => {
+    carrito.productosHistorial.map(productoCarrito => {
+      if (productoCarrito.articulo === articuloReseña.nombre) {
+        resultado = true;
+      } else {
+        resultado = false;
+      }
+    });
+  });
+  return resultado;
+};
 
 exports.establecerIdUsuario = (req, res, next) => {
   if (!req.body.producto) req.body.producto = req.params.id;
   if (!req.body.usuario) req.body.usuario = req.usuario.id;
   next();
 };
+
+exports.permitirHacerReseñaUsuario = catchAsync(async (req, res, next) => {
+  const comprasUsuario = await Compra.find({
+    usuario: req.usuario.id
+  });
+
+  const { producto } = req.body;
+
+  const articuloReseña = await Producto.findById(producto);
+
+  const carritos = await Promise.all(
+    comprasUsuario.map(compra => {
+      return Carrito.findById(compra.carrito);
+    })
+  );
+
+  const permiso = crearPermisoReseña(carritos, articuloReseña);
+
+  if (!permiso) {
+    return next(
+      new AppError('Debes de comprar el producto antes de hacer la reseña')
+    );
+  }
+  next();
+});
 
 exports.crearReseña = catchAsync(async (req, res, next) => {
   const reseña = await Reseña.create(req.body);

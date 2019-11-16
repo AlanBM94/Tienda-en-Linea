@@ -16,7 +16,6 @@ export default class Compra {
       await stripe.redirectToCheckout({
         sessionId: consulta.data.session.id
       });
-      console.log(consulta);
     } catch (error) {
       console.log(error);
     }

@@ -1,18 +1,30 @@
 /* eslint-disable */
 import { configWaypoints, domElementos } from './base';
 import { eliminarCookie } from './utils/cookie';
+import Peticion from './models/peticiones';
 import Registrarse from './models/registrarse';
 import IniciarSesion from './models/iniciarSesion';
 import Carrito from './models/carrito';
 import Compra from './models/compra';
+import Reseña from './models/reseña';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
 import * as carritoVista from './views/carritoVista';
 import * as compraVista from './views/compraVista';
+import * as reseñaVista from './views/reseñasVista';
 
 $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
   configWaypoints();
+
+  const controladorMostrarReseñas = async () => {
+    reseñaVista.mostrarReseñas();
+    const ids = reseñaVista.retornarIdsUsuarios();
+    const peticion = new Peticion();
+    const usuarios = await peticion.obtenerUsuarios(ids);
+    // Mostrar la información de los usuarios en las reseñas
+    reseñaVista.mostrarInfoUsuario(usuarios);
+  };
 
   const controladorRegistrarse = async () => {
     // Se crea la infoUsuario con los valores ingresados
@@ -84,6 +96,8 @@ $(document).ready(() => {
     }
   };
 
+  controladorMostrarReseñas();
+
   // Evento que se dispara cuando se envía el formulario de Registro
   domElementos.formularioRegistrarse.submit(event => {
     event.preventDefault();
@@ -144,6 +158,31 @@ $(document).ready(() => {
   });
 
   // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
+  domElementos.btnPublicarReseña.on('click', async e => {
+    e.preventDefault();
+    const productoId = reseñaVista.conseguirProductoId();
+    const valoresReseña = reseñaVista.obtenerValoresReseña();
+    if (valoresReseña.puntuacion === '' || valoresReseña.contenido === '') {
+      reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
+    } else {
+      const infoReseña = {
+        id: productoId,
+        puntuacion: valoresReseña.puntuacion,
+        reseña: valoresReseña.contenido
+      };
+      const reseña = new Reseña(infoReseña);
+      const mensaje = await reseña.crear();
+      console.log(mensaje);
+      if (
+        mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
+        mensaje === 'No puedes escribir más de una reseña'
+      ) {
+        reseñaVista.mostrarErrorReseña(mensaje);
+      } else {
+        reseñaVista.mostrarMensajeReseñaCreada(productoId);
+      }
+    }
+  });
 
   // Evento que se dispara cuando se cierra sesión
   domElementos.btnCerrarSesion.on('click', () => {

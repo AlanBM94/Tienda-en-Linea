@@ -42,7 +42,11 @@ router.use(authController.proteger, authController.permitirPara('usuario'));
 router
   .route('/:id/resenias')
   .get(reseñaController.obtenerReseñas)
-  .post(reseñaController.establecerIdUsuario, reseñaController.crearReseña);
+  .post(
+    reseñaController.establecerIdUsuario,
+    reseñaController.permitirHacerReseñaUsuario,
+    reseñaController.crearReseña
+  );
 
 router
   .route('/:id/resenias/:id')

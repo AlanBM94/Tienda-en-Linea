@@ -26,6 +26,7 @@ compraSchema.pre(/^find/, function(next) {
     path: 'Carrito',
     select: 'productos'
   });
+  next();
 });
 
 const Compra = mongoose.model('Compra', compraSchema);

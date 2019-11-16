@@ -13,20 +13,6 @@ exports.miPerfil = (req, res, next) => {
   next();
 };
 
-exports.obtenerUsuario = catchAsync(async (req, res, next) => {
-  const query = Usuario.findById(req.params.id);
-  const usuario = await query;
-  if (!usuario) {
-    return next(new AppError('Ningún usuario fue encontrado con ese Id', 404));
-  }
-  res.status(200).json({
-    status: 'Exito',
-    data: {
-      usuario
-    }
-  });
-});
-
 const filtrarObjeto = (objeto, ...permitidos) => {
   const nuevoObjeto = {};
   Object.keys(objeto).forEach(el => {
@@ -66,17 +52,7 @@ exports.eliminarMiPerfil = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.obtenerUsuarios = catchAsync(async (req, res, next) => {
-  const usuarios = await Usuario.find({ rol: 'usuario' });
-  res.status(200).json({
-    status: 'Exito',
-    data: {
-      usuarios
-    }
-  });
-});
-
-exports.obtenerUsuarioDesdeAdmin = catchAsync(async (req, res, next) => {
+exports.obtenerUsuario = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const usuario = await Usuario.findById(id);
   if (!usuario) {
@@ -86,6 +62,16 @@ exports.obtenerUsuarioDesdeAdmin = catchAsync(async (req, res, next) => {
     status: 'Exito',
     data: {
       usuario
+    }
+  });
+});
+
+exports.obtenerUsuarios = catchAsync(async (req, res, next) => {
+  const usuarios = await Usuario.find({ rol: 'usuario' });
+  res.status(200).json({
+    status: 'Exito',
+    data: {
+      usuarios
     }
   });
 });

@@ -13,6 +13,7 @@ export const domElementos = {
     confirmarContraseña: $('#registrarseConfirmarContraseña')
   },
   producto: {
+    articuloId: $('.producto__titulo').attr('id'),
     articulo: $('.producto__titulo')
       .text()
       .trim(),
@@ -51,7 +52,11 @@ export const domElementos = {
   btnAgregarCarrito: $('#agregarCarrito'),
   iconoAgregarCarrito: $('.iconoAgregarCarrito'),
   btnEliminarCarrito: $('.carrito__eliminar a'),
-  btnComprar: $('#btnComprar')
+  btnComprar: $('#btnComprar'),
+  btnPublicarReseña: $('#btnPublicarReseña'),
+  contenedoresInformacionPersonalUsuarios: $('.producto__reseniaUsuario'),
+  inputPuntajeReseña: $('#puntajeReseña'),
+  inputContenidoReseña: $('#contenidoReseña')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

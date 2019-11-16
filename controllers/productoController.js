@@ -4,7 +4,6 @@ const AppError = require('../utils/appError');
 const APICaracteristicas = require('../utils/caracteristicasBusqueda');
 
 exports.obtenerProducto = catchAsync(async (req, res, next) => {
-  // .populate('reseñas') permite el virtual populate
   const producto = await Producto.findById(req.params.id).populate('reseñas');
   if (!producto) {
     return next(new AppError('No se encontró producto con ese id', 404));
