@@ -9,3 +9,19 @@
   color: $blanco;
   font-size: 1.4rem;
 }
+
+.icono-editar {
+  font-size: 2rem;
+  color: #ffc700;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.icono-eliminar {
+  font-size: 2rem;
+  color: $color-primario;
+  &:hover {
+    cursor: pointer;
+  }
+}

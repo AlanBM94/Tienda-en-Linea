@@ -1,0 +1,12 @@
+.misComprasHeader {
+  //   background: red;
+  width: 100%;
+  padding: 2.5rem 0;
+  @include gridMisCompras;
+}
+
+.misComprasContenido {
+  @include gridMisCompras;
+  height: 5.5rem;
+  margin: 1.3rem 0;
+}

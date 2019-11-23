@@ -21,8 +21,10 @@
     <div class="perfil">
       <div class="perfil__personal">
         <div class="perfil__personalInfo">
-          <img src="images/Alan.jpg" alt="" />
-          <h4>Alan Beltrán Mendoza</h4>
+          <div>
+            <img src="images/Alan.jpg" alt="" />
+          </div>
+          <h4>AlanBM1994</h4>
           <span>Premium</span>
         </div>
         <div class="perfil__personalOpciones">
@@ -34,7 +36,7 @@
               <a href="#"> <i class="fas fa-shopping-cart"></i>Mis compras</a>
             </li>
             <li>
-              <a href="#"><i class="fas fa-cog"></i>Mi dirección</a>
+              <a href="#"><i class="fas fa-pen-alt"></i></i></i>Mis reseñas</a>
             </li>
             <li>
               <a href="#"><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a>
@@ -42,7 +44,61 @@
           </ul>
         </div>
       </div>
-      <div class="perfil__contenido"></div>
+      <div class="perfil__contenido">
+        <div class="perfil__contenidoPrincipal">
+          <h4>Ajustes de tu perfil</h4>
+          <form action="#" class="formularioPerfil">
+            <div
+              class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre"
+            >
+              <label for="nombre">Nombre</label>
+              <input type="text" name="nombre" id="nombre" />
+            </div>
+            <div
+              class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo"
+            >
+              <label for="correo">Correo electrónico</label>
+              <input type="text" name="correo" id="correo" />
+            </div>
+            <div
+              class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--foto"
+            >
+              <img src="images/Alan.jpg" alt="" />
+              <label for="foto" class="btn btn--secundario btn--secundarioContraseña">Cambia tu foto</label>
+              <input
+                type="file"
+                name="foto"
+                id="foto"
+                value="Cambiar foto"
+                placeholder="Cambiar foto"
+              />
+            </div>
+            <div class="formularioPerfil__contenedorBotonEnviar">
+              <button type="submit" class="btn btn--rojo">Guardar</button>
+            </ >
+          </form>
+        </div>
+        <div class="perfil__contenidoContraseña">
+          <h4>Cambiar contraseña</h4>
+          <form action="#" class="formularioPerfil formularioPerfil--2">
+              <div
+                class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre"
+              >
+                <label for="nombre">Contraseña</label>
+                <input type="password" name="nombre" id="nombre" />
+              </div>
+              <div
+                class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo"
+              >
+                <label for="correo">Confirmar contraseña</label>
+                <input type="password" name="correo" id="correo" />
+              </div>
+              <div class="formularioPerfil__contenedorBotonEnviar formularioPerfil__contenedorBotonEnviar--contraseña">
+                <button type="submit" class="btn btn--rojo btnContraseña">Guardar</button>
+              </ >
+            </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

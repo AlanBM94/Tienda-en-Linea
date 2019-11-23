@@ -1,0 +1,19 @@
+.misReseñasHeader {
+  width: 100%;
+  padding: 2.5rem 0;
+  @include gridMisReseñas;
+}
+
+.misReseñas {
+  &__acciones {
+    padding: 0 5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.misReseñasContenido {
+  @include gridMisReseñas;
+  height: 5.5rem;
+  margin: 1.3rem 0;
+}

@@ -56,3 +56,17 @@
   grid-template-columns: 50% repeat(4, 1fr);
   border-bottom: 1px solid $negro;
 }
+
+@mixin gridMisCompras {
+  display: grid;
+  grid-template-columns: 20% 35% 20% 25%;
+  padding: 1rem 0;
+  border-bottom: 1px solid $negro;
+}
+
+@mixin gridMisReseñas {
+  display: grid;
+  grid-template-columns: 20% 25% 30% 25%;
+  padding: 1rem 0;
+  border-bottom: 1px solid $negro;
+}

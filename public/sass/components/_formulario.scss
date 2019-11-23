@@ -3,6 +3,7 @@
   background: $gris-claro;
   height: 100vh;
   width: 100%;
+
   &--popup {
     width: 70%;
   }
@@ -69,17 +70,66 @@
     color: $color-primario-hover;
     text-decoration: none;
   }
-  // &__reseñaError {
-  //   position: absolute;
-  //   top: 0;
-  //   width: 100%;
-  //   background-color: $color-primario;
-  //   text-align: center;
-  //   padding: 5px;
-  //   display: none;
-  //   & p {
-  //     font-size: $tamanio-default-letra;
-  //     color: $blanco;
-  //   }
-  // }
+}
+
+.formularioPerfil {
+  width: 100%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: repeat(4, 10rem);
+  margin-bottom: 10rem;
+  &--2 {
+    margin-bottom: 0;
+  }
+  &__contenedorInput {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 0;
+    & label {
+      font-size: $tamanio-default-letra;
+      color: $negro;
+      font-weight: 700;
+    }
+    &--nombre {
+      grid-row: 1 / 2;
+    }
+    &--correo {
+      grid-row: 2 / 3;
+    }
+    &--foto {
+      grid-row: 3 / 4;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      & img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 12rem;
+        margin-right: 2rem;
+      }
+      & input {
+        display: none;
+      }
+    }
+  }
+  &__contenedorBotonEnviar {
+    width: 100%;
+    height: 100%;
+    padding: 1.6rem 1.3rem;
+    grid-row: 4 / 5;
+    grid-column: 2 / 3;
+
+    &--contraseña {
+      grid-row: 3 / 4;
+    }
+
+    & button {
+      width: 12rem;
+      height: 5rem;
+    }
+  }
 }

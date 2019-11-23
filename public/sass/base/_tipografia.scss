@@ -2,3 +2,15 @@
   font-size: 3rem;
   text-align: center;
 }
+
+.headerTablaPerfil {
+  font-size: $tamanio-default-letra;
+  color: $negro;
+}
+
+.textoTablaPerfil {
+  // margin: 3px 0;
+  font-size: 1.2rem;
+  color: $negro;
+  font-weight: 400;
+}
