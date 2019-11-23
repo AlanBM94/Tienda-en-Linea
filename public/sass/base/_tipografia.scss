@@ -9,8 +9,20 @@
 }
 
 .textoTablaPerfil {
-  // margin: 3px 0;
   font-size: 1.2rem;
   color: $negro;
   font-weight: 400;
+}
+
+.testimonialTexto {
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.testimonialUsuario {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.8;
 }

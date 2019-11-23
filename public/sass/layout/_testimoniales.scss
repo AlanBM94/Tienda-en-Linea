@@ -17,73 +17,27 @@
   &__contenedor {
     width: 30rem;
     height: 25rem;
-    filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.46));
+
+    display: flex;
+    flex-direction: column;
   }
-  &__contenido {
-    height: 100%;
+  &__contenedorUsuario {
+    background: $negro;
     width: 100%;
-    background: $gris-claro;
-    position: relative;
-    clip-path: polygon(
-      0% 0%,
-      100% 0%,
-      100% 75%,
-      46% 75%,
-      25% 99%,
-      25% 75%,
-      0% 75%
-    );
-    &::before {
-      display: block;
-      position: absolute;
-      top: -5%;
-      left: 0%;
-      color: $color-primario;
-      opacity: 0.4;
-      content: '\201C';
-      font-weight: 600;
-      font-size: 15rem;
-    }
-    position: relative;
-    padding: 2rem;
-    p {
-      position: absolute;
-      text-align: center;
-      top: 7.1rem;
-      font-weight: 600;
-      width: 26rem;
-      font-size: $tamanio-default-letra;
+    height: 50%;
+    @include flexCenter;
+    justify-content: center;
+    & img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 12rem;
     }
   }
-  &__autor {
-    background: red;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 2.5rem;
-    position: absolute;
-    left: 13%;
-    &--1 {
-      background: url(#{$imgpath}/Alan.jpg);
-      background-size: cover;
-    }
-    &--2 {
-      background: url(#{$imgpath}/Sus.jpg);
-      background-size: cover;
-    }
-    &--3 {
-      background: url(#{$imgpath}/Pablin.jpg);
-      background-size: cover;
-    }
-    & span {
-      position: absolute;
-      font-size: $tamanio-default-letra;
-      color: $color-primario;
-      width: 4rem;
-      top: 31%;
-      width: 24rem;
-      left: 110%;
-      font-weight: 600;
-      text-align: start;
-    }
+  &__contenedorTestimonial {
+    @include flexColumn;
+    padding: 1rem;
+    background: $gris-claro;
+    width: 100%;
+    height: 50%;
   }
 }
