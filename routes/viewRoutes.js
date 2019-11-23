@@ -23,15 +23,21 @@ router.get('/productos/:id', viewController.obtenerProducto);
 
 router.get('/carrito', viewController.obtenerCarrito);
 
+router.get('/registrarse', viewController.registrarseTemplate);
+router.get('/iniciarSesion', viewController.iniciarSesionTemplate);
+
+router.get('/perfil', authController.proteger, viewController.perfilTemplate);
+
 router.get(
-  '/registrarse',
-  authController.estaLogeado,
-  viewController.registrarseTemplate
+  '/misCompras',
+  authController.proteger,
+  viewController.misComprasTemplate
 );
+
 router.get(
-  '/iniciarSesion',
-  authController.estaLogeado,
-  viewController.iniciarSesionTemplate
+  '/misResenias',
+  authController.proteger,
+  viewController.misReseñasTemplate
 );
 
 module.exports = router;

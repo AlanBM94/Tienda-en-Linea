@@ -108,14 +108,16 @@ exports.estaLogeado = async (req, res, next) => {
       );
       const usuarioActual = await Usuario.findById(decodificado.id);
       if (!usuarioActual) {
-        return next();
+        return next(
+          new AppError('No has iniciado sesión, por favor inicia sesión', 401)
+        );
       }
       res.locals.usuario = usuarioActual;
       req.usuario = usuarioActual;
       return next();
     } catch (error) {
-      return next();
+      return next(new AppError('Error con el servidor', 400));
     }
   }
-  next();
+  return next();
 };

@@ -61,3 +61,17 @@ exports.obtenerCarrito = catchAsync(async (req, res, next) => {
     productosCarrito
   });
 });
+
+exports.perfilTemplate = (req, res, next) => {
+  res.status(200).render('tienda/perfil', {
+    usuario: req.usuario
+  });
+};
+
+exports.misComprasTemplate = (req, res, next) => {
+  res.status(200).render('tienda/misCompras');
+};
+
+exports.misReseñasTemplate = (req, res, next) => {
+  res.status(200).render('tienda/misReseñas');
+};
