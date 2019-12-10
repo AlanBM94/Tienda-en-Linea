@@ -22,10 +22,7 @@ const compraSchema = mongoose.Schema({
 });
 
 compraSchema.pre(/^find/, function(next) {
-  this.populate('usuario').populate({
-    path: 'Carrito',
-    select: 'productos'
-  });
+  this.populate('usuario').populate('carrito');
   next();
 });
 

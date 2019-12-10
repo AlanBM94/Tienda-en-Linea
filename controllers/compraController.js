@@ -96,3 +96,11 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   // Crea una nueva petición a esta url
   res.redirect(req.originalUrl.split('?')[0]);
 });
+
+exports.obtenerCompras = catchAsync(async (req, res, next) => {
+  const compras = await Compra.find({ usuario: req.params.id });
+  res.status(200).json({
+    status: 'Exito',
+    compras
+  });
+});

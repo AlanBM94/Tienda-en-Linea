@@ -1,7 +1,7 @@
 const express = require('express');
-
 const authController = require('../controllers/authController');
 const usuarioController = require('../controllers/usuarioController');
+const compraController = require('../controllers/compraController');
 
 const router = express.Router();
 
@@ -12,6 +12,8 @@ router.route('/iniciarSesion').post(authController.iniciarSesion);
 router.route('/:id').get(usuarioController.obtenerUsuario);
 
 router.use(authController.proteger);
+
+router.route('/:id/compras').get(compraController.obtenerCompras);
 
 router.route('/').get(usuarioController.obtenerUsuarios);
 

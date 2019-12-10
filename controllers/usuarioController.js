@@ -75,7 +75,6 @@ exports.actualizarMiPerfil = catchAsync(async (req, res, next) => {
   }
 
   const cuerpoFiltrado = filtrarObjeto(req.body, 'email', 'nombre');
-  console.log(req.body);
   if (req.file) {
     cuerpoFiltrado.foto = req.file.filename;
   }
