@@ -167,7 +167,13 @@ var domElementos = {
   btnPublicarReseña: $('#btnPublicarReseña'),
   contenedoresInformacionPersonalUsuarios: $('.producto__reseniaUsuario'),
   inputPuntajeReseña: $('#puntajeReseña'),
-  inputContenidoReseña: $('#contenidoReseña')
+  inputContenidoReseña: $('#contenidoReseña'),
+  infoAjustes: {
+    inputNombreAjustes: $('#nombreAjustes'),
+    inputCorreoAjustes: $('#correoAjustes'),
+    inputFotoAjustes: $('#fotoAjustes')
+  },
+  formularioAjustes: $('#formularioAjustes')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -234,7 +240,7 @@ exports.configWaypoints = configWaypoints;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.eliminarCookie = exports.crearCookie = void 0;
+exports.obtenerCookiePorNombre = exports.eliminarCookie = exports.crearCookie = void 0;
 
 /* eslint-disable */
 var crearCookie = function crearCookie(respuesta) {
@@ -249,6 +255,13 @@ var eliminarCookie = function eliminarCookie() {
 };
 
 exports.eliminarCookie = eliminarCookie;
+
+var obtenerCookiePorNombre = function obtenerCookiePorNombre(nombre) {
+  var b = document.cookie.match('(^|[^;]+)\\s*' + nombre + '\\s*=\\s*([^;]+)');
+  return b ? b.pop() : '';
+};
+
+exports.obtenerCookiePorNombre = obtenerCookiePorNombre;
 },{}],"../../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -2765,42 +2778,92 @@ function () {
       return hacerPeticionPost;
     }()
   }, {
-    key: "hacerPeticionUsuario",
+    key: "hacerPeticionPatch",
     value: function () {
-      var _hacerPeticionUsuario = _asyncToGenerator(
+      var _hacerPeticionPatch = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(id) {
-        var respuesta;
+      regeneratorRuntime.mark(function _callee2(url, data, token) {
+        var config, consulta;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                config = {
+                  headers: {
+                    Authorization: 'bearer ' + token
+                  }
+                };
+                _context2.prev = 1;
+                _context2.next = 4;
+                return (0, _axios.default)({
+                  method: 'PATCH',
+                  url: url,
+                  data: data,
+                  config: config
+                });
+
+              case 4:
+                consulta = _context2.sent;
+                console.log(consulta, 'peticion22222222222');
+                return _context2.abrupt("return", consulta);
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](1);
+                alert('Algo salió mal');
+                console.log(_context2.t0);
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 9]]);
+      }));
+
+      function hacerPeticionPatch(_x3, _x4, _x5) {
+        return _hacerPeticionPatch.apply(this, arguments);
+      }
+
+      return hacerPeticionPatch;
+    }()
+  }, {
+    key: "hacerPeticionUsuario",
+    value: function () {
+      var _hacerPeticionUsuario = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(id) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
                 return (0, _axios.default)({
                   url: "/api/v1/usuarios/".concat(id),
                   method: 'GET'
                 });
 
               case 3:
-                respuesta = _context2.sent;
-                return _context2.abrupt("return", respuesta);
+                respuesta = _context3.sent;
+                return _context3.abrupt("return", respuesta);
 
               case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](0);
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](0);
                 alert('Algo salió mal');
-                console.log(_context2.t0);
+                console.log(_context3.t0);
 
               case 11:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee3, null, [[0, 7]]);
       }));
 
-      function hacerPeticionUsuario(_x3) {
+      function hacerPeticionUsuario(_x6) {
         return _hacerPeticionUsuario.apply(this, arguments);
       }
 
@@ -2811,26 +2874,26 @@ function () {
     value: function () {
       var _obtenerUsuarios = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(idsUsuarios) {
+      regeneratorRuntime.mark(function _callee4(idsUsuarios) {
         var _this = this;
 
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                return _context3.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
+                return _context4.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
                   return _this.hacerPeticionUsuario(id);
                 })));
 
               case 1:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }));
 
-      function obtenerUsuarios(_x4) {
+      function obtenerUsuarios(_x7) {
         return _obtenerUsuarios.apply(this, arguments);
       }
 
@@ -3356,6 +3419,98 @@ function (_Peticion) {
 }(_peticiones.default);
 
 exports.default = Reseña;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js","../models/peticiones":"models/peticiones.js"}],"models/perfil.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _peticiones = _interopRequireDefault(require("../models/peticiones"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Perfil =
+/*#__PURE__*/
+function (_Peticion) {
+  _inherits(Perfil, _Peticion);
+
+  function Perfil() {
+    _classCallCheck(this, Perfil);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Perfil).call(this));
+  }
+
+  _createClass(Perfil, [{
+    key: "actualizar",
+    value: function () {
+      var _actualizar = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(data, token) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionPatch", this).call(this, "/api/v1/usuarios/actualizarMiPerfil", data, token);
+
+              case 2:
+                respuesta = _context.sent;
+                console.log(respuesta, 'peticion');
+                return _context.abrupt("return", respuesta);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function actualizar(_x, _x2) {
+        return _actualizar.apply(this, arguments);
+      }
+
+      return actualizar;
+    }()
+  }]);
+
+  return Perfil;
+}(_peticiones.default);
+
+exports.default = Perfil;
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js","../models/peticiones":"models/peticiones.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -6718,7 +6873,7 @@ var mostrarInfoUsuario = function mostrarInfoUsuario(usuarios) {
   var contenedores = _base.domElementos.contenedoresInformacionPersonalUsuarios; // Por cada usuario agrega a su contenedor la foto y el nombre
 
   usuarios.map(function (usuario, indice) {
-    contenedores[indice].children[0].src = "/images/".concat(usuario.data.data.usuario.foto);
+    contenedores[indice].children[0].src = "/images/usuarios/".concat(usuario.data.data.usuario.foto);
     contenedores[indice].children[1].innerText = usuario.data.data.usuario.nombre;
   });
 };
@@ -6763,6 +6918,74 @@ var mostrarMensajeReseñaCreada = function mostrarMensajeReseñaCreada(idProduct
 };
 
 exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/perfilVista.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = void 0;
+
+var _base = require("../base");
+
+var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
+
+/* eslint-disable */
+var mostrarMensajeExito = function mostrarMensajeExito() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', 'Tus datos han sido actualizados correctamente').then(function (respuesta) {
+    if (respuesta.value) {
+      location.assign('/perfil');
+    }
+  });
+};
+
+exports.mostrarMensajeExito = mostrarMensajeExito;
+
+var mostrarMensajeErrorCampos = function mostrarMensajeErrorCampos() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Ambos campos son incorrectos');
+};
+
+exports.mostrarMensajeErrorCampos = mostrarMensajeErrorCampos;
+
+var mostrarMensajeErrorNombrePequeño = function mostrarMensajeErrorNombrePequeño() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'Cuidado!', 'El nombre debe de tener al menos 3 caracteres');
+};
+
+var mostrarMensajeErrorNombreLargo = function mostrarMensajeErrorNombreLargo() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'Cuidado!', 'El nombre debe de tener como máximo 10 caracteres');
+};
+
+var mostrarMensajeErrorCorreo = function mostrarMensajeErrorCorreo() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Ingresa un correo válido');
+};
+
+var mostrarError = function mostrarError(error) {
+  if (error.nombre && error.email) {
+    mostrarMensajeErrorCampos();
+  } else if (error.nombre) {
+    if (error.nombre.message.includes('shorter than the minimum allowed')) {
+      mostrarMensajeErrorNombrePequeño();
+    }
+
+    if (error.nombre.message.includes(' is longer than the maximum ')) {
+      mostrarMensajeErrorNombreLargo();
+    }
+  } else if (error.email) {
+    mostrarMensajeErrorCorreo();
+  }
+};
+
+exports.mostrarError = mostrarError;
+
+var obtenerInfoAjustes = function obtenerInfoAjustes() {
+  var form = new FormData();
+  form.append('nombre', document.getElementById('nombreAjustes').value);
+  form.append('email', document.getElementById('correoAjustes').value);
+  form.append('foto', document.getElementById('fotoAjustes').files[0]);
+  return form;
+};
+
+exports.obtenerInfoAjustes = obtenerInfoAjustes;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -6782,6 +7005,8 @@ var _compra = _interopRequireDefault(require("./models/compra"));
 
 var _reseA = _interopRequireDefault(require("./models/rese\xF1a"));
 
+var _perfil = _interopRequireDefault(require("./models/perfil"));
+
 var registrarseVista = _interopRequireWildcard(require("./views/registrarseVista"));
 
 var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionVista"));
@@ -6791,6 +7016,8 @@ var carritoVista = _interopRequireWildcard(require("./views/carritoVista"));
 var compraVista = _interopRequireWildcard(require("./views/compraVista"));
 
 var reseñaVista = _interopRequireWildcard(require("./views/rese\xF1asVista"));
+
+var perfilVista = _interopRequireWildcard(require("./views/perfilVista"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -7022,7 +7249,49 @@ $(document).ready(function () {
     };
   }();
 
-  controladorMostrarReseñas(); // Evento que se dispara cuando se envía el formulario de Registro
+  controladorMostrarReseñas();
+
+  var controladorGuardarAjustes =
+  /*#__PURE__*/
+  function () {
+    var _ref6 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee6() {
+      var respuesta, infoUsuario, token, perfil;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              infoUsuario = perfilVista.obtenerInfoAjustes();
+              console.log(infoUsuario, 'hehe');
+              token = (0, _cookie.obtenerCookiePorNombre)('jwt');
+              perfil = new _perfil.default();
+              _context6.next = 6;
+              return perfil.actualizar(infoUsuario, token);
+
+            case 6:
+              respuesta = _context6.sent;
+
+              if (respuesta.data.status === 'error') {
+                perfilVista.mostrarError(respuesta.data.error.errors);
+              } else {
+                perfilVista.mostrarMensajeExito();
+              } // console.log(respuesta);
+
+
+            case 8:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function controladorGuardarAjustes() {
+      return _ref6.apply(this, arguments);
+    };
+  }(); // Evento que se dispara cuando se envía el formulario de Registro
+
 
   _base.domElementos.formularioRegistrarse.submit(function (event) {
     event.preventDefault();
@@ -7072,26 +7341,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref6 = _asyncToGenerator(
+    var _ref7 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(e) {
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+    regeneratorRuntime.mark(function _callee7(e) {
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
     return function (_x4) {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -7103,31 +7372,30 @@ $(document).ready(function () {
     var nuevaCompra = new _compra.default(idCarrito); // Hacer la petición al servidor
 
     nuevaCompra.hacerPeticionStripe();
-  }); // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
-
+  });
 
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref7 = _asyncToGenerator(
+    var _ref8 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee7(e) {
+    regeneratorRuntime.mark(function _callee8(e) {
       var productoId, valoresReseña, infoReseña, reseña, mensaje;
-      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               e.preventDefault();
               productoId = reseñaVista.conseguirProductoId();
               valoresReseña = reseñaVista.obtenerValoresReseña();
 
               if (!(valoresReseña.puntuacion === '' || valoresReseña.contenido === '')) {
-                _context7.next = 7;
+                _context8.next = 7;
                 break;
               }
 
               reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
-              _context7.next = 14;
+              _context8.next = 13;
               break;
 
             case 7:
@@ -7137,12 +7405,11 @@ $(document).ready(function () {
                 reseña: valoresReseña.contenido
               };
               reseña = new _reseA.default(infoReseña);
-              _context7.next = 11;
+              _context8.next = 11;
               return reseña.crear();
 
             case 11:
-              mensaje = _context7.sent;
-              console.log(mensaje);
+              mensaje = _context8.sent;
 
               if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
                 reseñaVista.mostrarErrorReseña(mensaje);
@@ -7150,18 +7417,23 @@ $(document).ready(function () {
                 reseñaVista.mostrarMensajeReseñaCreada(productoId);
               }
 
-            case 14:
+            case 13:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7);
+      }, _callee8);
     }));
 
     return function (_x5) {
-      return _ref7.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
-  }()); // Evento que se dispara cuando se cierra sesión
+  }());
+
+  _base.domElementos.formularioAjustes.submit(function (event) {
+    event.preventDefault();
+    controladorGuardarAjustes();
+  }); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click', function () {
@@ -7169,7 +7441,7 @@ $(document).ready(function () {
     location.assign('/');
   });
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./models/perfil":"models/perfil.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js","./views/perfilVista":"views/perfilVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7197,7 +7469,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58515" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50986" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

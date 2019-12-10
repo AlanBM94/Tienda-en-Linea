@@ -11,3 +11,8 @@ export const crearCookie = respuesta => {
 export const eliminarCookie = () => {
   document.cookie = 'jwt=;expires=Thu, path=/ 01 Jan 1970 00:00:01 GMT; path=/';
 };
+
+export const obtenerCookiePorNombre = nombre => {
+  var b = document.cookie.match('(^|[^;]+)\\s*' + nombre + '\\s*=\\s*([^;]+)');
+  return b ? b.pop() : '';
+};

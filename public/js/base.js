@@ -56,7 +56,13 @@ export const domElementos = {
   btnPublicarReseña: $('#btnPublicarReseña'),
   contenedoresInformacionPersonalUsuarios: $('.producto__reseniaUsuario'),
   inputPuntajeReseña: $('#puntajeReseña'),
-  inputContenidoReseña: $('#contenidoReseña')
+  inputContenidoReseña: $('#contenidoReseña'),
+  infoAjustes: {
+    inputNombreAjustes: $('#nombreAjustes'),
+    inputCorreoAjustes: $('#correoAjustes'),
+    inputFotoAjustes: $('#fotoAjustes')
+  },
+  formularioAjustes: $('#formularioAjustes')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

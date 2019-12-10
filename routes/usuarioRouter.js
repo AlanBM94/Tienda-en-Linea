@@ -1,4 +1,5 @@
 const express = require('express');
+
 const authController = require('../controllers/authController');
 const usuarioController = require('../controllers/usuarioController');
 
@@ -19,7 +20,12 @@ router.get(
   usuarioController.miPerfil,
   usuarioController.obtenerUsuario
 );
-router.patch('/actualizarMiPerfil', usuarioController.actualizarMiPerfil);
+router.patch(
+  '/actualizarMiPerfil',
+  usuarioController.actualizarMiFoto,
+  usuarioController.ajustarTamañoFoto,
+  usuarioController.actualizarMiPerfil
+);
 router.delete('/eliminarMiPerfil', usuarioController.eliminarMiPerfil);
 
 router.use(authController.permitirPara('administrador'));

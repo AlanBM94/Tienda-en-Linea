@@ -1,17 +1,19 @@
 /* eslint-disable */
 import { configWaypoints, domElementos } from './base';
-import { eliminarCookie } from './utils/cookie';
+import { eliminarCookie, obtenerCookiePorNombre } from './utils/cookie';
 import Peticion from './models/peticiones';
 import Registrarse from './models/registrarse';
 import IniciarSesion from './models/iniciarSesion';
 import Carrito from './models/carrito';
 import Compra from './models/compra';
 import Reseña from './models/reseña';
+import Perfil from './models/perfil';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
 import * as carritoVista from './views/carritoVista';
 import * as compraVista from './views/compraVista';
 import * as reseñaVista from './views/reseñasVista';
+import * as perfilVista from './views/perfilVista';
 
 $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
@@ -98,6 +100,21 @@ $(document).ready(() => {
 
   controladorMostrarReseñas();
 
+  const controladorGuardarAjustes = async () => {
+    let respuesta;
+    const infoUsuario = perfilVista.obtenerInfoAjustes();
+    console.log(infoUsuario, 'hehe');
+    const token = obtenerCookiePorNombre('jwt');
+    const perfil = new Perfil();
+    respuesta = await perfil.actualizar(infoUsuario, token);
+    if (respuesta.data.status === 'error') {
+      perfilVista.mostrarError(respuesta.data.error.errors);
+    } else {
+      perfilVista.mostrarMensajeExito();
+    }
+    // console.log(respuesta);
+  };
+
   // Evento que se dispara cuando se envía el formulario de Registro
   domElementos.formularioRegistrarse.submit(event => {
     event.preventDefault();
@@ -157,7 +174,6 @@ $(document).ready(() => {
     nuevaCompra.hacerPeticionStripe();
   });
 
-  // TODO: Permitir que los usuarios creen reseñas de los productos que hayan comprado
   domElementos.btnPublicarReseña.on('click', async e => {
     e.preventDefault();
     const productoId = reseñaVista.conseguirProductoId();
@@ -172,7 +188,6 @@ $(document).ready(() => {
       };
       const reseña = new Reseña(infoReseña);
       const mensaje = await reseña.crear();
-      console.log(mensaje);
       if (
         mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
         mensaje === 'No puedes escribir más de una reseña'
@@ -182,6 +197,11 @@ $(document).ready(() => {
         reseñaVista.mostrarMensajeReseñaCreada(productoId);
       }
     }
+  });
+
+  domElementos.formularioAjustes.submit(event => {
+    event.preventDefault();
+    controladorGuardarAjustes();
   });
 
   // Evento que se dispara cuando se cierra sesión

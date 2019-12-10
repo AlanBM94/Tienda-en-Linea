@@ -1,6 +1,36 @@
+const multer = require('multer');
+const sharp = require('sharp');
 const Usuario = require('../models/usuarioModel.js');
 const catchAsync = require('../utils/catchAsync.js');
 const AppError = require('../utils/appError.js');
+
+// const multerAlmacenamiento = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/images/usuarios');
+//   },
+//   filename: (req, file, cb) => {
+//     const extension = file.mimetype.split('/')[1];
+//     cb(null, `usuario-${req.usuario.id}-${Date.now()}.${extension}`);
+//   }
+// });
+
+const multerAlmacenamiento = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError('No es una imagen, por favor sube solo imagenes', 400),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: multerAlmacenamiento,
+  fileFilter: multerFilter
+});
 
 exports.obtenerUsuarios = catchAsync(async (req, res, next) => {
   res.status(500).json({
@@ -21,13 +51,34 @@ const filtrarObjeto = (objeto, ...permitidos) => {
   return nuevoObjeto;
 };
 
+exports.actualizarMiFoto = upload.single('foto');
+
+exports.ajustarTamañoFoto = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next();
+  }
+  req.file.filename = `usuario-${req.usuario.id}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(500, 500)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/images/usuarios/${req.file.filename}`);
+  next();
+});
+
 exports.actualizarMiPerfil = catchAsync(async (req, res, next) => {
   if (req.body.contraseña || req.body.confirmarContraseña) {
     return next(
       new AppError('Esta no es la ruta para actualizar contraseñas', 400)
     );
   }
+
   const cuerpoFiltrado = filtrarObjeto(req.body, 'email', 'nombre');
+  console.log(req.body);
+  if (req.file) {
+    cuerpoFiltrado.foto = req.file.filename;
+  }
   const usuarioActualizado = await Usuario.findByIdAndUpdate(
     req.usuario.id,
     cuerpoFiltrado,

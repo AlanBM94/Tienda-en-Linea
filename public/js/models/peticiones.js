@@ -19,6 +19,26 @@ export default class Peticion {
     }
   }
 
+  async hacerPeticionPatch(url, data, token) {
+    const config = {
+      headers: { Authorization: 'bearer ' + token }
+    };
+
+    try {
+      const consulta = await axios({
+        method: 'PATCH',
+        url,
+        data,
+        config
+      });
+      console.log(consulta, 'peticion22222222222');
+      return consulta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
+
   async hacerPeticionUsuario(id) {
     try {
       const respuesta = await axios({

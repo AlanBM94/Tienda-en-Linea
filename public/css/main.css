@@ -840,7 +840,7 @@ header .hero__btn:hover {
 }
 
 .misReseñas__acciones {
-  padding: 0 5rem;
+  padding: 0 30%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

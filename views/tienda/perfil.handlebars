@@ -2,19 +2,19 @@
 <div class="perfil__contenido">
     <div class="perfil__contenidoPrincipal">
         <h4>Ajustes de tu perfil</h4>
-        <form action="#" class="formularioPerfil">
+        <form action="#" class="formularioPerfil" id="formularioAjustes">
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" />
+                <input type="text" name="nombre" id="nombreAjustes" value="{{usuario.nombre}}" required />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo">
                 <label for="correo">Correo electrónico</label>
-                <input type="text" name="correo" id="correo" />
+                <input type="text" name="correo" id="correoAjustes" value="{{usuario.email}}" required />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--foto">
-                <img src="images/Alan.jpg" alt="" />
-                <label for="foto" class="btn btn--secundario btn--secundarioContraseña">Cambia tu foto</label>
-                <input type="file" name="foto" id="foto" value="Cambiar foto" placeholder="Cambiar foto" />
+                <img src="/images/usuarios/{{usuario.foto}}" alt="usuario" />
+                <label for="fotoAjustes" class="btn btn--secundario btn--secundarioContraseña">Cambia tu foto</label>
+                <input type="file" name="foto" accept='image/*' id="fotoAjustes" placeholder="Cambiar foto" />
             </div>
             <div class="formularioPerfil__contenedorBotonEnviar">
                 <button type="submit" class="btn btn--rojo">Guardar</button>
@@ -26,11 +26,11 @@
         <form action="#" class="formularioPerfil formularioPerfil--2">
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre">
                 <label for="nombre">Contraseña</label>
-                <input type="password" name="nombre" id="nombre" />
+                <input type="password" name="nombre" />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo">
                 <label for="correo">Confirmar contraseña</label>
-                <input type="password" name="correo" id="correo" />
+                <input type="password" name="correo" />
             </div>
             <div class="formularioPerfil__contenedorBotonEnviar formularioPerfil__contenedorBotonEnviar--contraseña">
                 <button type="submit" class="btn btn--rojo btnContraseña">Guardar</button>
@@ -40,5 +40,6 @@
 </div>
 </div>
 </body>
+{{> scripts}}
 
 </html>

@@ -59,7 +59,7 @@ export const mostrarInfoUsuario = usuarios => {
   usuarios.map((usuario, indice) => {
     contenedores[
       indice
-    ].children[0].src = `/images/${usuario.data.data.usuario.foto}`;
+    ].children[0].src = `/images/usuarios/${usuario.data.data.usuario.foto}`;
     contenedores[indice].children[1].innerText =
       usuario.data.data.usuario.nombre;
   });
