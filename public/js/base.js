@@ -62,7 +62,9 @@ export const domElementos = {
     inputCorreoAjustes: $('#correoAjustes'),
     inputFotoAjustes: $('#fotoAjustes')
   },
-  formularioAjustes: $('#formularioAjustes')
+  formularioAjustes: $('#formularioAjustes'),
+  idUsuario: $('#usuarioId'),
+  misComprasContenedor: $('#misComprasContenedor')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

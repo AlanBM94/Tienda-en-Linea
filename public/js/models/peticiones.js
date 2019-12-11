@@ -5,6 +5,19 @@ import axios from 'axios';
 export default class Peticion {
   constructor() {}
 
+  async hacerPeticionGet(id, tipo) {
+    try {
+      const consulta = await axios({
+        method: 'GET',
+        url: `/api/v1/usuarios/${id}/${tipo}`
+      });
+      return consulta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
+
   async hacerPeticionPost(url, data) {
     try {
       const consulta = await axios({
@@ -31,7 +44,6 @@ export default class Peticion {
         data,
         config
       });
-      console.log(consulta, 'peticion22222222222');
       return consulta;
     } catch (error) {
       alert('Algo salió mal');

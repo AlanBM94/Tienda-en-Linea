@@ -8,12 +8,14 @@ import Carrito from './models/carrito';
 import Compra from './models/compra';
 import Reseña from './models/reseña';
 import Perfil from './models/perfil';
+import MisCompras from './models/misCompras';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
 import * as carritoVista from './views/carritoVista';
 import * as compraVista from './views/compraVista';
 import * as reseñaVista from './views/reseñasVista';
 import * as perfilVista from './views/perfilVista';
+import * as misComprasVista from './views/misComprasVista';
 
 $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
@@ -27,6 +29,20 @@ $(document).ready(() => {
     // Mostrar la información de los usuarios en las reseñas
     reseñaVista.mostrarInfoUsuario(usuarios);
   };
+
+  controladorMostrarReseñas();
+
+  const controladorMisCompras = async () => {
+    const idUsuario = misComprasVista.obtenerIdUsuario();
+    const misCompras = new MisCompras(idUsuario);
+    const compras = await misCompras.mostrar();
+    console.log(compras);
+    compras.map(compra => {
+      misComprasVista.renderizarMisCompras(compra);
+    });
+  };
+
+  controladorMisCompras();
 
   const controladorRegistrarse = async () => {
     // Se crea la infoUsuario con los valores ingresados
@@ -98,8 +114,6 @@ $(document).ready(() => {
     }
   };
 
-  controladorMostrarReseñas();
-
   const controladorGuardarAjustes = async () => {
     let respuesta;
     const infoUsuario = perfilVista.obtenerInfoAjustes();
@@ -112,7 +126,6 @@ $(document).ready(() => {
     } else {
       perfilVista.mostrarMensajeExito();
     }
-    // console.log(respuesta);
   };
 
   // Evento que se dispara cuando se envía el formulario de Registro
