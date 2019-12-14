@@ -2,6 +2,11 @@
 import { domElementos } from '../base';
 import { configurarSweetAlert } from '../utils/sweetAlertMensajes';
 
+export const obtenerIdUsuario = () => {
+  const id = domElementos.idUsuario.attr('data-id');
+  return id;
+};
+
 export const mostrarMensajeExito = () => {
   configurarSweetAlert(
     'success',
@@ -59,4 +64,67 @@ export const obtenerInfoAjustes = () => {
   form.append('email', document.getElementById('correoAjustes').value);
   form.append('foto', document.getElementById('fotoAjustes').files[0]);
   return form;
+};
+
+const formatoFecha = fecha => {
+  return fecha.split('T')[0];
+};
+
+export const renderizarCompra = compra => {
+  const markup = `
+        <div class="misComprasContenido">
+            <div class="misCompras__fecha">
+                <h3 class="textoTablaPerfil">${formatoFecha(compra.fecha)}</h3>
+            </div>
+            <div class="misCompras__productos">
+                <h3 class="textoTablaPerfil">${
+                  compra.productos.length
+                } Productos comprados</h3>
+            </div>
+            <div class="misCompras__precio">
+                <h3 class="textoTablaPerfil">$${compra.precio}</h3>
+            </div>
+            <div class="misCompras__verDetalles">
+                <button class="btn btn--secundario btn--secundarioPequeño">Ver Detalles</button>
+            </div>
+        </div>
+    `;
+  domElementos.misComprasContenedor.append(markup);
+};
+
+export const renderizarReseña = reseña => {
+  const markup = `
+    <div class="misReseñasContenido">
+        <div class="misReseñas__fecha">
+            <h3 class="textoTablaPerfil">${formatoFecha(
+              reseña.reseñaFecha
+            )}</h3>
+        </div>
+        <div class="misReseñas__productos">
+            <h3 class="textoTablaPerfil">${reseña.producto}</h3>
+        </div>
+        <div class="misReseñas__precio">
+            <h3 class="textoTablaPerfil">${reseña.reseña}</h3>
+        </div>
+        <div class="misReseñas__acciones">
+            <i class="fas fa-edit icono-editar"></i>
+            <i class="fas fa-trash-alt icono-eliminar" id="btnEliminarReseña" data-id="${
+              reseña.id
+            }"
+    </div>
+  `;
+  domElementos.misReseñasContenedor.append(markup);
+};
+
+export const obtenerInfoResenia = evento => {
+  const infoResenia = {
+    idProducto: evento.parentElement.parentElement.children[1].innerText,
+    idResenia: evento.getAttribute('data-id')
+  };
+  return infoResenia;
+};
+
+export const eliminarReseniaDom = evento => {
+  const elementoHijo = evento.parentElement.parentElement;
+  elementoHijo.remove();
 };

@@ -13,7 +13,22 @@ export default class Perfil extends Peticion {
       data,
       token
     );
-    console.log(respuesta, 'peticion');
     return respuesta;
+  }
+
+  async mostrarMisCompras(idUsuario) {
+    const compras = await super.hacerPeticionGet(idUsuario, 'compras');
+    return compras.data.compras;
+  }
+
+  async mostrarMisReseñas(idUsuario) {
+    const reseñas = await super.hacerPeticionGet(idUsuario, 'resenias');
+    return reseñas.data.data.reseñas;
+  }
+
+  async eliminarResenia(idProducto, idResenia) {
+    await super.hacerPeticionDelete(
+      `/api/v1/productos/${idProducto}/resenias/${idResenia}`
+    );
   }
 }

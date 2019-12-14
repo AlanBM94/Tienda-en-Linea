@@ -8,41 +8,80 @@ import Carrito from './models/carrito';
 import Compra from './models/compra';
 import Reseña from './models/reseña';
 import Perfil from './models/perfil';
-import MisCompras from './models/misCompras';
 import * as registrarseVista from './views/registrarseVista';
 import * as iniciarSesionVista from './views/iniciarSesionVista';
 import * as carritoVista from './views/carritoVista';
 import * as compraVista from './views/compraVista';
 import * as reseñaVista from './views/reseñasVista';
 import * as perfilVista from './views/perfilVista';
-import * as misComprasVista from './views/misComprasVista';
 
 $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
   configWaypoints();
+
+  const controladorCrearResenia = async () => {
+    const productoId = reseñaVista.conseguirProductoId();
+    const valoresReseña = reseñaVista.obtenerValoresReseña();
+    if (valoresReseña.puntuacion === '' || valoresReseña.contenido === '') {
+      reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
+    } else {
+      const infoReseña = {
+        id: productoId,
+        puntuacion: valoresReseña.puntuacion,
+        reseña: valoresReseña.contenido
+      };
+      const reseña = new Reseña(infoReseña);
+      const mensaje = await reseña.crear();
+      if (
+        mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
+        mensaje === 'No puedes escribir más de una reseña'
+      ) {
+        reseñaVista.mostrarErrorReseña(mensaje);
+      } else {
+        reseñaVista.mostrarMensajeReseñaCreada(productoId);
+      }
+    }
+  };
+
+  const controladorEliminarResenia = target => {
+    const perfil = new Perfil();
+    const infoResenia = perfilVista.obtenerInfoResenia(target);
+    perfilVista.eliminarReseniaDom(target);
+    perfil.eliminarResenia(infoResenia.idProducto, infoResenia.idResenia);
+  };
 
   const controladorMostrarReseñas = async () => {
     reseñaVista.mostrarReseñas();
     const ids = reseñaVista.retornarIdsUsuarios();
     const peticion = new Peticion();
     const usuarios = await peticion.obtenerUsuarios(ids);
-    // Mostrar la información de los usuarios en las reseñas
     reseñaVista.mostrarInfoUsuario(usuarios);
   };
 
   controladorMostrarReseñas();
 
-  const controladorMisCompras = async () => {
-    const idUsuario = misComprasVista.obtenerIdUsuario();
-    const misCompras = new MisCompras(idUsuario);
-    const compras = await misCompras.mostrar();
-    console.log(compras);
+  const controladorMiInformacion = async () => {
+    const idUsuario = perfilVista.obtenerIdUsuario();
+    const perfil = new Perfil();
+    const compras = await perfil.mostrarMisCompras(idUsuario);
+    const reseñas = await perfil.mostrarMisReseñas(idUsuario);
+    reseñas.map(reseña => {
+      perfilVista.renderizarReseña(reseña);
+    });
+
     compras.map(compra => {
-      misComprasVista.renderizarMisCompras(compra);
+      perfilVista.renderizarCompra(compra);
     });
   };
 
-  controladorMisCompras();
+  const URL = document.URL.split('/');
+  if (
+    document.URL.split('/')[URL.length - 1] === 'perfil' ||
+    document.URL.split('/')[URL.length - 1] === 'misCompras' ||
+    document.URL.split('/')[URL.length - 1] === 'misResenias'
+  ) {
+    controladorMiInformacion();
+  }
 
   const controladorRegistrarse = async () => {
     // Se crea la infoUsuario con los valores ingresados
@@ -117,7 +156,6 @@ $(document).ready(() => {
   const controladorGuardarAjustes = async () => {
     let respuesta;
     const infoUsuario = perfilVista.obtenerInfoAjustes();
-    console.log(infoUsuario, 'hehe');
     const token = obtenerCookiePorNombre('jwt');
     const perfil = new Perfil();
     respuesta = await perfil.actualizar(infoUsuario, token);
@@ -189,26 +227,12 @@ $(document).ready(() => {
 
   domElementos.btnPublicarReseña.on('click', async e => {
     e.preventDefault();
-    const productoId = reseñaVista.conseguirProductoId();
-    const valoresReseña = reseñaVista.obtenerValoresReseña();
-    if (valoresReseña.puntuacion === '' || valoresReseña.contenido === '') {
-      reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
-    } else {
-      const infoReseña = {
-        id: productoId,
-        puntuacion: valoresReseña.puntuacion,
-        reseña: valoresReseña.contenido
-      };
-      const reseña = new Reseña(infoReseña);
-      const mensaje = await reseña.crear();
-      if (
-        mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
-        mensaje === 'No puedes escribir más de una reseña'
-      ) {
-        reseñaVista.mostrarErrorReseña(mensaje);
-      } else {
-        reseñaVista.mostrarMensajeReseñaCreada(productoId);
-      }
+    controladorCrearResenia();
+  });
+
+  domElementos.perfilContenido.on('click', function(e) {
+    if (e.target.matches('#btnEliminarReseña')) {
+      controladorEliminarResenia(e.target);
     }
   });
 

@@ -51,6 +51,19 @@ export default class Peticion {
     }
   }
 
+  async hacerPeticionDelete(url) {
+    try {
+      const consulta = await axios({
+        method: 'DELETE',
+        url
+      });
+      return consulta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
+
   async hacerPeticionUsuario(id) {
     try {
       const respuesta = await axios({

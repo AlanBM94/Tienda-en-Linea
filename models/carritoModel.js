@@ -25,7 +25,6 @@ const carritoSchema = new mongoose.Schema(
         stock: Number
       }
     ],
-    productosHistorial: [],
     total: {
       type: Number
     }

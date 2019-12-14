@@ -175,7 +175,9 @@ var domElementos = {
   },
   formularioAjustes: $('#formularioAjustes'),
   idUsuario: $('#usuarioId'),
-  misComprasContenedor: $('#misComprasContenedor')
+  misComprasContenedor: $('#misComprasContenedor'),
+  misReseñasContenedor: $('#misReseñasContenedor'),
+  perfilContenido: $('.perfil__contenido')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -2871,12 +2873,12 @@ function () {
       return hacerPeticionPatch;
     }()
   }, {
-    key: "hacerPeticionUsuario",
+    key: "hacerPeticionDelete",
     value: function () {
-      var _hacerPeticionUsuario = _asyncToGenerator(
+      var _hacerPeticionDelete = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(id) {
-        var respuesta;
+      regeneratorRuntime.mark(function _callee4(url) {
+        var consulta;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -2884,13 +2886,13 @@ function () {
                 _context4.prev = 0;
                 _context4.next = 3;
                 return (0, _axios.default)({
-                  url: "/api/v1/usuarios/".concat(id),
-                  method: 'GET'
+                  method: 'DELETE',
+                  url: url
                 });
 
               case 3:
-                respuesta = _context4.sent;
-                return _context4.abrupt("return", respuesta);
+                consulta = _context4.sent;
+                return _context4.abrupt("return", consulta);
 
               case 7:
                 _context4.prev = 7;
@@ -2906,7 +2908,49 @@ function () {
         }, _callee4, null, [[0, 7]]);
       }));
 
-      function hacerPeticionUsuario(_x8) {
+      function hacerPeticionDelete(_x8) {
+        return _hacerPeticionDelete.apply(this, arguments);
+      }
+
+      return hacerPeticionDelete;
+    }()
+  }, {
+    key: "hacerPeticionUsuario",
+    value: function () {
+      var _hacerPeticionUsuario = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee5(id) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return (0, _axios.default)({
+                  url: "/api/v1/usuarios/".concat(id),
+                  method: 'GET'
+                });
+
+              case 3:
+                respuesta = _context5.sent;
+                return _context5.abrupt("return", respuesta);
+
+              case 7:
+                _context5.prev = 7;
+                _context5.t0 = _context5["catch"](0);
+                alert('Algo salió mal');
+                console.log(_context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 7]]);
+      }));
+
+      function hacerPeticionUsuario(_x9) {
         return _hacerPeticionUsuario.apply(this, arguments);
       }
 
@@ -2917,26 +2961,26 @@ function () {
     value: function () {
       var _obtenerUsuarios = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(idsUsuarios) {
+      regeneratorRuntime.mark(function _callee6(idsUsuarios) {
         var _this = this;
 
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                return _context5.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
+                return _context6.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
                   return _this.hacerPeticionUsuario(id);
                 })));
 
               case 1:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5);
+        }, _callee6);
       }));
 
-      function obtenerUsuarios(_x9) {
+      function obtenerUsuarios(_x10) {
         return _obtenerUsuarios.apply(this, arguments);
       }
 
@@ -3531,10 +3575,9 @@ function (_Peticion) {
 
               case 2:
                 respuesta = _context.sent;
-                console.log(respuesta, 'peticion');
                 return _context.abrupt("return", respuesta);
 
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -3548,107 +3591,103 @@ function (_Peticion) {
 
       return actualizar;
     }()
+  }, {
+    key: "mostrarMisCompras",
+    value: function () {
+      var _mostrarMisCompras = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(idUsuario) {
+        var compras;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGet", this).call(this, idUsuario, 'compras');
+
+              case 2:
+                compras = _context2.sent;
+                return _context2.abrupt("return", compras.data.compras);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function mostrarMisCompras(_x3) {
+        return _mostrarMisCompras.apply(this, arguments);
+      }
+
+      return mostrarMisCompras;
+    }()
+  }, {
+    key: "mostrarMisRese\xF1as",
+    value: function () {
+      var _mostrarMisReseAs = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(idUsuario) {
+        var reseñas;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGet", this).call(this, idUsuario, 'resenias');
+
+              case 2:
+                reseñas = _context3.sent;
+                return _context3.abrupt("return", reseñas.data.data.reseñas);
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function mostrarMisReseAs(_x4) {
+        return _mostrarMisReseAs.apply(this, arguments);
+      }
+
+      return mostrarMisReseAs;
+    }()
+  }, {
+    key: "eliminarResenia",
+    value: function () {
+      var _eliminarResenia = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(idProducto, idResenia) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionDelete", this).call(this, "/api/v1/productos/".concat(idProducto, "/resenias/").concat(idResenia));
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function eliminarResenia(_x5, _x6) {
+        return _eliminarResenia.apply(this, arguments);
+      }
+
+      return eliminarResenia;
+    }()
   }]);
 
   return Perfil;
 }(_peticiones.default);
 
 exports.default = Perfil;
-},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js","../models/peticiones":"models/peticiones.js"}],"models/misCompras.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-require("regenerator-runtime/runtime");
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _peticiones = _interopRequireDefault(require("../models/peticiones"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var MisCompras =
-/*#__PURE__*/
-function (_Peticion) {
-  _inherits(MisCompras, _Peticion);
-
-  function MisCompras(id) {
-    var _this;
-
-    _classCallCheck(this, MisCompras);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MisCompras).call(this));
-    _this.idUsuario = id;
-    return _this;
-  }
-
-  _createClass(MisCompras, [{
-    key: "mostrar",
-    value: function () {
-      var _mostrar = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
-        var compras;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _get(_getPrototypeOf(MisCompras.prototype), "hacerPeticionGet", this).call(this, this.idUsuario, 'compras');
-
-              case 2:
-                compras = _context.sent;
-                return _context.abrupt("return", compras.data.compras);
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function mostrar() {
-        return _mostrar.apply(this, arguments);
-      }
-
-      return mostrar;
-    }()
-  }]);
-
-  return MisCompras;
-}(_peticiones.default);
-
-exports.default = MisCompras;
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js","../models/peticiones":"models/peticiones.js"}],"../../node_modules/sweetalert2/dist/sweetalert2.all.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -7062,13 +7101,21 @@ exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = void 0;
+exports.eliminarReseniaDom = exports.obtenerInfoResenia = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
 
 var _base = require("../base");
 
 var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
 
 /* eslint-disable */
+var obtenerIdUsuario = function obtenerIdUsuario() {
+  var id = _base.domElementos.idUsuario.attr('data-id');
+
+  return id;
+};
+
+exports.obtenerIdUsuario = obtenerIdUsuario;
+
 var mostrarMensajeExito = function mostrarMensajeExito() {
   (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', 'Tus datos han sido actualizados correctamente').then(function (respuesta) {
     if (respuesta.value) {
@@ -7124,33 +7171,44 @@ var obtenerInfoAjustes = function obtenerInfoAjustes() {
 };
 
 exports.obtenerInfoAjustes = obtenerInfoAjustes;
-},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/misComprasVista.js":[function(require,module,exports) {
-"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderizarMisCompras = exports.obtenerIdUsuario = void 0;
-
-var _base = require("../base");
-
-/* eslint-disable */
-var obtenerIdUsuario = function obtenerIdUsuario() {
-  var id = _base.domElementos.idUsuario.attr('data-id');
-
-  return id;
+var formatoFecha = function formatoFecha(fecha) {
+  return fecha.split('T')[0];
 };
 
-exports.obtenerIdUsuario = obtenerIdUsuario;
-
-var renderizarMisCompras = function renderizarMisCompras(compra) {
-  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(compra.fecha, "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.carrito.productosHistorial.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <button class=\"btn btn--secundario btn--secundarioPeque\xF1o\">Ver Detalles</button>\n            </div>\n        </div>\n    ");
+var renderizarCompra = function renderizarCompra(compra) {
+  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(compra.fecha), "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.productos.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <button class=\"btn btn--secundario btn--secundarioPeque\xF1o\">Ver Detalles</button>\n            </div>\n        </div>\n    ");
 
   _base.domElementos.misComprasContenedor.append(markup);
 };
 
-exports.renderizarMisCompras = renderizarMisCompras;
-},{"../base":"base.js"}],"index.js":[function(require,module,exports) {
+exports.renderizarCompra = renderizarCompra;
+
+var renderizarReseña = function renderizarReseña(reseña) {
+  var markup = "\n    <div class=\"misRese\xF1asContenido\">\n        <div class=\"misRese\xF1as__fecha\">\n            <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(reseña.reseñaFecha), "</h3>\n        </div>\n        <div class=\"misRese\xF1as__productos\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.producto, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__precio\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.reseña, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__acciones\">\n            <i class=\"fas fa-edit icono-editar\"></i>\n            <i class=\"fas fa-trash-alt icono-eliminar\" id=\"btnEliminarRese\xF1a\" data-id=\"").concat(reseña.id, "\"\n    </div>\n  ");
+
+  _base.domElementos.misReseñasContenedor.append(markup);
+};
+
+exports.renderizarReseña = renderizarReseña;
+
+var obtenerInfoResenia = function obtenerInfoResenia(evento) {
+  var infoResenia = {
+    idProducto: evento.parentElement.parentElement.children[1].innerText,
+    idResenia: evento.getAttribute('data-id')
+  };
+  return infoResenia;
+};
+
+exports.obtenerInfoResenia = obtenerInfoResenia;
+
+var eliminarReseniaDom = function eliminarReseniaDom(evento) {
+  var elementoHijo = evento.parentElement.parentElement;
+  elementoHijo.remove();
+};
+
+exports.eliminarReseniaDom = eliminarReseniaDom;
+},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _base = require("./base");
@@ -7171,8 +7229,6 @@ var _reseA = _interopRequireDefault(require("./models/rese\xF1a"));
 
 var _perfil = _interopRequireDefault(require("./models/perfil"));
 
-var _misCompras = _interopRequireDefault(require("./models/misCompras"));
-
 var registrarseVista = _interopRequireWildcard(require("./views/registrarseVista"));
 
 var iniciarSesionVista = _interopRequireWildcard(require("./views/iniciarSesionVista"));
@@ -7184,8 +7240,6 @@ var compraVista = _interopRequireWildcard(require("./views/compraVista"));
 var reseñaVista = _interopRequireWildcard(require("./views/rese\xF1asVista"));
 
 var perfilVista = _interopRequireWildcard(require("./views/perfilVista"));
-
-var misComprasVista = _interopRequireWildcard(require("./views/misComprasVista"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -7201,29 +7255,49 @@ $(document).ready(function () {
   // Configura los puntos en los que se tienen que hacer animaciones
   (0, _base.configWaypoints)();
 
-  var controladorMostrarReseñas =
+  var controladorCrearResenia =
   /*#__PURE__*/
   function () {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee() {
-      var ids, peticion, usuarios;
+      var productoId, valoresReseña, infoReseña, reseña, mensaje;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              reseñaVista.mostrarReseñas();
-              ids = reseñaVista.retornarIdsUsuarios();
-              peticion = new _peticiones.default();
-              _context.next = 5;
-              return peticion.obtenerUsuarios(ids);
+              productoId = reseñaVista.conseguirProductoId();
+              valoresReseña = reseñaVista.obtenerValoresReseña();
 
-            case 5:
-              usuarios = _context.sent;
-              // Mostrar la información de los usuarios en las reseñas
-              reseñaVista.mostrarInfoUsuario(usuarios);
+              if (!(valoresReseña.puntuacion === '' || valoresReseña.contenido === '')) {
+                _context.next = 6;
+                break;
+              }
 
-            case 7:
+              reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
+              _context.next = 12;
+              break;
+
+            case 6:
+              infoReseña = {
+                id: productoId,
+                puntuacion: valoresReseña.puntuacion,
+                reseña: valoresReseña.contenido
+              };
+              reseña = new _reseA.default(infoReseña);
+              _context.next = 10;
+              return reseña.crear();
+
+            case 10:
+              mensaje = _context.sent;
+
+              if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
+                reseñaVista.mostrarErrorReseña(mensaje);
+              } else {
+                reseñaVista.mostrarMensajeReseñaCreada(productoId);
+              }
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -7231,35 +7305,38 @@ $(document).ready(function () {
       }, _callee);
     }));
 
-    return function controladorMostrarReseñas() {
+    return function controladorCrearResenia() {
       return _ref.apply(this, arguments);
     };
   }();
 
-  controladorMostrarReseñas();
+  var controladorEliminarResenia = function controladorEliminarResenia(target) {
+    var perfil = new _perfil.default();
+    var infoResenia = perfilVista.obtenerInfoResenia(target);
+    perfilVista.eliminarReseniaDom(target);
+    perfil.eliminarResenia(infoResenia.idProducto, infoResenia.idResenia);
+  };
 
-  var controladorMisCompras =
+  var controladorMostrarReseñas =
   /*#__PURE__*/
   function () {
     var _ref2 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee2() {
-      var idUsuario, misCompras, compras;
+      var ids, peticion, usuarios;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              idUsuario = misComprasVista.obtenerIdUsuario();
-              misCompras = new _misCompras.default(idUsuario);
-              _context2.next = 4;
-              return misCompras.mostrar();
+              reseñaVista.mostrarReseñas();
+              ids = reseñaVista.retornarIdsUsuarios();
+              peticion = new _peticiones.default();
+              _context2.next = 5;
+              return peticion.obtenerUsuarios(ids);
 
-            case 4:
-              compras = _context2.sent;
-              console.log(compras);
-              compras.map(function (compra) {
-                misComprasVista.renderizarMisCompras(compra);
-              });
+            case 5:
+              usuarios = _context2.sent;
+              reseñaVista.mostrarInfoUsuario(usuarios);
 
             case 7:
             case "end":
@@ -7269,44 +7346,44 @@ $(document).ready(function () {
       }, _callee2);
     }));
 
-    return function controladorMisCompras() {
+    return function controladorMostrarReseñas() {
       return _ref2.apply(this, arguments);
     };
   }();
 
-  controladorMisCompras();
+  controladorMostrarReseñas();
 
-  var controladorRegistrarse =
+  var controladorMiInformacion =
   /*#__PURE__*/
   function () {
     var _ref3 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee3() {
-      var infoUsuario, objetoUsuario, usuarioRegistrado;
+      var idUsuario, perfil, compras, reseñas;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              // Se crea la infoUsuario con los valores ingresados
-              infoUsuario = registrarseVista.obtenerValoresUsuarioRegistrado();
+              idUsuario = perfilVista.obtenerIdUsuario();
+              perfil = new _perfil.default();
+              _context3.next = 4;
+              return perfil.mostrarMisCompras(idUsuario);
 
-              if (!(infoUsuario !== undefined)) {
-                _context3.next = 7;
-                break;
-              }
-
-              // Se crea un objeto de la clase Registrarse con la información del usuario
-              objetoUsuario = new _registrarse.default(infoUsuario); // Se envía la petición al servidor para crear el usuario
-
-              _context3.next = 5;
-              return objetoUsuario.enviarPeticion();
-
-            case 5:
-              usuarioRegistrado = _context3.sent;
-              // Muestra el sweet alert según la respuesta de la petición
-              registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
+            case 4:
+              compras = _context3.sent;
+              _context3.next = 7;
+              return perfil.mostrarMisReseñas(idUsuario);
 
             case 7:
+              reseñas = _context3.sent;
+              reseñas.map(function (reseña) {
+                perfilVista.renderizarReseña(reseña);
+              });
+              compras.map(function (compra) {
+                perfilVista.renderizarCompra(compra);
+              });
+
+            case 10:
             case "end":
               return _context3.stop();
           }
@@ -7314,42 +7391,48 @@ $(document).ready(function () {
       }, _callee3);
     }));
 
-    return function controladorRegistrarse() {
+    return function controladorMiInformacion() {
       return _ref3.apply(this, arguments);
     };
   }();
 
-  var controladorIniciarSesion =
+  var URL = document.URL.split('/');
+
+  if (document.URL.split('/')[URL.length - 1] === 'perfil' || document.URL.split('/')[URL.length - 1] === 'misCompras' || document.URL.split('/')[URL.length - 1] === 'misResenias') {
+    controladorMiInformacion();
+  }
+
+  var controladorRegistrarse =
   /*#__PURE__*/
   function () {
     var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee4() {
-      var infoUsuario, objetoUsuario, usuarioLogeado;
+      var infoUsuario, objetoUsuario, usuarioRegistrado;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
-              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
+              // Se crea la infoUsuario con los valores ingresados
+              infoUsuario = registrarseVista.obtenerValoresUsuarioRegistrado();
 
               if (!(infoUsuario !== undefined)) {
-                _context4.next = 8;
+                _context4.next = 7;
                 break;
               }
 
-              // Se crea un objeto de la clase IniciarSesion con la información del usuario
-              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
+              // Se crea un objeto de la clase Registrarse con la información del usuario
+              objetoUsuario = new _registrarse.default(infoUsuario); // Se envía la petición al servidor para crear el usuario
 
-              objetoUsuario.enviarPeticion();
-              _context4.next = 6;
+              _context4.next = 5;
               return objetoUsuario.enviarPeticion();
 
-            case 6:
-              usuarioLogeado = _context4.sent;
-              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
+            case 5:
+              usuarioRegistrado = _context4.sent;
+              // Muestra el sweet alert según la respuesta de la petición
+              registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
 
-            case 8:
+            case 7:
             case "end":
               return _context4.stop();
           }
@@ -7357,8 +7440,51 @@ $(document).ready(function () {
       }, _callee4);
     }));
 
-    return function controladorIniciarSesion() {
+    return function controladorRegistrarse() {
       return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var controladorIniciarSesion =
+  /*#__PURE__*/
+  function () {
+    var _ref5 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee5() {
+      var infoUsuario, objetoUsuario, usuarioLogeado;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
+              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
+
+              if (!(infoUsuario !== undefined)) {
+                _context5.next = 8;
+                break;
+              }
+
+              // Se crea un objeto de la clase IniciarSesion con la información del usuario
+              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
+
+              objetoUsuario.enviarPeticion();
+              _context5.next = 6;
+              return objetoUsuario.enviarPeticion();
+
+            case 6:
+              usuarioLogeado = _context5.sent;
+              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
+
+            case 8:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function controladorIniciarSesion() {
+      return _ref5.apply(this, arguments);
     };
   }(); //Controlador que agrega un producto al carrito
 
@@ -7366,13 +7492,13 @@ $(document).ready(function () {
   var controladorCarrito =
   /*#__PURE__*/
   function () {
-    var _ref5 = _asyncToGenerator(
+    var _ref6 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee5(boton, e) {
+    regeneratorRuntime.mark(function _callee6(boton, e) {
       var infoProducto, producto;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               if (boton === 'btn') {
                 // Obtener los datos del producto que quiero agregar al carrito
@@ -7383,12 +7509,12 @@ $(document).ready(function () {
 
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
-                _context5.next = 4;
+                _context6.next = 4;
                 break;
               }
 
               carritoVista.mostrarMensajeSinStock();
-              return _context5.abrupt("return");
+              return _context6.abrupt("return");
 
             case 4:
               // Crear un objeto de la clase Carrito
@@ -7404,14 +7530,14 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee5);
+      }, _callee6);
     }));
 
     return function controladorCarrito(_x, _x2) {
-      return _ref5.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }(); // Controlador que elimina un producto del carrito
 
@@ -7419,24 +7545,24 @@ $(document).ready(function () {
   var controladorEliminarProductoCarrito =
   /*#__PURE__*/
   function () {
-    var _ref6 = _asyncToGenerator(
+    var _ref7 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(e) {
+    regeneratorRuntime.mark(function _callee7(e) {
       var productoEliminar, producto, permisoBorrarProducto;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               // Se obtiene el id del producto que se quiere eliminar
               productoEliminar = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
 
               producto = new _carrito.default(); // Se elimina el producto creado con el id del producto y se envía la cantidad para que se actualice el stock
 
-              _context6.next = 4;
+              _context7.next = 4;
               return producto.eliminarProducto(productoEliminar.id, productoEliminar.cantidad, productoEliminar.nombre);
 
             case 4:
-              permisoBorrarProducto = _context6.sent;
+              permisoBorrarProducto = _context7.sent;
 
               if (permisoBorrarProducto) {
                 carritoVista.eliminarProductoDOM(e);
@@ -7446,37 +7572,36 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
     return function controladorEliminarProductoCarrito(_x3) {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }();
 
   var controladorGuardarAjustes =
   /*#__PURE__*/
   function () {
-    var _ref7 = _asyncToGenerator(
+    var _ref8 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee7() {
+    regeneratorRuntime.mark(function _callee8() {
       var respuesta, infoUsuario, token, perfil;
-      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               infoUsuario = perfilVista.obtenerInfoAjustes();
-              console.log(infoUsuario, 'hehe');
               token = (0, _cookie.obtenerCookiePorNombre)('jwt');
               perfil = new _perfil.default();
-              _context7.next = 6;
+              _context8.next = 5;
               return perfil.actualizar(infoUsuario, token);
 
-            case 6:
-              respuesta = _context7.sent;
+            case 5:
+              respuesta = _context8.sent;
 
               if (respuesta.data.status === 'error') {
                 perfilVista.mostrarError(respuesta.data.error.errors);
@@ -7484,16 +7609,16 @@ $(document).ready(function () {
                 perfilVista.mostrarMensajeExito();
               }
 
-            case 8:
+            case 7:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7);
+      }, _callee8);
     }));
 
     return function controladorGuardarAjustes() {
-      return _ref7.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
@@ -7546,26 +7671,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref8 = _asyncToGenerator(
+    var _ref9 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee8(e) {
-      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+    regeneratorRuntime.mark(function _callee9(e) {
+      return regeneratorRuntime.wrap(function _callee9$(_context9) {
         while (1) {
-          switch (_context8.prev = _context8.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context8.stop();
+              return _context9.stop();
           }
         }
-      }, _callee8);
+      }, _callee9);
     }));
 
     return function (_x4) {
-      return _ref8.apply(this, arguments);
+      return _ref9.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -7582,58 +7707,34 @@ $(document).ready(function () {
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref9 = _asyncToGenerator(
+    var _ref10 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee9(e) {
-      var productoId, valoresReseña, infoReseña, reseña, mensaje;
-      return regeneratorRuntime.wrap(function _callee9$(_context9) {
+    regeneratorRuntime.mark(function _callee10(e) {
+      return regeneratorRuntime.wrap(function _callee10$(_context10) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context10.prev = _context10.next) {
             case 0:
               e.preventDefault();
-              productoId = reseñaVista.conseguirProductoId();
-              valoresReseña = reseñaVista.obtenerValoresReseña();
+              controladorCrearResenia();
 
-              if (!(valoresReseña.puntuacion === '' || valoresReseña.contenido === '')) {
-                _context9.next = 7;
-                break;
-              }
-
-              reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
-              _context9.next = 13;
-              break;
-
-            case 7:
-              infoReseña = {
-                id: productoId,
-                puntuacion: valoresReseña.puntuacion,
-                reseña: valoresReseña.contenido
-              };
-              reseña = new _reseA.default(infoReseña);
-              _context9.next = 11;
-              return reseña.crear();
-
-            case 11:
-              mensaje = _context9.sent;
-
-              if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
-                reseñaVista.mostrarErrorReseña(mensaje);
-              } else {
-                reseñaVista.mostrarMensajeReseñaCreada(productoId);
-              }
-
-            case 13:
+            case 2:
             case "end":
-              return _context9.stop();
+              return _context10.stop();
           }
         }
-      }, _callee9);
+      }, _callee10);
     }));
 
     return function (_x5) {
-      return _ref9.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }());
+
+  _base.domElementos.perfilContenido.on('click', function (e) {
+    if (e.target.matches('#btnEliminarReseña')) {
+      controladorEliminarResenia(e.target);
+    }
+  });
 
   _base.domElementos.formularioAjustes.submit(function (event) {
     event.preventDefault();
@@ -7646,7 +7747,7 @@ $(document).ready(function () {
     location.assign('/');
   });
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./models/perfil":"models/perfil.js","./models/misCompras":"models/misCompras.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js","./views/perfilVista":"views/perfilVista.js","./views/misComprasVista":"views/misComprasVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./models/perfil":"models/perfil.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js","./views/perfilVista":"views/perfilVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7674,7 +7775,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51681" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56394" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

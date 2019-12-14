@@ -1,28 +1,29 @@
 <body>
-    <div class="perfil">
-        <div class="perfil__personal">
-            <div class="perfil__personalInfo">
-                <div>
-                    <img src="/images/usuarios/{{usuario.foto}}" alt="{{usuario.nombre}}" id="usuarioId"
-                        data-id="{{usuario.id}}" />
+    <div class="contenedor">
+        <div class="perfil">
+            <div class="perfil__personal">
+                <div class="perfil__personalInfo">
+                    <div>
+                        <img src="/images/usuarios/{{usuario.foto}}" alt="{{usuario.nombre}}" id="usuarioId"
+                            data-id="{{usuario.id}}" />
+                    </div>
+                    <h4>{{usuario.nombre}}</h4>
+                    <span>Premium</span>
                 </div>
-                <h4>{{usuario.nombre}}</h4>
-                <span>Premium</span>
+                <div class="perfil__personalOpciones">
+                    <ul>
+                        <li>
+                            <a href="/perfil"><i class="fas fa-user"></i> Mi perfil</a>
+                        </li>
+                        <li>
+                            <a href="/misCompras"> <i class="fas fa-shopping-cart"></i>Mis compras</a>
+                        </li>
+                        <li>
+                            <a href="/misResenias"><i class="fas fa-pen-alt"></i></i></i>Mis reseñas</a>
+                        </li>
+                        <li>
+                            <a href="/"><i class="fas fa-sign-out-alt"></i>Regresar</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="perfil__personalOpciones">
-                <ul>
-                    <li>
-                        <a href="/perfil"><i class="fas fa-user"></i> Mi perfil</a>
-                    </li>
-                    <li>
-                        <a href="/misCompras"> <i class="fas fa-shopping-cart"></i>Mis compras</a>
-                    </li>
-                    <li>
-                        <a href="/misResenias"><i class="fas fa-pen-alt"></i></i></i>Mis reseñas</a>
-                    </li>
-                    <li>
-                        <a href="/"><i class="fas fa-sign-out-alt"></i>Regresar</a>
-                    </li>
-                </ul>
-            </div>
-        </div>

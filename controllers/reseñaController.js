@@ -61,8 +61,28 @@ exports.crearReseña = catchAsync(async (req, res, next) => {
   });
 });
 
+const obtenerReseñasDesde = async (req, parametro) => {
+  let reseñas;
+  if (parametro === 'producto') {
+    reseñas = await Reseña.find({ producto: req.params.id });
+  } else if (parametro === 'usuario') {
+    reseñas = await Reseña.find({ usuario: req.params.id });
+  }
+  return reseñas;
+};
+
 exports.obtenerReseñas = catchAsync(async (req, res, next) => {
-  const reseñas = await Reseña.find({ producto: req.params.id });
+  const reseñas = await obtenerReseñasDesde(req, 'producto');
+  res.status(200).json({
+    status: 'Exito',
+    data: {
+      reseñas
+    }
+  });
+});
+
+exports.obtenerReseñasDesdeUsuario = catchAsync(async (req, res, next) => {
+  const reseñas = await obtenerReseñasDesde(req, 'usuario');
   res.status(200).json({
     status: 'Exito',
     data: {
@@ -81,7 +101,7 @@ exports.actualizarReseña = catchAsync(async (req, res, next) => {
   );
 
   // Si el usuario del token que quiere eliminar la reseña es el mismo que quien creo la reseña se permite actualizar la reseña
-  if (req.usuario.id == reseñaActualizada.usuario._id) {
+  if (req.usuario.id === reseñaActualizada.usuario._id) {
     res.status(200).json({
       status: 'Exito',
       data: {

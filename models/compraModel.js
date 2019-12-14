@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const compraSchema = mongoose.Schema({
-  carrito: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Carrito',
-    required: [true, 'La compra debe de pertenecer a un carrito']
-  },
+  productos: [],
   usuario: {
     type: mongoose.Schema.ObjectId,
     ref: 'Usuario',
