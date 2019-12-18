@@ -13,6 +13,15 @@ const firmarToken = id => {
 
 const enviarToken = (usuario, statusCodigo, res) => {
   const token = firmarToken(usuario.id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('jwt', token, cookieOptions);
   usuario.contraseña = undefined;
   res.status(statusCodigo).json({
     status: 'Exito',
@@ -106,18 +115,28 @@ exports.estaLogeado = async (req, res, next) => {
         req.cookies.jwt,
         process.env.JWT_SECRET
       );
+
       const usuarioActual = await Usuario.findById(decodificado.id);
+
       if (!usuarioActual) {
-        return next(
-          new AppError('No has iniciado sesión, por favor inicia sesión', 401)
-        );
+        return next();
       }
+
       res.locals.usuario = usuarioActual;
       req.usuario = usuarioActual;
+
       return next();
     } catch (error) {
-      return next(new AppError('Error con el servidor', 400));
+      return next();
     }
   }
-  return next();
+  next();
+};
+
+exports.cerrarSesion = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() * 10 * 1000),
+    httpOnly: true
+  });
+  res.status(200).json({ status: 'Exito' });
 };

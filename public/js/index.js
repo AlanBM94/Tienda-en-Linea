@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { configWaypoints, domElementos } from './base';
+import { cerrarSesion } from './models/cerrarSesion';
 import { eliminarCookie, obtenerCookiePorNombre } from './utils/cookie';
 import Peticion from './models/peticiones';
 import Registrarse from './models/registrarse';
@@ -127,7 +128,11 @@ $(document).ready(() => {
     const producto = new Carrito();
     if (infoProducto !== false) {
       // Enviar la petición al servidor para agregar el producto al carrito
-      producto.agregarProducto(infoProducto);
+      const respuesta = await producto.agregarProducto(infoProducto);
+      console.log(respuesta);
+      if (respuesta.data.status === 'error') {
+        return carritoVista.mostrarMensajeNoSession();
+      }
       carritoVista.mostrarMensaje(infoProducto);
     } else {
       carritoVista.mostrarMensaje(infoProducto);
@@ -182,31 +187,13 @@ $(document).ready(() => {
   domElementos.btnAgregarCarrito.on('click', e => {
     e.preventDefault();
     // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
-    if (document.cookie) {
-      const cookieMiTienda = document.cookie.split('=')[0];
-      if (cookieMiTienda === 'jwt') {
-        controladorCarrito('btn');
-      } else {
-        carritoVista.mostrarMensajeNoSession();
-      }
-    } else {
-      carritoVista.mostrarMensajeNoSession();
-    }
+    controladorCarrito('btn');
   });
 
   // Evento que se dispara cuando se presiona el icono de agregar al carrito
   domElementos.iconoAgregarCarrito.on('click', function(e) {
     // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
-    if (document.cookie) {
-      const cookieMiTienda = document.cookie.split('=')[0];
-      if (cookieMiTienda === 'jwt') {
-        controladorCarrito('icono', e);
-      } else {
-        carritoVista.mostrarMensajeNoSession();
-      }
-    } else {
-      carritoVista.mostrarMensajeNoSession();
-    }
+    controladorCarrito('icono', e);
   });
 
   // Evento que se dispara cuando se presiona el boton de eliminar carrito
@@ -242,8 +229,9 @@ $(document).ready(() => {
   });
 
   // Evento que se dispara cuando se cierra sesión
-  domElementos.btnCerrarSesion.on('click', () => {
-    eliminarCookie();
+  domElementos.btnCerrarSesion.on('click', async e => {
+    e.preventDefault();
+    await cerrarSesion();
     location.assign('/');
   });
 });

@@ -118,5 +118,9 @@ export const mostrarMensajeNoSession = () => {
     'warning',
     'No has iniciado sesión!',
     'Debes iniciar sesión para agregar un producto a tu carrito'
-  );
+  ).then(function(respuesta) {
+    if (respuesta.value) {
+      window.location.href = '/iniciarSesion';
+    }
+  });
 };

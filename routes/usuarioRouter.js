@@ -10,6 +10,8 @@ router.route('/registrarse').post(authController.registrarse);
 
 router.route('/iniciarSesion').post(authController.iniciarSesion);
 
+router.route('/cerrarSesion').get(authController.cerrarSesion);
+
 router.route('/:id').get(usuarioController.obtenerUsuario);
 
 router.use(authController.proteger);

@@ -238,34 +238,6 @@ var configWaypoints = function configWaypoints() {
 };
 
 exports.configWaypoints = configWaypoints;
-},{}],"utils/cookie.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.obtenerCookiePorNombre = exports.eliminarCookie = exports.crearCookie = void 0;
-
-/* eslint-disable */
-var crearCookie = function crearCookie(respuesta) {
-  document.cookie = "jwt=".concat(respuesta.data.token, "; max-age=").concat(60 * 60 * 24 * 7, " path=/");
-  document.cookie = 'username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/';
-};
-
-exports.crearCookie = crearCookie;
-
-var eliminarCookie = function eliminarCookie() {
-  document.cookie = 'jwt=;expires=Thu, path=/ 01 Jan 1970 00:00:01 GMT; path=/';
-};
-
-exports.eliminarCookie = eliminarCookie;
-
-var obtenerCookiePorNombre = function obtenerCookiePorNombre(nombre) {
-  var b = document.cookie.match('(^|[^;]+)\\s*' + nombre + '\\s*=\\s*([^;]+)');
-  return b ? b.pop() : '';
-};
-
-exports.obtenerCookiePorNombre = obtenerCookiePorNombre;
 },{}],"../../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -2707,7 +2679,96 @@ module.exports.default = axios;
 
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"models/peticiones.js":[function(require,module,exports) {
+},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"models/cerrarSesion.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.cerrarSesion = void 0;
+
+require("regenerator-runtime/runtime");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var cerrarSesion =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee() {
+    var res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return (0, _axios.default)({
+              method: 'GET',
+              url: '/api/v1/usuarios/cerrarSesion'
+            });
+
+          case 3:
+            res = _context.sent;
+            if (res.data.status = 'success') location.reload(true);
+            _context.next = 10;
+            break;
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            console.log(_context.t0.response);
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function cerrarSesion() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.cerrarSesion = cerrarSesion;
+},{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","axios":"../../node_modules/axios/index.js"}],"utils/cookie.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.obtenerCookiePorNombre = exports.eliminarCookie = exports.crearCookie = void 0;
+
+/* eslint-disable */
+var crearCookie = function crearCookie(respuesta) {
+  document.cookie = "jwt=".concat(respuesta.data.token, "; max-age=").concat(60 * 60 * 24 * 7, " path=/");
+  document.cookie = 'username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/';
+};
+
+exports.crearCookie = crearCookie;
+
+var eliminarCookie = function eliminarCookie() {
+  document.cookie = 'jwt=;expires=Thu, path=/ 01 Jan 1970 00:00:01 GMT; path=/';
+};
+
+exports.eliminarCookie = eliminarCookie;
+
+var obtenerCookiePorNombre = function obtenerCookiePorNombre(nombre) {
+  var b = document.cookie.match('(^|[^;]+)\\s*' + nombre + '\\s*=\\s*([^;]+)');
+  return b ? b.pop() : '';
+};
+
+exports.obtenerCookiePorNombre = obtenerCookiePorNombre;
+},{}],"models/peticiones.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3140,20 +3201,21 @@ function () {
 
               case 3:
                 consulta = _context.sent;
+                console.log(consulta);
                 return _context.abrupt("return", consulta);
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
                 alert('Algo salió mal');
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       function enviarPeticion() {
@@ -3229,21 +3291,20 @@ function () {
 
               case 3:
                 consulta = _context.sent;
-                _context.next = 10;
-                break;
+                return _context.abrupt("return", consulta);
 
-              case 6:
-                _context.prev = 6;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
                 alert('Algo salió mal');
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee, null, [[0, 7]]);
       }));
 
       function agregarProducto(_x) {
@@ -6830,7 +6891,6 @@ var mostrarSweetAlert = function mostrarSweetAlert(respuesta) {
   if (respuesta.data.status === 'fail') {
     (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', respuesta.data.message);
   } else {
-    (0, _cookie.crearCookie)(respuesta);
     (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', "Bienvenido ".concat(respuesta.data.data.usuario.nombre)).then(function (respuesta) {
       if (respuesta.value) {
         location.assign('/');
@@ -6957,7 +7017,11 @@ var mostrarMensajeSinStock = function mostrarMensajeSinStock() {
 exports.mostrarMensajeSinStock = mostrarMensajeSinStock;
 
 var mostrarMensajeNoSession = function mostrarMensajeNoSession() {
-  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'No has iniciado sesión!', 'Debes iniciar sesión para agregar un producto a tu carrito');
+  (0, _sweetAlertMensajes.configurarSweetAlert)('warning', 'No has iniciado sesión!', 'Debes iniciar sesión para agregar un producto a tu carrito').then(function (respuesta) {
+    if (respuesta.value) {
+      window.location.href = '/iniciarSesion';
+    }
+  });
 };
 
 exports.mostrarMensajeNoSession = mostrarMensajeNoSession;
@@ -7212,6 +7276,8 @@ exports.eliminarReseniaDom = eliminarReseniaDom;
 "use strict";
 
 var _base = require("./base");
+
+var _cerrarSesion = require("./models/cerrarSesion");
 
 var _cookie = require("./utils/cookie");
 
@@ -7495,7 +7561,7 @@ $(document).ready(function () {
     var _ref6 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee6(boton, e) {
-      var infoProducto, producto;
+      var infoProducto, producto, respuesta;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
@@ -7520,15 +7586,34 @@ $(document).ready(function () {
               // Crear un objeto de la clase Carrito
               producto = new _carrito.default();
 
-              if (infoProducto !== false) {
-                // Enviar la petición al servidor para agregar el producto al carrito
-                producto.agregarProducto(infoProducto);
-                carritoVista.mostrarMensaje(infoProducto);
-              } else {
-                carritoVista.mostrarMensaje(infoProducto);
+              if (!(infoProducto !== false)) {
+                _context6.next = 15;
+                break;
               }
 
-            case 6:
+              _context6.next = 8;
+              return producto.agregarProducto(infoProducto);
+
+            case 8:
+              respuesta = _context6.sent;
+              console.log(respuesta);
+
+              if (!(respuesta.data.status === 'error')) {
+                _context6.next = 12;
+                break;
+              }
+
+              return _context6.abrupt("return", carritoVista.mostrarMensajeNoSession());
+
+            case 12:
+              carritoVista.mostrarMensaje(infoProducto);
+              _context6.next = 16;
+              break;
+
+            case 15:
+              carritoVista.mostrarMensaje(infoProducto);
+
+            case 16:
             case "end":
               return _context6.stop();
           }
@@ -7638,33 +7723,13 @@ $(document).ready(function () {
   _base.domElementos.btnAgregarCarrito.on('click', function (e) {
     e.preventDefault(); // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
 
-    if (document.cookie) {
-      var cookieMiTienda = document.cookie.split('=')[0];
-
-      if (cookieMiTienda === 'jwt') {
-        controladorCarrito('btn');
-      } else {
-        carritoVista.mostrarMensajeNoSession();
-      }
-    } else {
-      carritoVista.mostrarMensajeNoSession();
-    }
+    controladorCarrito('btn');
   }); // Evento que se dispara cuando se presiona el icono de agregar al carrito
 
 
   _base.domElementos.iconoAgregarCarrito.on('click', function (e) {
     // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
-    if (document.cookie) {
-      var cookieMiTienda = document.cookie.split('=')[0];
-
-      if (cookieMiTienda === 'jwt') {
-        controladorCarrito('icono', e);
-      } else {
-        carritoVista.mostrarMensajeNoSession();
-      }
-    } else {
-      carritoVista.mostrarMensajeNoSession();
-    }
+    controladorCarrito('icono', e);
   }); // Evento que se dispara cuando se presiona el boton de eliminar carrito
 
 
@@ -7742,12 +7807,37 @@ $(document).ready(function () {
   }); // Evento que se dispara cuando se cierra sesión
 
 
-  _base.domElementos.btnCerrarSesion.on('click', function () {
-    (0, _cookie.eliminarCookie)();
-    location.assign('/');
-  });
+  _base.domElementos.btnCerrarSesion.on('click',
+  /*#__PURE__*/
+  function () {
+    var _ref11 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee11(e) {
+      return regeneratorRuntime.wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              e.preventDefault();
+              _context11.next = 3;
+              return (0, _cerrarSesion.cerrarSesion)();
+
+            case 3:
+              location.assign('/');
+
+            case 4:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
+    }));
+
+    return function (_x6) {
+      return _ref11.apply(this, arguments);
+    };
+  }());
 });
-},{"./base":"base.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./models/perfil":"models/perfil.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js","./views/perfilVista":"views/perfilVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./base":"base.js","./models/cerrarSesion":"models/cerrarSesion.js","./utils/cookie":"utils/cookie.js","./models/peticiones":"models/peticiones.js","./models/registrarse":"models/registrarse.js","./models/iniciarSesion":"models/iniciarSesion.js","./models/carrito":"models/carrito.js","./models/compra":"models/compra.js","./models/reseña":"models/reseña.js","./models/perfil":"models/perfil.js","./views/registrarseVista":"views/registrarseVista.js","./views/iniciarSesionVista":"views/iniciarSesionVista.js","./views/carritoVista":"views/carritoVista.js","./views/compraVista":"views/compraVista.js","./views/reseñasVista":"views/reseñasVista.js","./views/perfilVista":"views/perfilVista.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7775,7 +7865,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56394" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56162" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -25,7 +25,6 @@ export const mostrarSweetAlert = respuesta => {
   if (respuesta.data.status === 'fail') {
     configurarSweetAlert('error', 'Error!', respuesta.data.message);
   } else {
-    crearCookie(respuesta);
     configurarSweetAlert(
       'success',
       'Exito!',

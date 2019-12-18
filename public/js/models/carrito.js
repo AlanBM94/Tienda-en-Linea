@@ -20,6 +20,7 @@ export default class Carrito {
           stock: producto.stock
         }
       });
+      return consulta;
     } catch (error) {
       console.log(error);
       alert('Algo salió mal');
