@@ -1843,6 +1843,12 @@ body {
   color: #f3f2f2;
 }
 
+.tituloDetalles {
+  margin: 0 auto;
+  font-size: 2rem;
+  color: #ed2827;
+}
+
 .btn {
   border: none;
   padding: 1rem 1.2rem;
@@ -1891,7 +1897,7 @@ body {
   border: 2px solid #ed2827;
   position: relative;
   overflow: hidden;
-  z-index: 1000000000;
+  z-index: 10000;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -1925,7 +1931,7 @@ body {
 
 .btn--secundarioPequeño {
   padding: 5px;
-  width: auto;
+  width: 10rem;
   height: auto;
   font-size: 1.2rem;
   margin: 0;
@@ -2159,6 +2165,11 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+.popup--perfil {
+  background: transparent;
+  position: fixed;
+}
+
 .popup a {
   font-size: 2rem;
   color: #ed2827;
@@ -2191,5 +2202,38 @@ body {
 .popup:target {
   -webkit-transform: translateX(0);
           transform: translateX(0);
+}
+
+.popup__detallesCompras {
+  width: 80%;
+  height: 80%;
+  padding: 5rem;
+  background: #ffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  position: absolute;
+  top: 3%;
+  left: 5%;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popup__detallesComprasContenido {
+  margin-top: 2rem;
+  width: 90%;
+  min-height: 80%;
+  background: #f3f2f2;
+  padding: 5rem;
+  overflow: scroll;
 }
 /*# sourceMappingURL=main.css.map */

@@ -85,7 +85,7 @@ export const renderizarCompra = compra => {
                 <h3 class="textoTablaPerfil">$${compra.precio}</h3>
             </div>
             <div class="misCompras__verDetalles">
-                <button class="btn btn--secundario btn--secundarioPequeño">Ver Detalles</button>
+                <a href="#popup" class="btn btn--secundario btn--secundarioPequeño">Ver Detalles</a>
             </div>
         </div>
     `;

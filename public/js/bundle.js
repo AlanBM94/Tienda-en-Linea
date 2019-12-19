@@ -7242,7 +7242,7 @@ var formatoFecha = function formatoFecha(fecha) {
 };
 
 var renderizarCompra = function renderizarCompra(compra) {
-  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(compra.fecha), "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.productos.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <button class=\"btn btn--secundario btn--secundarioPeque\xF1o\">Ver Detalles</button>\n            </div>\n        </div>\n    ");
+  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(compra.fecha), "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.productos.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <a href=\"#popup\" class=\"btn btn--secundario btn--secundarioPeque\xF1o\">Ver Detalles</a>\n            </div>\n        </div>\n    ");
 
   _base.domElementos.misComprasContenedor.append(markup);
 };
@@ -7588,7 +7588,7 @@ $(document).ready(function () {
               producto = new _carrito.default();
 
               if (!(infoProducto !== false)) {
-                _context6.next = 15;
+                _context6.next = 14;
                 break;
               }
 
@@ -7597,24 +7597,23 @@ $(document).ready(function () {
 
             case 8:
               respuesta = _context6.sent;
-              console.log(respuesta);
 
               if (!(respuesta.data.status !== 'Exito')) {
-                _context6.next = 12;
+                _context6.next = 11;
                 break;
               }
 
               return _context6.abrupt("return", carritoVista.mostrarMensajeNoSession());
 
-            case 12:
+            case 11:
               carritoVista.mostrarMensaje(infoProducto);
-              _context6.next = 16;
+              _context6.next = 15;
               break;
 
-            case 15:
+            case 14:
               carritoVista.mostrarMensaje(infoProducto);
 
-            case 16:
+            case 15:
             case "end":
               return _context6.stop();
           }
@@ -7866,7 +7865,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50257" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53504" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

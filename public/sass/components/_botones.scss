@@ -33,7 +33,7 @@
     border: 2px solid $color-primario;
     position: relative;
     overflow: hidden;
-    z-index: 1000000000;
+    z-index: 10000;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
     &:hover {
@@ -58,7 +58,7 @@
     }
     &Pequeño {
       padding: 5px;
-      width: auto;
+      width: 10rem;
       height: auto;
       font-size: 1.2rem;
       margin: 0;

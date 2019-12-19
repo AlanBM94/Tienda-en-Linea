@@ -9,6 +9,10 @@
   z-index: 100000;
   transform: translateX(100%);
   transition: all 0.3s ease-in-out;
+  &--perfil {
+    background: transparent;
+    position: fixed;
+  }
   & a {
     font-size: 2rem;
     color: $color-primario;
@@ -35,7 +39,30 @@
     left: 70%;
     padding: 8rem 3rem;
   }
+
   &:target {
     transform: translateX(0);
+  }
+
+  &__detallesCompras {
+    width: 80%;
+    height: 80%;
+    padding: 5rem;
+    background: $blanco;
+    display: flex;
+    margin: 0 auto;
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    @include flexColumn;
+  }
+
+  &__detallesComprasContenido {
+    margin-top: 2rem;
+    width: 90%;
+    min-height: 80%;
+    background: $gris-claro;
+    padding: 5rem;
+    overflow: scroll;
   }
 }
