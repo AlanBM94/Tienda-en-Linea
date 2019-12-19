@@ -33,6 +33,7 @@ $(document).ready(() => {
       };
       const reseña = new Reseña(infoReseña);
       const mensaje = await reseña.crear();
+      console.log(mensaje);
       if (
         mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
         mensaje === 'No puedes escribir más de una reseña'

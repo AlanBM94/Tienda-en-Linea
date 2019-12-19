@@ -7342,7 +7342,7 @@ $(document).ready(function () {
               }
 
               reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
-              _context.next = 12;
+              _context.next = 13;
               break;
 
             case 6:
@@ -7357,6 +7357,7 @@ $(document).ready(function () {
 
             case 10:
               mensaje = _context.sent;
+              console.log(mensaje);
 
               if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
                 reseñaVista.mostrarErrorReseña(mensaje);
@@ -7364,7 +7365,7 @@ $(document).ready(function () {
                 reseñaVista.mostrarMensajeReseñaCreada(productoId);
               }
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -7865,7 +7866,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53504" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50928" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
