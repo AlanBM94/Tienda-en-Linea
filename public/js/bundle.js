@@ -3544,10 +3544,11 @@ function (_Peticion) {
 
               case 2:
                 respuesta = _context.sent;
+                console.log(respuesta);
                 mensaje = this.validarCreacionReseña(respuesta);
                 return _context.abrupt("return", mensaje);
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -7598,7 +7599,7 @@ $(document).ready(function () {
               respuesta = _context6.sent;
               console.log(respuesta);
 
-              if (!(respuesta.data.status === 'error')) {
+              if (!(respuesta.data.status !== 'Exito')) {
                 _context6.next = 12;
                 break;
               }
@@ -7865,7 +7866,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56162" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50257" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

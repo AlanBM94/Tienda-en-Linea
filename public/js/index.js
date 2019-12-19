@@ -130,7 +130,7 @@ $(document).ready(() => {
       // Enviar la petición al servidor para agregar el producto al carrito
       const respuesta = await producto.agregarProducto(infoProducto);
       console.log(respuesta);
-      if (respuesta.data.status === 'error') {
+      if (respuesta.data.status !== 'Exito') {
         return carritoVista.mostrarMensajeNoSession();
       }
       carritoVista.mostrarMensaje(infoProducto);

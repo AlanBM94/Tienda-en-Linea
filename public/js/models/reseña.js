@@ -36,6 +36,7 @@ export default class Reseña extends Peticion {
         puntuacion: this.puntuacion
       }
     );
+    console.log(respuesta);
     const mensaje = this.validarCreacionReseña(respuesta);
     return mensaje;
   }

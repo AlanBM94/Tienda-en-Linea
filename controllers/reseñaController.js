@@ -6,20 +6,6 @@ const Producto = require('../models/productoModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const crearPermisoReseña = (carritos, articuloReseña) => {
-  let resultado;
-  carritos.map(carrito => {
-    carrito.productosHistorial.map(productoCarrito => {
-      if (productoCarrito.articulo === articuloReseña.nombre) {
-        resultado = true;
-      } else {
-        resultado = false;
-      }
-    });
-  });
-  return resultado;
-};
-
 exports.establecerIdUsuario = (req, res, next) => {
   if (!req.body.producto) req.body.producto = req.params.id;
   if (!req.body.usuario) req.body.usuario = req.usuario.id;
@@ -27,21 +13,24 @@ exports.establecerIdUsuario = (req, res, next) => {
 };
 
 exports.permitirHacerReseñaUsuario = catchAsync(async (req, res, next) => {
+  let permiso = false;
+
   const comprasUsuario = await Compra.find({
     usuario: req.usuario.id
   });
 
   const { producto } = req.body;
 
-  const articuloReseña = await Producto.findById(producto);
+  const productoReseña = await Producto.findById(producto);
 
-  const carritos = await Promise.all(
+  await Promise.all(
     comprasUsuario.map(compra => {
+      compra.productos.map(productoCompra => {
+        if (productoReseña.nombre === productoCompra.articulo) permiso = true;
+      });
       return Carrito.findById(compra.carrito);
     })
   );
-
-  const permiso = crearPermisoReseña(carritos, articuloReseña);
 
   if (!permiso) {
     return next(
