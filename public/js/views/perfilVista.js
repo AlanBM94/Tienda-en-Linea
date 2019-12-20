@@ -85,7 +85,9 @@ export const renderizarCompra = compra => {
                 <h3 class="textoTablaPerfil">$${compra.precio}</h3>
             </div>
             <div class="misCompras__verDetalles">
-                <a href="#popup" class="btn btn--secundario btn--secundarioPequeño">Ver Detalles</a>
+                <a href="#popup-perfil" class="btn btn--secundario btn--secundarioPequeño" data-id="${
+                  compra._id
+                }">Ver Detalles</a>
             </div>
         </div>
     `;
@@ -127,4 +129,26 @@ export const obtenerInfoResenia = evento => {
 export const eliminarReseniaDom = evento => {
   const elementoHijo = evento.parentElement.parentElement;
   elementoHijo.remove();
+};
+
+export const obtenerIdCompra = e => e.target.getAttribute('data-id');
+
+export const renderizarDetallesCompra = producto => {
+  const markup = `
+    <div class="misComprasContenido">
+      <div class="misCompras__fecha">
+          <h3 class="textoTablaPerfil">${producto.categoria}</h3>
+      </div>
+      <div class="misCompras__productos">
+          <h3 class="textoTablaPerfil">${producto.articulo}</h3>
+      </div>
+      <div class="misCompras__precio">
+          <h3 class="textoTablaPerfil">${producto.cantidad}</h3>
+      </div>
+      <div class="misCompras__verDetalles">
+          <h3 class="textoTablaPerfil">$${producto.precio}</h3>
+      </div>
+    </div>`;
+
+  domElementos.contenedorCompraUnica.append(markup);
 };

@@ -172,6 +172,17 @@ $(document).ready(() => {
     }
   };
 
+  const controladorVerDetallesCompra = async e => {
+    // Obtener el id del atributo data-id
+    const idCompra = perfilVista.obtenerIdCompra(e);
+    // Hacer una petición a la API para recuperar la compra del id obtenido
+    const perfil = new Perfil();
+    const compra = await perfil.obtenerCompra(idCompra);
+    compra.productos.map(producto => {
+      perfilVista.renderizarDetallesCompra(producto);
+    });
+  };
+
   // Evento que se dispara cuando se envía el formulario de Registro
   domElementos.formularioRegistrarse.submit(event => {
     event.preventDefault();
@@ -227,6 +238,12 @@ $(document).ready(() => {
   domElementos.formularioAjustes.submit(event => {
     event.preventDefault();
     controladorGuardarAjustes();
+  });
+
+  domElementos.perfilContenido.on('click', e => {
+    if (e.target.matches('.btn--secundarioPequeño')) {
+      controladorVerDetallesCompra(e);
+    }
   });
 
   // Evento que se dispara cuando se cierra sesión

@@ -5,7 +5,7 @@ import axios from 'axios';
 export default class Peticion {
   constructor() {}
 
-  async hacerPeticionGet(id, tipo) {
+  async hacerPeticionGetAnidada(id, tipo) {
     try {
       const consulta = await axios({
         method: 'GET',
@@ -64,10 +64,10 @@ export default class Peticion {
     }
   }
 
-  async hacerPeticionUsuario(id) {
+  async hacerPeticionGet(ruta, id) {
     try {
       const respuesta = await axios({
-        url: `/api/v1/usuarios/${id}`,
+        url: `/api/v1/${ruta}/${id}`,
         method: 'GET'
       });
       return respuesta;
@@ -78,6 +78,8 @@ export default class Peticion {
   }
 
   async obtenerUsuarios(idsUsuarios) {
-    return Promise.all(idsUsuarios.map(id => this.hacerPeticionUsuario(id)));
+    return Promise.all(
+      idsUsuarios.map(id => this.hacerPeticionGet('usuarios', id))
+    );
   }
 }

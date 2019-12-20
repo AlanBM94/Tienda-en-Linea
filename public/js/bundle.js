@@ -177,7 +177,8 @@ var domElementos = {
   idUsuario: $('#usuarioId'),
   misComprasContenedor: $('#misComprasContenedor'),
   misReseñasContenedor: $('#misReseñasContenedor'),
-  perfilContenido: $('.perfil__contenido')
+  perfilContenido: $('.perfil__contenido'),
+  contenedorCompraUnica: $('.popup__detallesComprasContenido')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -2800,9 +2801,9 @@ function () {
   }
 
   _createClass(Peticion, [{
-    key: "hacerPeticionGet",
+    key: "hacerPeticionGetAnidada",
     value: function () {
-      var _hacerPeticionGet = _asyncToGenerator(
+      var _hacerPeticionGetAnidada = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(id, tipo) {
         var consulta;
@@ -2835,11 +2836,11 @@ function () {
         }, _callee, null, [[0, 7]]);
       }));
 
-      function hacerPeticionGet(_x, _x2) {
-        return _hacerPeticionGet.apply(this, arguments);
+      function hacerPeticionGetAnidada(_x, _x2) {
+        return _hacerPeticionGetAnidada.apply(this, arguments);
       }
 
-      return hacerPeticionGet;
+      return hacerPeticionGetAnidada;
     }()
   }, {
     key: "hacerPeticionPost",
@@ -2976,11 +2977,11 @@ function () {
       return hacerPeticionDelete;
     }()
   }, {
-    key: "hacerPeticionUsuario",
+    key: "hacerPeticionGet",
     value: function () {
-      var _hacerPeticionUsuario = _asyncToGenerator(
+      var _hacerPeticionGet = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(id) {
+      regeneratorRuntime.mark(function _callee5(ruta, id) {
         var respuesta;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
@@ -2989,7 +2990,7 @@ function () {
                 _context5.prev = 0;
                 _context5.next = 3;
                 return (0, _axios.default)({
-                  url: "/api/v1/usuarios/".concat(id),
+                  url: "/api/v1/".concat(ruta, "/").concat(id),
                   method: 'GET'
                 });
 
@@ -3011,11 +3012,11 @@ function () {
         }, _callee5, null, [[0, 7]]);
       }));
 
-      function hacerPeticionUsuario(_x9) {
-        return _hacerPeticionUsuario.apply(this, arguments);
+      function hacerPeticionGet(_x9, _x10) {
+        return _hacerPeticionGet.apply(this, arguments);
       }
 
-      return hacerPeticionUsuario;
+      return hacerPeticionGet;
     }()
   }, {
     key: "obtenerUsuarios",
@@ -3030,7 +3031,7 @@ function () {
             switch (_context6.prev = _context6.next) {
               case 0:
                 return _context6.abrupt("return", Promise.all(idsUsuarios.map(function (id) {
-                  return _this.hacerPeticionUsuario(id);
+                  return _this.hacerPeticionGet('usuarios', id);
                 })));
 
               case 1:
@@ -3041,7 +3042,7 @@ function () {
         }, _callee6);
       }));
 
-      function obtenerUsuarios(_x10) {
+      function obtenerUsuarios(_x11) {
         return _obtenerUsuarios.apply(this, arguments);
       }
 
@@ -3665,7 +3666,7 @@ function (_Peticion) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGet", this).call(this, idUsuario, 'compras');
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGetAnidada", this).call(this, idUsuario, 'compras');
 
               case 2:
                 compras = _context2.sent;
@@ -3686,22 +3687,22 @@ function (_Peticion) {
       return mostrarMisCompras;
     }()
   }, {
-    key: "mostrarMisRese\xF1as",
+    key: "obtenerCompra",
     value: function () {
-      var _mostrarMisReseAs = _asyncToGenerator(
+      var _obtenerCompra = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(idUsuario) {
-        var reseñas;
+      regeneratorRuntime.mark(function _callee3(idCompra) {
+        var compra;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGet", this).call(this, idUsuario, 'resenias');
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGet", this).call(this, 'compra', idCompra);
 
               case 2:
-                reseñas = _context3.sent;
-                return _context3.abrupt("return", reseñas.data.data.reseñas);
+                compra = _context3.sent;
+                return _context3.abrupt("return", compra.data.data);
 
               case 4:
               case "end":
@@ -3711,7 +3712,39 @@ function (_Peticion) {
         }, _callee3, this);
       }));
 
-      function mostrarMisReseAs(_x4) {
+      function obtenerCompra(_x4) {
+        return _obtenerCompra.apply(this, arguments);
+      }
+
+      return obtenerCompra;
+    }()
+  }, {
+    key: "mostrarMisRese\xF1as",
+    value: function () {
+      var _mostrarMisReseAs = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(idUsuario) {
+        var reseñas;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionGetAnidada", this).call(this, idUsuario, 'resenias');
+
+              case 2:
+                reseñas = _context4.sent;
+                return _context4.abrupt("return", reseñas.data.data.reseñas);
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function mostrarMisReseAs(_x5) {
         return _mostrarMisReseAs.apply(this, arguments);
       }
 
@@ -3722,23 +3755,23 @@ function (_Peticion) {
     value: function () {
       var _eliminarResenia = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(idProducto, idResenia) {
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      regeneratorRuntime.mark(function _callee5(idProducto, idResenia) {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.next = 2;
+                _context5.next = 2;
                 return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionDelete", this).call(this, "/api/v1/productos/".concat(idProducto, "/resenias/").concat(idResenia));
 
               case 2:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
-      function eliminarResenia(_x5, _x6) {
+      function eliminarResenia(_x6, _x7) {
         return _eliminarResenia.apply(this, arguments);
       }
 
@@ -7166,7 +7199,7 @@ exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.eliminarReseniaDom = exports.obtenerInfoResenia = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
+exports.renderizarDetallesCompra = exports.obtenerIdCompra = exports.eliminarReseniaDom = exports.obtenerInfoResenia = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
 
 var _base = require("../base");
 
@@ -7242,7 +7275,7 @@ var formatoFecha = function formatoFecha(fecha) {
 };
 
 var renderizarCompra = function renderizarCompra(compra) {
-  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(compra.fecha), "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.productos.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <a href=\"#popup\" class=\"btn btn--secundario btn--secundarioPeque\xF1o\">Ver Detalles</a>\n            </div>\n        </div>\n    ");
+  var markup = "\n        <div class=\"misComprasContenido\">\n            <div class=\"misCompras__fecha\">\n                <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(compra.fecha), "</h3>\n            </div>\n            <div class=\"misCompras__productos\">\n                <h3 class=\"textoTablaPerfil\">").concat(compra.productos.length, " Productos comprados</h3>\n            </div>\n            <div class=\"misCompras__precio\">\n                <h3 class=\"textoTablaPerfil\">$").concat(compra.precio, "</h3>\n            </div>\n            <div class=\"misCompras__verDetalles\">\n                <a href=\"#popup-perfil\" class=\"btn btn--secundario btn--secundarioPeque\xF1o\" data-id=\"").concat(compra._id, "\">Ver Detalles</a>\n            </div>\n        </div>\n    ");
 
   _base.domElementos.misComprasContenedor.append(markup);
 };
@@ -7273,6 +7306,20 @@ var eliminarReseniaDom = function eliminarReseniaDom(evento) {
 };
 
 exports.eliminarReseniaDom = eliminarReseniaDom;
+
+var obtenerIdCompra = function obtenerIdCompra(e) {
+  return e.target.getAttribute('data-id');
+};
+
+exports.obtenerIdCompra = obtenerIdCompra;
+
+var renderizarDetallesCompra = function renderizarDetallesCompra(producto) {
+  var markup = "\n    <div class=\"misComprasContenido\">\n      <div class=\"misCompras__fecha\">\n          <h3 class=\"textoTablaPerfil\">".concat(producto.categoria, "</h3>\n      </div>\n      <div class=\"misCompras__productos\">\n          <h3 class=\"textoTablaPerfil\">").concat(producto.articulo, "</h3>\n      </div>\n      <div class=\"misCompras__precio\">\n          <h3 class=\"textoTablaPerfil\">").concat(producto.cantidad, "</h3>\n      </div>\n      <div class=\"misCompras__verDetalles\">\n          <h3 class=\"textoTablaPerfil\">$").concat(producto.precio, "</h3>\n      </div>\n    </div>");
+
+  _base.domElementos.contenedorCompraUnica.append(markup);
+};
+
+exports.renderizarDetallesCompra = renderizarDetallesCompra;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -7706,6 +7753,43 @@ $(document).ready(function () {
     return function controladorGuardarAjustes() {
       return _ref8.apply(this, arguments);
     };
+  }();
+
+  var controladorVerDetallesCompra =
+  /*#__PURE__*/
+  function () {
+    var _ref9 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee9(e) {
+      var idCompra, perfil, compra;
+      return regeneratorRuntime.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              // Obtener el id del atributo data-id
+              idCompra = perfilVista.obtenerIdCompra(e); // Hacer una petición a la API para recuperar la compra del id obtenido
+
+              perfil = new _perfil.default();
+              _context9.next = 4;
+              return perfil.obtenerCompra(idCompra);
+
+            case 4:
+              compra = _context9.sent;
+              compra.productos.map(function (producto) {
+                perfilVista.renderizarDetallesCompra(producto);
+              });
+
+            case 6:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+
+    return function controladorVerDetallesCompra(_x4) {
+      return _ref9.apply(this, arguments);
+    };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
 
@@ -7737,26 +7821,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref9 = _asyncToGenerator(
+    var _ref10 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee9(e) {
-      return regeneratorRuntime.wrap(function _callee9$(_context9) {
+    regeneratorRuntime.mark(function _callee10(e) {
+      return regeneratorRuntime.wrap(function _callee10$(_context10) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context10.prev = _context10.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context9.stop();
+              return _context10.stop();
           }
         }
-      }, _callee9);
+      }, _callee10);
     }));
 
-    return function (_x4) {
-      return _ref9.apply(this, arguments);
+    return function (_x5) {
+      return _ref10.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -7773,26 +7857,26 @@ $(document).ready(function () {
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref10 = _asyncToGenerator(
+    var _ref11 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee10(e) {
-      return regeneratorRuntime.wrap(function _callee10$(_context10) {
+    regeneratorRuntime.mark(function _callee11(e) {
+      return regeneratorRuntime.wrap(function _callee11$(_context11) {
         while (1) {
-          switch (_context10.prev = _context10.next) {
+          switch (_context11.prev = _context11.next) {
             case 0:
               e.preventDefault();
               controladorCrearResenia();
 
             case 2:
             case "end":
-              return _context10.stop();
+              return _context11.stop();
           }
         }
-      }, _callee10);
+      }, _callee11);
     }));
 
-    return function (_x5) {
-      return _ref10.apply(this, arguments);
+    return function (_x6) {
+      return _ref11.apply(this, arguments);
     };
   }());
 
@@ -7805,21 +7889,27 @@ $(document).ready(function () {
   _base.domElementos.formularioAjustes.submit(function (event) {
     event.preventDefault();
     controladorGuardarAjustes();
+  });
+
+  _base.domElementos.perfilContenido.on('click', function (e) {
+    if (e.target.matches('.btn--secundarioPequeño')) {
+      controladorVerDetallesCompra(e);
+    }
   }); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click',
   /*#__PURE__*/
   function () {
-    var _ref11 = _asyncToGenerator(
+    var _ref12 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee11(e) {
-      return regeneratorRuntime.wrap(function _callee11$(_context11) {
+    regeneratorRuntime.mark(function _callee12(e) {
+      return regeneratorRuntime.wrap(function _callee12$(_context12) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context12.prev = _context12.next) {
             case 0:
               e.preventDefault();
-              _context11.next = 3;
+              _context12.next = 3;
               return (0, _cerrarSesion.cerrarSesion)();
 
             case 3:
@@ -7827,14 +7917,14 @@ $(document).ready(function () {
 
             case 4:
             case "end":
-              return _context11.stop();
+              return _context12.stop();
           }
         }
-      }, _callee11);
+      }, _callee12);
     }));
 
-    return function (_x6) {
-      return _ref11.apply(this, arguments);
+    return function (_x7) {
+      return _ref12.apply(this, arguments);
     };
   }());
 });
@@ -7866,7 +7956,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50928" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49957" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

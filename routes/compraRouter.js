@@ -12,4 +12,6 @@ router.get(
   compraController.obtenerCheckoutSession
 );
 
+router.get('/:id', compraController.obtenerCompra);
+
 module.exports = router;

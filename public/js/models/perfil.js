@@ -17,12 +17,17 @@ export default class Perfil extends Peticion {
   }
 
   async mostrarMisCompras(idUsuario) {
-    const compras = await super.hacerPeticionGet(idUsuario, 'compras');
+    const compras = await super.hacerPeticionGetAnidada(idUsuario, 'compras');
     return compras.data.compras;
   }
 
+  async obtenerCompra(idCompra) {
+    const compra = await super.hacerPeticionGet('compra', idCompra);
+    return compra.data.data;
+  }
+
   async mostrarMisReseñas(idUsuario) {
-    const reseñas = await super.hacerPeticionGet(idUsuario, 'resenias');
+    const reseñas = await super.hacerPeticionGetAnidada(idUsuario, 'resenias');
     return reseñas.data.data.reseñas;
   }
 

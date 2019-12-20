@@ -103,3 +103,11 @@ exports.obtenerCompras = catchAsync(async (req, res, next) => {
     compras
   });
 });
+
+exports.obtenerCompra = catchAsync(async (req, res, next) => {
+  const compra = await Compra.findById(req.params.id);
+  res.json({
+    status: 'Exito',
+    data: compra
+  });
+});
