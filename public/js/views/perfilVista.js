@@ -109,7 +109,7 @@ export const renderizarReseña = reseña => {
             <h3 class="textoTablaPerfil">${reseña.reseña}</h3>
         </div>
         <div class="misReseñas__acciones">
-            <i class="fas fa-edit icono-editar"></i>
+            <a href="#popup"><i class="fas fa-edit icono-editar" ></i></a>
             <i class="fas fa-trash-alt icono-eliminar" id="btnEliminarReseña" data-id="${
               reseña.id
             }"

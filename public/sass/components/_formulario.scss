@@ -33,6 +33,11 @@
     &--login {
       justify-content: space-around;
     }
+    &--reseña {
+      & input {
+        max-width: 10rem;
+      }
+    }
     & textarea {
       resize: none;
       height: 213px;

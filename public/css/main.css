@@ -2009,6 +2009,10 @@ body {
       justify-content: space-around;
 }
 
+.formulario__form--reseña input {
+  max-width: 10rem;
+}
+
 .formulario__form textarea {
   resize: none;
   height: 213px;
@@ -2173,6 +2177,24 @@ body {
 
 .popup--perfil:target {
   background: #ffff;
+}
+
+.popup--reseña {
+  background: #f3f2f2;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup--reseña:target {
+  opacity: 1;
+  visibility: visible;
+  max-width: 80rem;
+  height: 80%;
+  -webkit-transform: translateX(-30%);
+          transform: translateX(-30%);
+  position: absolute !important;
 }
 
 .popup a {

@@ -1,21 +1,9 @@
-// const sendErrorDev = (err, req, res) => {
-//     // A) API
-//     if (req.originalUrl.startsWith('/api')) {
-//       return res.status(err.statusCode).json({
-//         status: err.status,
-//         error: err,
-//         message: err.message,
-//         stack: err.stack
-//       });
-//     }
+const AppError = require('../utils/appError');
 
-//     // B) RENDERED WEBSITE
-//     console.error('ERROR 💥', err);
-//     return res.status(err.statusCode).render('error', {
-//       title: 'Something went wrong!',
-//       msg: err.message
-//     });
-//   };
+const handleCastErrorDB = err => {
+  const message = `Invalid ${err.path}: ${err.value}.`;
+  return new AppError(message, 400);
+};
 
 const sendErrorDev = (err, req, res) => {
   return res.json({
@@ -32,5 +20,10 @@ module.exports = (err, req, res, next) => {
 
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, req, res);
+  } else if (process.env.NODE_ENV === 'production') {
+    let error = { ...err };
+    error.message = err.message;
+    // When the id is not valid
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
   }
 };

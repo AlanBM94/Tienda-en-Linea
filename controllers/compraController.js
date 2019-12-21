@@ -106,6 +106,9 @@ exports.obtenerCompras = catchAsync(async (req, res, next) => {
 
 exports.obtenerCompra = catchAsync(async (req, res, next) => {
   const compra = await Compra.findById(req.params.id);
+  if (!compra) {
+    return next('No se encontro ninguna compra con ese id', 404);
+  }
   res.json({
     status: 'Exito',
     data: compra

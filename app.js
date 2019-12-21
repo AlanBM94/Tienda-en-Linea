@@ -4,6 +4,7 @@ const expressHbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const globalErrorHandler = require('./controllers/errorController');
+const AppError = require('./utils/appError');
 const productoRouter = require('./routes/productoRouter');
 const usuarioRouter = require('./routes/usuarioRouter');
 const carritoRouter = require('./routes/carritoRouter');
@@ -63,6 +64,12 @@ app.use('/api/v1/productos', productoRouter);
 app.use('/api/v1/usuarios', usuarioRouter);
 app.use('/api/v1/carrito', carritoRouter);
 app.use('/api/v1/compra', compraRouter);
+// Handle the routes that were not found
+// app.all('*', (req, res, next) => {
+//   // console.log(req.originalUrl);
+//   // When an argument is passed into the next function express will assume that is an error and will skip all the middlewares until it reaches the error handler middleware
+//   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+// });
 app.use(globalErrorHandler);
 
 module.exports = app;

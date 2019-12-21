@@ -8,7 +8,6 @@ exports.obtenerProducto = catchAsync(async (req, res, next) => {
   if (!producto) {
     return next(new AppError('No se encontró producto con ese id', 404));
   }
-
   res.status(200).json({
     status: 'Exito',
     producto

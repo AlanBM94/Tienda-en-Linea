@@ -7283,7 +7283,7 @@ var renderizarCompra = function renderizarCompra(compra) {
 exports.renderizarCompra = renderizarCompra;
 
 var renderizarReseña = function renderizarReseña(reseña) {
-  var markup = "\n    <div class=\"misRese\xF1asContenido\">\n        <div class=\"misRese\xF1as__fecha\">\n            <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(reseña.reseñaFecha), "</h3>\n        </div>\n        <div class=\"misRese\xF1as__productos\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.producto, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__precio\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.reseña, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__acciones\">\n            <i class=\"fas fa-edit icono-editar\"></i>\n            <i class=\"fas fa-trash-alt icono-eliminar\" id=\"btnEliminarRese\xF1a\" data-id=\"").concat(reseña.id, "\"\n    </div>\n  ");
+  var markup = "\n    <div class=\"misRese\xF1asContenido\">\n        <div class=\"misRese\xF1as__fecha\">\n            <h3 class=\"textoTablaPerfil\">".concat(formatoFecha(reseña.reseñaFecha), "</h3>\n        </div>\n        <div class=\"misRese\xF1as__productos\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.producto, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__precio\">\n            <h3 class=\"textoTablaPerfil\">").concat(reseña.reseña, "</h3>\n        </div>\n        <div class=\"misRese\xF1as__acciones\">\n            <a href=\"#popup\"><i class=\"fas fa-edit icono-editar\" ></i></a>\n            <i class=\"fas fa-trash-alt icono-eliminar\" id=\"btnEliminarRese\xF1a\" data-id=\"").concat(reseña.id, "\"\n    </div>\n  ");
 
   _base.domElementos.misReseñasContenedor.append(markup);
 };
@@ -7956,7 +7956,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49957" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51811" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
