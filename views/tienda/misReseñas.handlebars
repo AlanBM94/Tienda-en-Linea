@@ -1,15 +1,16 @@
 {{> navigationPerfil}}
 <div class="perfil__contenido">
-    <div class="popup popup--reseña" id="popup">
+    <div class="popup popup--reseña" id="popupReseña">
         <a href="/misResenias">X</a>
         <form action="#" class="formulario__form formulario__form--reseña" id="formularioReseña">
             <div class="formulario__reseñaError">
 
             </div>
-            <input id="puntajeReseña" type="number" min="1" max="5" class="formulario__input" name="puntaje"
+            <input id="puntajeEditarReseña" type="number" min="1" max="5" class="formulario__input" name="puntaje"
                 placeholder="Puntaje" />
-            <textarea class="formulario__input" name="reseña" id="contenidoReseña" cols="30" rows="10"></textarea>
-            <button class="btn btn--rojo" id="btnPublicarReseña">Publicar reseña</button>
+            <textarea class="formulario__input" name="reseña" id="contenidoEditarReseña" cols="30" rows="10"></textarea>
+            <input type="hidden" id="idResenia">
+            <button class="btn btn--rojo" id="editarReseña" data-id="0">Editar reseña</button>
         </form>
     </div>
     <div class="perfil__contenidoPrincipal" id="misReseñasContenedor">

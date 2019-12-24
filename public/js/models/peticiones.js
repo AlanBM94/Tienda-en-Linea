@@ -5,11 +5,11 @@ import axios from 'axios';
 export default class Peticion {
   constructor() {}
 
-  async hacerPeticionGetAnidada(id, tipo) {
+  async hacerPeticionGetAnidadaUsuarios(id, tipo) {
     try {
       const consulta = await axios({
         method: 'GET',
-        url: `/api/v1/usuarios/${id}/${tipo}`
+        url: `http://localhost:3000/api/v1/usuarios/${id}/${tipo}`
       });
       return consulta;
     } catch (error) {
@@ -32,17 +32,12 @@ export default class Peticion {
     }
   }
 
-  async hacerPeticionPatch(url, data, token) {
-    const config = {
-      headers: { Authorization: 'bearer ' + token }
-    };
-
+  async hacerPeticionPatch(url, data) {
     try {
       const consulta = await axios({
         method: 'PATCH',
         url,
-        data,
-        config
+        data
       });
       return consulta;
     } catch (error) {
@@ -67,10 +62,43 @@ export default class Peticion {
   async hacerPeticionGet(ruta, id) {
     try {
       const respuesta = await axios({
-        url: `/api/v1/${ruta}/${id}`,
+        url: `http://localhost:3000/api/v1/${ruta}/${id}`,
         method: 'GET'
       });
       return respuesta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
+
+  async hacerPeticionGetAnidada(ruta, rutaAnidada, idPrimario, idSecundario) {
+    try {
+      const respuesta = await axios({
+        url: `http://localhost:3000/api/v1/${ruta}/${idPrimario}/${rutaAnidada}/${idSecundario}`,
+        method: 'GET'
+      });
+      return respuesta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
+
+  async hacerPeticionPatchAnidada(
+    ruta,
+    rutaAnidada,
+    idPrincipal,
+    idSecundario,
+    data
+  ) {
+    try {
+      const consulta = await axios({
+        method: 'PATCH',
+        url: `http://localhost:3000/api/v1/${ruta}/${idPrincipal}/${rutaAnidada}/${idSecundario}`,
+        data
+      });
+      return consulta;
     } catch (error) {
       alert('Algo salió mal');
       console.log(error);

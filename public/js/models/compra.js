@@ -10,7 +10,7 @@ export default class Compra {
     try {
       const stripe = Stripe('pk_test_ZDcXOQ8zKStcrxrjeTz1ynAN00aquyrddG');
       const consulta = await axios(
-        `/api/v1/compra/checkout-session/${this.id}`
+        `http://localhost:3000/api/v1/compra/checkout-session/${this.id}`
       );
       //Redirecciona al formulario de stripe
       await stripe.redirectToCheckout({

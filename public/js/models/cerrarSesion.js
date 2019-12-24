@@ -6,7 +6,7 @@ export const cerrarSesion = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: '/api/v1/usuarios/cerrarSesion'
+      url: 'http://localhost:3000/api/v1/usuarios/cerrarSesion'
     });
     if ((res.data.status = 'success')) location.reload(true);
   } catch (err) {

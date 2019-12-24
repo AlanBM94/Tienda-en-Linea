@@ -29,72 +29,8 @@ export const obtenerValoresUsuarioRegistrado = () => {
   return validarCamposLlenos(infoUsuarioRegistrado);
 };
 
-const mostrarMensajeError = (errores, mensaje) => {
-  if (mensaje.includes(errores[0])) {
-    configurarSweetAlert('error', 'Error', 'Ese correo electrónico ya existe');
-  }
-  if (
-    mensaje.includes(errores[1].campo) &&
-    mensaje.includes(errores[1].mensaje)
-  ) {
-    configurarSweetAlert(
-      'error',
-      'Error',
-      'El usuario debe de tener al menos 3 caracteres'
-    );
-  }
-  if (
-    mensaje.includes(errores[2].campo) &&
-    mensaje.includes(errores[2].mensaje)
-  ) {
-    configurarSweetAlert(
-      'error',
-      'Error',
-      'La contraseña debe de tener al menos 3 caracteres'
-    );
-  }
-  if (
-    mensaje.includes(errores[3].campo) &&
-    mensaje.includes(errores[3].mensaje)
-  ) {
-    configurarSweetAlert(
-      'error',
-      'Error',
-      'El usuario debe tener como máximo 10 caracteres'
-    );
-  }
-  if (
-    mensaje.includes(errores[4].campo) &&
-    mensaje.includes(errores[4].mensaje)
-  ) {
-    configurarSweetAlert(
-      'error',
-      'Error',
-      'La contraseña debe tener como máximo 20 caracteres'
-    );
-  }
-  if (mensaje.includes(errores[5])) {
-    configurarSweetAlert('error', 'Error', `${errores[5]}`);
-  }
-  if (mensaje.includes(errores[6])) {
-    configurarSweetAlert('error', 'Error', `${errores[6]}`);
-  }
-};
-
-const crearMensajeError = mensaje => {
-  const posiblesErrores = [
-    'duplicate key error collection',
-    { campo: 'nombre', mensaje: 'is shorter than the minimum allowed' },
-    { campo: 'contraseña', mensaje: 'is shorter than the minimum allowed' },
-    { campo: 'nombre', mensaje: 'is longer than the maximum allowed' },
-    { campo: 'contraseña', mensaje: 'is longer than the maximum allowed' },
-    'Las contraseñas no son iguales',
-    'Ingresa un correo electrónico valido'
-  ];
-  mostrarMensajeError(posiblesErrores, mensaje);
-};
-
 export const mostrarMensajeRegistro = respuestaAPI => {
+  console.log(respuestaAPI);
   if (respuestaAPI.data.status === 'Exito') {
     crearCookie(respuestaAPI);
     configurarSweetAlert(
@@ -107,6 +43,10 @@ export const mostrarMensajeRegistro = respuestaAPI => {
       }
     });
   } else {
-    crearMensajeError(respuestaAPI.data.message);
+    configurarSweetAlert(
+      'error',
+      'Error!',
+      'Pasa el mouse sobre el icono de exclamación para ver que pudo haber salido mal'
+    );
   }
 };

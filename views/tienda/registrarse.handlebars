@@ -12,7 +12,21 @@
             <input class="formulario__input" id="registrarseContraseña" type="password" placeholder="Contraseña" />
             <input class="formulario__input" id="registrarseConfirmarContraseña" type="password"
                 placeholder="Confirmar contraseña" />
-            <button class="formulario__btnEnviar btn">Registrarse</button>
+            <div class="formulario__form__contenedorRegistrarse">
+                <button class="formulario__btnEnviar btn">Registrarse</button>
+                <i class="fas fa-exclamation-circle formulario__form__icono"></i>
+                <div class="formulario__form__contenedorErrores" id="contenedorErrores">
+                    <ul>
+                        <li>El correo electrónico tiene que ser único</li>
+                        <li>El correo electrónico debe de ser válido</li>
+                        <li>El nombre debe de tener al menos 3 caracteres</li>
+                        <li>El nombre debe de tener como máximo 10 caracteres</li>
+                        <li>La contraseña debe de tener al menos 3 caracteres</li>
+                        <li>La contraseña debe de tener como máximo 20 caracteres</li>
+                        <li>Las contraseñas deben de ser iguales</li>
+                    </ul>
+                </div>
+            </div>
             <a href="/usuarios/iniciarSesion" class="formulario__enlaceSecundario">Ya tienes cuenta?</a>
         </form>
     </div>

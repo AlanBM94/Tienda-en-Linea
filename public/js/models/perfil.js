@@ -7,17 +7,19 @@ export default class Perfil extends Peticion {
   constructor() {
     super();
   }
-  async actualizar(data, token) {
+  async actualizar(data) {
     const respuesta = await super.hacerPeticionPatch(
-      `/api/v1/usuarios/actualizarMiPerfil`,
-      data,
-      token
+      `http://localhost:3000/api/v1/usuarios/actualizarMiPerfil`,
+      data
     );
     return respuesta;
   }
 
   async mostrarMisCompras(idUsuario) {
-    const compras = await super.hacerPeticionGetAnidada(idUsuario, 'compras');
+    const compras = await super.hacerPeticionGetAnidadaUsuarios(
+      idUsuario,
+      'compras'
+    );
     return compras.data.compras;
   }
 
@@ -26,14 +28,38 @@ export default class Perfil extends Peticion {
     return compra.data.data;
   }
 
+  async obtenerResenia(idProducto, idResenia) {
+    const resenia = await super.hacerPeticionGetAnidada(
+      'productos',
+      'resenias',
+      idProducto,
+      idResenia
+    );
+    return resenia.data.data;
+  }
+
   async mostrarMisReseñas(idUsuario) {
-    const reseñas = await super.hacerPeticionGetAnidada(idUsuario, 'resenias');
+    const reseñas = await super.hacerPeticionGetAnidadaUsuarios(
+      idUsuario,
+      'resenias'
+    );
     return reseñas.data.data.reseñas;
+  }
+
+  async editarReseña(idProducto, idResenia, data) {
+    const respuesta = await super.hacerPeticionPatchAnidada(
+      'productos',
+      'resenias',
+      idProducto,
+      idResenia,
+      data
+    );
+    return respuesta;
   }
 
   async eliminarResenia(idProducto, idResenia) {
     await super.hacerPeticionDelete(
-      `/api/v1/productos/${idProducto}/resenias/${idResenia}`
+      `http://localhost:3000/api/v1/productos/${idProducto}/resenias/${idResenia}`
     );
   }
 }

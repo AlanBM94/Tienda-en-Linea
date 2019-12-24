@@ -93,9 +93,9 @@ exports.proteger = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.permitirPara = rol => {
+exports.permitirPara = (...roles) => {
   return (req, res, next) => {
-    if (req.usuario.rol !== rol) {
+    if (!roles.includes(req.usuario.rol)) {
       return next(
         new AppError(
           'No tienes los permisos necesatios para realizar está acción',

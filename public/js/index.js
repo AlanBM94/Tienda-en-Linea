@@ -33,7 +33,6 @@ $(document).ready(() => {
       };
       const reseña = new Reseña(infoReseña);
       const mensaje = await reseña.crear();
-      console.log(mensaje);
       if (
         mensaje === 'Debes de comprar el producto antes de hacer la reseña' ||
         mensaje === 'No puedes escribir más de una reseña'
@@ -162,9 +161,8 @@ $(document).ready(() => {
   const controladorGuardarAjustes = async () => {
     let respuesta;
     const infoUsuario = perfilVista.obtenerInfoAjustes();
-    const token = obtenerCookiePorNombre('jwt');
     const perfil = new Perfil();
-    respuesta = await perfil.actualizar(infoUsuario, token);
+    respuesta = await perfil.actualizar(infoUsuario);
     if (respuesta.data.status === 'error') {
       perfilVista.mostrarError(respuesta.data.error.errors);
     } else {
@@ -173,14 +171,37 @@ $(document).ready(() => {
   };
 
   const controladorVerDetallesCompra = async e => {
-    // Obtener el id del atributo data-id
     const idCompra = perfilVista.obtenerIdCompra(e);
-    // Hacer una petición a la API para recuperar la compra del id obtenido
     const perfil = new Perfil();
     const compra = await perfil.obtenerCompra(idCompra);
     compra.productos.map(producto => {
       perfilVista.renderizarDetallesCompra(producto);
     });
+  };
+
+  const controladorMostrarReseñaParaEditar = async e => {
+    const info = perfilVista.obtenerIdsResenia(e);
+    const perfil = new Perfil();
+    const respuesta = await perfil.obtenerResenia(
+      info.idProducto,
+      info.idResenia
+    );
+    perfilVista.renderizarReseñaParaEditar(respuesta);
+    return info;
+  };
+
+  const controladorEditarReseña = async e => {
+    const infoResenia = perfilVista.obtenerInfoReseniaEditar();
+    const perfil = new Perfil();
+    const respuesta = await perfil.editarReseña(
+      infoResenia.producto,
+      infoResenia.resenia,
+      {
+        reseña: infoResenia.contenido,
+        puntuacion: infoResenia.puntaje
+      }
+    );
+    perfilVista.mostrarMensajeResenia(respuesta);
   };
 
   // Evento que se dispara cuando se envía el formulario de Registro
@@ -244,6 +265,14 @@ $(document).ready(() => {
     if (e.target.matches('.btn--secundarioPequeño')) {
       controladorVerDetallesCompra(e);
     }
+    if (e.target.matches('.icono-editar')) {
+      controladorMostrarReseñaParaEditar(e);
+    }
+  });
+
+  domElementos.btnEditarReseña.on('click', e => {
+    e.preventDefault();
+    controladorEditarReseña(e);
   });
 
   // Evento que se dispara cuando se cierra sesión

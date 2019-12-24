@@ -50,6 +50,7 @@ router
 
 router
   .route('/:id/resenias/:id')
+  .get(reseñaController.obtenerReseña)
   .patch(reseñaController.actualizarReseña)
   .delete(reseñaController.eliminarReseña);
 

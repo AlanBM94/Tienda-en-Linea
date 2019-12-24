@@ -109,7 +109,9 @@ export const renderizarReseña = reseña => {
             <h3 class="textoTablaPerfil">${reseña.reseña}</h3>
         </div>
         <div class="misReseñas__acciones">
-            <a href="#popup"><i class="fas fa-edit icono-editar" ></i></a>
+            <a href="#popupReseña"><i class="fas fa-edit icono-editar" data-id="${
+              reseña.id
+            }"></i></a>
             <i class="fas fa-trash-alt icono-eliminar" id="btnEliminarReseña" data-id="${
               reseña.id
             }"
@@ -118,12 +120,39 @@ export const renderizarReseña = reseña => {
   domElementos.misReseñasContenedor.append(markup);
 };
 
+export const renderizarReseñaParaEditar = reseña => {
+  domElementos.btnEditarReseña.attr('data-id', reseña.reseña.producto);
+  domElementos.inputIdResenia.val(reseña.reseña._id);
+  domElementos.inputReseñaPuntuacion.val(reseña.reseña.puntuacion);
+  domElementos.inputReseñaContenido.val(reseña.reseña.reseña);
+  domElementos.btnEditarReseña;
+};
+
+export const obtenerInfoReseniaEditar = reseña => {
+  return {
+    puntaje: domElementos.inputReseñaPuntuacion.val(),
+    contenido: domElementos.inputReseñaContenido.val(),
+    resenia: domElementos.inputIdResenia.val(),
+    producto: domElementos.btnEditarReseña.attr('data-id')
+  };
+};
+
 export const obtenerInfoResenia = evento => {
   const infoResenia = {
     idProducto: evento.parentElement.parentElement.children[1].innerText,
     idResenia: evento.getAttribute('data-id')
   };
   return infoResenia;
+};
+
+export const obtenerIdsResenia = evento => {
+  const info = {
+    idProducto:
+      evento.target.parentElement.parentElement.parentElement.children[1]
+        .children[0].innerText,
+    idResenia: evento.target.getAttribute('data-id')
+  };
+  return info;
 };
 
 export const eliminarReseniaDom = evento => {
@@ -151,4 +180,12 @@ export const renderizarDetallesCompra = producto => {
     </div>`;
 
   domElementos.contenedorCompraUnica.append(markup);
+};
+
+export const mostrarMensajeResenia = respuesta => {
+  if (respuesta.data.status === 'Exito') {
+    configurarSweetAlert('success', 'Exito!', 'Has editado tu reseña');
+  } else {
+    configurarSweetAlert('fail', 'Error!', 'Parece que ha ocurrido un error');
+  }
 };

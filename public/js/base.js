@@ -67,7 +67,11 @@ export const domElementos = {
   misComprasContenedor: $('#misComprasContenedor'),
   misReseñasContenedor: $('#misReseñasContenedor'),
   perfilContenido: $('.perfil__contenido'),
-  contenedorCompraUnica: $('.popup__detallesComprasContenido')
+  contenedorCompraUnica: $('.popup__detallesComprasContenido'),
+  inputReseñaPuntuacion: $('#puntajeEditarReseña'),
+  inputReseñaContenido: $('#contenidoEditarReseña'),
+  inputIdResenia: $('#idResenia'),
+  btnEditarReseña: $('#editarReseña')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
