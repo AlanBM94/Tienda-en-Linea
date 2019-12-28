@@ -133,6 +133,25 @@ exports.estaLogeado = async (req, res, next) => {
   next();
 };
 
+exports.actualizarContrasenia = catchAsync(async (req, res, next) => {
+  const usuario = await Usuario.findById(req.usuario.id).select('+contraseña');
+  if (
+    !(await usuario.contraseñaCorrecta(
+      req.body.contraseñaActual,
+      usuario.contraseña
+    ))
+  ) {
+    return next(new AppError('Tu contraseña actual no es válida', 401));
+  }
+
+  usuario.contraseña = req.body.contraseñaNueva;
+  usuario.confirmarContraseña = req.body.confirmarContraseña;
+  await usuario.save();
+
+  // Log usuario in, send jwt
+  enviarToken(usuario, 200, res);
+});
+
 exports.cerrarSesion = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() * 10 * 1000),

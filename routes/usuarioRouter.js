@@ -28,6 +28,8 @@ router.get(
   usuarioController.obtenerUsuario
 );
 
+router.patch('/actualizarMiContrasenia', authController.actualizarContrasenia);
+
 router.patch(
   '/actualizarMiPerfil',
   usuarioController.actualizarMiFoto,

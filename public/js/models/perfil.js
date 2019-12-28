@@ -7,11 +7,13 @@ export default class Perfil extends Peticion {
   constructor() {
     super();
   }
-  async actualizar(data) {
-    const respuesta = await super.hacerPeticionPatch(
-      `http://localhost:3000/api/v1/usuarios/actualizarMiPerfil`,
-      data
-    );
+
+  async editar(data, tipo) {
+    const url =
+      tipo === 'contraseña'
+        ? 'http://localhost:3000/api/v1/usuarios/actualizarMiContrasenia'
+        : 'http://localhost:3000/api/v1/usuarios/actualizarMiPerfil';
+    const respuesta = await super.hacerPeticionPatch(url, data);
     return respuesta;
   }
 

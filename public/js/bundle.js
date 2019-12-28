@@ -182,7 +182,11 @@ var domElementos = {
   inputReseñaPuntuacion: $('#puntajeEditarReseña'),
   inputReseñaContenido: $('#contenidoEditarReseña'),
   inputIdResenia: $('#idResenia'),
-  btnEditarReseña: $('#editarReseña')
+  btnEditarReseña: $('#editarReseña'),
+  contraseñaActualInput: $('#contraseñaActual'),
+  nuevaContraseñaInput: $('#nuevaContraseña'),
+  confirmarContraseñaInput: $('#confirmarContraseña'),
+  formularioContraseña: $('#formularioContraseña')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -3706,24 +3710,25 @@ function (_Peticion) {
   }
 
   _createClass(Perfil, [{
-    key: "actualizar",
+    key: "editar",
     value: function () {
-      var _actualizar = _asyncToGenerator(
+      var _editar = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(data) {
-        var respuesta;
+      regeneratorRuntime.mark(function _callee(data, tipo) {
+        var url, respuesta;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionPatch", this).call(this, "http://localhost:3000/api/v1/usuarios/actualizarMiPerfil", data);
+                url = tipo === 'contraseña' ? 'http://localhost:3000/api/v1/usuarios/actualizarMiContrasenia' : 'http://localhost:3000/api/v1/usuarios/actualizarMiPerfil';
+                _context.next = 3;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionPatch", this).call(this, url, data);
 
-              case 2:
+              case 3:
                 respuesta = _context.sent;
                 return _context.abrupt("return", respuesta);
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -3731,11 +3736,11 @@ function (_Peticion) {
         }, _callee, this);
       }));
 
-      function actualizar(_x) {
-        return _actualizar.apply(this, arguments);
+      function editar(_x, _x2) {
+        return _editar.apply(this, arguments);
       }
 
-      return actualizar;
+      return editar;
     }()
   }, {
     key: "mostrarMisCompras",
@@ -3763,7 +3768,7 @@ function (_Peticion) {
         }, _callee2, this);
       }));
 
-      function mostrarMisCompras(_x2) {
+      function mostrarMisCompras(_x3) {
         return _mostrarMisCompras.apply(this, arguments);
       }
 
@@ -3795,7 +3800,7 @@ function (_Peticion) {
         }, _callee3, this);
       }));
 
-      function obtenerCompra(_x3) {
+      function obtenerCompra(_x4) {
         return _obtenerCompra.apply(this, arguments);
       }
 
@@ -3827,7 +3832,7 @@ function (_Peticion) {
         }, _callee4, this);
       }));
 
-      function obtenerResenia(_x4, _x5) {
+      function obtenerResenia(_x5, _x6) {
         return _obtenerResenia.apply(this, arguments);
       }
 
@@ -3859,7 +3864,7 @@ function (_Peticion) {
         }, _callee5, this);
       }));
 
-      function mostrarMisReseAs(_x6) {
+      function mostrarMisReseAs(_x7) {
         return _mostrarMisReseAs.apply(this, arguments);
       }
 
@@ -3891,7 +3896,7 @@ function (_Peticion) {
         }, _callee6, this);
       }));
 
-      function editarReseA(_x7, _x8, _x9) {
+      function editarReseA(_x8, _x9, _x10) {
         return _editarReseA.apply(this, arguments);
       }
 
@@ -3918,7 +3923,7 @@ function (_Peticion) {
         }, _callee7, this);
       }));
 
-      function eliminarResenia(_x10, _x11) {
+      function eliminarResenia(_x11, _x12) {
         return _eliminarResenia.apply(this, arguments);
       }
 
@@ -7301,7 +7306,7 @@ exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarMensajeResenia = exports.renderizarDetallesCompra = exports.obtenerIdCompra = exports.eliminarReseniaDom = exports.obtenerIdsResenia = exports.obtenerInfoResenia = exports.obtenerInfoReseniaEditar = exports.renderizarReseñaParaEditar = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
+exports.mostrarMensajeErrorCambiarContraseña = exports.mostrarMensajeContraseñaCambiadaExitosamente = exports.obtenerInputsContraseñas = exports.mostrarMensajeResenia = exports.renderizarDetallesCompra = exports.obtenerIdCompra = exports.eliminarReseniaDom = exports.obtenerIdsResenia = exports.obtenerInfoResenia = exports.obtenerInfoReseniaEditar = exports.renderizarReseñaParaEditar = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
 
 var _base = require("../base");
 
@@ -7467,6 +7472,29 @@ var mostrarMensajeResenia = function mostrarMensajeResenia(respuesta) {
 };
 
 exports.mostrarMensajeResenia = mostrarMensajeResenia;
+
+var obtenerInputsContraseñas = function obtenerInputsContraseñas() {
+  var infoActualizarContraseña = {
+    contraseñaActual: _base.domElementos.contraseñaActualInput.val(),
+    contraseñaNueva: _base.domElementos.nuevaContraseñaInput.val(),
+    confirmarContraseña: _base.domElementos.confirmarContraseñaInput.val()
+  };
+  return infoActualizarContraseña;
+};
+
+exports.obtenerInputsContraseñas = obtenerInputsContraseñas;
+
+var mostrarMensajeContraseñaCambiadaExitosamente = function mostrarMensajeContraseñaCambiadaExitosamente() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito', 'La contraseña se actualizó correctamente');
+};
+
+exports.mostrarMensajeContraseñaCambiadaExitosamente = mostrarMensajeContraseñaCambiadaExitosamente;
+
+var mostrarMensajeErrorCambiarContraseña = function mostrarMensajeErrorCambiarContraseña(mensaje) {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', mensaje);
+};
+
+exports.mostrarMensajeErrorCambiarContraseña = mostrarMensajeErrorCambiarContraseña;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -7876,7 +7904,7 @@ $(document).ready(function () {
               infoUsuario = perfilVista.obtenerInfoAjustes();
               perfil = new _perfil.default();
               _context8.next = 4;
-              return perfil.actualizar(infoUsuario);
+              return perfil.editar(infoUsuario, 'infoNormal');
 
             case 4:
               respuesta = _context8.sent;
@@ -8003,6 +8031,45 @@ $(document).ready(function () {
     return function controladorEditarReseña(_x6) {
       return _ref11.apply(this, arguments);
     };
+  }();
+
+  var controladorCambiarContraseña =
+  /*#__PURE__*/
+  function () {
+    var _ref12 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee12() {
+      var infoContraseña, usuario, respuesta, mensaje;
+      return regeneratorRuntime.wrap(function _callee12$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              infoContraseña = perfilVista.obtenerInputsContraseñas();
+              usuario = new _perfil.default();
+              _context12.next = 4;
+              return usuario.editar(infoContraseña, 'contraseña');
+
+            case 4:
+              respuesta = _context12.sent;
+
+              if (respuesta.data.status === 'Exito') {
+                perfilVista.mostrarMensajeContraseñaCambiadaExitosamente();
+              } else {
+                mensaje = respuesta.data.message;
+                perfilVista.mostrarMensajeErrorCambiarContraseña(mensaje);
+              }
+
+            case 6:
+            case "end":
+              return _context12.stop();
+          }
+        }
+      }, _callee12);
+    }));
+
+    return function controladorCambiarContraseña() {
+      return _ref12.apply(this, arguments);
+    };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
 
@@ -8034,26 +8101,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref12 = _asyncToGenerator(
+    var _ref13 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee12(e) {
-      return regeneratorRuntime.wrap(function _callee12$(_context12) {
+    regeneratorRuntime.mark(function _callee13(e) {
+      return regeneratorRuntime.wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context12.stop();
+              return _context13.stop();
           }
         }
-      }, _callee12);
+      }, _callee13);
     }));
 
     return function (_x7) {
-      return _ref12.apply(this, arguments);
+      return _ref13.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -8070,26 +8137,26 @@ $(document).ready(function () {
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref13 = _asyncToGenerator(
+    var _ref14 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee13(e) {
-      return regeneratorRuntime.wrap(function _callee13$(_context13) {
+    regeneratorRuntime.mark(function _callee14(e) {
+      return regeneratorRuntime.wrap(function _callee14$(_context14) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context14.prev = _context14.next) {
             case 0:
               e.preventDefault();
               controladorCrearResenia();
 
             case 2:
             case "end":
-              return _context13.stop();
+              return _context14.stop();
           }
         }
-      }, _callee13);
+      }, _callee14);
     }));
 
     return function (_x8) {
-      return _ref13.apply(this, arguments);
+      return _ref14.apply(this, arguments);
     };
   }());
 
@@ -8117,21 +8184,47 @@ $(document).ready(function () {
   _base.domElementos.btnEditarReseña.on('click', function (e) {
     e.preventDefault();
     controladorEditarReseña(e);
-  }); // Evento que se dispara cuando se cierra sesión
+  });
+
+  _base.domElementos.formularioContraseña.submit(
+  /*#__PURE__*/
+  function () {
+    var _ref15 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee15(e) {
+      return regeneratorRuntime.wrap(function _callee15$(_context15) {
+        while (1) {
+          switch (_context15.prev = _context15.next) {
+            case 0:
+              e.preventDefault();
+              controladorCambiarContraseña();
+
+            case 2:
+            case "end":
+              return _context15.stop();
+          }
+        }
+      }, _callee15);
+    }));
+
+    return function (_x9) {
+      return _ref15.apply(this, arguments);
+    };
+  }()); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click',
   /*#__PURE__*/
   function () {
-    var _ref14 = _asyncToGenerator(
+    var _ref16 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee14(e) {
-      return regeneratorRuntime.wrap(function _callee14$(_context14) {
+    regeneratorRuntime.mark(function _callee16(e) {
+      return regeneratorRuntime.wrap(function _callee16$(_context16) {
         while (1) {
-          switch (_context14.prev = _context14.next) {
+          switch (_context16.prev = _context16.next) {
             case 0:
               e.preventDefault();
-              _context14.next = 3;
+              _context16.next = 3;
               return (0, _cerrarSesion.cerrarSesion)();
 
             case 3:
@@ -8139,14 +8232,14 @@ $(document).ready(function () {
 
             case 4:
             case "end":
-              return _context14.stop();
+              return _context16.stop();
           }
         }
-      }, _callee14);
+      }, _callee16);
     }));
 
-    return function (_x9) {
-      return _ref14.apply(this, arguments);
+    return function (_x10) {
+      return _ref16.apply(this, arguments);
     };
   }());
 });
@@ -8178,7 +8271,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61921" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52253" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

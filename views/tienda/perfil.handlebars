@@ -23,17 +23,20 @@
     </div>
     <div class="perfil__contenidoContraseña">
         <h4>Cambiar contraseña</h4>
-        <form action="#" class="formularioPerfil formularioPerfil--2">
+        <form class="formularioPerfil formularioPerfil--2" id="formularioContraseña">
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre">
-                <label for="nombre">Contraseña</label>
-                <input type="password" name="nombre" />
+                <label for="contraseñaActual">Contraseña actual</label>
+                <input type="password" id="contraseñaActual" />
+                <br>
+                <label for="nuevaContraseña">Nueva contraseña</label>
+                <input type="password" id="nuevaContraseña" />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo">
-                <label for="correo">Confirmar contraseña</label>
-                <input type="password" name="correo" />
+                <label for="confirmarContraseña">Confirmar contraseña</label>
+                <input type="password" id="confirmarContraseña" />
             </div>
             <div class="formularioPerfil__contenedorBotonEnviar formularioPerfil__contenedorBotonEnviar--contraseña">
-                <button type="submit" class="btn btn--rojo btnContraseña">Guardar</button>
+                <button type="submit" class="btn btn--rojo btnContraseña" id="guardarContraseña">Guardar</button>
                 </>
         </form>
     </div>

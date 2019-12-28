@@ -189,3 +189,24 @@ export const mostrarMensajeResenia = respuesta => {
     configurarSweetAlert('fail', 'Error!', 'Parece que ha ocurrido un error');
   }
 };
+
+export const obtenerInputsContraseñas = () => {
+  const infoActualizarContraseña = {
+    contraseñaActual: domElementos.contraseñaActualInput.val(),
+    contraseñaNueva: domElementos.nuevaContraseñaInput.val(),
+    confirmarContraseña: domElementos.confirmarContraseñaInput.val()
+  };
+  return infoActualizarContraseña;
+};
+
+export const mostrarMensajeContraseñaCambiadaExitosamente = () => {
+  configurarSweetAlert(
+    'success',
+    'Exito',
+    'La contraseña se actualizó correctamente'
+  );
+};
+
+export const mostrarMensajeErrorCambiarContraseña = mensaje => {
+  configurarSweetAlert('error', 'Error!', mensaje);
+};

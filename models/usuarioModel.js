@@ -29,7 +29,6 @@ const usuarioSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Ingresa una contraseña'],
     minlength: 8,
-    maxlength: 20,
     select: false
   },
   confirmarContraseña: {
@@ -65,6 +64,13 @@ usuarioSchema.pre('save', async function(next) {
   next();
 });
 
+// Before the password is changed
+usuarioSchema.pre('save', function(next) {
+  if (!this.isModified('contraseña') || this.isNew) return next();
+  // Set the passwordChangedAt to the current Date
+  this.contraseñaCambiadaEn = Date.now() - 1000;
+  next();
+});
 usuarioSchema.methods.contraseñaCorrecta = async (
   contraseñaCorrecta,
   usuarioContraseña

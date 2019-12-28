@@ -162,7 +162,7 @@ $(document).ready(() => {
     let respuesta;
     const infoUsuario = perfilVista.obtenerInfoAjustes();
     const perfil = new Perfil();
-    respuesta = await perfil.actualizar(infoUsuario);
+    respuesta = await perfil.editar(infoUsuario, 'infoNormal');
     if (respuesta.data.status === 'error') {
       perfilVista.mostrarError(respuesta.data.error.errors);
     } else {
@@ -202,6 +202,18 @@ $(document).ready(() => {
       }
     );
     perfilVista.mostrarMensajeResenia(respuesta);
+  };
+
+  const controladorCambiarContraseña = async () => {
+    const infoContraseña = perfilVista.obtenerInputsContraseñas();
+    const usuario = new Perfil();
+    const respuesta = await usuario.editar(infoContraseña, 'contraseña');
+    if (respuesta.data.status === 'Exito') {
+      perfilVista.mostrarMensajeContraseñaCambiadaExitosamente();
+    } else {
+      const mensaje = respuesta.data.message;
+      perfilVista.mostrarMensajeErrorCambiarContraseña(mensaje);
+    }
   };
 
   // Evento que se dispara cuando se envía el formulario de Registro
@@ -273,6 +285,11 @@ $(document).ready(() => {
   domElementos.btnEditarReseña.on('click', e => {
     e.preventDefault();
     controladorEditarReseña(e);
+  });
+
+  domElementos.formularioContraseña.submit(async e => {
+    e.preventDefault();
+    controladorCambiarContraseña();
   });
 
   // Evento que se dispara cuando se cierra sesión
