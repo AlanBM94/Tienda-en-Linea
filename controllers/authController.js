@@ -1,6 +1,7 @@
 // const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
+const Email = require('../utils/email');
 const Usuario = require('./../models/usuarioModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -34,6 +35,8 @@ const enviarToken = (usuario, statusCodigo, res) => {
 
 exports.registrarse = catchAsync(async (req, res, next) => {
   const usuario = await Usuario.create(req.body);
+  const url = `${req.protocol}://${req.get('host')}/perfil`;
+  await new Email(usuario, url).sendWelcome();
   enviarToken(usuario, 201, res);
 });
 

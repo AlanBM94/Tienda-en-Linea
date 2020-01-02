@@ -36,9 +36,12 @@ const hbs = expressHbs.create({
     }
   }
 });
+
+// app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
+
 // view engine setup
 app.engine('handlebars', hbs.engine);
-
 app.set('view engine', 'handlebars');
 
 // Accede a los archivos estaticos

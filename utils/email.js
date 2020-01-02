@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-// const pug = require('pug');
-// const htmlToText = require('html-to-text');
+const pug = require('pug');
+const htmlToText = require('html-to-text');
 const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 module.exports = class Email {
@@ -27,5 +27,33 @@ module.exports = class Email {
         pass: process.env.EMAIL_PASSWORD
       }
     });
+  }
+
+  async send(template, subject) {
+    const html = pug.renderFile(
+      `${__dirname}/../views/emails/${template}.pug`,
+      {
+        firstName: this.firstName,
+        url: this.url,
+        subject
+      }
+    );
+
+    const mailOptions = {
+      from: this.desde,
+      to: this.para,
+      subject,
+      html,
+      text: htmlToText.fromString(html)
+    };
+    console.log(mailOptions);
+    await this.nuevoTransporte().sendMail(mailOptions);
+  }
+
+  async sendWelcome() {
+    await this.send(
+      'Bienvenido',
+      'Bienvenido a Mi Tienda, el lugar donde encuentrarás todos los artículos que necesitas'
+    );
   }
 };
