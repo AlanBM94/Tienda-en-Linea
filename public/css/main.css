@@ -1964,6 +1964,10 @@ body {
           align-items: center;
 }
 
+.formulario__textoRecuperarContrasenia {
+  font-size: 13px;
+}
+
 .formulario--popup {
   width: 70%;
 }

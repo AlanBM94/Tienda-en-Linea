@@ -12,6 +12,12 @@ router.route('/iniciarSesion').post(authController.iniciarSesion);
 
 router.route('/cerrarSesion').get(authController.cerrarSesion);
 
+router.route('/recuperarContrasenia').post(authController.recuperarContrasenia);
+
+router
+  .route('/resetearContrasenia/:token')
+  .patch(authController.resetearContrasenia);
+
 router.route('/:id').get(usuarioController.obtenerUsuario);
 
 router.use(authController.proteger);

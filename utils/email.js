@@ -46,7 +46,6 @@ module.exports = class Email {
       html,
       text: htmlToText.fromString(html)
     };
-    console.log(mailOptions);
     await this.nuevoTransporte().sendMail(mailOptions);
   }
 
@@ -54,6 +53,13 @@ module.exports = class Email {
     await this.send(
       'Bienvenido',
       'Bienvenido a Mi Tienda, el lugar donde encuentrarás todos los artículos que necesitas'
+    );
+  }
+
+  async enviarRecuperarContrasenia() {
+    await this.send(
+      'recuperarContrasenia',
+      'Tu token para recuperar tu contraseña es valida solo por 10 minutos'
     );
   }
 };

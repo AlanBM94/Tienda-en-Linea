@@ -25,6 +25,7 @@ router.get('/carrito', viewController.obtenerCarrito);
 
 router.get('/registrarse', viewController.registrarseTemplate);
 router.get('/iniciarSesion', viewController.iniciarSesionTemplate);
+router.get('/recuperarContrasenia', viewController.recuperarContrasenia);
 
 router.get('/perfil', authController.proteger, viewController.perfilTemplate);
 

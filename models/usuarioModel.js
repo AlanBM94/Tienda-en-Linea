@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const usuarioSchema = new mongoose.Schema({
   nombre: {
@@ -71,11 +72,23 @@ usuarioSchema.pre('save', function(next) {
   this.contraseñaCambiadaEn = Date.now() - 1000;
   next();
 });
+
 usuarioSchema.methods.contraseñaCorrecta = async (
   contraseñaCorrecta,
   usuarioContraseña
 ) => {
   return await bcrypt.compare(contraseñaCorrecta, usuarioContraseña);
+};
+
+usuarioSchema.methods.crearTokenRecuperarContrasenia = function() {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.recuperarContraseñaToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  this.recuperarContraseñaExpira = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 const Usuario = mongoose.model('Usuario', usuarioSchema);

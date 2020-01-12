@@ -1,6 +1,7 @@
 // const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const Email = require('../utils/email');
 const Usuario = require('./../models/usuarioModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -152,6 +153,69 @@ exports.actualizarContrasenia = catchAsync(async (req, res, next) => {
   await usuario.save();
 
   // Log usuario in, send jwt
+  enviarToken(usuario, 200, res);
+});
+
+exports.recuperarContrasenia = catchAsync(async (req, res, next) => {
+  const usuario = await Usuario.findOne({ email: req.body.email });
+
+  if (!usuario) {
+    return next(new AppError('No existe un usuario con ese id', 404));
+  }
+
+  const resetToken = usuario.crearTokenRecuperarContrasenia();
+
+  await usuario.save({ validateBeforeSave: false });
+
+  try {
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/usuarios/resetearContrasenia/${resetToken}`;
+
+    await new Email(usuario, resetURL).enviarRecuperarContrasenia();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Token enviada a email!'
+    });
+  } catch (err) {
+    usuario.passwordResetToken = undefined;
+    usuario.passwordResetExpires = undefined;
+    await usuario.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError(
+        'Hubo un problema al mandar el correo, por favor intente más tarde'
+      ),
+      500
+    );
+  }
+});
+
+exports.resetearContrasenia = catchAsync(async (req, res, next) => {
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const usuario = await Usuario.findOne({
+    recuperarContraseñaToken: hashedToken,
+    recuperarContraseñaExpira: { $gt: Date.now() }
+  });
+
+  console.log(usuario);
+
+  if (!usuario) {
+    return next(new AppError('La token no es válida o ya ha expirado', 400));
+  }
+
+  usuario.contraseña = req.body.contraseña;
+  usuario.confirmarContraseña = req.body.confirmarContraseña;
+  usuario.recuperarContraseñaToken = undefined;
+  usuario.recuperarContraseñaExpira = undefined;
+
+  await usuario.save();
+
   enviarToken(usuario, 200, res);
 });
 

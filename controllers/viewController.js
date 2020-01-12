@@ -27,6 +27,10 @@ exports.iniciarSesionTemplate = (req, res, next) => {
   generarTemplates('tienda/iniciarSesion', res);
 };
 
+exports.recuperarContrasenia = (req, res, next) => {
+  generarTemplates('tienda/recuperarContrasenia', res);
+};
+
 exports.obtenerCategoria = catchAsync(async (req, res, next) => {
   // Obtiene la categoría de la url y la modifica para obtener los productos
   const categoria = configurarCategoria(req.url.split('/')[1]);

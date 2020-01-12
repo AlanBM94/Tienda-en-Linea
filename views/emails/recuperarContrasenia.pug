@@ -1,0 +1,16 @@
+extends baseEmail
+
+block content
+  p Hola #{primerNombre},
+  p olvidaste tu contraseña? Envía una petición PATCH a la siguiente url con la nueva contraseña y la contaseña de confirmación: #{url}.
+  p (El sitio web para esta acción aún no ha sido implementado.)
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Resetea la contraseña
+  p Si no olvidaste tu contraseña, por favor ignora este email
