@@ -6980,8 +6980,6 @@ var obtenerValoresUsuarioRegistrado = function obtenerValoresUsuarioRegistrado()
 exports.obtenerValoresUsuarioRegistrado = obtenerValoresUsuarioRegistrado;
 
 var mostrarMensajeRegistro = function mostrarMensajeRegistro(respuestaAPI) {
-  console.log(respuestaAPI);
-
   if (respuestaAPI.data.status === 'Exito') {
     (0, _cookie.crearCookie)(respuestaAPI);
     (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Felicidades!', 'Te has registrado con exito').then(function (respuesta) {
@@ -6990,11 +6988,22 @@ var mostrarMensajeRegistro = function mostrarMensajeRegistro(respuestaAPI) {
       }
     });
   } else {
-    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Pasa el mouse sobre el icono de exclamación para ver que pudo haber salido mal');
+    var mensajeError = crearMensajeError(respuestaAPI.data.message);
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', mensajeError);
   }
 };
 
 exports.mostrarMensajeRegistro = mostrarMensajeRegistro;
+
+var crearMensajeError = function crearMensajeError(error) {
+  var errorGenerado = error.split(':')[2].trim();
+  var mensajeError;
+  if (errorGenerado === 'Las contraseñas no son iguales') mensajeError = 'Las contraseñas no son iguales';
+  if (error.startsWith('E11000')) mensajeError = 'El correo electrónico debe de ser único';
+  if (errorGenerado === 'Ingresa un correo electrónico valido') mensajeError = 'Ingresa un correo electrónico valido';
+  if (errorGenerado === 'Ingresa un correo electrónico valido, confirmarContraseña') mensajeError = 'Ingresa un correo electrónico valido - Las contraseñas no son iguales';
+  return mensajeError;
+};
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js","../utils/cookie":"utils/cookie.js"}],"views/iniciarSesionVista.js":[function(require,module,exports) {
 "use strict";
 
@@ -8271,7 +8280,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52253" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63226" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

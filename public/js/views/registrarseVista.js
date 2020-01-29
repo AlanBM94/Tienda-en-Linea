@@ -30,7 +30,6 @@ export const obtenerValoresUsuarioRegistrado = () => {
 };
 
 export const mostrarMensajeRegistro = respuestaAPI => {
-  console.log(respuestaAPI);
   if (respuestaAPI.data.status === 'Exito') {
     crearCookie(respuestaAPI);
     configurarSweetAlert(
@@ -43,10 +42,25 @@ export const mostrarMensajeRegistro = respuestaAPI => {
       }
     });
   } else {
-    configurarSweetAlert(
-      'error',
-      'Error!',
-      'Pasa el mouse sobre el icono de exclamación para ver que pudo haber salido mal'
-    );
+    const mensajeError = crearMensajeError(respuestaAPI.data.message);
+    configurarSweetAlert('error', 'Error!', mensajeError);
   }
+};
+
+const crearMensajeError = error => {
+  const errorGenerado = error.split(':')[2].trim();
+  let mensajeError;
+  if (errorGenerado === 'Las contraseñas no son iguales')
+    mensajeError = 'Las contraseñas no son iguales';
+  if (error.startsWith('E11000'))
+    mensajeError = 'El correo electrónico debe de ser único';
+  if (errorGenerado === 'Ingresa un correo electrónico valido')
+    mensajeError = 'Ingresa un correo electrónico valido';
+  if (
+    errorGenerado ===
+    'Ingresa un correo electrónico valido, confirmarContraseña'
+  )
+    mensajeError =
+      'Ingresa un correo electrónico valido - Las contraseñas no son iguales';
+  return mensajeError;
 };

@@ -22,7 +22,6 @@ export default class Registrarse {
           confirmarContraseña: this.confirmarContraseña
         }
       });
-      console.log(consulta);
       return consulta;
     } catch (error) {
       alert('Algo salió mal');

@@ -2047,35 +2047,6 @@ body {
       align-self: center;
 }
 
-.formulario__form__contenedorErrores {
-  position: absolute;
-  background: #ffff;
-  padding: 3rem;
-  height: auto;
-  left: 63%;
-  top: 15%;
-  max-width: 25rem;
-  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.46);
-          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.46);
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-.formulario__form__contenedorErrores ul li {
-  font-size: 1.6rem;
-}
-
-.formulario__form__contenedorErrores ul li:not(:first-child) {
-  margin-top: 2rem;
-}
-
-.formulario__form__icono:hover ~ .formulario__form__contenedorErrores {
-  opacity: 1;
-  visibility: visible;
-}
-
 .formulario__input {
   text-align: center;
   width: 100%;

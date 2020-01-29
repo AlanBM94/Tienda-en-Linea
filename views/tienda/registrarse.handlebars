@@ -7,25 +7,15 @@
     <div class="formulario__contenido">
         <h2 class="formulario__titulo">Registrate</h2>
         <form action="#" id="formularioRegistrarse" class="formulario__form">
-            <input class="formulario__input" id="registrarseNombre" type="text" placeholder="Usuario" />
+            <input class="formulario__input" id="registrarseNombre" type="text" placeholder="Usuario" minlength="3"
+                maxlength="10" />
             <input class="formulario__input" id="registrarseEmail" type="text" placeholder="Correo electrónico" />
-            <input class="formulario__input" id="registrarseContraseña" type="password" placeholder="Contraseña" />
+            <input class="formulario__input" id="registrarseContraseña" type="password" placeholder="Contraseña"
+                minlength="8" />
             <input class="formulario__input" id="registrarseConfirmarContraseña" type="password"
-                placeholder="Confirmar contraseña" />
+                placeholder="Confirmar contraseña" minlength="8" />
             <div class="formulario__form__contenedorRegistrarse">
                 <button class="formulario__btnEnviar btn">Registrarse</button>
-                <i class="fas fa-exclamation-circle formulario__form__icono"></i>
-                <div class="formulario__form__contenedorErrores" id="contenedorErrores">
-                    <ul>
-                        <li>El correo electrónico tiene que ser único</li>
-                        <li>El correo electrónico debe de ser válido</li>
-                        <li>El nombre debe de tener al menos 3 caracteres</li>
-                        <li>El nombre debe de tener como máximo 10 caracteres</li>
-                        <li>La contraseña debe de tener al menos 3 caracteres</li>
-                        <li>La contraseña debe de tener como máximo 20 caracteres</li>
-                        <li>Las contraseñas deben de ser iguales</li>
-                    </ul>
-                </div>
             </div>
             <a href="/iniciarSesion" class="formulario__enlaceSecundario">Ya tienes cuenta?</a>
         </form>
