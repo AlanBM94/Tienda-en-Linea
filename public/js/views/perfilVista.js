@@ -62,8 +62,34 @@ export const obtenerInfoAjustes = () => {
   const form = new FormData();
   form.append('nombre', document.getElementById('nombreAjustes').value);
   form.append('email', document.getElementById('correoAjustes').value);
-  form.append('foto', document.getElementById('fotoAjustes').files[0]);
-  return form;
+  form.append(
+    'foto',
+    validarSiEsImagen(document.getElementById('fotoAjustes').files[0])
+  );
+  const archivoEsUnaImagen = validarSiEsImagen(
+    document.getElementById('fotoAjustes').files[0]
+  );
+  return archivoEsUnaImagen ? form : false;
+};
+
+const validarSiEsImagen = archivo => {
+  const extensionArchivo = archivo.name
+    .split('.')
+    [archivo.name.split('.').length - 1].toLowerCase();
+  if (
+    extensionArchivo !== 'jpg' &&
+    extensionArchivo !== 'png' &&
+    extensionArchivo !== 'jpeg'
+  ) {
+    configurarSweetAlert(
+      'error',
+      'Error',
+      'Tipos de arcchivos aceptados: .jpg, png, jpeg'
+    );
+    return false;
+  } else {
+    return archivo;
+  }
 };
 
 const formatoFecha = fecha => {

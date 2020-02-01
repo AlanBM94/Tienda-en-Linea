@@ -7,9 +7,11 @@ export const obtenerInfoProducto = () => {
   const { producto } = domElementos;
   producto.articulo = producto.articulo.split('$')[0].trim();
   producto.cantidad = parseInt($('.producto__cantidad').val());
-  producto.precio = parseInt(producto.precio.split('$')[1]);
+  producto.precio = parseInt(producto.precio);
   producto.stock = parseInt(producto.stock);
-  producto.imagen = producto.imagen.split('/')[3];
+  producto.imagen = producto.imagen.split('/')[
+    producto.imagen.split('/').length - 1
+  ];
   if (!producto.cantidad) {
     return false;
   } else {

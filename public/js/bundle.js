@@ -7068,9 +7068,9 @@ var obtenerInfoProducto = function obtenerInfoProducto() {
   var producto = _base.domElementos.producto;
   producto.articulo = producto.articulo.split('$')[0].trim();
   producto.cantidad = parseInt($('.producto__cantidad').val());
-  producto.precio = parseInt(producto.precio.split('$')[1]);
+  producto.precio = parseInt(producto.precio);
   producto.stock = parseInt(producto.stock);
-  producto.imagen = producto.imagen.split('/')[3];
+  producto.imagen = producto.imagen.split('/')[producto.imagen.split('/').length - 1];
 
   if (!producto.cantidad) {
     return false;
@@ -7380,11 +7380,23 @@ var obtenerInfoAjustes = function obtenerInfoAjustes() {
   var form = new FormData();
   form.append('nombre', document.getElementById('nombreAjustes').value);
   form.append('email', document.getElementById('correoAjustes').value);
-  form.append('foto', document.getElementById('fotoAjustes').files[0]);
-  return form;
+  form.append('foto', validarSiEsImagen(document.getElementById('fotoAjustes').files[0]));
+  var archivoEsUnaImagen = validarSiEsImagen(document.getElementById('fotoAjustes').files[0]);
+  return archivoEsUnaImagen ? form : false;
 };
 
 exports.obtenerInfoAjustes = obtenerInfoAjustes;
+
+var validarSiEsImagen = function validarSiEsImagen(archivo) {
+  var extensionArchivo = archivo.name.split('.')[archivo.name.split('.').length - 1].toLowerCase();
+
+  if (extensionArchivo !== 'jpg' && extensionArchivo !== 'png' && extensionArchivo !== 'jpeg') {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'Tipos de arcchivos aceptados: .jpg, png, jpeg');
+    return false;
+  } else {
+    return archivo;
+  }
+};
 
 var formatoFecha = function formatoFecha(fecha) {
   return fecha.split('T')[0];
@@ -7807,44 +7819,45 @@ $(document).ready(function () {
 
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
-                _context6.next = 4;
+                _context6.next = 5;
                 break;
               }
 
               carritoVista.mostrarMensajeSinStock();
-              return _context6.abrupt("return");
+              _context6.next = 16;
+              break;
 
-            case 4:
+            case 5:
               // Crear un objeto de la clase Carrito
               producto = new _carrito.default();
 
               if (!(infoProducto !== false)) {
-                _context6.next = 14;
+                _context6.next = 15;
                 break;
               }
 
-              _context6.next = 8;
+              _context6.next = 9;
               return producto.agregarProducto(infoProducto);
 
-            case 8:
+            case 9:
               respuesta = _context6.sent;
 
               if (!(respuesta.data.status !== 'Exito')) {
-                _context6.next = 11;
+                _context6.next = 12;
                 break;
               }
 
               return _context6.abrupt("return", carritoVista.mostrarMensajeNoSession());
 
-            case 11:
+            case 12:
               carritoVista.mostrarMensaje(infoProducto);
-              _context6.next = 15;
+              _context6.next = 16;
               break;
 
-            case 14:
+            case 15:
               carritoVista.mostrarMensaje(infoProducto);
 
-            case 15:
+            case 16:
             case "end":
               return _context6.stop();
           }
@@ -7911,20 +7924,21 @@ $(document).ready(function () {
           switch (_context8.prev = _context8.next) {
             case 0:
               infoUsuario = perfilVista.obtenerInfoAjustes();
-              perfil = new _perfil.default();
-              _context8.next = 4;
-              return perfil.editar(infoUsuario, 'infoNormal');
 
-            case 4:
-              respuesta = _context8.sent;
-
-              if (respuesta.data.status === 'error') {
-                perfilVista.mostrarError(respuesta.data.error.errors);
-              } else {
-                perfilVista.mostrarMensajeExito();
+              if (!infoUsuario) {
+                _context8.next = 7;
+                break;
               }
 
-            case 6:
+              perfil = new _perfil.default();
+              _context8.next = 5;
+              return perfil.editar(infoUsuario, 'infoNormal');
+
+            case 5:
+              respuesta = _context8.sent;
+              respuesta.data.status === 'error' ? perfilVista.mostrarError(respuesta.data.error.errors) : perfilVista.mostrarMensajeExito();
+
+            case 7:
             case "end":
               return _context8.stop();
           }
@@ -8064,7 +8078,7 @@ $(document).ready(function () {
               if (respuesta.data.status === 'Exito') {
                 perfilVista.mostrarMensajeContraseñaCambiadaExitosamente();
               } else {
-                mensaje = respuesta.data.message;
+                mensaje = respuesta.data.message.split(':')[respuesta.data.message.split(':').length - 1];
                 perfilVista.mostrarMensajeErrorCambiarContraseña(mensaje);
               }
 
@@ -8280,7 +8294,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63226" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64647" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

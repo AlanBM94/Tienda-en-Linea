@@ -13,8 +13,11 @@
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--foto">
                 <img src="/images/usuarios/{{usuario.foto}}" alt="usuario" />
-                <label for="fotoAjustes" class="btn btn--secundario btn--secundarioContraseña">Cambia tu foto</label>
+                <label for="fotoAjustes" class="btn btn--secundario btn--secundarioContraseña"
+                    style="margin-right: 10px;">Cambia tu foto</label>
                 <input type="file" name="foto" accept='image/*' id="fotoAjustes" placeholder="Cambiar foto" />
+                <br>
+                <span> (.jpg, png, jpeg) </span>
             </div>
             <div class="formularioPerfil__contenedorBotonEnviar">
                 <button type="submit" class="btn btn--rojo">Guardar</button>
@@ -26,14 +29,14 @@
         <form class="formularioPerfil formularioPerfil--2" id="formularioContraseña">
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre">
                 <label for="contraseñaActual">Contraseña actual</label>
-                <input type="password" id="contraseñaActual" />
+                <input type="password" id="contraseñaActual" required minlength="8" />
                 <br>
                 <label for="nuevaContraseña">Nueva contraseña</label>
-                <input type="password" id="nuevaContraseña" />
+                <input type="password" id="nuevaContraseña" required minlength="8" />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo">
                 <label for="confirmarContraseña">Confirmar contraseña</label>
-                <input type="password" id="confirmarContraseña" />
+                <input type="password" id="confirmarContraseña" required minlength="8" />
             </div>
             <div class="formularioPerfil__contenedorBotonEnviar formularioPerfil__contenedorBotonEnviar--contraseña">
                 <button type="submit" class="btn btn--rojo btnContraseña" id="guardarContraseña">Guardar</button>

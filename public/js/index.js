@@ -122,20 +122,20 @@ $(document).ready(() => {
     // Si la cantidad de productos que quiere comprar el usuario es más grande que el stock, se muestra el mensaje que no hay suficiente stock
     if (infoProducto.cantidad > infoProducto.stock) {
       carritoVista.mostrarMensajeSinStock();
-      return;
-    }
-    // Crear un objeto de la clase Carrito
-    const producto = new Carrito();
-    if (infoProducto !== false) {
-      // Enviar la petición al servidor para agregar el producto al carrito
-      const respuesta = await producto.agregarProducto(infoProducto);
-
-      if (respuesta.data.status !== 'Exito') {
-        return carritoVista.mostrarMensajeNoSession();
-      }
-      carritoVista.mostrarMensaje(infoProducto);
     } else {
-      carritoVista.mostrarMensaje(infoProducto);
+      // Crear un objeto de la clase Carrito
+      const producto = new Carrito();
+      if (infoProducto !== false) {
+        // Enviar la petición al servidor para agregar el producto al carrito
+        const respuesta = await producto.agregarProducto(infoProducto);
+
+        if (respuesta.data.status !== 'Exito') {
+          return carritoVista.mostrarMensajeNoSession();
+        }
+        carritoVista.mostrarMensaje(infoProducto);
+      } else {
+        carritoVista.mostrarMensaje(infoProducto);
+      }
     }
   };
 
@@ -161,12 +161,12 @@ $(document).ready(() => {
   const controladorGuardarAjustes = async () => {
     let respuesta;
     const infoUsuario = perfilVista.obtenerInfoAjustes();
-    const perfil = new Perfil();
-    respuesta = await perfil.editar(infoUsuario, 'infoNormal');
-    if (respuesta.data.status === 'error') {
-      perfilVista.mostrarError(respuesta.data.error.errors);
-    } else {
-      perfilVista.mostrarMensajeExito();
+    if (infoUsuario) {
+      const perfil = new Perfil();
+      respuesta = await perfil.editar(infoUsuario, 'infoNormal');
+      respuesta.data.status === 'error'
+        ? perfilVista.mostrarError(respuesta.data.error.errors)
+        : perfilVista.mostrarMensajeExito();
     }
   };
 
@@ -211,7 +211,10 @@ $(document).ready(() => {
     if (respuesta.data.status === 'Exito') {
       perfilVista.mostrarMensajeContraseñaCambiadaExitosamente();
     } else {
-      const mensaje = respuesta.data.message;
+      const mensaje = respuesta.data.message.split(':')[
+        respuesta.data.message.split(':').length - 1
+      ];
+
       perfilVista.mostrarMensajeErrorCambiarContraseña(mensaje);
     }
   };
