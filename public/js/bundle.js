@@ -186,7 +186,12 @@ var domElementos = {
   contraseñaActualInput: $('#contraseñaActual'),
   nuevaContraseñaInput: $('#nuevaContraseña'),
   confirmarContraseñaInput: $('#confirmarContraseña'),
-  formularioContraseña: $('#formularioContraseña')
+  formularioContraseña: $('#formularioContraseña'),
+  formularioRecuperarContraseña: $('#formularioRecuperarContrasenia'),
+  inputEmailRecuperarContrasenia: $('#inputCorreoRecuperarContrasenia'),
+  formularioResetearContraseña: $('#formularioResetearContraseña'),
+  inputContraseñaResetear: $('#inputContraseñaResetear'),
+  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -3929,6 +3934,73 @@ function (_Peticion) {
 
       return eliminarResenia;
     }()
+  }, {
+    key: "recuperarContrasenia",
+    value: function () {
+      var _recuperarContrasenia = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee8(email) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionPost", this).call(this, "http://localhost:3000/api/v1/usuarios/recuperarContrasenia", email);
+
+              case 2:
+                respuesta = _context8.sent;
+                return _context8.abrupt("return", respuesta);
+
+              case 4:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function recuperarContrasenia(_x13) {
+        return _recuperarContrasenia.apply(this, arguments);
+      }
+
+      return recuperarContrasenia;
+    }()
+  }, {
+    key: "resetearContrasenia",
+    value: function () {
+      var _resetearContrasenia = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee9(infoResetearContraseña, token) {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.next = 2;
+                return _get(_getPrototypeOf(Perfil.prototype), "hacerPeticionPatch", this).call(this, "http://localhost:3000/api/v1/usuarios/resetearContrasenia/".concat(token), {
+                  contraseña: infoResetearContraseña.contraseña,
+                  confirmarContraseña: infoResetearContraseña.confirmarContraseña
+                });
+
+              case 2:
+                respuesta = _context9.sent;
+                return _context9.abrupt("return", respuesta);
+
+              case 4:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, this);
+      }));
+
+      function resetearContrasenia(_x14, _x15) {
+        return _resetearContrasenia.apply(this, arguments);
+      }
+
+      return resetearContrasenia;
+    }()
   }]);
 
   return Perfil;
@@ -7315,7 +7387,7 @@ exports.mostrarMensajeReseñaCreada = mostrarMensajeReseñaCreada;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mostrarMensajeErrorCambiarContraseña = exports.mostrarMensajeContraseñaCambiadaExitosamente = exports.obtenerInputsContraseñas = exports.mostrarMensajeResenia = exports.renderizarDetallesCompra = exports.obtenerIdCompra = exports.eliminarReseniaDom = exports.obtenerIdsResenia = exports.obtenerInfoResenia = exports.obtenerInfoReseniaEditar = exports.renderizarReseñaParaEditar = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
+exports.resetearContraseñaMensaje = exports.recuperarInfoResetearContraseña = exports.mostrarMensajeRespuesta = exports.obtenerEmailRecuperarContraseña = exports.mostrarMensajeErrorCambiarContraseña = exports.mostrarMensajeContraseñaCambiadaExitosamente = exports.obtenerInputsContraseñas = exports.mostrarMensajeResenia = exports.renderizarDetallesCompra = exports.obtenerIdCompra = exports.eliminarReseniaDom = exports.obtenerIdsResenia = exports.obtenerInfoResenia = exports.obtenerInfoReseniaEditar = exports.renderizarReseñaParaEditar = exports.renderizarReseña = exports.renderizarCompra = exports.obtenerInfoAjustes = exports.mostrarError = exports.mostrarMensajeErrorCampos = exports.mostrarMensajeExito = exports.obtenerIdUsuario = void 0;
 
 var _base = require("../base");
 
@@ -7516,6 +7588,49 @@ var mostrarMensajeErrorCambiarContraseña = function mostrarMensajeErrorCambiarC
 };
 
 exports.mostrarMensajeErrorCambiarContraseña = mostrarMensajeErrorCambiarContraseña;
+
+var obtenerEmailRecuperarContraseña = function obtenerEmailRecuperarContraseña() {
+  return _base.domElementos.inputEmailRecuperarContrasenia.val();
+};
+
+exports.obtenerEmailRecuperarContraseña = obtenerEmailRecuperarContraseña;
+
+var mostrarMensajeRespuesta = function mostrarMensajeRespuesta(respuesta) {
+  if (respuesta.data.status === 'success') {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito', 'Te ha sido envíado un correo con las instrucciones para que recuperes tu contraseña.').then(function (respuesta) {
+      if (respuesta.value) {
+        location.assign('/iniciarSesion');
+      }
+    });
+  } else {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'No existe ese ese correo electrónico en nuestra base de datos.');
+  }
+};
+
+exports.mostrarMensajeRespuesta = mostrarMensajeRespuesta;
+
+var recuperarInfoResetearContraseña = function recuperarInfoResetearContraseña() {
+  return {
+    contraseña: _base.domElementos.inputContraseñaResetear.val().trim(),
+    confirmarContraseña: _base.domElementos.inputConfirmarContraseñaResetear.val().trim()
+  };
+};
+
+exports.recuperarInfoResetearContraseña = recuperarInfoResetearContraseña;
+
+var resetearContraseñaMensaje = function resetearContraseñaMensaje(mensaje) {
+  if (mensaje.data.status === 'Exito') {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('success', 'Exito!', 'La contraseña ha sido actualizada').then(function (respuesta) {
+      if (respuesta.value) {
+        location.assign('/');
+      }
+    });
+  } else {
+    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Las contraseñas no son iguales');
+  }
+};
+
+exports.resetearContraseñaMensaje = resetearContraseñaMensaje;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -8093,6 +8208,82 @@ $(document).ready(function () {
     return function controladorCambiarContraseña() {
       return _ref12.apply(this, arguments);
     };
+  }();
+
+  var controladorRecuperarContraseña =
+  /*#__PURE__*/
+  function () {
+    var _ref13 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee13() {
+      var email, perfil, respuesta;
+      return regeneratorRuntime.wrap(function _callee13$(_context13) {
+        while (1) {
+          switch (_context13.prev = _context13.next) {
+            case 0:
+              // Recuperar el valor del email al que se le quiere envíar la contraseña
+              email = perfilVista.obtenerEmailRecuperarContraseña();
+              perfil = new _perfil.default();
+              _context13.next = 4;
+              return perfil.recuperarContrasenia({
+                email: email
+              });
+
+            case 4:
+              respuesta = _context13.sent;
+              perfilVista.mostrarMensajeRespuesta(respuesta);
+
+            case 6:
+            case "end":
+              return _context13.stop();
+          }
+        }
+      }, _callee13);
+    }));
+
+    return function controladorRecuperarContraseña() {
+      return _ref13.apply(this, arguments);
+    };
+  }();
+
+  var controladorResetearContraseña =
+  /*#__PURE__*/
+  function () {
+    var _ref14 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee14() {
+      var infoResetearContraseña, token, perfil, respuesta;
+      return regeneratorRuntime.wrap(function _callee14$(_context14) {
+        while (1) {
+          switch (_context14.prev = _context14.next) {
+            case 0:
+              infoResetearContraseña = perfilVista.recuperarInfoResetearContraseña();
+              token = window.location.href.split('/')[window.location.href.split('/').length - 1];
+
+              if (!token) {
+                _context14.next = 8;
+                break;
+              }
+
+              perfil = new _perfil.default();
+              _context14.next = 6;
+              return perfil.resetearContrasenia(infoResetearContraseña, token);
+
+            case 6:
+              respuesta = _context14.sent;
+              perfilVista.resetearContraseñaMensaje(respuesta);
+
+            case 8:
+            case "end":
+              return _context14.stop();
+          }
+        }
+      }, _callee14);
+    }));
+
+    return function controladorResetearContraseña() {
+      return _ref14.apply(this, arguments);
+    };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
 
@@ -8124,26 +8315,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref13 = _asyncToGenerator(
+    var _ref15 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee13(e) {
-      return regeneratorRuntime.wrap(function _callee13$(_context13) {
+    regeneratorRuntime.mark(function _callee15(e) {
+      return regeneratorRuntime.wrap(function _callee15$(_context15) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context15.prev = _context15.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context13.stop();
+              return _context15.stop();
           }
         }
-      }, _callee13);
+      }, _callee15);
     }));
 
     return function (_x7) {
-      return _ref13.apply(this, arguments);
+      return _ref15.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -8160,26 +8351,26 @@ $(document).ready(function () {
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref14 = _asyncToGenerator(
+    var _ref16 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee14(e) {
-      return regeneratorRuntime.wrap(function _callee14$(_context14) {
+    regeneratorRuntime.mark(function _callee16(e) {
+      return regeneratorRuntime.wrap(function _callee16$(_context16) {
         while (1) {
-          switch (_context14.prev = _context14.next) {
+          switch (_context16.prev = _context16.next) {
             case 0:
               e.preventDefault();
               controladorCrearResenia();
 
             case 2:
             case "end":
-              return _context14.stop();
+              return _context16.stop();
           }
         }
-      }, _callee14);
+      }, _callee16);
     }));
 
     return function (_x8) {
-      return _ref14.apply(this, arguments);
+      return _ref16.apply(this, arguments);
     };
   }());
 
@@ -8212,42 +8403,52 @@ $(document).ready(function () {
   _base.domElementos.formularioContraseña.submit(
   /*#__PURE__*/
   function () {
-    var _ref15 = _asyncToGenerator(
+    var _ref17 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee15(e) {
-      return regeneratorRuntime.wrap(function _callee15$(_context15) {
+    regeneratorRuntime.mark(function _callee17(e) {
+      return regeneratorRuntime.wrap(function _callee17$(_context17) {
         while (1) {
-          switch (_context15.prev = _context15.next) {
+          switch (_context17.prev = _context17.next) {
             case 0:
               e.preventDefault();
               controladorCambiarContraseña();
 
             case 2:
             case "end":
-              return _context15.stop();
+              return _context17.stop();
           }
         }
-      }, _callee15);
+      }, _callee17);
     }));
 
     return function (_x9) {
-      return _ref15.apply(this, arguments);
+      return _ref17.apply(this, arguments);
     };
-  }()); // Evento que se dispara cuando se cierra sesión
+  }());
+
+  _base.domElementos.formularioRecuperarContraseña.submit(function (e) {
+    e.preventDefault();
+    controladorRecuperarContraseña();
+  });
+
+  _base.domElementos.formularioResetearContraseña.submit(function (e) {
+    e.preventDefault();
+    controladorResetearContraseña();
+  }); // Evento que se dispara cuando se cierra sesión
 
 
   _base.domElementos.btnCerrarSesion.on('click',
   /*#__PURE__*/
   function () {
-    var _ref16 = _asyncToGenerator(
+    var _ref18 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee16(e) {
-      return regeneratorRuntime.wrap(function _callee16$(_context16) {
+    regeneratorRuntime.mark(function _callee18(e) {
+      return regeneratorRuntime.wrap(function _callee18$(_context18) {
         while (1) {
-          switch (_context16.prev = _context16.next) {
+          switch (_context18.prev = _context18.next) {
             case 0:
               e.preventDefault();
-              _context16.next = 3;
+              _context18.next = 3;
               return (0, _cerrarSesion.cerrarSesion)();
 
             case 3:
@@ -8255,14 +8456,14 @@ $(document).ready(function () {
 
             case 4:
             case "end":
-              return _context16.stop();
+              return _context18.stop();
           }
         }
-      }, _callee16);
+      }, _callee18);
     }));
 
     return function (_x10) {
-      return _ref16.apply(this, arguments);
+      return _ref18.apply(this, arguments);
     };
   }());
 });
@@ -8294,7 +8495,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64647" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53985" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

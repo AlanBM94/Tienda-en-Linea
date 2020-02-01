@@ -236,3 +236,51 @@ export const mostrarMensajeContraseñaCambiadaExitosamente = () => {
 export const mostrarMensajeErrorCambiarContraseña = mensaje => {
   configurarSweetAlert('error', 'Error!', mensaje);
 };
+
+export const obtenerEmailRecuperarContraseña = () =>
+  domElementos.inputEmailRecuperarContrasenia.val();
+
+export const mostrarMensajeRespuesta = respuesta => {
+  if (respuesta.data.status === 'success') {
+    configurarSweetAlert(
+      'success',
+      'Exito',
+      'Te ha sido envíado un correo con las instrucciones para que recuperes tu contraseña.'
+    ).then(function(respuesta) {
+      if (respuesta.value) {
+        location.assign('/iniciarSesion');
+      }
+    });
+  } else {
+    configurarSweetAlert(
+      'error',
+      'Error!',
+      'No existe ese ese correo electrónico en nuestra base de datos.'
+    );
+  }
+};
+
+export const recuperarInfoResetearContraseña = () => {
+  return {
+    contraseña: domElementos.inputContraseñaResetear.val().trim(),
+    confirmarContraseña: domElementos.inputConfirmarContraseñaResetear
+      .val()
+      .trim()
+  };
+};
+
+export const resetearContraseñaMensaje = mensaje => {
+  if (mensaje.data.status === 'Exito') {
+    configurarSweetAlert(
+      'success',
+      'Exito!',
+      'La contraseña ha sido actualizada'
+    ).then(function(respuesta) {
+      if (respuesta.value) {
+        location.assign('/');
+      }
+    });
+  } else {
+    configurarSweetAlert('error', 'Error!', 'Las contraseñas no son iguales');
+  }
+};

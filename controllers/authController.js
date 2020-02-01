@@ -170,7 +170,7 @@ exports.recuperarContrasenia = catchAsync(async (req, res, next) => {
   try {
     const resetURL = `${req.protocol}://${req.get(
       'host'
-    )}/api/v1/usuarios/resetearContrasenia/${resetToken}`;
+    )}/resetearContrasenia/${resetToken}`;
 
     await new Email(usuario, resetURL).enviarRecuperarContrasenia();
 
@@ -202,8 +202,6 @@ exports.resetearContrasenia = catchAsync(async (req, res, next) => {
     recuperarContraseñaToken: hashedToken,
     recuperarContraseñaExpira: { $gt: Date.now() }
   });
-
-  console.log(usuario);
 
   if (!usuario) {
     return next(new AppError('La token no es válida o ya ha expirado', 400));

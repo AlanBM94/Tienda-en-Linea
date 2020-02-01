@@ -1,0 +1,24 @@
+<title>Resetear contraseña</title>
+<section class="formulario">
+    <h1 class="titulo-logo">
+        <i class="fas fa-shopping-cart logo-icono"></i>
+        Mi tienda
+    </h1>
+    <div class="formulario__contenido">
+        <h2 class="formulario__titulo">Ingresa tu nueva contraseña</h2>
+        <form action="usuarioLogeado.html" class="formulario__form formulario__form--login"
+            id="formularioResetearContraseña">
+            <label class="formulario__textoRecuperarContrasenia" for="correoElectronico">Por favor introduzca la nueva
+                contraseña que le será asignada a su cuenta</label>
+            <input class="formulario__input" type="password" required minLength="8" placeholder="Nueva contraseña"
+                id="inputContraseñaResetear" />
+            <input class="formulario__input" type="password" required minLength="8" placeholder="Confirmar contraseña"
+                id="inputConfirmarContraseñaResetear" />
+            <button class="formulario__btnEnviar btn">Cambiar contraseña</button>
+        </form>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/js/bundle.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>

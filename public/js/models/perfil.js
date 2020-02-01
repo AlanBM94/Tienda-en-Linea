@@ -64,4 +64,23 @@ export default class Perfil extends Peticion {
       `http://localhost:3000/api/v1/productos/${idProducto}/resenias/${idResenia}`
     );
   }
+
+  async recuperarContrasenia(email) {
+    const respuesta = await super.hacerPeticionPost(
+      `http://localhost:3000/api/v1/usuarios/recuperarContrasenia`,
+      email
+    );
+    return respuesta;
+  }
+
+  async resetearContrasenia(infoResetearContraseña, token) {
+    const respuesta = await super.hacerPeticionPatch(
+      `http://localhost:3000/api/v1/usuarios/resetearContrasenia/${token}`,
+      {
+        contraseña: infoResetearContraseña.contraseña,
+        confirmarContraseña: infoResetearContraseña.confirmarContraseña
+      }
+    );
+    return respuesta;
+  }
 }

@@ -75,7 +75,12 @@ export const domElementos = {
   contraseñaActualInput: $('#contraseñaActual'),
   nuevaContraseñaInput: $('#nuevaContraseña'),
   confirmarContraseñaInput: $('#confirmarContraseña'),
-  formularioContraseña: $('#formularioContraseña')
+  formularioContraseña: $('#formularioContraseña'),
+  formularioRecuperarContraseña: $('#formularioRecuperarContrasenia'),
+  inputEmailRecuperarContrasenia: $('#inputCorreoRecuperarContrasenia'),
+  formularioResetearContraseña: $('#formularioResetearContraseña'),
+  inputContraseñaResetear: $('#inputContraseñaResetear'),
+  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

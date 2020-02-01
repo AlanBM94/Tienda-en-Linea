@@ -31,6 +31,10 @@ exports.recuperarContrasenia = (req, res, next) => {
   generarTemplates('tienda/recuperarContrasenia', res);
 };
 
+exports.resetearContrasenia = (req, res, next) => {
+  generarTemplates('tienda/resetearContrasenia', res);
+};
+
 exports.obtenerCategoria = catchAsync(async (req, res, next) => {
   // Obtiene la categoría de la url y la modifica para obtener los productos
   const categoria = configurarCategoria(req.url.split('/')[1]);

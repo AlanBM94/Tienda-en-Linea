@@ -219,6 +219,29 @@ $(document).ready(() => {
     }
   };
 
+  const controladorRecuperarContraseña = async () => {
+    // Recuperar el valor del email al que se le quiere envíar la contraseña
+    const email = perfilVista.obtenerEmailRecuperarContraseña();
+    const perfil = new Perfil();
+    const respuesta = await perfil.recuperarContrasenia({ email });
+    perfilVista.mostrarMensajeRespuesta(respuesta);
+  };
+
+  const controladorResetearContraseña = async () => {
+    const infoResetearContraseña = perfilVista.recuperarInfoResetearContraseña();
+    const token = window.location.href.split('/')[
+      window.location.href.split('/').length - 1
+    ];
+    if (token) {
+      const perfil = new Perfil();
+      const respuesta = await perfil.resetearContrasenia(
+        infoResetearContraseña,
+        token
+      );
+      perfilVista.resetearContraseñaMensaje(respuesta);
+    }
+  };
+
   // Evento que se dispara cuando se envía el formulario de Registro
   domElementos.formularioRegistrarse.submit(event => {
     event.preventDefault();
@@ -293,6 +316,16 @@ $(document).ready(() => {
   domElementos.formularioContraseña.submit(async e => {
     e.preventDefault();
     controladorCambiarContraseña();
+  });
+
+  domElementos.formularioRecuperarContraseña.submit(e => {
+    e.preventDefault();
+    controladorRecuperarContraseña();
+  });
+
+  domElementos.formularioResetearContraseña.submit(e => {
+    e.preventDefault();
+    controladorResetearContraseña();
   });
 
   // Evento que se dispara cuando se cierra sesión
