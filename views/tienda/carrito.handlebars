@@ -51,7 +51,11 @@
                 </div>
                 <div class="carrito__resumenFila">
                     <p class="resumenCampo">Total:</p>
+                    {{#if usuario.premium}}
+                    <span>Total - 10% = ${{carrito.total}}</span>
+                    {{else}}
                     <span>${{carrito.total}}</span>
+                    {{/if}}
                 </div>
             </div>
             <button class="btn btn--rojo" data-id="{{carrito._id}}" id="btnComprar">Comprar</button>

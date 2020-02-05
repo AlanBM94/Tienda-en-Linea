@@ -26,7 +26,8 @@ const carritoSchema = new mongoose.Schema(
       }
     ],
     total: {
-      type: Number
+      type: Number,
+      min: 0
     }
   },
   {
@@ -35,13 +36,27 @@ const carritoSchema = new mongoose.Schema(
   }
 );
 
-carritoSchema.methods.calcularTotal = function() {
+const calcularTotal = productos => {
   // Cada vez que se llama este metodo se vuelve a inicializar el total en 0 para que no sume de más al total
-  this.total = 0;
-  for (let i = 0; i < this.productos.length; i++) {
+  let totalCompra = 0;
+  for (let i = 0; i < productos.length; i++) {
     // Actualiza en el documento actual
-    this.total += this.productos[i].cantidad * this.productos[i].precio;
+    totalCompra += productos[i].cantidad * productos[i].precio;
   }
+  return totalCompra;
+};
+
+carritoSchema.methods.calcularTotal = function() {
+  const totalCompra = calcularTotal(this.productos);
+  this.total = totalCompra;
+  this.save();
+};
+
+carritoSchema.methods.calcularTotalPremium = function() {
+  const descuento = 0.1;
+  const totalCompra = calcularTotal(this.productos);
+  this.total = totalCompra;
+  this.total = this.total - this.total * descuento;
   this.save();
 };
 

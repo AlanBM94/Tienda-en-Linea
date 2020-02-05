@@ -1,40 +1,17 @@
 const path = require('path');
 const express = require('express');
-const expressHbs = require('express-handlebars');
+
 const cookieParser = require('cookie-parser');
 
 const globalErrorHandler = require('./controllers/errorController');
-const AppError = require('./utils/appError');
 const productoRouter = require('./routes/productoRouter');
 const usuarioRouter = require('./routes/usuarioRouter');
 const carritoRouter = require('./routes/carritoRouter');
 const compraRouter = require('./routes/compraRouter');
 const viewRouter = require('./routes/viewRoutes');
+const hbs = require('./handlebars/helpers');
 
 const app = express();
-
-// Helpers de Handlebars
-const hbs = expressHbs.create({
-  helpers: {
-    subtotal: function(cantidad, precio) {
-      return cantidad * precio;
-    },
-    formatoFecha: function(fecha) {
-      function agregar0(num) {
-        return num < 10 ? `0${num}` : num;
-      }
-      return `${agregar0(fecha.getDate())}/${agregar0(
-        fecha.getMonth() + 1
-      )}/${fecha.getFullYear()} - ${agregar0(fecha.getHours())}:${agregar0(
-        fecha.getMinutes()
-      )}`;
-    },
-    activarBoton: function(stock) {
-      const respuesta = stock === '0' ? stock : false;
-      return respuesta;
-    }
-  }
-});
 
 // app.set('view engine', 'pug');
 // app.set('views', path.join(__dirname, 'views'));

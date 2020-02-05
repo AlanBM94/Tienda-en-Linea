@@ -2,6 +2,7 @@ const Carrito = require('../models/carritoModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const Producto = require('../models/productoModel');
+// const Usuario = require('../models/usuarioModel');
 
 // Le resta al stock la cantidad de los productos comprados
 const restarStock = catchAsync(async (cantidad, slugProducto) => {
@@ -78,8 +79,11 @@ exports.agregarAlCarrito = catchAsync(async (req, res, next) => {
     return next(new AppError('No se encontró ningún carrito con ese Id', 404));
   }
 
-  // Calcula el total del carrito
-  carritoActualizado.calcularTotal();
+  if (req.usuario.premium) {
+    carritoActualizado.calcularTotalPremium();
+  } else {
+    carritoActualizado.calcularTotal();
+  }
   res.status(200).json({
     status: 'Exito',
     data: {

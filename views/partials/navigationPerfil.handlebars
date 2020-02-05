@@ -30,7 +30,11 @@
                             data-id="{{usuario.id}}" />
                     </div>
                     <h4>{{usuario.nombre}}</h4>
+                    {{#if usuario.premium}}
                     <span>Premium</span>
+                    {{else}}
+                    <span>Normal</span>
+                    {{/if}}
                 </div>
                 <div class="perfil__personalOpciones">
                     <ul>

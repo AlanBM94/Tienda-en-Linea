@@ -63,12 +63,14 @@ exports.obtenerProducto = catchAsync(async (req, res, next) => {
 exports.obtenerCarrito = catchAsync(async (req, res, next) => {
   const idUsuario = req.usuario._id;
   const carrito = await Carrito.findOne({ usuario: idUsuario });
+  const { usuario } = req;
   if (!carrito) {
     res.status(200).render('tienda/carritoVacio');
   } else {
     const productosCarrito = carrito.productos;
     res.status(200).render('tienda/carrito', {
       carrito,
+      usuario,
       productosCarrito
     });
   }
