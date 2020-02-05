@@ -33,7 +33,7 @@ module.exports = class Email {
     const html = pug.renderFile(
       `${__dirname}/../views/emails/${template}.pug`,
       {
-        firstName: this.firstName,
+        primerNombre: this.primerNombre,
         url: this.url,
         subject
       }
@@ -60,6 +60,13 @@ module.exports = class Email {
     await this.send(
       'recuperarContrasenia',
       'Tu token para recuperar tu contraseña es valida solo por 10 minutos'
+    );
+  }
+
+  async enviarConfirmacionUsuarioPremium() {
+    await this.send(
+      'usuarioPremium',
+      'Felicidades, te has convertido en un usuario premium'
     );
   }
 };

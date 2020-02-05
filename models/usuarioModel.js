@@ -43,6 +43,10 @@ const usuarioSchema = new mongoose.Schema({
       message: 'Las contraseñas no son iguales'
     }
   },
+  premium: {
+    type: Boolean,
+    default: false
+  },
 
   contraseñaCambiadaEn: Date,
   recuperarContraseñaToken: String,

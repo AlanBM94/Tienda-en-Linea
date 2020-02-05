@@ -1,8 +1,9 @@
 const stripe = require('stripe')('sk_test_aX5uThJUB2R6tw70TbVPbiZD00TNRhCnTk');
 const Carrito = require('../models/carritoModel');
 const Compra = require('../models/compraModel');
-const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const Usuario = require('../models/usuarioModel.js');
+const Email = require('../utils/email');
 
 // Le da formato a la fecha
 const formatoFecha = fecha => {
@@ -70,6 +71,22 @@ exports.obtenerCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
+const verificarSiUsuarioEsPremium = catchAsync(async (idUsuario, req) => {
+  if (idUsuario) {
+    const compras = await Compra.find({ usuario: idUsuario });
+    const resetURL = `${req.protocol}://${req.get('host')}/`;
+    if (compras.length === 5) {
+      const usuario = await Usuario.findById(idUsuario);
+      await Usuario.findByIdAndUpdate(
+        idUsuario,
+        { premium: true },
+        { new: true, runValidators: true }
+      );
+      await new Email(usuario, resetURL).enviarConfirmacionUsuarioPremium();
+    }
+  }
+});
+
 // Crea una nueva compra
 exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   // FIXME: esto es temporal porque todos pueden hacer compras sin pagar, se solucionara en producción
@@ -91,6 +108,7 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
     );
     // Actualiza el total del carrito
     await Carrito.findByIdAndUpdate(carrito, { total: 0 });
+    verificarSiUsuarioEsPremium(usuario, req);
   }
   // Crea una nueva petición a esta url
   res.redirect(req.originalUrl.split('?')[0]);

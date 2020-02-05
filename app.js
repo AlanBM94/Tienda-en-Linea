@@ -30,7 +30,6 @@ const hbs = expressHbs.create({
       )}`;
     },
     activarBoton: function(stock) {
-      console.log(stock);
       const respuesta = stock === '0' ? stock : false;
       return respuesta;
     }
