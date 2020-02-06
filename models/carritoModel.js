@@ -37,10 +37,8 @@ const carritoSchema = new mongoose.Schema(
 );
 
 const calcularTotal = productos => {
-  // Cada vez que se llama este metodo se vuelve a inicializar el total en 0 para que no sume de más al total
   let totalCompra = 0;
   for (let i = 0; i < productos.length; i++) {
-    // Actualiza en el documento actual
     totalCompra += productos[i].cantidad * productos[i].precio;
   }
   return totalCompra;

@@ -7196,6 +7196,7 @@ var actualizarTotalCarrito = function actualizarTotalCarrito(producto) {
   var precioProducto = parseInt(producto.children[3].children[0].innerText.split('$')[1].trim());
   var precioCarritoTotal = parseInt($('.carrito__resumenFila span').text().split('$')[1]);
   var precioActualizadoCarrito = precioCarritoTotal - precioProducto;
+  if (precioActualizadoCarrito < 0) precioActualizadoCarrito = 0;
   $('.carrito__resumenFila span').text("$".concat(precioActualizadoCarrito));
 }; // Elimina el producto del DOM
 
@@ -7679,6 +7680,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 $(document).ready(function () {
   // Configura los puntos en los que se tienen que hacer animaciones
   (0, _base.configWaypoints)();
+  history.pushState(null, null, location.href);
+
+  window.onpopstate = function () {
+    history.go(1);
+  };
 
   var controladorCrearResenia =
   /*#__PURE__*/
@@ -8300,14 +8306,12 @@ $(document).ready(function () {
 
 
   _base.domElementos.btnAgregarCarrito.on('click', function (e) {
-    e.preventDefault(); // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
-
+    e.preventDefault();
     controladorCarrito('btn');
   }); // Evento que se dispara cuando se presiona el icono de agregar al carrito
 
 
   _base.domElementos.iconoAgregarCarrito.on('click', function (e) {
-    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
     controladorCarrito('icono', e);
   }); // Evento que se dispara cuando se presiona el boton de eliminar carrito
 
@@ -8495,7 +8499,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59717" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

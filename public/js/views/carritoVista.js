@@ -71,7 +71,8 @@ const actualizarTotalCarrito = producto => {
       .text()
       .split('$')[1]
   );
-  const precioActualizadoCarrito = precioCarritoTotal - precioProducto;
+  let precioActualizadoCarrito = precioCarritoTotal - precioProducto;
+  if (precioActualizadoCarrito < 0) precioActualizadoCarrito = 0;
   $('.carrito__resumenFila span').text(`$${precioActualizadoCarrito}`);
 };
 

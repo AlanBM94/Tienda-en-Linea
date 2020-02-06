@@ -20,6 +20,11 @@ $(document).ready(() => {
   // Configura los puntos en los que se tienen que hacer animaciones
   configWaypoints();
 
+  history.pushState(null, null, location.href);
+  window.onpopstate = function() {
+    history.go(1);
+  };
+
   const controladorCrearResenia = async () => {
     const productoId = reseñaVista.conseguirProductoId();
     const valoresReseña = reseñaVista.obtenerValoresReseña();
@@ -257,13 +262,11 @@ $(document).ready(() => {
   // Evento que se dispara cuando se presiona el boton de agregar al carrito
   domElementos.btnAgregarCarrito.on('click', e => {
     e.preventDefault();
-    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
     controladorCarrito('btn');
   });
 
   // Evento que se dispara cuando se presiona el icono de agregar al carrito
   domElementos.iconoAgregarCarrito.on('click', function(e) {
-    // Si existe una cookie con el nombre jwt puedes agregar un producto al carrito
     controladorCarrito('icono', e);
   });
 

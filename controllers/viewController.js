@@ -1,8 +1,6 @@
 const Producto = require('../models/productoModel');
-const Usuario = require('../models/usuarioModel');
 const Carrito = require('../models/carritoModel');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('./../utils/appError');
 
 const generarTemplates = (tipo, respuesta) =>
   respuesta.status(200).render(tipo);

@@ -18,6 +18,9 @@ const hbs = expressHbs.create({
     activarBoton: function(stock) {
       const respuesta = stock === '0' ? stock : false;
       return respuesta;
+    },
+    recargarPagina: function() {
+      console.log('hola mundo');
     }
   }
 });
