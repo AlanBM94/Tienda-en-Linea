@@ -159,25 +159,3 @@ exports.eliminarUsuario = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.verificarSiUsuarioEsPremium = catchAsync(async (req, res, next) => {
-  console.log('estas dentro');
-  if (req.usuario) {
-    const idUsuario = req.usuario._id;
-    const compras = await Compra.find({ usuario: idUsuario });
-    const { usuario } = req;
-    const resetURL = `${req.protocol}://${req.get('host')}/`;
-    if (compras.length >= 5) {
-      await Usuario.findByIdAndUpdate(
-        idUsuario,
-        { premium: true },
-        { new: true, runValidators: true }
-      );
-    }
-    console.log(compras.length);
-    if (compras.length === 11)
-      await new Email(usuario, resetURL).enviarConfirmacionUsuarioPremium();
-    res.redirect(req.originalUrl.split('?')[0]);
-  } else {
-    res.redirect(req.originalUrl.split('?')[0]);
-  }
-});

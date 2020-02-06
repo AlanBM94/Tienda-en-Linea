@@ -71,45 +71,60 @@ exports.obtenerCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
+const elegirCorreo = catchAsync(async (usuario, url, tipo) => {
+  if (tipo === 'usuarioPremium') {
+    await new Email(usuario, url).enviarConfirmacionUsuarioPremium();
+  } else if (tipo === 'nuevaCompra') {
+    await new Email(usuario, url).enviarMensajeNuevaCompra();
+  }
+});
+
+const enviarCorreo = catchAsync(async (idUsuario, req, tipo) => {
+  const usuario = await Usuario.findById(idUsuario);
+  const resetURL = `${req.protocol}://${req.get('host')}/`;
+  elegirCorreo(usuario, resetURL, tipo);
+});
+
 const verificarSiUsuarioEsPremium = catchAsync(async (idUsuario, req) => {
   if (idUsuario) {
     const compras = await Compra.find({ usuario: idUsuario });
-    const resetURL = `${req.protocol}://${req.get('host')}/`;
     if (compras.length === 5) {
-      const usuario = await Usuario.findById(idUsuario);
+      enviarCorreo(idUsuario, req, 'usuarioPremium');
       await Usuario.findByIdAndUpdate(
         idUsuario,
         { premium: true },
         { new: true, runValidators: true }
       );
-      await new Email(usuario, resetURL).enviarConfirmacionUsuarioPremium();
     }
   }
+});
+
+const actualizarCarrito = catchAsync(async (infoCarrito, req) => {
+  const { carrito, usuario, nuevaCompra } = infoCarrito;
+  const carritoProductos = await Carrito.findById(carrito);
+  await Compra.findByIdAndUpdate(nuevaCompra.id, {
+    productos: carritoProductos.productos
+  });
+  await Carrito.findOneAndUpdate(
+    { usuario },
+    { $pull: { productos: {} } },
+    { multi: true }
+  );
+  await Carrito.findByIdAndUpdate(carrito, { total: 0 });
+  verificarSiUsuarioEsPremium(usuario, req);
 });
 
 // Crea una nueva compra
 exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   // FIXME: esto es temporal porque todos pueden hacer compras sin pagar, se solucionara en producción
   const { carrito, usuario, precio } = req.query;
-  if (!carrito && !usuario && !precio) {
-    return next();
-  }
+  if (!carrito && !usuario && !precio) return next();
   const nuevaCompra = await Compra.create({ carrito, usuario, precio });
   if (nuevaCompra) {
-    const carritoProductos = await Carrito.findById(carrito);
-    await Compra.findByIdAndUpdate(nuevaCompra.id, {
-      productos: carritoProductos.productos
-    });
-    // Eliminar los productos del carrito
-    await Carrito.findOneAndUpdate(
-      { usuario },
-      { $pull: { productos: {} } },
-      { multi: true }
-    );
-    // Actualiza el total del carrito
-    await Carrito.findByIdAndUpdate(carrito, { total: 0 });
-    verificarSiUsuarioEsPremium(usuario, req);
+    const infoCarrito = { carrito, usuario, nuevaCompra };
+    actualizarCarrito(infoCarrito, req);
   }
+  enviarCorreo(usuario, req, 'nuevaCompra');
   // Crea una nueva petición a esta url
   res.redirect(req.originalUrl.split('?')[0]);
 });

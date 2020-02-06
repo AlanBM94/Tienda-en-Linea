@@ -29,6 +29,17 @@ module.exports = class Email {
     });
   }
 
+  crearMailOptions(subject, html) {
+    const mailOptions = {
+      from: this.desde,
+      to: this.para,
+      subject,
+      html,
+      text: htmlToText.fromString(html)
+    };
+    return mailOptions;
+  }
+
   async send(template, subject) {
     const html = pug.renderFile(
       `${__dirname}/../views/emails/${template}.pug`,
@@ -38,14 +49,7 @@ module.exports = class Email {
         subject
       }
     );
-
-    const mailOptions = {
-      from: this.desde,
-      to: this.para,
-      subject,
-      html,
-      text: htmlToText.fromString(html)
-    };
+    const mailOptions = this.crearMailOptions(subject, html);
     await this.nuevoTransporte().sendMail(mailOptions);
   }
 
@@ -61,6 +65,10 @@ module.exports = class Email {
       'recuperarContrasenia',
       'Tu token para recuperar tu contraseña es valida solo por 10 minutos'
     );
+  }
+
+  async enviarMensajeNuevaCompra() {
+    await this.send('nuevaCompra', 'Felicidades por tu nueva compra');
   }
 
   async enviarConfirmacionUsuarioPremium() {
