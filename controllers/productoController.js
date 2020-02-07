@@ -19,6 +19,7 @@ exports.obtenerProductos = catchAsync(async (req, res, next) => {
     .filtrar()
     .ordenar()
     .paginacion()
+    .limitarCampos()
     .categoria();
 
   const productos = await caracteristicas.consulta;
@@ -65,5 +66,42 @@ exports.eliminarProducto = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'Exito',
     data: null
+  });
+});
+
+exports.modificarConsultaPorPrecio = catchAsync(async (req, res, next) => {
+  if (req.params.precio === 'baratos') {
+    req.query.ordenar = 'precio';
+  }
+  if (req.params.precio === 'caros') {
+    req.query.ordenar = '-precio';
+  }
+  req.query.limite = '5';
+  req.query.campos = 'nombre,descripcion,precio';
+  next();
+});
+
+exports.obtenerEstadisticasProductos = catchAsync(async (req, res, next) => {
+  const estadisticas = await Producto.aggregate([
+    { $match: { precio: { $gte: 100 } } },
+    {
+      $group: {
+        _id: { $toUpper: '$categoria' },
+        numeroProductos: { $sum: 1 },
+        precioPromedio: { $avg: '$precio' },
+        precioMinimo: { $min: '$precio' },
+        precioMaximo: { $max: '$precio' },
+        stockPromedio: { $avg: '$stock' },
+        stockMinimo: { $min: '$stock' },
+        stockMaximo: { $max: '$stock' }
+      }
+    }
+  ]);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      estadisticas
+    }
   });
 });

@@ -56,6 +56,16 @@ class CaracteristicasProducto {
     }
     return this;
   }
+
+  limitarCampos() {
+    if (this.consultaCadena.campos) {
+      const campos = this.consultaCadena.campos.split(',').join(' ');
+      this.consulta = this.consulta.select(campos);
+    } else {
+      this.consulta = this.consulta.select('-__v');
+    }
+    return this;
+  }
 }
 
 module.exports = CaracteristicasProducto;

@@ -7,6 +7,17 @@ const reseñaController = require('../controllers/reseñaController');
 const router = express.Router();
 
 router
+  .route('/productosPorPrecio/:precio')
+  .get(
+    productoController.modificarConsultaPorPrecio,
+    productoController.obtenerProductos
+  );
+
+router
+  .route('/estadisticas')
+  .get(productoController.obtenerEstadisticasProductos);
+
+router
   .route('/')
   .get(
     authController.estaLogeado,

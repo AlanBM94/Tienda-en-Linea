@@ -126,7 +126,7 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   }
   enviarCorreo(usuario, req, 'nuevaCompra');
   // Crea una nueva petición a esta url
-  res.redirect(req.originalUrl.split('?')[0]);
+  res.redirect(`${req.protocol}://${req.get('host')}/misCompras`);
 });
 
 exports.obtenerCompras = catchAsync(async (req, res, next) => {
