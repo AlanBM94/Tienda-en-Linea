@@ -6,6 +6,8 @@ const reseñaController = require('../controllers/reseñaController');
 
 const router = express.Router();
 
+router.route('/').get(usuarioController.obtenerUsuarios);
+
 router.route('/registrarse').post(authController.registrarse);
 
 router.route('/iniciarSesion').post(authController.iniciarSesion);
@@ -25,8 +27,6 @@ router.use(authController.proteger);
 router.route('/:id/resenias').get(reseñaController.obtenerReseñasDesdeUsuario);
 
 router.route('/:id/compras').get(compraController.obtenerCompras);
-
-router.route('/').get(usuarioController.obtenerUsuarios);
 
 router.get(
   '/miPerfil',

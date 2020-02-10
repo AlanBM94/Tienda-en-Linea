@@ -105,3 +105,25 @@ exports.obtenerEstadisticasProductos = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.obtenerProductosMasVendidos = catchAsync(async (req, res, next) => {
+  const numeroProductos = parseInt(req.query.numeroProductos, 10) || 3;
+  const estadisticas = await Producto.aggregate([
+    { $match: { precio: { $gte: 100 } } },
+    {
+      $group: {
+        _id: { $toUpper: '$nombre' },
+        numeroDeVentas: { $max: '$numeroVentas' }
+      }
+    },
+    { $sort: { numeroDeVentas: -1 } },
+    { $limit: numeroProductos }
+  ]);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: estadisticas
+    }
+  });
+});

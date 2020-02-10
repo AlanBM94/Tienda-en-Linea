@@ -1,10 +1,10 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const Usuario = require('../models/usuarioModel.js');
-const Compra = require('../models/compraModel');
+// const Compra = require('../models/compraModel');
 const catchAsync = require('../utils/catchAsync.js');
 const AppError = require('../utils/appError.js');
-const Email = require('../utils/email');
+// const Email = require('../utils/email');
 
 // const multerAlmacenamiento = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -32,12 +32,6 @@ const multerFilter = (req, file, cb) => {
 const upload = multer({
   storage: multerAlmacenamiento,
   fileFilter: multerFilter
-});
-
-exports.obtenerUsuarios = catchAsync(async (req, res, next) => {
-  res.status(500).json({
-    mensaje: 'Esta ruta aún no ha sido definida'
-  });
 });
 
 exports.miPerfil = (req, res, next) => {
@@ -158,4 +152,3 @@ exports.eliminarUsuario = catchAsync(async (req, res, next) => {
     data: null
   });
 });
-

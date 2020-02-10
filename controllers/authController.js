@@ -35,6 +35,7 @@ const enviarToken = (usuario, statusCodigo, res) => {
 };
 
 exports.registrarse = catchAsync(async (req, res, next) => {
+  console.log(req);
   const usuario = await Usuario.create(req.body);
   const url = `${req.protocol}://${req.get('host')}/perfil`;
   await new Email(usuario, url).sendWelcome();
@@ -112,7 +113,7 @@ exports.permitirPara = (...roles) => {
 };
 
 // Verifica que el usuario este logeado
-exports.estaLogeado = async (req, res, next) => {
+exports.usuarioEstaLogeado = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
       const decodificado = await promisify(jwt.verify)(

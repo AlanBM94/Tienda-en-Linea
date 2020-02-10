@@ -43,52 +43,23 @@ const mostrarMensajeErrorCorreo = () => {
   configurarSweetAlert('error', 'Error!', 'Ingresa un correo válido');
 };
 
-export const mostrarError = error => {
-  if (error.nombre && error.email) {
-    mostrarMensajeErrorCampos();
-  } else if (error.nombre) {
-    if (error.nombre.message.includes('shorter than the minimum allowed')) {
-      mostrarMensajeErrorNombrePequeño();
-    }
-    if (error.nombre.message.includes(' is longer than the maximum ')) {
-      mostrarMensajeErrorNombreLargo();
-    }
-  } else if (error.email) {
-    mostrarMensajeErrorCorreo();
-  }
+export const mostrarError = () => {
+  configurarSweetAlert(
+    'error',
+    'Error!',
+    'El formato de la imagen no es correcto'
+  );
 };
 
 export const obtenerInfoAjustes = () => {
   const form = new FormData();
   form.append('nombre', document.getElementById('nombreAjustes').value);
   form.append('email', document.getElementById('correoAjustes').value);
-  form.append(
-    'foto',
-    validarSiEsImagen(document.getElementById('fotoAjustes').files[0])
-  );
-  const archivoEsUnaImagen = validarSiEsImagen(
-    document.getElementById('fotoAjustes').files[0]
-  );
-  return archivoEsUnaImagen ? form : false;
-};
-
-const validarSiEsImagen = archivo => {
-  const extensionArchivo = archivo.name
-    .split('.')
-    [archivo.name.split('.').length - 1].toLowerCase();
-  if (
-    extensionArchivo !== 'jpg' &&
-    extensionArchivo !== 'png' &&
-    extensionArchivo !== 'jpeg'
-  ) {
-    configurarSweetAlert(
-      'error',
-      'Error',
-      'Tipos de arcchivos aceptados: .jpg, png, jpeg'
-    );
-    return false;
+  form.append('foto', document.getElementById('fotoAjustes').files[0]);
+  if (form) {
+    return form;
   } else {
-    return archivo;
+    return false;
   }
 };
 

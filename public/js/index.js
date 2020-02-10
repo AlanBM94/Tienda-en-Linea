@@ -170,7 +170,7 @@ $(document).ready(() => {
       const perfil = new Perfil();
       respuesta = await perfil.editar(infoUsuario, 'infoNormal');
       respuesta.data.status === 'error'
-        ? perfilVista.mostrarError(respuesta.data.error.errors)
+        ? perfilVista.mostrarError()
         : perfilVista.mostrarMensajeExito();
     }
   };

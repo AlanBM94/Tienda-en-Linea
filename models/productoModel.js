@@ -38,6 +38,22 @@ const productoSchema = new mongoose.Schema(
     stock: {
       type: Number,
       min: 0
+    },
+    puntuacionPromedio: {
+      type: Number,
+      default: 4.5,
+      min: [1, 'La puntuación mínima es 1'],
+      max: [5, 'La puntuación máxima es 5'],
+      set: val => Math.round(val * 10) / 10
+    },
+    cantidadReseñas: {
+      type: Number,
+      default: 0
+    },
+    numeroVentas: {
+      type: Number,
+      min: 0,
+      default: 0
     }
   },
   {

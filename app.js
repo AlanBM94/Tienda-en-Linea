@@ -35,14 +35,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas de el sitio que consume la API
-app.use('/', viewRouter);
-
 // Rutas de la API
 app.use('/api/v1/productos', productoRouter);
 app.use('/api/v1/usuarios', usuarioRouter);
 app.use('/api/v1/carrito', carritoRouter);
 app.use('/api/v1/compra', compraRouter);
+
+// Rutas de el sitio que consume la API
+app.use('/', viewRouter);
 // Handle the routes that were not found
 // app.all('*', (req, res, next) => {
 //   // console.log(req.originalUrl);

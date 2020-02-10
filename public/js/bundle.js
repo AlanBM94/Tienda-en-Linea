@@ -7431,20 +7431,8 @@ var mostrarMensajeErrorCorreo = function mostrarMensajeErrorCorreo() {
   (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'Ingresa un correo válido');
 };
 
-var mostrarError = function mostrarError(error) {
-  if (error.nombre && error.email) {
-    mostrarMensajeErrorCampos();
-  } else if (error.nombre) {
-    if (error.nombre.message.includes('shorter than the minimum allowed')) {
-      mostrarMensajeErrorNombrePequeño();
-    }
-
-    if (error.nombre.message.includes(' is longer than the maximum ')) {
-      mostrarMensajeErrorNombreLargo();
-    }
-  } else if (error.email) {
-    mostrarMensajeErrorCorreo();
-  }
+var mostrarError = function mostrarError() {
+  (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error!', 'El formato de la imagen no es correcto');
 };
 
 exports.mostrarError = mostrarError;
@@ -7453,23 +7441,16 @@ var obtenerInfoAjustes = function obtenerInfoAjustes() {
   var form = new FormData();
   form.append('nombre', document.getElementById('nombreAjustes').value);
   form.append('email', document.getElementById('correoAjustes').value);
-  form.append('foto', validarSiEsImagen(document.getElementById('fotoAjustes').files[0]));
-  var archivoEsUnaImagen = validarSiEsImagen(document.getElementById('fotoAjustes').files[0]);
-  return archivoEsUnaImagen ? form : false;
+  form.append('foto', document.getElementById('fotoAjustes').files[0]);
+
+  if (form) {
+    return form;
+  } else {
+    return false;
+  }
 };
 
 exports.obtenerInfoAjustes = obtenerInfoAjustes;
-
-var validarSiEsImagen = function validarSiEsImagen(archivo) {
-  var extensionArchivo = archivo.name.split('.')[archivo.name.split('.').length - 1].toLowerCase();
-
-  if (extensionArchivo !== 'jpg' && extensionArchivo !== 'png' && extensionArchivo !== 'jpeg') {
-    (0, _sweetAlertMensajes.configurarSweetAlert)('error', 'Error', 'Tipos de arcchivos aceptados: .jpg, png, jpeg');
-    return false;
-  } else {
-    return archivo;
-  }
-};
 
 var formatoFecha = function formatoFecha(fecha) {
   return fecha.split('T')[0];
@@ -8057,7 +8038,7 @@ $(document).ready(function () {
 
             case 5:
               respuesta = _context8.sent;
-              respuesta.data.status === 'error' ? perfilVista.mostrarError(respuesta.data.error.errors) : perfilVista.mostrarMensajeExito();
+              respuesta.data.status === 'error' ? perfilVista.mostrarError() : perfilVista.mostrarMensajeExito();
 
             case 7:
             case "end":
@@ -8499,7 +8480,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50582" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64434" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

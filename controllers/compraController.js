@@ -122,6 +122,8 @@ exports.crearCompraCheckout = catchAsync(async (req, res, next) => {
   const nuevaCompra = await Compra.create({ carrito, usuario, precio });
   if (nuevaCompra) {
     const infoCarrito = { carrito, usuario, nuevaCompra };
+    const productosCarrito = await Carrito.findById(carrito);
+    nuevaCompra.actualizarNumeroDeVentas(productosCarrito);
     actualizarCarrito(infoCarrito, req);
   }
   enviarCorreo(usuario, req, 'nuevaCompra');

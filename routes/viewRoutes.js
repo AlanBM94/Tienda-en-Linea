@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(
   compraController.crearCompraCheckout,
-  authController.estaLogeado,
+  authController.usuarioEstaLogeado,
   carritoController.obtenerCarritoLocals
 );
 

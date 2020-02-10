@@ -5,16 +5,16 @@
         <form action="#" class="formularioPerfil" id="formularioAjustes">
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--nombre">
                 <label for="nombreAjustes">Nombre</label>
-                <input type="text" name="nombre" id="nombreAjustes" value="{{usuario.nombre}}" required />
+                <input type="text" name="nombre" id="nombreAjustes" value="{{usuario.nombre}}" required minlength="3" maxLength="10"/>
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--correo">
                 <label for="correoAjustes">Correo electrónico</label>
-                <input type="text" name="correo" id="correoAjustes" value="{{usuario.email}}" required />
+                <input type="email" name="correo" id="correoAjustes" value="{{usuario.email}}" required />
             </div>
             <div class="formularioPerfil__contenedorInput formularioPerfil__contenedorInput--foto">
                 <img src="/images/usuarios/{{usuario.foto}}" alt="usuario" />
                 <label for="fotoAjustes" class="btn btn--secundario btn--secundarioContraseña"
-                    style="margin-right: 10px;">Cambia tu foto</label>
+                    style="margin-right: 10px;" id="btnCambiarFoto">Cambia tu foto</label>
                 <input type="file" name="foto" accept='image/*' id="fotoAjustes" placeholder="Cambiar foto" />
                 <br>
                 <span> (.jpg, png, jpeg) </span>
