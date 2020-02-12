@@ -74,10 +74,8 @@ exports.proteger = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
   // Si no hay token no está el usuario no ha iniciado sesión
-  if (!token) {
-    return next(
-      new AppError('No has iniciado sesión, por favor inicia sesión', 401)
-    );
+  if (!token || token === 'loggedout') {    
+    return res.redirect(`${req.protocol}://${req.get('host')}/`);
   }
   // Los valores decodificados del token se asignan a decodificado y lo compara con el process.env.JWT_SECRET para ver si el token pertenece a un usuario o ha sido modificado
   const decodificado = await promisify(jwt.verify)(

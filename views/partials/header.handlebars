@@ -98,9 +98,16 @@
         </div>
         <div class="hero__secundario">
             <span>A partir de 5 compras</span>
-            <button class="hero__btn btn btn--rojo">
+            {{#if usuario }}
+            <a class="hero__btn btn btn--rojo" href="/carrito" style="text-decoration: none;">
                 Comienza a comprar
-            </button>
+            </a>
+
+            {{ else }}
+            <a class="hero__btn btn btn--rojo" href="/iniciarSesion" style="text-decoration: none;">
+                Comienza a comprar
+            </a>
+            {{/if}}
         </div>
     </div>
 </header>

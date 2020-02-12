@@ -22,7 +22,7 @@ router.get('/herramientas', viewController.obtenerCategoria);
 
 router.get('/productos/:id', viewController.obtenerProducto);
 
-router.get('/carrito', viewController.obtenerCarrito);
+router.get('/carrito', authController.proteger, viewController.obtenerCarrito);
 
 router.get('/registrarse', viewController.registrarseTemplate);
 router.get('/iniciarSesion', viewController.iniciarSesionTemplate);

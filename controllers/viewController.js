@@ -75,6 +75,7 @@ exports.obtenerCarrito = catchAsync(async (req, res, next) => {
 });
 
 exports.perfilTemplate = (req, res, next) => {
+  console.log(req.usuario);
   res.status(200).render('tienda/perfil', {
     usuario: req.usuario
   });
