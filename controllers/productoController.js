@@ -113,7 +113,10 @@ exports.obtenerProductosMasVendidos = catchAsync(async (req, res, next) => {
     {
       $group: {
         _id: { $toUpper: '$nombre' },
-        numeroDeVentas: { $max: '$numeroVentas' }
+        nombre: { $last: '$nombre' },
+        descripcion: { $last: '$descripcion' },
+        numeroDeVentas: { $max: '$numeroVentas' },
+        idProducto: { $last: '$_id' }
       }
     },
     { $sort: { numeroDeVentas: -1 } },

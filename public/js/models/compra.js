@@ -20,4 +20,17 @@ export default class Compra {
       console.log(error);
     }
   }
+
+  async mostrarProductosConMasCompras() {
+    try {
+      const respuesta = await axios({
+        url: `http://localhost:3000/api/v1/productos/productosMasVendidos`,
+        method: 'GET'
+      });
+      return respuesta;
+    } catch (error) {
+      alert('Algo salió mal');
+      console.log(error);
+    }
+  }
 }

@@ -80,7 +80,13 @@ export const domElementos = {
   inputEmailRecuperarContrasenia: $('#inputCorreoRecuperarContrasenia'),
   formularioResetearContraseña: $('#formularioResetearContraseña'),
   inputContraseñaResetear: $('#inputContraseñaResetear'),
-  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear')
+  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear'),
+  productoMasVendidoTitulo1: $('#productoMasVendidoTitulo-1'),
+  productoMasVendidoTitulo2: $('#productoMasVendidoTitulo-2'),
+  productoMasVendidoTitulo3: $('#productoMasVendidoTitulo-3'),
+  productoMasVendidoDescripcion1: $('#productoMasVendidoDescripcion-1'),
+  productoMasVendidoDescripcion2: $('#productoMasVendidoDescripcion-2'),
+  productoMasVendidoDescripcion3: $('#productoMasVendidoDescripcion-3')
 };
 
 // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll

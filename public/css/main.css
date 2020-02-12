@@ -676,8 +676,9 @@ header .hero__btn:hover {
   width: 100% !important;
   height: 40rem !important;
   margin: 0 2rem;
-  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562))), url(/images/television.jpg);
-  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)), url(/images/television.jpg);
+  background: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 0.562)), to(rgba(0, 0, 0, 0.562)));
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562));
+  text-align: center;
   background-size: contain;
   background-position-x: center;
   background-repeat: no-repeat;

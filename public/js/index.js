@@ -25,6 +25,23 @@ $(document).ready(() => {
     history.go(1);
   };
 
+  const controladorMostrarReseñas = async () => {
+    reseñaVista.mostrarReseñas();
+    const ids = reseñaVista.retornarIdsUsuarios();
+    const peticion = new Peticion();
+    const usuarios = await peticion.obtenerUsuarios(ids);
+    reseñaVista.mostrarInfoUsuario(usuarios);
+  };
+
+  controladorMostrarReseñas();
+
+  const controladorMostrarMejoresProductos = async () => {
+    const productosMasComprados = await new Compra().mostrarProductosConMasCompras();
+    compraVista.mostrarProductosMasVendidos(productosMasComprados);
+  };
+
+  controladorMostrarMejoresProductos();
+
   const controladorCrearResenia = async () => {
     const productoId = reseñaVista.conseguirProductoId();
     const valoresReseña = reseñaVista.obtenerValoresReseña();
@@ -55,16 +72,6 @@ $(document).ready(() => {
     perfilVista.eliminarReseniaDom(target);
     perfil.eliminarResenia(infoResenia.idProducto, infoResenia.idResenia);
   };
-
-  const controladorMostrarReseñas = async () => {
-    reseñaVista.mostrarReseñas();
-    const ids = reseñaVista.retornarIdsUsuarios();
-    const peticion = new Peticion();
-    const usuarios = await peticion.obtenerUsuarios(ids);
-    reseñaVista.mostrarInfoUsuario(usuarios);
-  };
-
-  controladorMostrarReseñas();
 
   const controladorMiInformacion = async () => {
     const idUsuario = perfilVista.obtenerIdUsuario();

@@ -191,7 +191,13 @@ var domElementos = {
   inputEmailRecuperarContrasenia: $('#inputCorreoRecuperarContrasenia'),
   formularioResetearContraseña: $('#formularioResetearContraseña'),
   inputContraseñaResetear: $('#inputContraseñaResetear'),
-  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear')
+  inputConfirmarContraseñaResetear: $('#inputConfirmarContraseñaResetear'),
+  productoMasVendidoTitulo1: $('#productoMasVendidoTitulo-1'),
+  productoMasVendidoTitulo2: $('#productoMasVendidoTitulo-2'),
+  productoMasVendidoTitulo3: $('#productoMasVendidoTitulo-3'),
+  productoMasVendidoDescripcion1: $('#productoMasVendidoDescripcion-1'),
+  productoMasVendidoDescripcion2: $('#productoMasVendidoDescripcion-2'),
+  productoMasVendidoDescripcion3: $('#productoMasVendidoDescripcion-3')
 }; // Da funcionalidad a la navegación sticky y activa las animaciones cuando se hace scroll
 
 exports.domElementos = domElementos;
@@ -3537,6 +3543,48 @@ function () {
       }
 
       return hacerPeticionStripe;
+    }()
+  }, {
+    key: "mostrarProductosConMasCompras",
+    value: function () {
+      var _mostrarProductosConMasCompras = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
+        var respuesta;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return (0, _axios.default)({
+                  url: "http://localhost:3000/api/v1/productos/productosMasVendidos",
+                  method: 'GET'
+                });
+
+              case 3:
+                respuesta = _context2.sent;
+                return _context2.abrupt("return", respuesta);
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                alert('Algo salió mal');
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }));
+
+      function mostrarProductosConMasCompras() {
+        return _mostrarProductosConMasCompras.apply(this, arguments);
+      }
+
+      return mostrarProductosConMasCompras;
     }()
   }]);
 
@@ -7254,7 +7302,7 @@ exports.mostrarMensajeNoSession = mostrarMensajeNoSession;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.obtenerId = void 0;
+exports.mostrarProductosMasVendidos = exports.obtenerId = void 0;
 
 var _base = require("../base");
 
@@ -7266,6 +7314,18 @@ var obtenerId = function obtenerId(e) {
 };
 
 exports.obtenerId = obtenerId;
+
+var mostrarProductosMasVendidos = function mostrarProductosMasVendidos(productos) {
+  var arregloProductosMasVendidos = productos.data.data.data;
+  arregloProductosMasVendidos.map(function (producto, indice) {
+    var indiceProducto = indice + 1;
+    $("#productoMasVendidoTitulo-".concat(indiceProducto)).text(producto.nombre);
+    $("#productoMasVendidoDescripcion-".concat(indiceProducto)).text(producto.descripcion);
+    $("#productoMasVendidoEnlace-".concat(indiceProducto)).attr('href', "/productos/".concat(producto.idProducto));
+  });
+};
+
+exports.mostrarProductosMasVendidos = mostrarProductosMasVendidos;
 },{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/reseñasVista.js":[function(require,module,exports) {
 "use strict";
 
@@ -7667,27 +7727,96 @@ $(document).ready(function () {
     history.go(1);
   };
 
-  var controladorCrearResenia =
+  var controladorMostrarReseñas =
   /*#__PURE__*/
   function () {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee() {
-      var productoId, valoresReseña, infoReseña, reseña, mensaje;
+      var ids, peticion, usuarios;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
+            case 0:
+              reseñaVista.mostrarReseñas();
+              ids = reseñaVista.retornarIdsUsuarios();
+              peticion = new _peticiones.default();
+              _context.next = 5;
+              return peticion.obtenerUsuarios(ids);
+
+            case 5:
+              usuarios = _context.sent;
+              reseñaVista.mostrarInfoUsuario(usuarios);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function controladorMostrarReseñas() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  controladorMostrarReseñas();
+
+  var controladorMostrarMejoresProductos =
+  /*#__PURE__*/
+  function () {
+    var _ref2 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee2() {
+      var productosMasComprados;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return new _compra.default().mostrarProductosConMasCompras();
+
+            case 2:
+              productosMasComprados = _context2.sent;
+              compraVista.mostrarProductosMasVendidos(productosMasComprados);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function controladorMostrarMejoresProductos() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  controladorMostrarMejoresProductos();
+
+  var controladorCrearResenia =
+  /*#__PURE__*/
+  function () {
+    var _ref3 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3() {
+      var productoId, valoresReseña, infoReseña, reseña, mensaje;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               productoId = reseñaVista.conseguirProductoId();
               valoresReseña = reseñaVista.obtenerValoresReseña();
 
               if (!(valoresReseña.puntuacion === '' || valoresReseña.contenido === '')) {
-                _context.next = 6;
+                _context3.next = 6;
                 break;
               }
 
               reseñaVista.mostrarMensajeCrearReseñaYPuntaje();
-              _context.next = 12;
+              _context3.next = 12;
               break;
 
             case 6:
@@ -7697,11 +7826,11 @@ $(document).ready(function () {
                 reseña: valoresReseña.contenido
               };
               reseña = new _reseA.default(infoReseña);
-              _context.next = 10;
+              _context3.next = 10;
               return reseña.crear();
 
             case 10:
-              mensaje = _context.sent;
+              mensaje = _context3.sent;
 
               if (mensaje === 'Debes de comprar el producto antes de hacer la reseña' || mensaje === 'No puedes escribir más de una reseña') {
                 reseñaVista.mostrarErrorReseña(mensaje);
@@ -7711,14 +7840,14 @@ $(document).ready(function () {
 
             case 12:
             case "end":
-              return _context.stop();
+              return _context3.stop();
           }
         }
-      }, _callee);
+      }, _callee3);
     }));
 
     return function controladorCrearResenia() {
-      return _ref.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
 
@@ -7729,65 +7858,29 @@ $(document).ready(function () {
     perfil.eliminarResenia(infoResenia.idProducto, infoResenia.idResenia);
   };
 
-  var controladorMostrarReseñas =
-  /*#__PURE__*/
-  function () {
-    var _ref2 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2() {
-      var ids, peticion, usuarios;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              reseñaVista.mostrarReseñas();
-              ids = reseñaVista.retornarIdsUsuarios();
-              peticion = new _peticiones.default();
-              _context2.next = 5;
-              return peticion.obtenerUsuarios(ids);
-
-            case 5:
-              usuarios = _context2.sent;
-              reseñaVista.mostrarInfoUsuario(usuarios);
-
-            case 7:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function controladorMostrarReseñas() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  controladorMostrarReseñas();
-
   var controladorMiInformacion =
   /*#__PURE__*/
   function () {
-    var _ref3 = _asyncToGenerator(
+    var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3() {
+    regeneratorRuntime.mark(function _callee4() {
       var idUsuario, perfil, compras, reseñas;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               idUsuario = perfilVista.obtenerIdUsuario();
               perfil = new _perfil.default();
-              _context3.next = 4;
+              _context4.next = 4;
               return perfil.mostrarMisCompras(idUsuario);
 
             case 4:
-              compras = _context3.sent;
-              _context3.next = 7;
+              compras = _context4.sent;
+              _context4.next = 7;
               return perfil.mostrarMisReseñas(idUsuario);
 
             case 7:
-              reseñas = _context3.sent;
+              reseñas = _context4.sent;
               reseñas.map(function (reseña) {
                 perfilVista.renderizarReseña(reseña);
               });
@@ -7797,14 +7890,14 @@ $(document).ready(function () {
 
             case 10:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
 
     return function controladorMiInformacion() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -7817,77 +7910,34 @@ $(document).ready(function () {
   var controladorRegistrarse =
   /*#__PURE__*/
   function () {
-    var _ref4 = _asyncToGenerator(
+    var _ref5 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4() {
+    regeneratorRuntime.mark(function _callee5() {
       var infoUsuario, objetoUsuario, usuarioRegistrado;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               // Se crea la infoUsuario con los valores ingresados
               infoUsuario = registrarseVista.obtenerValoresUsuarioRegistrado();
 
               if (!(infoUsuario !== undefined)) {
-                _context4.next = 7;
+                _context5.next = 7;
                 break;
               }
 
               // Se crea un objeto de la clase Registrarse con la información del usuario
               objetoUsuario = new _registrarse.default(infoUsuario); // Se envía la petición al servidor para crear el usuario
 
-              _context4.next = 5;
+              _context5.next = 5;
               return objetoUsuario.enviarPeticion();
 
             case 5:
-              usuarioRegistrado = _context4.sent;
+              usuarioRegistrado = _context5.sent;
               // Muestra el sweet alert según la respuesta de la petición
               registrarseVista.mostrarMensajeRegistro(usuarioRegistrado);
 
             case 7:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    return function controladorRegistrarse() {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
-  var controladorIniciarSesion =
-  /*#__PURE__*/
-  function () {
-    var _ref5 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee5() {
-      var infoUsuario, objetoUsuario, usuarioLogeado;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
-              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
-
-              if (!(infoUsuario !== undefined)) {
-                _context5.next = 8;
-                break;
-              }
-
-              // Se crea un objeto de la clase IniciarSesion con la información del usuario
-              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
-
-              objetoUsuario.enviarPeticion();
-              _context5.next = 6;
-              return objetoUsuario.enviarPeticion();
-
-            case 6:
-              usuarioLogeado = _context5.sent;
-              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
-
-            case 8:
             case "end":
               return _context5.stop();
           }
@@ -7895,8 +7945,51 @@ $(document).ready(function () {
       }, _callee5);
     }));
 
-    return function controladorIniciarSesion() {
+    return function controladorRegistrarse() {
       return _ref5.apply(this, arguments);
+    };
+  }();
+
+  var controladorIniciarSesion =
+  /*#__PURE__*/
+  function () {
+    var _ref6 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee6() {
+      var infoUsuario, objetoUsuario, usuarioLogeado;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              // Se crea infoUsuario con la información del usuario que quiere iniciar sesión
+              infoUsuario = iniciarSesionVista.obtenerValoresIniciarSesion();
+
+              if (!(infoUsuario !== undefined)) {
+                _context6.next = 8;
+                break;
+              }
+
+              // Se crea un objeto de la clase IniciarSesion con la información del usuario
+              objetoUsuario = new _iniciarSesion.default(infoUsuario); // Se envía una petición al servidor para confirmar que el usuario existe
+
+              objetoUsuario.enviarPeticion();
+              _context6.next = 6;
+              return objetoUsuario.enviarPeticion();
+
+            case 6:
+              usuarioLogeado = _context6.sent;
+              iniciarSesionVista.mostrarSweetAlert(usuarioLogeado);
+
+            case 8:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function controladorIniciarSesion() {
+      return _ref6.apply(this, arguments);
     };
   }(); //Controlador que agrega un producto al carrito
 
@@ -7904,13 +7997,13 @@ $(document).ready(function () {
   var controladorCarrito =
   /*#__PURE__*/
   function () {
-    var _ref6 = _asyncToGenerator(
+    var _ref7 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(boton, e) {
+    regeneratorRuntime.mark(function _callee7(boton, e) {
       var infoProducto, producto, respuesta;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               if (boton === 'btn') {
                 // Obtener los datos del producto que quiero agregar al carrito
@@ -7921,12 +8014,12 @@ $(document).ready(function () {
 
 
               if (!(infoProducto.cantidad > infoProducto.stock)) {
-                _context6.next = 5;
+                _context7.next = 5;
                 break;
               }
 
               carritoVista.mostrarMensajeSinStock();
-              _context6.next = 16;
+              _context7.next = 16;
               break;
 
             case 5:
@@ -7934,26 +8027,26 @@ $(document).ready(function () {
               producto = new _carrito.default();
 
               if (!(infoProducto !== false)) {
-                _context6.next = 15;
+                _context7.next = 15;
                 break;
               }
 
-              _context6.next = 9;
+              _context7.next = 9;
               return producto.agregarProducto(infoProducto);
 
             case 9:
-              respuesta = _context6.sent;
+              respuesta = _context7.sent;
 
               if (!(respuesta.data.status !== 'Exito')) {
-                _context6.next = 12;
+                _context7.next = 12;
                 break;
               }
 
-              return _context6.abrupt("return", carritoVista.mostrarMensajeNoSession());
+              return _context7.abrupt("return", carritoVista.mostrarMensajeNoSession());
 
             case 12:
               carritoVista.mostrarMensaje(infoProducto);
-              _context6.next = 16;
+              _context7.next = 16;
               break;
 
             case 15:
@@ -7961,14 +8054,14 @@ $(document).ready(function () {
 
             case 16:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
     return function controladorCarrito(_x, _x2) {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }(); // Controlador que elimina un producto del carrito
 
@@ -7976,24 +8069,24 @@ $(document).ready(function () {
   var controladorEliminarProductoCarrito =
   /*#__PURE__*/
   function () {
-    var _ref7 = _asyncToGenerator(
+    var _ref8 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee7(e) {
+    regeneratorRuntime.mark(function _callee8(e) {
       var productoEliminar, producto, permisoBorrarProducto;
-      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               // Se obtiene el id del producto que se quiere eliminar
               productoEliminar = carritoVista.obtenerInfoProductoAEliminar(e); // Se crea un objeto de la clase Carrito
 
               producto = new _carrito.default(); // Se elimina el producto creado con el id del producto y se envía la cantidad para que se actualice el stock
 
-              _context7.next = 4;
+              _context8.next = 4;
               return producto.eliminarProducto(productoEliminar.id, productoEliminar.cantidad, productoEliminar.nombre);
 
             case 4:
-              permisoBorrarProducto = _context7.sent;
+              permisoBorrarProducto = _context8.sent;
 
               if (permisoBorrarProducto) {
                 carritoVista.eliminarProductoDOM(e);
@@ -8003,79 +8096,44 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7);
-    }));
-
-    return function controladorEliminarProductoCarrito(_x3) {
-      return _ref7.apply(this, arguments);
-    };
-  }();
-
-  var controladorGuardarAjustes =
-  /*#__PURE__*/
-  function () {
-    var _ref8 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee8() {
-      var respuesta, infoUsuario, perfil;
-      return regeneratorRuntime.wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              infoUsuario = perfilVista.obtenerInfoAjustes();
-
-              if (!infoUsuario) {
-                _context8.next = 7;
-                break;
-              }
-
-              perfil = new _perfil.default();
-              _context8.next = 5;
-              return perfil.editar(infoUsuario, 'infoNormal');
-
-            case 5:
-              respuesta = _context8.sent;
-              respuesta.data.status === 'error' ? perfilVista.mostrarError() : perfilVista.mostrarMensajeExito();
-
-            case 7:
-            case "end":
               return _context8.stop();
           }
         }
       }, _callee8);
     }));
 
-    return function controladorGuardarAjustes() {
+    return function controladorEliminarProductoCarrito(_x3) {
       return _ref8.apply(this, arguments);
     };
   }();
 
-  var controladorVerDetallesCompra =
+  var controladorGuardarAjustes =
   /*#__PURE__*/
   function () {
     var _ref9 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee9(e) {
-      var idCompra, perfil, compra;
+    regeneratorRuntime.mark(function _callee9() {
+      var respuesta, infoUsuario, perfil;
       return regeneratorRuntime.wrap(function _callee9$(_context9) {
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
-              idCompra = perfilVista.obtenerIdCompra(e);
+              infoUsuario = perfilVista.obtenerInfoAjustes();
+
+              if (!infoUsuario) {
+                _context9.next = 7;
+                break;
+              }
+
               perfil = new _perfil.default();
-              _context9.next = 4;
-              return perfil.obtenerCompra(idCompra);
+              _context9.next = 5;
+              return perfil.editar(infoUsuario, 'infoNormal');
 
-            case 4:
-              compra = _context9.sent;
-              compra.productos.map(function (producto) {
-                perfilVista.renderizarDetallesCompra(producto);
-              });
+            case 5:
+              respuesta = _context9.sent;
+              respuesta.data.status === 'error' ? perfilVista.mostrarError() : perfilVista.mostrarMensajeExito();
 
-            case 6:
+            case 7:
             case "end":
               return _context9.stop();
           }
@@ -8083,33 +8141,34 @@ $(document).ready(function () {
       }, _callee9);
     }));
 
-    return function controladorVerDetallesCompra(_x4) {
+    return function controladorGuardarAjustes() {
       return _ref9.apply(this, arguments);
     };
   }();
 
-  var controladorMostrarReseñaParaEditar =
+  var controladorVerDetallesCompra =
   /*#__PURE__*/
   function () {
     var _ref10 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee10(e) {
-      var info, perfil, respuesta;
+      var idCompra, perfil, compra;
       return regeneratorRuntime.wrap(function _callee10$(_context10) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              info = perfilVista.obtenerIdsResenia(e);
+              idCompra = perfilVista.obtenerIdCompra(e);
               perfil = new _perfil.default();
               _context10.next = 4;
-              return perfil.obtenerResenia(info.idProducto, info.idResenia);
+              return perfil.obtenerCompra(idCompra);
 
             case 4:
-              respuesta = _context10.sent;
-              perfilVista.renderizarReseñaParaEditar(respuesta);
-              return _context10.abrupt("return", info);
+              compra = _context10.sent;
+              compra.productos.map(function (producto) {
+                perfilVista.renderizarDetallesCompra(producto);
+              });
 
-            case 7:
+            case 6:
             case "end":
               return _context10.stop();
           }
@@ -8117,35 +8176,33 @@ $(document).ready(function () {
       }, _callee10);
     }));
 
-    return function controladorMostrarReseñaParaEditar(_x5) {
+    return function controladorVerDetallesCompra(_x4) {
       return _ref10.apply(this, arguments);
     };
   }();
 
-  var controladorEditarReseña =
+  var controladorMostrarReseñaParaEditar =
   /*#__PURE__*/
   function () {
     var _ref11 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee11(e) {
-      var infoResenia, perfil, respuesta;
+      var info, perfil, respuesta;
       return regeneratorRuntime.wrap(function _callee11$(_context11) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
-              infoResenia = perfilVista.obtenerInfoReseniaEditar();
+              info = perfilVista.obtenerIdsResenia(e);
               perfil = new _perfil.default();
               _context11.next = 4;
-              return perfil.editarReseña(infoResenia.producto, infoResenia.resenia, {
-                reseña: infoResenia.contenido,
-                puntuacion: infoResenia.puntaje
-              });
+              return perfil.obtenerResenia(info.idProducto, info.idResenia);
 
             case 4:
               respuesta = _context11.sent;
-              perfilVista.mostrarMensajeResenia(respuesta);
+              perfilVista.renderizarReseñaParaEditar(respuesta);
+              return _context11.abrupt("return", info);
 
-            case 6:
+            case 7:
             case "end":
               return _context11.stop();
           }
@@ -8153,29 +8210,65 @@ $(document).ready(function () {
       }, _callee11);
     }));
 
-    return function controladorEditarReseña(_x6) {
+    return function controladorMostrarReseñaParaEditar(_x5) {
       return _ref11.apply(this, arguments);
+    };
+  }();
+
+  var controladorEditarReseña =
+  /*#__PURE__*/
+  function () {
+    var _ref12 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee12(e) {
+      var infoResenia, perfil, respuesta;
+      return regeneratorRuntime.wrap(function _callee12$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              infoResenia = perfilVista.obtenerInfoReseniaEditar();
+              perfil = new _perfil.default();
+              _context12.next = 4;
+              return perfil.editarReseña(infoResenia.producto, infoResenia.resenia, {
+                reseña: infoResenia.contenido,
+                puntuacion: infoResenia.puntaje
+              });
+
+            case 4:
+              respuesta = _context12.sent;
+              perfilVista.mostrarMensajeResenia(respuesta);
+
+            case 6:
+            case "end":
+              return _context12.stop();
+          }
+        }
+      }, _callee12);
+    }));
+
+    return function controladorEditarReseña(_x6) {
+      return _ref12.apply(this, arguments);
     };
   }();
 
   var controladorCambiarContraseña =
   /*#__PURE__*/
   function () {
-    var _ref12 = _asyncToGenerator(
+    var _ref13 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee12() {
+    regeneratorRuntime.mark(function _callee13() {
       var infoContraseña, usuario, respuesta, mensaje;
-      return regeneratorRuntime.wrap(function _callee12$(_context12) {
+      return regeneratorRuntime.wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
               infoContraseña = perfilVista.obtenerInputsContraseñas();
               usuario = new _perfil.default();
-              _context12.next = 4;
+              _context13.next = 4;
               return usuario.editar(infoContraseña, 'contraseña');
 
             case 4:
-              respuesta = _context12.sent;
+              respuesta = _context13.sent;
 
               if (respuesta.data.status === 'Exito') {
                 perfilVista.mostrarMensajeContraseñaCambiadaExitosamente();
@@ -8186,81 +8279,41 @@ $(document).ready(function () {
 
             case 6:
             case "end":
-              return _context12.stop();
-          }
-        }
-      }, _callee12);
-    }));
-
-    return function controladorCambiarContraseña() {
-      return _ref12.apply(this, arguments);
-    };
-  }();
-
-  var controladorRecuperarContraseña =
-  /*#__PURE__*/
-  function () {
-    var _ref13 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee13() {
-      var email, perfil, respuesta;
-      return regeneratorRuntime.wrap(function _callee13$(_context13) {
-        while (1) {
-          switch (_context13.prev = _context13.next) {
-            case 0:
-              // Recuperar el valor del email al que se le quiere envíar la contraseña
-              email = perfilVista.obtenerEmailRecuperarContraseña();
-              perfil = new _perfil.default();
-              _context13.next = 4;
-              return perfil.recuperarContrasenia({
-                email: email
-              });
-
-            case 4:
-              respuesta = _context13.sent;
-              perfilVista.mostrarMensajeRespuesta(respuesta);
-
-            case 6:
-            case "end":
               return _context13.stop();
           }
         }
       }, _callee13);
     }));
 
-    return function controladorRecuperarContraseña() {
+    return function controladorCambiarContraseña() {
       return _ref13.apply(this, arguments);
     };
   }();
 
-  var controladorResetearContraseña =
+  var controladorRecuperarContraseña =
   /*#__PURE__*/
   function () {
     var _ref14 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee14() {
-      var infoResetearContraseña, token, perfil, respuesta;
+      var email, perfil, respuesta;
       return regeneratorRuntime.wrap(function _callee14$(_context14) {
         while (1) {
           switch (_context14.prev = _context14.next) {
             case 0:
-              infoResetearContraseña = perfilVista.recuperarInfoResetearContraseña();
-              token = window.location.href.split('/')[window.location.href.split('/').length - 1];
-
-              if (!token) {
-                _context14.next = 8;
-                break;
-              }
-
+              // Recuperar el valor del email al que se le quiere envíar la contraseña
+              email = perfilVista.obtenerEmailRecuperarContraseña();
               perfil = new _perfil.default();
-              _context14.next = 6;
-              return perfil.resetearContrasenia(infoResetearContraseña, token);
+              _context14.next = 4;
+              return perfil.recuperarContrasenia({
+                email: email
+              });
+
+            case 4:
+              respuesta = _context14.sent;
+              perfilVista.mostrarMensajeRespuesta(respuesta);
 
             case 6:
-              respuesta = _context14.sent;
-              perfilVista.resetearContraseñaMensaje(respuesta);
-
-            case 8:
             case "end":
               return _context14.stop();
           }
@@ -8268,8 +8321,48 @@ $(document).ready(function () {
       }, _callee14);
     }));
 
-    return function controladorResetearContraseña() {
+    return function controladorRecuperarContraseña() {
       return _ref14.apply(this, arguments);
+    };
+  }();
+
+  var controladorResetearContraseña =
+  /*#__PURE__*/
+  function () {
+    var _ref15 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee15() {
+      var infoResetearContraseña, token, perfil, respuesta;
+      return regeneratorRuntime.wrap(function _callee15$(_context15) {
+        while (1) {
+          switch (_context15.prev = _context15.next) {
+            case 0:
+              infoResetearContraseña = perfilVista.recuperarInfoResetearContraseña();
+              token = window.location.href.split('/')[window.location.href.split('/').length - 1];
+
+              if (!token) {
+                _context15.next = 8;
+                break;
+              }
+
+              perfil = new _perfil.default();
+              _context15.next = 6;
+              return perfil.resetearContrasenia(infoResetearContraseña, token);
+
+            case 6:
+              respuesta = _context15.sent;
+              perfilVista.resetearContraseñaMensaje(respuesta);
+
+            case 8:
+            case "end":
+              return _context15.stop();
+          }
+        }
+      }, _callee15);
+    }));
+
+    return function controladorResetearContraseña() {
+      return _ref15.apply(this, arguments);
     };
   }(); // Evento que se dispara cuando se envía el formulario de Registro
 
@@ -8300,26 +8393,26 @@ $(document).ready(function () {
   _base.domElementos.btnEliminarCarrito.on('click',
   /*#__PURE__*/
   function () {
-    var _ref15 = _asyncToGenerator(
+    var _ref16 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee15(e) {
-      return regeneratorRuntime.wrap(function _callee15$(_context15) {
+    regeneratorRuntime.mark(function _callee16(e) {
+      return regeneratorRuntime.wrap(function _callee16$(_context16) {
         while (1) {
-          switch (_context15.prev = _context15.next) {
+          switch (_context16.prev = _context16.next) {
             case 0:
               e.preventDefault();
               controladorEliminarProductoCarrito(e);
 
             case 2:
             case "end":
-              return _context15.stop();
+              return _context16.stop();
           }
         }
-      }, _callee15);
+      }, _callee16);
     }));
 
     return function (_x7) {
-      return _ref15.apply(this, arguments);
+      return _ref16.apply(this, arguments);
     };
   }()); // Evento que se dispara cuando se hace click en el boton de comprar
 
@@ -8336,26 +8429,26 @@ $(document).ready(function () {
   _base.domElementos.btnPublicarReseña.on('click',
   /*#__PURE__*/
   function () {
-    var _ref16 = _asyncToGenerator(
+    var _ref17 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee16(e) {
-      return regeneratorRuntime.wrap(function _callee16$(_context16) {
+    regeneratorRuntime.mark(function _callee17(e) {
+      return regeneratorRuntime.wrap(function _callee17$(_context17) {
         while (1) {
-          switch (_context16.prev = _context16.next) {
+          switch (_context17.prev = _context17.next) {
             case 0:
               e.preventDefault();
               controladorCrearResenia();
 
             case 2:
             case "end":
-              return _context16.stop();
+              return _context17.stop();
           }
         }
-      }, _callee16);
+      }, _callee17);
     }));
 
     return function (_x8) {
-      return _ref16.apply(this, arguments);
+      return _ref17.apply(this, arguments);
     };
   }());
 
@@ -8388,26 +8481,26 @@ $(document).ready(function () {
   _base.domElementos.formularioContraseña.submit(
   /*#__PURE__*/
   function () {
-    var _ref17 = _asyncToGenerator(
+    var _ref18 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee17(e) {
-      return regeneratorRuntime.wrap(function _callee17$(_context17) {
+    regeneratorRuntime.mark(function _callee18(e) {
+      return regeneratorRuntime.wrap(function _callee18$(_context18) {
         while (1) {
-          switch (_context17.prev = _context17.next) {
+          switch (_context18.prev = _context18.next) {
             case 0:
               e.preventDefault();
               controladorCambiarContraseña();
 
             case 2:
             case "end":
-              return _context17.stop();
+              return _context18.stop();
           }
         }
-      }, _callee17);
+      }, _callee18);
     }));
 
     return function (_x9) {
-      return _ref17.apply(this, arguments);
+      return _ref18.apply(this, arguments);
     };
   }());
 
@@ -8425,15 +8518,15 @@ $(document).ready(function () {
   _base.domElementos.btnCerrarSesion.on('click',
   /*#__PURE__*/
   function () {
-    var _ref18 = _asyncToGenerator(
+    var _ref19 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee18(e) {
-      return regeneratorRuntime.wrap(function _callee18$(_context18) {
+    regeneratorRuntime.mark(function _callee19(e) {
+      return regeneratorRuntime.wrap(function _callee19$(_context19) {
         while (1) {
-          switch (_context18.prev = _context18.next) {
+          switch (_context19.prev = _context19.next) {
             case 0:
               e.preventDefault();
-              _context18.next = 3;
+              _context19.next = 3;
               return (0, _cerrarSesion.cerrarSesion)();
 
             case 3:
@@ -8441,14 +8534,14 @@ $(document).ready(function () {
 
             case 4:
             case "end":
-              return _context18.stop();
+              return _context19.stop();
           }
         }
-      }, _callee18);
+      }, _callee19);
     }));
 
     return function (_x10) {
-      return _ref18.apply(this, arguments);
+      return _ref19.apply(this, arguments);
     };
   }());
 });
@@ -8480,7 +8573,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64434" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56509" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
