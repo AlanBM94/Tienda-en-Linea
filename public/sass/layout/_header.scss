@@ -17,7 +17,8 @@ header {
       // width < 900?
       flex-direction: column;
       width: 35rem;
-      height: 43rem;
+      height: 35rem;
+      margin-top: 3rem;
     }
     &__primario {
       background: $color-primario;

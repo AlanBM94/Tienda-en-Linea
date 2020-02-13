@@ -10,6 +10,9 @@
     margin: 6rem auto;
     width: 90%;
     height: 100%;
+    @include responsive(tab-port) {
+      margin-top: 10rem;
+    }
   }
 }
 
@@ -32,6 +35,10 @@
     font-size: 4rem;
     color: $blanco;
     font-weight: 300;
+    @include responsive(tab-port) {
+      font-size: 2rem;
+      font-weight: 700;
+    }
   }
   &__descripcion {
     font-size: $tamanio-default-letra;
@@ -50,5 +57,8 @@
     @include flexCenter;
     justify-content: center;
     margin-top: 2rem;
+    @include responsive(tab-port) {
+      width: 90%;
+    }
   }
 }

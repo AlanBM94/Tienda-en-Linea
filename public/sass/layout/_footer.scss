@@ -4,9 +4,19 @@
   @include flexCenter;
   justify-content: space-around;
   background: $negro;
+  @include responsive(tab-port) {
+    flex-direction: column;
+    height: 10rem;
+    padding: 2rem;
+    align-items: center;
+  }
   &__autor {
     font-size: 1.4rem;
     color: $blanco;
+
+    & p {
+      text-align: center;
+    }
   }
   &__social {
     background: 5rem;

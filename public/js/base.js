@@ -107,7 +107,10 @@ export const configWaypoints = () => {
       } else {
         $('.nav').removeClass('sticky');
         $('.nav').css({ opacity: '0.9' });
-        $('.nav__lista').css({ background: 'transparent' });
+        $('.nav__lista').css({
+          background: window.innerWidth > 900 ? 'transparent' : '#232121',
+          zIndex: '1000!important'
+        });
         $('.nav__usuarioDropdown').css({ background: '' });
         $('.nav__usuarioDropdown').css({
           height: 'auto',

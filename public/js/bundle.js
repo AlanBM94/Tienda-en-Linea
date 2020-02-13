@@ -225,7 +225,8 @@ var configWaypoints = function configWaypoints() {
         opacity: '0.9'
       });
       $('.nav__lista').css({
-        background: 'transparent'
+        background: window.innerWidth > 900 ? 'transparent' : '#232121',
+        zIndex: '1000!important'
       });
       $('.nav__usuarioDropdown').css({
         background: ''
@@ -7304,10 +7305,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.mostrarProductosMasVendidos = exports.obtenerId = void 0;
 
-var _base = require("../base");
-
-var _sweetAlertMensajes = require("../utils/sweetAlertMensajes");
-
 /* eslint-disable */
 var obtenerId = function obtenerId(e) {
   return e.target.getAttribute('data-id');
@@ -7326,7 +7323,7 @@ var mostrarProductosMasVendidos = function mostrarProductosMasVendidos(productos
 };
 
 exports.mostrarProductosMasVendidos = mostrarProductosMasVendidos;
-},{"../base":"base.js","../utils/sweetAlertMensajes":"utils/sweetAlertMensajes.js"}],"views/reseñasVista.js":[function(require,module,exports) {
+},{}],"views/reseñasVista.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8573,7 +8570,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56509" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60342" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
