@@ -2,6 +2,11 @@
   padding: $paddingSecciones;
   width: 100%;
   height: 60rem;
+  @include responsive(tab-land) {
+    // width < 1200?
+    height: auto;
+    // padding:
+  }
   &__titulo {
     @include titulo;
   }
@@ -13,11 +18,17 @@
     align-items: center;
     opacity: 0;
     transition: all 0.2s;
+    @include responsive(tab-land) {
+      // width < 1200?
+      flex-direction: column;
+      opacity: 1;
+      min-height: 100rem;
+      margin-top: 10rem;
+    }
   }
   &__contenedor {
     width: 30rem;
     height: 25rem;
-
     display: flex;
     flex-direction: column;
   }

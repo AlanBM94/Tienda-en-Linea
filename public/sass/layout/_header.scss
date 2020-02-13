@@ -13,11 +13,22 @@ header {
     top: 40%;
     transform: translateX(-50%);
     display: flex;
+    @include responsive(tab-port) {
+      // width < 900?
+      flex-direction: column;
+      width: 35rem;
+      height: 43rem;
+    }
     &__primario {
       background: $color-primario;
       height: 100%;
       width: 40%;
       padding: 3rem 0;
+      @include responsive(tab-port) {
+        // width < 900?
+        width: 100%;
+        height: 75%;
+      }
     }
     &__titulo {
       font-size: 2.8rem;
@@ -40,6 +51,10 @@ header {
       height: 100%;
       padding: 1rem;
       @include flexColumn;
+      @include responsive(tab-port) {
+        // width < 900?
+        width: 100%;
+      }
     }
     & span {
       font-size: 1.4rem;
@@ -49,10 +64,20 @@ header {
       &::before {
         @include promocionEstilo;
         left: 52%;
+        @include responsive(tab-port) {
+          // width < 900?
+          top: 64%;
+          left: 77%;
+        }
       }
       &::after {
         @include promocionEstilo;
         left: 84%;
+        @include responsive(tab-port) {
+          // width < 900?
+          top: 64%;
+          left: 17%;
+        }
       }
       opacity: 0.7;
     }

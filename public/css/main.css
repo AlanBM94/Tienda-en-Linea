@@ -69,6 +69,12 @@
   height: 60rem;
 }
 
+@media only screen and (max-width: 75em) {
+  .caracteristicas {
+    height: auto;
+  }
+}
+
 .caracteristicas--categoria {
   height: auto;
 }
@@ -108,6 +114,17 @@
   transition: all 0.2s;
 }
 
+@media only screen and (max-width: 75em) {
+  .caracteristicas__contenido {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    opacity: 1;
+    min-height: 100rem;
+  }
+}
+
 .caracteristicas__item {
   background: #fef3f3;
   width: 13rem;
@@ -127,6 +144,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media only screen and (max-width: 75em) {
+  .caracteristicas__item {
+    top: 0%;
+  }
 }
 
 .caracteristicas__icono {
@@ -553,11 +576,29 @@ header .hero {
   display: flex;
 }
 
+@media only screen and (max-width: 56.25em) {
+  header .hero {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 35rem;
+    height: 43rem;
+  }
+}
+
 header .hero__primario {
   background: #ed2827;
   height: 100%;
   width: 40%;
   padding: 3rem 0;
+}
+
+@media only screen and (max-width: 56.25em) {
+  header .hero__primario {
+    width: 100%;
+    height: 75%;
+  }
 }
 
 header .hero__titulo {
@@ -596,6 +637,12 @@ header .hero__secundario {
           align-items: center;
 }
 
+@media only screen and (max-width: 56.25em) {
+  header .hero__secundario {
+    width: 100%;
+  }
+}
+
 header .hero span {
   font-size: 1.4rem;
   margin-top: 2rem;
@@ -615,6 +662,13 @@ header .hero span::before {
   left: 52%;
 }
 
+@media only screen and (max-width: 56.25em) {
+  header .hero span::before {
+    top: 64%;
+    left: 77%;
+  }
+}
+
 header .hero span::after {
   content: '';
   display: block;
@@ -624,6 +678,13 @@ header .hero span::after {
   height: 0.3rem;
   background: #ed2827;
   left: 84%;
+}
+
+@media only screen and (max-width: 56.25em) {
+  header .hero span::after {
+    top: 64%;
+    left: 17%;
+  }
 }
 
 header .hero__btn {
@@ -1702,6 +1763,12 @@ header .hero__btn:hover {
   height: 60rem;
 }
 
+@media only screen and (max-width: 75em) {
+  .testimonial {
+    height: auto;
+  }
+}
+
 .testimonial__titulo {
   text-align: center;
   font-size: 4.2rem;
@@ -1737,6 +1804,18 @@ header .hero__btn:hover {
   opacity: 0;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+}
+
+@media only screen and (max-width: 75em) {
+  .testimonial__contenedorGrande {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    opacity: 1;
+    min-height: 100rem;
+    margin-top: 10rem;
+  }
 }
 
 .testimonial__contenedor {
@@ -1804,6 +1883,24 @@ header .hero__btn:hover {
 
 html {
   font-size: 62.5%;
+}
+
+@media only screen and (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media only screen and (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
 }
 
 body {
