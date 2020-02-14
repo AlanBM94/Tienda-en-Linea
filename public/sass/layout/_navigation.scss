@@ -31,7 +31,8 @@
       width: 100%;
       left: 0;
       text-align: center;
-      top: 10rem;
+      top: 8rem;
+      z-index: 10000;
     }
   }
   &__item {
@@ -94,6 +95,9 @@
     margin-left: auto;
     height: 6rem;
     width: 40rem;
+    @include responsive(tab-port) {
+      margin: 0;
+    }
   }
   &__btnCarrito {
     width: 30%;

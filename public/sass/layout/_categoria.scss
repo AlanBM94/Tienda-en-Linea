@@ -11,6 +11,9 @@
     grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
     grid-gap: 8rem;
     padding: 13rem 10rem;
+    @include responsive(tab-port) {
+      padding: 6rem 10rem;
+    }
   }
 
   &__item {

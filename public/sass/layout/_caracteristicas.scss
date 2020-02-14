@@ -8,6 +8,10 @@
   }
   &--categoria {
     height: auto;
+    @include responsive(tab-port) {
+      // width < 900?
+      padding: 13rem 0;
+    }
   }
   &__titulo {
     @include titulo;

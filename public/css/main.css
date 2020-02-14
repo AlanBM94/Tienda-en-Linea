@@ -79,6 +79,12 @@
   height: auto;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .caracteristicas--categoria {
+    padding: 13rem 0;
+  }
+}
+
 .caracteristicas__titulo {
   text-align: center;
   font-size: 4.2rem;
@@ -439,6 +445,12 @@
       grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
   grid-gap: 8rem;
   padding: 13rem 10rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .categoria__contenido {
+    padding: 6rem 10rem;
+  }
 }
 
 .categoria__item {
@@ -1032,7 +1044,8 @@ header .hero__btn:hover {
     width: 100%;
     left: 0;
     text-align: center;
-    top: 10rem;
+    top: 8rem;
+    z-index: 10000;
   }
 }
 
@@ -1123,6 +1136,12 @@ header .hero__btn:hover {
   margin-left: auto;
   height: 6rem;
   width: 40rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .nav__seccionDinamicaPerfil {
+    margin: 0;
+  }
 }
 
 .nav__btnCarrito {
@@ -1428,6 +1447,12 @@ header .hero__btn:hover {
   padding: 10rem 5rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .producto {
+    padding: 10rem 0;
+  }
+}
+
 .producto__contenido {
   width: 100%;
   height: 100%;
@@ -1439,6 +1464,24 @@ header .hero__btn:hover {
   row-gap: 5rem;
   -ms-grid-rows: 80% 20%;
       grid-template-rows: 80% 20%;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .producto__contenido {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 5rem 0;
+  }
 }
 
 .producto__fotografias {
@@ -1573,6 +1616,13 @@ header .hero__btn:hover {
       justify-content: space-around;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .producto__contenidoPrincipal {
+    text-align: center;
+    padding: 5rem;
+  }
+}
+
 .producto__titulo {
   font-size: 3.2rem;
   font-weight: 600;
@@ -1609,6 +1659,15 @@ header .hero__btn:hover {
   width: 50%;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .producto__formulario {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 12rem;
+  }
+}
+
 .producto__contenidoSecundario {
   width: 100%;
   height: 100%;
@@ -1622,6 +1681,16 @@ header .hero__btn:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .producto__contenidoSecundario {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+  }
 }
 
 .producto__puntaje {
@@ -1745,6 +1814,15 @@ header .hero__btn:hover {
   margin: 2rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .producto__contenedorResenia {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .producto__reseniaUsuario {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 30%;
@@ -1757,6 +1835,13 @@ header .hero__btn:hover {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 3rem 1rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .producto__reseniaUsuario {
+    padding: 0;
+    margin-top: 3rem;
+  }
 }
 
 .producto__reseniaUsuario img {
@@ -2423,6 +2508,13 @@ body {
   top: 0%;
   left: 70%;
   padding: 8rem 3rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .popup__contenido {
+    left: 0%;
+    width: 100%;
+  }
 }
 
 .popup:target {
