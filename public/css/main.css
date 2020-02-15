@@ -187,7 +187,7 @@
 .carrito {
   width: 100%;
   height: auto;
-  padding: paddingSecciones;
+  padding: 10rem 8rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -200,6 +200,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .carrito {
+    padding: 20rem 0;
+  }
 }
 
 .carrito__titulo {
@@ -307,6 +313,15 @@
   display: flex;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .carrito__contenido {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .carrito__lista {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 70%;
@@ -352,6 +367,12 @@
   height: 8rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .carrito__listaItem {
+    height: 11rem;
+  }
+}
+
 .carrito__resumen {
   padding: 2rem;
   margin-left: 5rem;
@@ -368,6 +389,12 @@
           flex-direction: column;
   height: 30rem;
   margin-top: 5rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .carrito__resumen {
+    margin: 5rem 0;
+  }
 }
 
 .carrito__resumenHeader h4 {
@@ -972,6 +999,12 @@ header .hero__btn:hover {
   margin: 1.3rem 0;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .misReseñas__productos {
+    overflow: hidden;
+  }
+}
+
 .misComprasHeader {
   width: 100%;
   padding: 2.5rem 0;
@@ -1290,6 +1323,12 @@ header .hero__btn:hover {
   background: #f3f2f2;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .contenedor {
+    padding: 0;
+  }
+}
+
 .perfil {
   max-width: 120rem;
   margin: 0 auto;
@@ -1298,6 +1337,15 @@ header .hero__btn:hover {
   display: flex;
   -webkit-box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 56.25em) {
+  .perfil {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .perfil__personal {
@@ -1318,6 +1366,12 @@ header .hero__btn:hover {
   min-height: 100vh;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .perfil__personal {
+    min-height: auto;
+  }
+}
+
 .perfil__personalInfo {
   width: 100%;
   display: -ms-grid;
@@ -1329,6 +1383,14 @@ header .hero__btn:hover {
       grid-template-rows: repeat(2, 4rem);
   padding: 2rem 4rem;
   background: #1a1919;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .perfil__personalInfo {
+    -ms-grid-columns: 15% 60%;
+        grid-template-columns: 15% 60%;
+    padding: 1rem;
+  }
 }
 
 .perfil__personalInfo div {
@@ -1395,14 +1457,37 @@ header .hero__btn:hover {
   width: 100%;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .perfil__personalOpciones {
+    padding: 3rem 0;
+  }
+}
+
 .perfil__personalOpciones ul {
   list-style: none;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .perfil__personalOpciones ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
 }
 
 .perfil__personalOpciones ul li i {
   font-size: 1.4rem;
   color: #ed2827;
   margin-right: 1rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .perfil__personalOpciones ul li i {
+    display: none;
+  }
 }
 
 .perfil__personalOpciones ul li a {
@@ -1415,12 +1500,24 @@ header .hero__btn:hover {
   margin-top: 4.5rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .perfil__personalOpciones ul li:not(:first-child) {
+    margin: 0;
+  }
+}
+
 .perfil__contenido {
   background: #ffff;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   padding: 5rem 8rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .perfil__contenido {
+    padding: 5rem 1rem;
+  }
 }
 
 .perfil__contenido h4 {
@@ -2481,6 +2578,12 @@ body {
           transform: translateX(-30%);
 }
 
+@media only screen and (max-width: 56.25em) {
+  .popup--reseña:target {
+    width: 95%;
+  }
+}
+
 .popup a {
   font-size: 2rem;
   color: #ed2827;
@@ -2547,6 +2650,12 @@ body {
           align-items: center;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .popup__detallesCompras {
+    padding: 1rem;
+  }
+}
+
 .popup__detallesComprasContenido {
   margin-top: 2rem;
   width: 90%;
@@ -2554,5 +2663,12 @@ body {
   background: #f3f2f2;
   padding: 5rem;
   overflow: scroll;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .popup__detallesComprasContenido {
+    padding: 2rem 1rem;
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=main.css.map */

@@ -28,6 +28,9 @@
       max-width: 80rem;
       height: 80%;
       transform: translateX(-30%);
+      @include responsive(tab-port) {
+        width: 95%;
+      }
     }
   }
   & a {
@@ -76,6 +79,9 @@
     scale: 0;
     transition: all 0.3s ease;
     @include flexColumn;
+    @include responsive(tab-port) {
+      padding: 1rem;
+    }
   }
 
   &__detallesComprasContenido {
@@ -85,5 +91,9 @@
     background: $gris-claro;
     padding: 5rem;
     overflow: scroll;
+    @include responsive(tab-port) {
+      padding: 2rem 1rem;
+      width: 100%;
+    }
   }
 }

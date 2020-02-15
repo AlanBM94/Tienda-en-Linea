@@ -17,3 +17,9 @@
   height: 5.5rem;
   margin: 1.3rem 0;
 }
+
+.misReseñas__productos {
+  @include responsive(tab-port) {
+    overflow: hidden;
+  }
+}
