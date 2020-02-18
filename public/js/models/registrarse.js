@@ -14,7 +14,7 @@ export default class Registrarse {
     try {
       const consulta = await axios({
         method: 'POST',
-        url: 'http://localhost:3000/api/v1/usuarios/registrarse',
+        url: '/api/v1/usuarios/registrarse',
         data: {
           nombre: this.nombre,
           email: this.email,

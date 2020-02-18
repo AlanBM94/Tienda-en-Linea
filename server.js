@@ -4,7 +4,7 @@ const app = require('./app');
 
 dotenv.config({ path: './config.env' });
 
-const puerto = process.env.PUERTO || 3000;
+const puerto = process.env.PORT || 3000;
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',

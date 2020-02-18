@@ -30,7 +30,7 @@ export default class Reseña extends Peticion {
 
   async crear() {
     const respuesta = await super.hacerPeticionPost(
-      `http://localhost:3000/api/v1/productos/${this.idProducto}/resenias`,
+      `/api/v1/productos/${this.idProducto}/resenias`,
       {
         reseña: this.reseña,
         puntuacion: this.puntuacion

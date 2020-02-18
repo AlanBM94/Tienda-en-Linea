@@ -9,9 +9,7 @@ export default class Compra {
   async hacerPeticionStripe() {
     try {
       const stripe = Stripe('pk_test_ZDcXOQ8zKStcrxrjeTz1ynAN00aquyrddG');
-      const consulta = await axios(
-        `http://localhost:3000/api/v1/compra/checkout-session/${this.id}`
-      );
+      const consulta = await axios(`api/v1/compra/checkout-session/${this.id}`);
       //Redirecciona al formulario de stripe
       await stripe.redirectToCheckout({
         sessionId: consulta.data.session.id
@@ -24,7 +22,7 @@ export default class Compra {
   async mostrarProductosConMasCompras() {
     try {
       const respuesta = await axios({
-        url: `http://localhost:3000/api/v1/productos/productosMasVendidos`,
+        url: `api/v1/productos/productosMasVendidos`,
         method: 'GET'
       });
       return respuesta;

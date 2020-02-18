@@ -11,8 +11,8 @@ export default class Perfil extends Peticion {
   async editar(data, tipo) {
     const url =
       tipo === 'contraseña'
-        ? 'http://localhost:3000/api/v1/usuarios/actualizarMiContrasenia'
-        : 'http://localhost:3000/api/v1/usuarios/actualizarMiPerfil';
+        ? '/api/v1/usuarios/actualizarMiContrasenia'
+        : '/api/v1/usuarios/actualizarMiPerfil';
     const respuesta = await super.hacerPeticionPatch(url, data);
     return respuesta;
   }
@@ -61,13 +61,13 @@ export default class Perfil extends Peticion {
 
   async eliminarResenia(idProducto, idResenia) {
     await super.hacerPeticionDelete(
-      `http://localhost:3000/api/v1/productos/${idProducto}/resenias/${idResenia}`
+      `/api/v1/productos/${idProducto}/resenias/${idResenia}`
     );
   }
 
   async recuperarContrasenia(email) {
     const respuesta = await super.hacerPeticionPost(
-      `http://localhost:3000/api/v1/usuarios/recuperarContrasenia`,
+      `/api/v1/usuarios/recuperarContrasenia`,
       email
     );
     return respuesta;
@@ -75,7 +75,7 @@ export default class Perfil extends Peticion {
 
   async resetearContrasenia(infoResetearContraseña, token) {
     const respuesta = await super.hacerPeticionPatch(
-      `http://localhost:3000/api/v1/usuarios/resetearContrasenia/${token}`,
+      `/api/v1/usuarios/resetearContrasenia/${token}`,
       {
         contraseña: infoResetearContraseña.contraseña,
         confirmarContraseña: infoResetearContraseña.confirmarContraseña

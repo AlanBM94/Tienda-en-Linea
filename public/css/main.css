@@ -2168,6 +2168,8 @@ body {
 .titulo-logo {
   font-size: 3rem;
   text-align: center;
+  text-decoration: none;
+  color: #232121;
 }
 
 .headerTablaPerfil {
