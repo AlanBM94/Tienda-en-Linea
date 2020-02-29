@@ -9,4 +9,5 @@ Tienda en linea creada con Nodejs, Express, Mongo DB y Handlebars.
 * Crear, leer, editar y eliminar documentos utilizando mongoose.
 * Utilizar Postman para simular las peticiones a la API.
 * Enviar correos electrónicos utilizando Sengrid.
+* Utilizar handlebars para crear vistas de la aplicación.
 
